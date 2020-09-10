@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="studio.rrprojects.runnerbuddy.gui.cards.GearCard">
+  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="2" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-14079180"/>
+      <foreground color="-11805347"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <scrollpane id="83543">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14079180"/>
+          <foreground color="-11805347"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="29dca" class="javax.swing.JList" binding="listAvailable">
+            <constraints/>
+            <properties>
+              <background color="-14079180"/>
+              <foreground color="-11805347"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <scrollpane id="6629f">
+        <constraints>
+          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14079180"/>
+          <foreground color="-11805347"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="b0eb0" class="javax.swing.JList" binding="listSelected">
+            <constraints/>
+            <properties>
+              <background color="-14079180"/>
+              <foreground color="-11805347"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="6403e" class="javax.swing.JComboBox" binding="boxSubCategory">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14079180"/>
+          <foreground color="-11805347"/>
+        </properties>
+      </component>
+      <component id="ea976" class="javax.swing.JButton" binding="buttonClear">
+        <constraints>
+          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14079180"/>
+          <foreground color="-11805347"/>
+          <text value="Clear All"/>
+        </properties>
+      </component>
+      <component id="c96d6" class="javax.swing.JLabel" binding="textStarting">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-11805347"/>
+          <text value="Starting Nuyen: X"/>
+        </properties>
+      </component>
+      <component id="6ffce" class="javax.swing.JLabel" binding="textRemaining">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-11805347"/>
+          <text value="Remaining Nuyen: Y"/>
+        </properties>
+      </component>
+      <component id="22f6c" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="0" column="2" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <orientation value="1"/>
+        </properties>
+      </component>
+      <component id="498da" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="0" column="4" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="4" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <orientation value="1"/>
+        </properties>
+      </component>
+      <component id="9538b" class="javax.swing.JComboBox" binding="boxCategory">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-14079180"/>
+          <foreground color="-11805347"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
