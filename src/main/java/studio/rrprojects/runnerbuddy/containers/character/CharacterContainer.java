@@ -4,6 +4,7 @@ import studio.rrprojects.runnerbuddy.controllers.*;
 
 public class CharacterContainer {
 
+    ContactsController contactsController;
     RaceController raceController;
     AttributeController attributeController;
     SkillsController skillsController;
@@ -17,6 +18,7 @@ public class CharacterContainer {
         skillsController = new SkillsController();
         magicController = new MagicController();
         resourceController = new ResourceController();
+        contactsController = new ContactsController();
     }
 
     public AttributeController getAttributeController() {
@@ -37,6 +39,10 @@ public class CharacterContainer {
 
     public ResourceController getResourceController() {
         return resourceController;
+    }
+
+    public ContactsController getContactsController() {
+        return contactsController;
     }
 }
 

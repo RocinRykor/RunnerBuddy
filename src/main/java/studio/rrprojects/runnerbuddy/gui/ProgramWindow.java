@@ -1,9 +1,6 @@
 package studio.rrprojects.runnerbuddy.gui;
 
-import studio.rrprojects.runnerbuddy.gui.cards.AttributeCard;
-import studio.rrprojects.runnerbuddy.gui.cards.GearCard;
-import studio.rrprojects.runnerbuddy.gui.cards.NameCard;
-import studio.rrprojects.runnerbuddy.gui.cards.SkillCard;
+import studio.rrprojects.runnerbuddy.gui.cards.*;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
 
@@ -28,6 +25,8 @@ public class ProgramWindow extends JFrame {
     private JPanel cardSkills;
     private GearCard gearCard;
     private JPanel cardGear;
+    private ContactsCard contactsCard;
+    private JPanel cardContacts;
 
     public ProgramWindow(String title, RunnerBuilderController runnerBuilderController, CharacterContainer characterContainer) {
         super(title);
@@ -131,6 +130,11 @@ public class ProgramWindow extends JFrame {
         gearCard = new GearCard(characterContainer);
         cardGear = gearCard.getPanel();
         panelCards.add(cardGear, "CardGear");
+        cardLayout = (CardLayout) panelCards.getLayout();
+
+        contactsCard = new ContactsCard(characterContainer);
+        cardContacts = contactsCard.getPanel();
+        panelCards.add(cardContacts, "CardContacts");
         cardLayout = (CardLayout) panelCards.getLayout();
 
     }
