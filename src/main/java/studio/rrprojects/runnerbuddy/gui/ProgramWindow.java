@@ -27,6 +27,9 @@ public class ProgramWindow extends JFrame {
     private JPanel cardGear;
     private ContactsCard contactsCard;
     private JPanel cardContacts;
+    private MagicCard magicCard;
+    private JPanel cardMagic;
+    private JButton buttonMagic;
 
     public ProgramWindow(String title, RunnerBuilderController runnerBuilderController, CharacterContainer characterContainer) {
         super(title);
@@ -88,6 +91,14 @@ public class ProgramWindow extends JFrame {
             }
         });
 
+        buttonMagic = new JButton("Magic");
+        buttonMagic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                SwitchTo("CardMagic");
+            }
+        });
+
         buttonContacts = new JButton("Contacts");
         buttonContacts.addActionListener(new ActionListener() {
             @Override
@@ -103,6 +114,7 @@ public class ProgramWindow extends JFrame {
         panelMenu.add(buttonAttr);
         panelMenu.add(buttonSkills);
         panelMenu.add(buttonGear);
+        panelMenu.add(buttonMagic);
         panelMenu.add(buttonContacts);
         splitPane1.setLeftComponent(panelMenu);
 
@@ -120,21 +132,24 @@ public class ProgramWindow extends JFrame {
         attrCard = new AttributeCard(characterContainer);
         cardAttr = attrCard.getPanel();
         panelCards.add(cardAttr, "CardAttr");
-        cardLayout = (CardLayout) panelCards.getLayout();
 
         skillsCard = new SkillCard(characterContainer);
         cardSkills = skillsCard.getPanel();
         panelCards.add(cardSkills, "CardSkills");
-        cardLayout = (CardLayout) panelCards.getLayout();
         
         gearCard = new GearCard(characterContainer);
         cardGear = gearCard.getPanel();
         panelCards.add(cardGear, "CardGear");
-        cardLayout = (CardLayout) panelCards.getLayout();
+
+        magicCard = new MagicCard(characterContainer);
+        cardMagic = magicCard.getPanel();
+        panelCards.add(cardMagic, "CardMagic");
 
         contactsCard = new ContactsCard(characterContainer);
         cardContacts = contactsCard.getPanel();
         panelCards.add(cardContacts, "CardContacts");
+        
+
         cardLayout = (CardLayout) panelCards.getLayout();
 
     }
