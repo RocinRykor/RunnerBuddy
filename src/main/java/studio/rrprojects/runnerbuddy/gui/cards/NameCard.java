@@ -53,7 +53,11 @@ public class NameCard {
             CheckValidity();
             characterContainer.getRaceController().setSelectedRace(Objects.requireNonNull(boxRace.getSelectedItem()));
         });
-        boxMagic.addActionListener(actionEvent -> CheckValidity());
+        boxMagic.addActionListener(actionEvent -> {
+            CheckValidity();
+            characterContainer.getMagicController().setSelectedMagicLevel((String) boxMagic.getSelectedItem());
+        });
+
         boxAttr.addActionListener(actionEvent -> {
             CheckValidity();
             characterContainer.getAttributeController().setSelectedAttributePriority(Objects.requireNonNull(boxAttr.getSelectedItem()));

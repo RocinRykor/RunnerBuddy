@@ -7,8 +7,12 @@ import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class MagicCard {
+    private CharacterContainer character;
     private JComboBox boxMageType;
     private JComboBox boxTotem;
     private JComboBox boxSpells;
@@ -17,8 +21,25 @@ public class MagicCard {
     private JList listSpells;
     private JList listSelected;
     private JTextField points00VALIDTextField;
+    private JButton buttonRefresh;
 
     public MagicCard(CharacterContainer characterContainer) {
+        this.character = characterContainer;
+        buttonRefresh.addActionListener(actionEvent -> {
+            UpdateMageTypeBox();
+        });
+        boxMageType.addActionListener(actionEvent -> {
+            characterContainer.getMagicController().setSelectedMageType(Objects.requireNonNull(boxMageType.getSelectedItem()).toString());
+            UpdateAll();
+        });
+    }
+
+    private void UpdateMageTypeBox() {
+        boxMageType.setModel(character.getMagicController().getMageTypeBox());
+    }
+
+    private void UpdateAll() {
+        boxTotem.setModel(character.getMagicController().getTotemBox());
     }
 
     {
@@ -37,7 +58,7 @@ public class MagicCard {
      */
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.setLayout(new GridLayoutManager(6, 3, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.setBackground(new Color(-14079180));
         panelMain.setForeground(new Color(-11805347));
         boxMageType = new JComboBox();
@@ -47,6 +68,9 @@ public class MagicCard {
         defaultComboBoxModel1.addElement("Hermetic Mage");
         defaultComboBoxModel1.addElement("Shaman");
         boxMageType.setModel(defaultComboBoxModel1);
+        boxMageType.setRequestFocusEnabled(false);
+        boxMageType.setSelectedIndex(0);
+        boxMageType.setVerifyInputWhenFocusTarget(false);
         panelMain.add(boxMageType, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         panelMain.add(spacer1, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
@@ -58,6 +82,7 @@ public class MagicCard {
         defaultComboBoxModel2.addElement("Badger");
         defaultComboBoxModel2.addElement("Shark");
         boxTotem.setModel(defaultComboBoxModel2);
+        boxTotem.setSelectedIndex(0);
         panelMain.add(boxTotem, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         boxSpells = new JComboBox();
         boxSpells.setBackground(new Color(-14079180));
@@ -68,9 +93,10 @@ public class MagicCard {
         defaultComboBoxModel3.addElement("Detection");
         defaultComboBoxModel3.addElement("Foci");
         boxSpells.setModel(defaultComboBoxModel3);
+        boxSpells.setSelectedIndex(0);
         panelMain.add(boxSpells, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
-        panelMain.add(scrollPane1, new GridConstraints(1, 0, 4, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panelMain.add(scrollPane1, new GridConstraints(1, 0, 5, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         listSpells = new JList();
         listSpells.setBackground(new Color(-14079180));
         listSpells.setForeground(new Color(-11805347));
@@ -87,7 +113,7 @@ public class MagicCard {
         buttonClear.setText("Clear All");
         panelMain.add(buttonClear, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JScrollPane scrollPane2 = new JScrollPane();
-        panelMain.add(scrollPane2, new GridConstraints(1, 2, 4, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panelMain.add(scrollPane2, new GridConstraints(1, 2, 5, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         listSelected = new JList();
         listSelected.setBackground(new Color(-14079180));
         listSelected.setForeground(new Color(-11805347));
@@ -106,6 +132,11 @@ public class MagicCard {
         points00VALIDTextField.setHorizontalAlignment(0);
         points00VALIDTextField.setText("Points 0/0 : VALID");
         panelMain.add(points00VALIDTextField, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        buttonRefresh = new JButton();
+        buttonRefresh.setBackground(new Color(-14079180));
+        buttonRefresh.setForeground(new Color(-11805347));
+        buttonRefresh.setText("REFRESH");
+        panelMain.add(buttonRefresh, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
