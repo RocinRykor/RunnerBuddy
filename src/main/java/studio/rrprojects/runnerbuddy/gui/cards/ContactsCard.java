@@ -169,18 +169,13 @@ public class ContactsCard {
         panelMain.add(textName, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         labelLevel = new JLabel();
         labelLevel.setForeground(new Color(-11805347));
-        labelLevel.setText("Level");
-        panelMain.add(labelLevel, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        labelLevel.setText("Level:");
+        panelMain.add(labelLevel, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textOccupation = new JTextField();
         textOccupation.setBackground(new Color(-13487043));
         textOccupation.setCaretColor(new Color(-11805347));
         textOccupation.setForeground(new Color(-11805347));
         panelMain.add(textOccupation, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        buttonDelete = new JButton();
-        buttonDelete.setBackground(new Color(-14079180));
-        buttonDelete.setForeground(new Color(-11805347));
-        buttonDelete.setText("Delete Contact");
-        panelMain.add(buttonDelete, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textLevelBonus = new JTextArea();
         textLevelBonus.setBackground(new Color(-13487043));
         textLevelBonus.setCaretColor(new Color(-11805347));
@@ -199,16 +194,16 @@ public class ContactsCard {
         panelMain.add(boxLevel, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setForeground(new Color(-11805347));
-        label1.setText("Occupation");
-        panelMain.add(label1, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label1.setText("Occupation:");
+        panelMain.add(label1, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setForeground(new Color(-11805347));
         label2.setText("Notes:");
-        panelMain.add(label2, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelMain.add(label2, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
         label3.setForeground(new Color(-11805347));
-        label3.setText("Name");
-        panelMain.add(label3, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label3.setText("Name:");
+        panelMain.add(label3, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         notesArea = new JTextArea();
         notesArea.setBackground(new Color(-13487043));
         notesArea.setCaretColor(new Color(-11805347));
@@ -221,6 +216,11 @@ public class ContactsCard {
         buttonSaveContact.setForeground(new Color(-11805347));
         buttonSaveContact.setText("Save Contact");
         panelMain.add(buttonSaveContact, new GridConstraints(5, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonDelete = new JButton();
+        buttonDelete.setBackground(new Color(-14079180));
+        buttonDelete.setForeground(new Color(-11805347));
+        buttonDelete.setText("Delete Contact");
+        panelMain.add(buttonDelete, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
