@@ -1,10 +1,8 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
 import studio.rrprojects.runnerbuddy.containers.attributes.AttributePriorityContainer;
-import studio.rrprojects.runnerbuddy.gui.cards.AttributeCard;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,18 +10,20 @@ import java.util.Map;
 public class AttributeController {
     LinkedHashMap<String, AttributePriorityContainer> getPriorityTableAttributes;
     HashMap<String, AttributeArray> racialModTable;
-    private AttributePriorityContainer selectedAttributePriority;
+    private AttributePriorityContainer selectedAttributePriority, defaultPriority;
     private AttributeArray selectedAttributes;
 
     public AttributeController() {
-        selectedAttributePriority = new AttributePriorityContainer("BLANK", 6);
         selectedAttributes = new AttributeArray(1, 1, 1, 1, 1, 1);
         PopTables();
+
+        defaultPriority = new AttributePriorityContainer("BLANK", 6);
+        SetPriority(defaultPriority);
     }
 
     private void PopTables() {
         //Racial Mod Table
-        racialModTable = new HashMap<String, AttributeArray>();
+        racialModTable = new HashMap<>();
         racialModTable.put("Troll", new AttributeArray(5, -1, 4, -2, -2, 0));
         racialModTable.put("Elf", new AttributeArray(0, 1, 0, 2, 0,0));
         racialModTable.put("Dwarf", new AttributeArray(1, 0, 2, 0, 0,1));
@@ -40,7 +40,7 @@ public class AttributeController {
     }
 
     public DefaultComboBoxModel<String> GetPriorityBox() {
-        DefaultComboBoxModel<String> box = new DefaultComboBoxModel<String>();
+        DefaultComboBoxModel<String> box = new DefaultComboBoxModel<>();
         box.addElement("-- Select Attribute Level --");
         for (Map.Entry<String, AttributePriorityContainer> attribute: getPriorityTableAttributes.entrySet()) {
             box.addElement(String.format("%s - %d Points", attribute.getValue().getPriorityLevel(), attribute.getValue().getAttributePoints()));
@@ -49,13 +49,20 @@ public class AttributeController {
     }
 
     public void setSelectedAttributePriority(Object selectedItem) {
+        String searchTerm;
+
         if (selectedItem.toString().startsWith("--")) {
+            SetPriority(defaultPriority);
             return;
+        } else {
+            searchTerm = String.valueOf(selectedItem.toString().charAt(0));
         }
 
-        String searchTerm = String.valueOf(selectedItem.toString().charAt(0));
+        SetPriority(getPriorityTableAttributes.get(searchTerm));
+    }
 
-        selectedAttributePriority = getPriorityTableAttributes.get(searchTerm);
+    private void SetPriority(AttributePriorityContainer priorityLevel) {
+        selectedAttributePriority = priorityLevel;
     }
 
     public AttributeArray getSelectedAttributes() {
@@ -81,8 +88,9 @@ public class AttributeController {
 
         private void CalcReaction() {
             int quickness = attributeList.get("Quickness");
-            int intelligence = attributeList.get("Intelligence");;
+            int intelligence = attributeList.get("Intelligence");
 
+            //Bit-shift to divide by two
             int reaction = (int) Math.floor((quickness + intelligence) >> 1);
 
             if (attributeList.containsKey("Reaction")) {
@@ -103,10 +111,6 @@ public class AttributeController {
 
             CalcReaction();
         }
-    }
-
-    public LinkedHashMap<String, AttributePriorityContainer> getPriorityTableAttributes() {
-        return getPriorityTableAttributes;
     }
 
     public HashMap<String, AttributeArray> getRacialModTable() {

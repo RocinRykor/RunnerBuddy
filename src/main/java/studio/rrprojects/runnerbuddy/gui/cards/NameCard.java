@@ -7,6 +7,8 @@ import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -33,6 +35,7 @@ public class NameCard {
     private JTextField textName;
     private JTextField textNameReal;
     private JLabel labelValidOutput;
+    private JButton buttonFinalize;
     CharacterContainer characterContainer;
     Boolean isValid;
     ArrayList<JComboBox> boxGroup;
@@ -64,9 +67,37 @@ public class NameCard {
         });
         boxSkills.addActionListener(actionEvent -> {
             CheckValidity();
-            characterContainer.getSkillsController().setBaseSkillPoints(Objects.requireNonNull(boxSkills.getSelectedItem()).toString());
+            characterContainer.getSkillsController().setSkillPriority(Objects.requireNonNull(boxSkills.getSelectedItem()).toString());
         });
-        boxResources.addActionListener(actionEvent -> CheckValidity());
+        boxResources.addActionListener(actionEvent -> {
+            CheckValidity();
+            characterContainer.getResourceController().setSelectedResourcePriorityLevel(Objects.requireNonNull(boxResources.getSelectedItem().toString()));
+        });
+        buttonFinalize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                UpdateDescription();
+                ExportCharacterToText();
+            }
+        });
+        textNameReal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                UpdateDescription();
+            }
+        });
+    }
+
+    private void UpdateDescription() {
+        characterContainer.getDescriptionController().setNameReal(textNameReal.getText());
+        characterContainer.getDescriptionController().setNameStreet(textName.getText());
+        characterContainer.getDescriptionController().setAge(textAge.getText());
+        characterContainer.getDescriptionController().setSex(textSex.getText());
+        characterContainer.getDescriptionController().setRace(characterContainer.getRaceController().getSelectedRace());
+    }
+
+    private void ExportCharacterToText() {
+        characterContainer.ExportToText();
     }
 
     private void Init() {
@@ -156,7 +187,7 @@ public class NameCard {
      */
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(13, 7, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.setLayout(new GridLayoutManager(14, 7, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.setAlignmentX(1.0f);
         panelMain.setAlignmentY(1.0f);
         panelMain.setBackground(new Color(-14079180));
@@ -273,6 +304,12 @@ public class NameCard {
         labelValidOutput.setForeground(new Color(-11805347));
         labelValidOutput.setText("VALID");
         panelMain.add(labelValidOutput, new GridConstraints(11, 4, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonFinalize = new JButton();
+        buttonFinalize.setBackground(new Color(-14079180));
+        buttonFinalize.setForeground(new Color(-11805347));
+        buttonFinalize.setHideActionText(false);
+        buttonFinalize.setText("Export Chracter to Text File");
+        panelMain.add(buttonFinalize, new GridConstraints(13, 0, 1, 7, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         labelRaceLevel.setLabelFor(boxRaceLevel);
         label1.setLabelFor(boxRaceLevel);
     }

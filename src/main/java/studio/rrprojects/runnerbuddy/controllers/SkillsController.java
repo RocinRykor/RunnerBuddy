@@ -15,12 +15,16 @@ public class SkillsController {
     LinkedHashMap<String, SkillContainer> selectedKnowledgeSkills;
     LinkedHashMap<String, SkillContainer> selectedLanguageSkills;
     LinkedHashMap<String, LinkedHashMap<String, SkillContainer>> selectedSkillsLists;
+    SkillPriorityContainer defaultPriority;
     private int baseSkillPoints;
+    private SkillPriorityContainer selectedPriorityLevel;
 
 
     public SkillsController() {
         skillList = new LinkedHashMap<>();
         LoadTables();
+        defaultPriority = new SkillPriorityContainer("E", 27);
+        SetPriority(defaultPriority);
     }
 
     private void LoadTables() {
@@ -29,7 +33,7 @@ public class SkillsController {
         skillPriorityTable.put("B", new SkillPriorityContainer("B", 40));
         skillPriorityTable.put("C", new SkillPriorityContainer("C", 34));
         skillPriorityTable.put("D", new SkillPriorityContainer("D", 30));
-        skillPriorityTable.put("E", new SkillPriorityContainer("E", 27));
+        skillPriorityTable.put("E", new SkillPriorityContainer("E", 27) );
 
         selectedSkillsLists = new LinkedHashMap<>();
 
@@ -84,13 +88,21 @@ public class SkillsController {
         return baseSkillPoints;
     }
 
-    public void setBaseSkillPoints(String string) {
-        System.out.println(string);
+    public void setBaseSkillPoints() {
+        baseSkillPoints = selectedPriorityLevel.getSkillPoints();
+    }
+
+    private void SetPriority(SkillPriorityContainer priorityLevel) {
+        selectedPriorityLevel = priorityLevel;
+        setBaseSkillPoints();
+    }
+
+    public void setSkillPriority(String string) {
         if (string.startsWith("--")) {
-            baseSkillPoints = 0;
+            SetPriority(defaultPriority);
         } else {
             String searchTerm = String.valueOf(string.charAt(0));
-            baseSkillPoints = skillPriorityTable.get(searchTerm).getSkillPoints();
+            SetPriority(skillPriorityTable.get(searchTerm));
         }
     }
 }

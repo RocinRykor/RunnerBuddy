@@ -10,7 +10,11 @@ public class RaceController {
     private String selectedRace;
 
     public RaceController() {
+
         LoadTables();
+
+        //Sets The Default
+        SetRace("Human");
     }
 
     private void LoadTables() {
@@ -41,10 +45,15 @@ public class RaceController {
 
     public void setSelectedRace(Object selectedItem) {
         if (selectedItem.toString().startsWith("--")) {
+            SetRace("Human");
             return;
         }
 
-        selectedRace = selectedItem.toString();
+        SetRace(selectedItem.toString());
+    }
+
+    private void SetRace(String race) {
+        selectedRace = race;
     }
 
     public String getSelectedRace() {

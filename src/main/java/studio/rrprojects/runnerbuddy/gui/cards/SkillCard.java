@@ -33,6 +33,9 @@ public class SkillCard {
     private LinkedHashMap<String, SkillContainer> tableActiveSkills, tableKnowledgeSkills, tableLanguageSkills;
 
     public SkillCard(CharacterContainer characterContainer) {
+
+        //TODO Move File Loading
+
         character = characterContainer;
         PopulateAllLists();
         UpdateAll();

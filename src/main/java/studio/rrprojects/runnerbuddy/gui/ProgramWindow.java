@@ -11,25 +11,20 @@ import java.awt.event.ActionListener;
 
 public class ProgramWindow extends JFrame {
 
-    private JPanel panelMain;
-    private JPanel panelMenu;
-    private JPanel panelCards;
-    private JPanel cardName;
-    private JButton buttonName, buttonAttr, buttonSkills, buttonGear, buttonContacts;
-    private JPanel cardAttr;
+    private JPanel panelMain, panelMenu, panelCards;
+    private JButton buttonName, buttonAttr, buttonSkills, buttonGear, buttonMagic, buttonContacts;
+    private JPanel cardName, cardAttr, cardSkills, cardGear, cardContacts, cardMagic;
+
     CardLayout cardLayout;
     CharacterContainer characterContainer;
+
+    //Cards
     private NameCard nameCard;
     private AttributeCard attrCard;
     private SkillCard skillsCard;
-    private JPanel cardSkills;
     private GearCard gearCard;
-    private JPanel cardGear;
     private ContactsCard contactsCard;
-    private JPanel cardContacts;
     private MagicCard magicCard;
-    private JPanel cardMagic;
-    private JButton buttonMagic;
 
     public ProgramWindow(String title, RunnerBuilderController runnerBuilderController, CharacterContainer characterContainer) {
         super(title);
@@ -39,12 +34,6 @@ public class ProgramWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        AddCardsToCharacterContainer();
-    }
-
-    private void AddCardsToCharacterContainer() {
-        //characterContainer.setCardName(nameCard);
-        //characterContainer.setCardAttr(attrCard);
     }
 
     private void BeginInit() {
@@ -53,13 +42,15 @@ public class ProgramWindow extends JFrame {
 
         //Split Panel
         final JSplitPane splitPane1 = new JSplitPane();
-        splitPane1.setDividerLocation(30);
+        splitPane1.setDividerLocation(40);
         splitPane1.setDividerSize(0);
         splitPane1.setOrientation(0);
         panelMain.add(splitPane1, BorderLayout.CENTER);
 
         //Buttons
         buttonName = new JButton("Name");
+        buttonName.setBackground(new Color(-14079180));
+        buttonName.setForeground(new Color(-11805347));
         buttonName.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -68,6 +59,8 @@ public class ProgramWindow extends JFrame {
         });
 
         buttonAttr = new JButton("Attributes");
+        buttonAttr.setBackground(new Color(-14079180));
+        buttonAttr.setForeground(new Color(-11805347));
         buttonAttr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -76,6 +69,8 @@ public class ProgramWindow extends JFrame {
         });
 
         buttonSkills = new JButton("Skills");
+        buttonSkills.setBackground(new Color(-14079180));
+        buttonSkills.setForeground(new Color(-11805347));
         buttonSkills.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -84,6 +79,8 @@ public class ProgramWindow extends JFrame {
         });
 
         buttonGear = new JButton("Gear");
+        buttonGear.setBackground(new Color(-14079180));
+        buttonGear.setForeground(new Color(-11805347));
         buttonGear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -92,6 +89,8 @@ public class ProgramWindow extends JFrame {
         });
 
         buttonMagic = new JButton("Magic");
+        buttonMagic.setBackground(new Color(-14079180));
+        buttonMagic.setForeground(new Color(-11805347));
         buttonMagic.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -100,6 +99,8 @@ public class ProgramWindow extends JFrame {
         });
 
         buttonContacts = new JButton("Contacts");
+        buttonContacts.setBackground(new Color(-14079180));
+        buttonContacts.setForeground(new Color(-11805347));
         buttonContacts.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -110,6 +111,8 @@ public class ProgramWindow extends JFrame {
         //Menu Panels
         panelMenu = new JPanel();
         panelMenu.setLayout(new FlowLayout());
+        panelMenu.setBackground(new Color(-14079180));
+        panelMenu.setForeground(new Color(-11805347));
         panelMenu.add(buttonName);
         panelMenu.add(buttonAttr);
         panelMenu.add(buttonSkills);

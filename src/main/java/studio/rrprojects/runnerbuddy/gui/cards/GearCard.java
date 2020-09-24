@@ -100,6 +100,7 @@ public class GearCard {
     }
 
     private void UpdateAll() {
+        textStarting.setText("Starting Nuyen: " + character.getResourceController().getBaseResources() + "¥");
         boxSubCategory.setModel(subcategoryList.get(Objects.requireNonNull(boxCategory.getSelectedItem()).toString()));
         listAvailable.setModel(listModelArray.get(Objects.requireNonNull(boxSubCategory.getSelectedItem()).toString()));
     }
