@@ -101,12 +101,12 @@ public class AttributeCard {
 
         }
 
+        //Update Character Container
+        characterContainer.getAttributeController().getSelectedAttributes().UpdateBaseAttributes(totalAttributes);
+
         labelEssTotal.setText(String.valueOf(characterContainer.getAttributeController().getSelectedAttributes().getAttribute("Essence")));
         labelMagTotal.setText(String.valueOf(characterContainer.getAttributeController().getSelectedAttributes().getAttribute("Magic")));
         labelReaTotal.setText(String.valueOf(characterContainer.getAttributeController().getSelectedAttributes().getAttribute("Reaction")));
-
-        //Update Character Container
-        characterContainer.getAttributeController().getSelectedAttributes().UpdateBaseAttributes(totalAttributes);
     }
 
     private void UpdateBaseInfo() {
