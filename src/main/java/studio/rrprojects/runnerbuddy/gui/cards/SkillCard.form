@@ -30,18 +30,6 @@
           </component>
         </children>
       </scrollpane>
-      <component id="ede73" class="javax.swing.JList" binding="listSelected">
-        <constraints>
-          <grid row="1" column="7" row-span="7" col-span="3" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-14079180"/>
-          <foreground color="-11805347"/>
-          <selectionBackground color="-14079180"/>
-        </properties>
-      </component>
       <component id="7bc0c" class="javax.swing.JSeparator">
         <constraints>
           <grid row="0" column="6" row-span="8" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -138,6 +126,25 @@
           <text value="CLEAR ALL"/>
         </properties>
       </component>
+      <scrollpane id="f01df">
+        <constraints>
+          <grid row="1" column="7" row-span="7" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="157" height="128"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="65405" class="javax.swing.JList" binding="listSelected">
+            <constraints/>
+            <properties>
+              <background color="-14079180"/>
+              <foreground color="-11805347"/>
+              <model/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

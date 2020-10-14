@@ -80,7 +80,14 @@ public class SkillContainer {
         String specString = skill.getValue().asObject().getString("specialization", "UNKNOWN");
         specialization = new ArrayList<>();
         if (specString.length() > 0) {
-            specialization.addAll(Arrays.asList(specString.split(",")));
+            String[] splitString = specString.split(",");
+            for (String spec: splitString) {
+                if (spec.startsWith(" ")) {
+                    specialization.add(spec.replaceFirst(" ",""));
+                } else {
+                    specialization.add(spec);
+                }
+            }
         } else {
             specialization.add("CUSTOM");
         }

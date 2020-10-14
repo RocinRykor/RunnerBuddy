@@ -17,17 +17,15 @@ public class CharacterContainer {
 
     public CharacterContainer() {
 
-        //Start the Controllers
-        descriptionController = new DescriptionController();
-        raceController = new RaceController();
-        attributeController = new AttributeController();
-        skillsController = new SkillsController();
-        magicController = new MagicController();
-        resourceController = new ResourceController();
-        contactsController = new ContactsController();
-
-        fileController = new FileController();
-
+        //Start the Controllers | Uses "this" so that each controller can access the others through the CharacterContainer
+        fileController = new FileController(this);
+        descriptionController = new DescriptionController(this);
+        raceController = new RaceController(this);
+        attributeController = new AttributeController(this);
+        skillsController = new SkillsController(this);
+        magicController = new MagicController(this);
+        resourceController = new ResourceController(this);
+        contactsController = new ContactsController(this);
     }
 
     public void ExportToText() {
@@ -52,10 +50,14 @@ public class CharacterContainer {
 
         assert writer != null;
         String descriptionBlock = descriptionController.getFinalText();
+        String attributeBlock = attributeController.getFinalText();
+        String skillsBlock = skillsController.getFinalText();
 
 
         try {
             writer.write(descriptionBlock);
+            writer.append("\n\n").append(attributeBlock);
+            writer.append("\n").append(skillsBlock);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

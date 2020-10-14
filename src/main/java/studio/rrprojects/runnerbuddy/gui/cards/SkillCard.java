@@ -1,25 +1,22 @@
 package studio.rrprojects.runnerbuddy.gui.cards;
 
-import com.eclipsesource.json.Json;
-import com.eclipsesource.json.JsonObject;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.gui.popups.EditSkillPopup;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class SkillCard {
-    private CharacterContainer character;
+    private final CharacterContainer character;
     private JList<String> listAvailable;
     private JList<String> listSelected;
     private JPanel panelMain;
@@ -30,7 +27,6 @@ public class SkillCard {
     private JLabel labelLanguage;
     private LinkedHashMap<String, DefaultListModel<String>> tableSkillType;
     private LinkedHashMap<String, LinkedHashMap<String, SkillContainer>> tableSkillTypeList;
-    private LinkedHashMap<String, SkillContainer> tableActiveSkills, tableKnowledgeSkills, tableLanguageSkills;
 
     public SkillCard(CharacterContainer characterContainer) {
 
@@ -71,7 +67,6 @@ public class SkillCard {
             UpdateAll();
         });
     }
-
 
 
     private void ClearAll() {
@@ -120,7 +115,7 @@ public class SkillCard {
 
     private void UpdateSelectedLists() {
         LinkedHashMap<String, LinkedHashMap<String, SkillContainer>> skillsLists = character.getSkillsController().getSelectedSkillsLists();
-        DefaultListModel<String> list = new DefaultListModel<String>();
+        DefaultListModel<String> list = new DefaultListModel<>();
         for (Map.Entry<String, LinkedHashMap<String, SkillContainer>> map : skillsLists.entrySet()) {
             list.addElement("-- " + map.getKey() + " --");
             for (Map.Entry<String, SkillContainer> skill : map.getValue().entrySet()) {
@@ -138,22 +133,16 @@ public class SkillCard {
         tableSkillTypeList = new LinkedHashMap<>();
 
         //Active Skills
-        tableActiveSkills = new LinkedHashMap<>();
-        DefaultListModel<String> modelActiveSkills = LoadSkills("Active Skills", "SR3E_active_skills.json", new String[]{"Body", "Strength", "Quickness", "Intelligence", "Charisma", "Willpower", "Reaction"}, tableActiveSkills);
+        DefaultListModel<String> modelActiveSkills = character.getSkillsController().TableToList(character.getSkillsController().getTableActiveSkills(), true);
         tableSkillType.put("Active Skills", modelActiveSkills);
-        tableSkillTypeList.put("Active Skills", tableActiveSkills);
 
         //Knowledge Skills
-        tableKnowledgeSkills = new LinkedHashMap<>();
-        DefaultListModel<String> modelKnowledgeSkills = LoadSkills("Knowledge Skills", "SR3E_knowledge_skills.json", new String[]{"Street", "Academic", "Sixth World", "Interests"}, tableKnowledgeSkills);
+        DefaultListModel<String> modelKnowledgeSkills = character.getSkillsController().TableToList(character.getSkillsController().getTableKnowledgeSkills(), false);
         tableSkillType.put("Knowledge Skills", modelKnowledgeSkills);
-        tableSkillTypeList.put("Knowledge Skills", tableKnowledgeSkills);
 
         //Language Skills
-        tableLanguageSkills = new LinkedHashMap<>();
-        DefaultListModel<String> modelLanguageSkills = LoadSkills("Language Skills", "SR3E_language_skills.json", new String[]{"Languages"}, tableLanguageSkills);
+        DefaultListModel<String> modelLanguageSkills = character.getSkillsController().TableToList(character.getSkillsController().getTableLanguageSkills(), false);
         tableSkillType.put("Language Skills", modelLanguageSkills);
-        tableSkillTypeList.put("Language Skills", tableLanguageSkills);
 
         //Populate Skill Type Selector
         for (Map.Entry<String, DefaultListModel<String>> type : tableSkillType.entrySet()) {
@@ -164,68 +153,11 @@ public class SkillCard {
         listAvailable.setModel(modelActiveSkills);
     }
 
-    private DefaultListModel<String> LoadSkills(String skillType, String fileName, String[] separators, LinkedHashMap<String, SkillContainer> hashMap) {
-        DefaultListModel<String> list = new DefaultListModel<>();
-        //Load The File and Create ArrayList
-        ArrayList<SkillContainer> tmpSkillList = CreateArrayFromJSON(fileName, skillType);
-        //Split Arraylist into separate hashmap for each linked attribute and add Each Hashmap to a larger group
-        assert tmpSkillList != null;
-        LinkedHashMap<String, LinkedHashMap<String, SkillContainer>> tableSkills = SplitArray(tmpSkillList, separators);
-        //Create Box from Main Group
-        for (Map.Entry<String, LinkedHashMap<String, SkillContainer>> group : tableSkills.entrySet()) {
-            list.addElement("-- " + group.getKey() + " --");
-            for (Map.Entry<String, SkillContainer> skill : group.getValue().entrySet()) {
-                list.addElement(skill.getKey());
-                hashMap.put(skill.getKey(), skill.getValue());
-            }
-        }
-
-        return list;
-    }
-
-    private LinkedHashMap<String, LinkedHashMap<String, SkillContainer>> SplitArray(ArrayList<SkillContainer> tmpSkillList, String[] strings) {
-        LinkedHashMap<String, LinkedHashMap<String, SkillContainer>> arrayList = new LinkedHashMap<>();
-        for (String category : strings) {
-            arrayList.put(category, new LinkedHashMap<>());
-        }
-
-        for (SkillContainer skill : tmpSkillList) {
-            if (arrayList.containsValue(arrayList.get(skill.getAttribute()))) {
-                arrayList.get(skill.getAttribute()).put(skill.getSkillName(), skill);
-            } else {
-                arrayList.get(skill.getCategory()).put(skill.getSkillName(), skill);
-            }
-        }
-
-        return arrayList;
-    }
-
-    private ArrayList<SkillContainer> CreateArrayFromJSON(String fileName, String skillType) {
-        ArrayList<SkillContainer> arrayList = new ArrayList<>();
-        String file = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "RunnerBuddy" + File.separator + "JSON" + File.separator + fileName;
-
-
-        JsonObject mainObj;
-        try {
-            FileReader reader = new FileReader(new File(file));
-            mainObj = (JsonObject) Json.parse(reader);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        for (JsonObject.Member skill : mainObj) {
-            arrayList.add(new SkillContainer(skill, skillType));
-        }
-
-        return arrayList;
-    }
-
     private void SkillSelect(String skill) {
-        SkillContainer baseSkill = null;
+        SkillContainer baseSkill;
         String searchTerm = Objects.requireNonNull(boxSkillType.getSelectedItem()).toString();
 
-        baseSkill = tableSkillTypeList.get(searchTerm).get(skill);
+        baseSkill = character.getSkillsController().getSkill(skill, searchTerm);
 
         if (baseSkill != null) {
             new EditSkillPopup(baseSkill, character, this);
@@ -233,7 +165,7 @@ public class SkillCard {
     }
 
     private void EditSkill(String skill) {
-        SkillContainer baseSkill = null;
+        SkillContainer baseSkill;
         String searchTerm = Objects.requireNonNull(boxSkillType.getSelectedItem()).toString();
 
         baseSkill = character.getSkillsController().getSelectedSkillsLists().get(searchTerm).get(skill);
@@ -270,11 +202,6 @@ public class SkillCard {
         final DefaultListModel defaultListModel1 = new DefaultListModel();
         listAvailable.setModel(defaultListModel1);
         scrollPane1.setViewportView(listAvailable);
-        listSelected = new JList();
-        listSelected.setBackground(new Color(-14079180));
-        listSelected.setForeground(new Color(-11805347));
-        listSelected.setSelectionBackground(new Color(-14079180));
-        panelMain.add(listSelected, new GridConstraints(1, 7, 7, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         final JSeparator separator1 = new JSeparator();
         separator1.setOrientation(1);
         panelMain.add(separator1, new GridConstraints(0, 6, 8, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
@@ -319,6 +246,14 @@ public class SkillCard {
         buttonClear.setForeground(new Color(-11805347));
         buttonClear.setText("CLEAR ALL");
         panelMain.add(buttonClear, new GridConstraints(0, 7, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane2 = new JScrollPane();
+        panelMain.add(scrollPane2, new GridConstraints(1, 7, 7, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(157, 128), null, 0, false));
+        listSelected = new JList();
+        listSelected.setBackground(new Color(-14079180));
+        listSelected.setForeground(new Color(-11805347));
+        final DefaultListModel defaultListModel2 = new DefaultListModel();
+        listSelected.setModel(defaultListModel2);
+        scrollPane2.setViewportView(listSelected);
     }
 
     /**

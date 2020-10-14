@@ -1,6 +1,7 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
 import studio.rrprojects.runnerbuddy.containers.attributes.AttributePriorityContainer;
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 
 import javax.swing.*;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ public class AttributeController {
     private AttributePriorityContainer selectedAttributePriority, defaultPriority;
     private AttributeArray selectedAttributes;
 
-    public AttributeController() {
+    public AttributeController(CharacterContainer characterContainer) {
         selectedAttributes = new AttributeArray(1, 1, 1, 1, 1, 1);
         PopTables();
 
@@ -69,6 +70,10 @@ public class AttributeController {
         return selectedAttributes;
     }
 
+    public String getFinalText() {
+        return getSelectedAttributes().getString();
+    }
+
     public class AttributeArray {
         private LinkedHashMap<String, Integer> attributeList;
 
@@ -110,6 +115,14 @@ public class AttributeController {
             }
 
             CalcReaction();
+        }
+
+        public String getString() {
+            StringBuilder output = new StringBuilder("- - - ATTRIBUTES - - -");
+            for (Map.Entry<String, Integer> attribute: attributeList.entrySet()) {
+                output.append(attribute.getKey()).append(": ").append(attribute.getValue()).append("\n");
+            }
+            return output.toString();
         }
     }
 

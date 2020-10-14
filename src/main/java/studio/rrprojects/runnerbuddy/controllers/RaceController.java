@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.race.RacePriorityContainer;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ public class RaceController {
    ArrayList<RacePriorityContainer> racePriorityTable;
     private String selectedRace;
 
-    public RaceController() {
+    public RaceController(CharacterContainer characterContainer) {
 
         LoadTables();
 
@@ -59,4 +60,5 @@ public class RaceController {
     public String getSelectedRace() {
         return selectedRace;
     }
+
 }

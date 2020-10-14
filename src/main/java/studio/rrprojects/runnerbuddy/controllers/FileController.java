@@ -1,5 +1,7 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -14,7 +16,7 @@ public class FileController {
     private final String cyberDirectory;
     private ArrayList<String> directoryList;
 
-    public FileController() {
+    public FileController(CharacterContainer characterContainer) {
         //Main Directories
         mainDirectory = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "RunnerBuddy";
         jsonDirectory = mainDirectory + File.separator + "JSON";

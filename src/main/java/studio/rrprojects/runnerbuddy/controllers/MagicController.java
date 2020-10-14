@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.magic.MagicPriorityContainer;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class MagicController {
     private ArrayList<String> listTotems;
     private ArrayList<String> listElements;
 
-    public MagicController(){
+    public MagicController(CharacterContainer characterContainer){
         selectedMagicLevel = "Mundane";
         setSelectedMageType("Mundane");
 

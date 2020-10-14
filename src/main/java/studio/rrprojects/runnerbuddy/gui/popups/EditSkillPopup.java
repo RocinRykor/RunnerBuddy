@@ -22,6 +22,7 @@ public class EditSkillPopup {
     private JCheckBox checkSpecialization;
     private JTextPane textDescription;
     private JLabel textResult;
+    private JCheckBox checkBuildRepair;
     SkillContainer skill;
 
     public EditSkillPopup(SkillContainer baseSkill, CharacterContainer character, SkillCard skillCard) {
@@ -35,6 +36,7 @@ public class EditSkillPopup {
         frame.pack();
 
         PopulateSpecializationBox();
+        checkBuildRepair.setEnabled(skill.isBuild_repair());
         SetDescription();
         SetResult();
         UpdateAll();
@@ -48,6 +50,7 @@ public class EditSkillPopup {
     private void Submit(JFrame frame, SkillContainer baseSkill) {
         baseSkill.setBaseLevel(Integer.parseInt(Objects.requireNonNull(boxSkillLevel.getSelectedItem()).toString()));
         baseSkill.setIsSpecialized(checkSpecialization.isSelected());
+        
         if (checkSpecialization.isSelected()) {
             baseSkill.setSpecialization(Objects.requireNonNull(boxSpecialization.getSelectedItem()).toString());
         }
@@ -93,12 +96,19 @@ public class EditSkillPopup {
 
     private void SetResult() {
         String string;
+
+        String skillName = skill.getSkillName();
+
+        if (checkBuildRepair.isSelected()) {
+            skillName += " (B/R)";
+        }
+
         if (checkSpecialization.isSelected()) {
             int skillLevel = Integer.parseInt(Objects.requireNonNull(boxSkillLevel.getSelectedItem()).toString());
-            string = String.format("%s (%d), %s (%d) | Total Cost: %d", skill.getSkillName(), skillLevel - 1, Objects.requireNonNull(boxSpecialization.getSelectedItem()).toString(), skillLevel + 1, skill.getTotalCost());
+            string = String.format("%s (%d), %s (%d) | Total Cost: %d", skillName, skillLevel - 1, Objects.requireNonNull(boxSpecialization.getSelectedItem()).toString(), skillLevel + 1, skill.getTotalCost());
         } else {
             int skillLevel = Integer.parseInt(Objects.requireNonNull(boxSkillLevel.getSelectedItem()).toString());
-            string = String.format("%s (%d) | Total Cost: %d", skill.getSkillName(), skillLevel, skill.getTotalCost());
+            string = String.format("%s (%d) | Total Cost: %d", skillName, skillLevel, skill.getTotalCost());
         }
 
         textResult.setText(string);
@@ -131,15 +141,15 @@ public class EditSkillPopup {
      */
     private void $$$setupUI$$$() {
         panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
         panel1.setBackground(new Color(-14079180));
         panel1.setForeground(new Color(-11805347));
         panel1.setPreferredSize(new Dimension(400, 400));
         final Spacer spacer1 = new Spacer();
-        panel1.add(spacer1, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer1, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         buttonSubmit = new JButton();
         buttonSubmit.setText("Submit");
-        panel1.add(buttonSubmit, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(buttonSubmit, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         boxSkillLevel = new JComboBox();
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
         defaultComboBoxModel1.addElement("0");
@@ -152,10 +162,10 @@ public class EditSkillPopup {
         boxSkillLevel.setModel(defaultComboBoxModel1);
         panel1.add(boxSkillLevel, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
-        panel1.add(spacer2, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel1.add(spacer2, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         buttonCancel = new JButton();
         buttonCancel.setText("Cancel");
-        panel1.add(buttonCancel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(buttonCancel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         checkSpecialization = new JCheckBox();
         checkSpecialization.setBackground(new Color(-14079180));
         checkSpecialization.setForeground(new Color(-11805347));
@@ -171,13 +181,20 @@ public class EditSkillPopup {
         textResult.setForeground(new Color(-11805347));
         textResult.setText("X");
         panel1.add(textResult, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        panel1.add(scrollPane1, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         textDescription = new JTextPane();
         textDescription.setBackground(new Color(-14079180));
         textDescription.setCaretColor(new Color(-11805347));
         textDescription.setEditable(false);
         textDescription.setForeground(new Color(-11805347));
         textDescription.setText("X");
-        panel1.add(textDescription, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        scrollPane1.setViewportView(textDescription);
+        checkBuildRepair = new JCheckBox();
+        checkBuildRepair.setBackground(new Color(-14079180));
+        checkBuildRepair.setForeground(new Color(-11805347));
+        checkBuildRepair.setText("Build/Repair");
+        panel1.add(checkBuildRepair, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.contacts.ContactContainer;
 
 import javax.swing.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class ContactsController {
     ArrayList<ContactContainer> contactList;
 
-    public ContactsController() {
+    public ContactsController(CharacterContainer characterContainer) {
         InitTable();
     }
 

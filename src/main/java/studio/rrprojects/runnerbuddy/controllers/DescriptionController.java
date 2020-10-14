@@ -1,10 +1,12 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+
 public class DescriptionController {
 
     String nameStreet, nameReal, age, sex, description, race;
 
-    public DescriptionController() {
+    public DescriptionController(CharacterContainer characterContainer) {
     }
 
     public String getNameStreet() {
@@ -57,7 +59,8 @@ public class DescriptionController {
 
     public String getFinalText() {
 
-        return String.format("Name: %s, AKA: %s\n" +
+        return String.format("- - - - Description - - - -\n" +
+                "Name: %s, AKA: %s\n" +
                 "%s %s, Age %s", nameReal, nameStreet, sex, race, age);
     }
 }

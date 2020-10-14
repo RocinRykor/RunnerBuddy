@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.resources.ResourcePriorityContainer;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ public class ResourceController {
     LinkedHashMap<String, ResourcePriorityContainer> resourcePriorityTable;
     ResourcePriorityContainer selectedPriority, defaultPriority;
 
-    public ResourceController(){
+    public ResourceController(CharacterContainer characterContainer){
 
         LoadTables();
         defaultPriority = resourcePriorityTable.get("E");
