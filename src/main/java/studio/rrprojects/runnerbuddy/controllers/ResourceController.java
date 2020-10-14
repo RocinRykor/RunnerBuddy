@@ -1,6 +1,7 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.gear.GearContainer;
 import studio.rrprojects.runnerbuddy.containers.resources.ResourcePriorityContainer;
 
 import javax.swing.*;
@@ -11,12 +12,14 @@ import java.util.Map;
 public class ResourceController {
     LinkedHashMap<String, ResourcePriorityContainer> resourcePriorityTable;
     ResourcePriorityContainer selectedPriority, defaultPriority;
+    ArrayList<GearContainer> takenGearList;
 
     public ResourceController(CharacterContainer characterContainer){
 
         LoadTables();
         defaultPriority = resourcePriorityTable.get("E");
         SetPriority(defaultPriority);
+        takenGearList = new ArrayList<>();
     }
 
     private void SetPriority(ResourcePriorityContainer priorityContainer) {
@@ -52,5 +55,15 @@ public class ResourceController {
 
     public String getBaseResources() {
         return selectedPriority.getNuyenAmountString();
+    }
+
+    public int getRemainingResources() {
+        int availableMoney = selectedPriority.getNuyenAmount();
+
+        for (GearContainer gearItem: takenGearList) {
+            //availableMoney -= gearItem.GetTotalCost();
+        }
+
+        return availableMoney;
     }
 }

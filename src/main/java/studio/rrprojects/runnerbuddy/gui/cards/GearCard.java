@@ -4,13 +4,10 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.gear.GearContainer;
-import studio.rrprojects.runnerbuddy.controllers.GearController;
-import studio.rrprojects.runnerbuddy.gui.popups.EditGearPopup;
+import studio.rrprojects.runnerbuddy.controllers.gear.GearController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -31,11 +28,15 @@ public class GearCard {
     private JComboBox<String> boxCategory;
     private LinkedHashMap<String, DefaultListModel<String>> listModelArray;
     private LinkedHashMap<String, DefaultComboBoxModel<String>> subcategoryList;
+    String selectedCategory, selectedSubcategory;
 
     public GearCard(CharacterContainer characterContainer) {
         character = characterContainer;
-        gearController = new GearController();
+        selectedCategory = "";
+        selectedSubcategory = "";
 
+        PopulateCategoryBox();
+        PopulateSubcategoryBox();
         PopulateAvailableList();
 
         boxSubCategory.addActionListener(actionEvent -> UpdateAll());
@@ -51,68 +52,63 @@ public class GearCard {
 
                     // Double-click detected
                     int index = list.locationToIndex(e.getPoint());
-                    GearSelect(list.getSelectedValue().toString());
+                    //GearSelect(list.getSelectedValue().toString());
                 }
             }
         });
 
     }
 
-    private void GearSelect(String gearName) {
-        GearContainer baseGear = null;
-        String categoryName = Objects.requireNonNull(boxSubCategory.getSelectedItem()).toString();
+    private void PopulateCategoryBox() {
+        DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
 
-        //baseGear = gearController.getCategoryList().get(categoryName).get(gearName);
-
-        if (baseGear != null) {
-            new EditGearPopup(baseGear, character, this);
+        for (Map.Entry<String, ArrayList<String>> category : character.getGearController().getCategoryList().entrySet()) {
+            boxModel.addElement(category.getKey());
         }
+
+        boxCategory.setModel(boxModel);
+    }
+
+    private void PopulateSubcategoryBox() {
+        String searchTerm = Objects.requireNonNull(boxCategory.getSelectedItem()).toString();
+
+        ArrayList<String> list = character.getGearController().getCategoryList().get(searchTerm);
+
+        DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
+
+        for (String subcategory : list) {
+            boxModel.addElement(subcategory);
+        }
+
+        boxSubCategory.setModel(boxModel);
     }
 
     private void PopulateAvailableList() {
-        listModelArray = new LinkedHashMap<>();
-        subcategoryList = new LinkedHashMap<String, DefaultComboBoxModel<String>>();
 
-        //Fill Category Box
-        LinkedHashMap<String, ArrayList<String>> categoryList = gearController.getCategoryList();
-        DefaultComboBoxModel<String> categoryBox = new DefaultComboBoxModel<>();
+        String searchTerm = Objects.requireNonNull(boxSubCategory.getSelectedItem()).toString();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
 
-        for (Map.Entry<String, ArrayList<String>> category : categoryList.entrySet()) {
-            categoryBox.addElement(category.getKey());
-
-            //Fill Subcategory Box
-            DefaultComboBoxModel<String> tmpList = new DefaultComboBoxModel<String>();
-            for (String subcategory : category.getValue()) {
-                tmpList.addElement(subcategory);
-            }
-            subcategoryList.put(category.getKey(), tmpList);
-        }
-        boxCategory.setModel(categoryBox);
-        boxSubCategory.setModel(subcategoryList.get(Objects.requireNonNull(boxCategory.getSelectedItem()).toString()));
-
-        //Create List Array for Subcategory Box
-        LinkedHashMap<String, LinkedHashMap<String, GearContainer>> subcategoryMap = gearController.getSubcategoryList();
-        for (Map.Entry<String, LinkedHashMap<String, GearContainer>> subcategory : subcategoryMap.entrySet()) {
-            listModelArray.put(subcategory.getKey(), CreateListModel(subcategory.getValue()));
+        for (GearContainer gear : character.getGearController().getSubcategoryList().get(searchTerm)) {
+            listModel.addElement(gear.getItemName());
         }
 
-        UpdateAll();
+        listAvailable.setModel(listModel);
     }
 
     private void UpdateAll() {
         textStarting.setText("Starting Nuyen: " + character.getResourceController().getBaseResources() + "¥");
-        boxSubCategory.setModel(subcategoryList.get(Objects.requireNonNull(boxCategory.getSelectedItem()).toString()));
-        listAvailable.setModel(listModelArray.get(Objects.requireNonNull(boxSubCategory.getSelectedItem()).toString()));
-    }
 
-    private DefaultListModel<String> CreateListModel(LinkedHashMap<String, GearContainer> hashMap) {
-        DefaultListModel<String> tmpList = new DefaultListModel<>();
-
-        for (Map.Entry<String, GearContainer> entry : hashMap.entrySet()) {
-            tmpList.addElement(entry.getKey());
+        if (!selectedCategory.equalsIgnoreCase(Objects.requireNonNull(boxCategory.getSelectedItem()).toString())) {
+            PopulateSubcategoryBox();
+            selectedCategory = boxCategory.getSelectedItem().toString();
         }
 
-        return tmpList;
+        if (!selectedSubcategory.equalsIgnoreCase(Objects.requireNonNull(boxSubCategory.getSelectedItem()).toString())) {
+            PopulateAvailableList();
+            selectedSubcategory = boxSubCategory.getSelectedItem().toString();
+        }
+
+        textRemaining.setText("Remaining Nuyen: " + character.getResourceController().getRemainingResources() + "¥");
     }
 
     {

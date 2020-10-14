@@ -1,6 +1,7 @@
 package studio.rrprojects.runnerbuddy.containers.character;
 
 import studio.rrprojects.runnerbuddy.controllers.*;
+import studio.rrprojects.runnerbuddy.controllers.gear.GearController;
 
 import java.io.*;
 
@@ -11,6 +12,7 @@ public class CharacterContainer {
     ContactsController contactsController;
     RaceController raceController;
     AttributeController attributeController;
+    GearController gearController;
     SkillsController skillsController;
     MagicController magicController;
     ResourceController resourceController;
@@ -23,6 +25,7 @@ public class CharacterContainer {
         raceController = new RaceController(this);
         attributeController = new AttributeController(this);
         skillsController = new SkillsController(this);
+        gearController = new GearController(this);
         magicController = new MagicController(this);
         resourceController = new ResourceController(this);
         contactsController = new ContactsController(this);
@@ -93,5 +96,6 @@ public class CharacterContainer {
         return contactsController;
     }
 
+    public GearController getGearController() { return gearController; }
 }
 
