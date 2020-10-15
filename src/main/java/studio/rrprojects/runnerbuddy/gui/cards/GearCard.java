@@ -5,9 +5,12 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.gear.GearContainer;
 import studio.rrprojects.runnerbuddy.controllers.gear.GearController;
+import studio.rrprojects.runnerbuddy.gui.popups.EditGearPopup;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class GearCard {
     private JButton buttonClear;
     private JPanel panelMain;
     private JList<String> listAvailable;
-    private JList listSelected;
+    private JList<String> listSelected;
     private JLabel textStarting;
     private JLabel textRemaining;
     private JComboBox<String> boxCategory;
@@ -39,6 +42,8 @@ public class GearCard {
         PopulateSubcategoryBox();
         PopulateAvailableList();
 
+        UpdateAll();
+
         boxSubCategory.addActionListener(actionEvent -> UpdateAll());
         boxCategory.addActionListener(actionEvent -> UpdateAll());
         listAvailable.addMouseListener(new MouseAdapter() {
@@ -52,11 +57,24 @@ public class GearCard {
 
                     // Double-click detected
                     int index = list.locationToIndex(e.getPoint());
-                    //GearSelect(list.getSelectedValue().toString());
+                    GearSelect(list.getSelectedValue().toString());
                 }
             }
         });
 
+        buttonClear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                character.getGearController().ClearGearList();
+                UpdateAll();
+            }
+        });
+    }
+
+    private void GearSelect(String searchTerm) {
+        if (character.getGearController().SearchForGear(searchTerm, selectedSubcategory) != null) {
+            new EditGearPopup(character.getGearController().SearchForGear(searchTerm, selectedSubcategory), character, this);
+        }
     }
 
     private void PopulateCategoryBox() {
@@ -84,18 +102,30 @@ public class GearCard {
     }
 
     private void PopulateAvailableList() {
-
+        boolean showAll = false;
         String searchTerm = Objects.requireNonNull(boxSubCategory.getSelectedItem()).toString();
         DefaultListModel<String> listModel = new DefaultListModel<>();
 
         for (GearContainer gear : character.getGearController().getSubcategoryList().get(searchTerm)) {
-            listModel.addElement(gear.getItemName());
+            if (showAll || gear.getAvailabilityRating() <= 8) {
+                listModel.addElement(gear.getItemName());
+            }
         }
 
         listAvailable.setModel(listModel);
     }
 
-    private void UpdateAll() {
+    private void PopulateSelectedList() {
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+
+        for (Map.Entry<String, GearContainer> gear : character.getGearController().getSelectedGearList().entrySet()) {
+            listModel.addElement(gear.getKey());
+        }
+
+        listSelected.setModel(listModel);
+    }
+
+    public void UpdateAll() {
         textStarting.setText("Starting Nuyen: " + character.getResourceController().getBaseResources() + "¥");
 
         if (!selectedCategory.equalsIgnoreCase(Objects.requireNonNull(boxCategory.getSelectedItem()).toString())) {
@@ -107,6 +137,8 @@ public class GearCard {
             PopulateAvailableList();
             selectedSubcategory = boxSubCategory.getSelectedItem().toString();
         }
+
+        PopulateSelectedList();
 
         textRemaining.setText("Remaining Nuyen: " + character.getResourceController().getRemainingResources() + "¥");
     }

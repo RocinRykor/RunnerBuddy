@@ -13,10 +13,12 @@ public class GearController {
     private ArrayList<GearContainer> masterList;
     private LinkedHashMap<String, ArrayList<String>> categoryList;
     private LinkedHashMap<String, ArrayList<GearContainer>> subcategoryList;
+    private LinkedHashMap<String, GearContainer> selectedGearList;
 
 
     public GearController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
+        selectedGearList = new LinkedHashMap<>();
         masterList = new ArrayList<>();
         weaponController = new WeaponController(characterContainer);
 
@@ -66,5 +68,26 @@ public class GearController {
 
     public LinkedHashMap<String, ArrayList<GearContainer>> getSubcategoryList() {
         return subcategoryList;
+    }
+
+    public GearContainer SearchForGear(String searchTerm, String selectedSubcategory) {
+        for (GearContainer gear: subcategoryList.get(selectedSubcategory)) {
+            if (gear.getItemName().equalsIgnoreCase(searchTerm)) {
+                return gear;
+            }
+        }
+        return null;
+    }
+
+    public void AddNewGear(GearContainer gear) {
+        selectedGearList.put(gear.getItemName(), gear);
+    }
+
+    public LinkedHashMap<String, GearContainer> getSelectedGearList() {
+        return selectedGearList;
+    }
+
+    public void ClearGearList() {
+        selectedGearList.clear();
     }
 }
