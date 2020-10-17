@@ -10,16 +10,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ResourceController {
+    private final CharacterContainer characterContainer;
     LinkedHashMap<String, ResourcePriorityContainer> resourcePriorityTable;
     ResourcePriorityContainer selectedPriority, defaultPriority;
-    ArrayList<GearContainer> takenGearList;
 
     public ResourceController(CharacterContainer characterContainer){
-
+        this.characterContainer = characterContainer;
         LoadTables();
         defaultPriority = resourcePriorityTable.get("E");
         SetPriority(defaultPriority);
-        takenGearList = new ArrayList<>();
     }
 
     private void SetPriority(ResourcePriorityContainer priorityContainer) {
@@ -60,8 +59,8 @@ public class ResourceController {
     public int getRemainingResources() {
         int availableMoney = selectedPriority.getNuyenAmount();
 
-        for (GearContainer gearItem: takenGearList) {
-            //availableMoney -= gearItem.GetTotalCost();
+        for (Map.Entry<String, GearContainer> gearItem: characterContainer.getGearController().getSelectedGearList().entrySet()) {
+            availableMoney -= gearItem.getValue().getTotalCost();
         }
 
         return availableMoney;

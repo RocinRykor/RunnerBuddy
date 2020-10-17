@@ -27,4 +27,9 @@ public class TextUtils {
         NumberFormat numberFormat = NumberFormat.getNumberInstance(new Locale("en_US"));
         return numberFormat.format(input) + "¥";
     }
+
+    public static String PrettyKey(String input) {
+        String output = input.replaceAll("_", " ");
+        return TitleCase(output);
+    }
 }
