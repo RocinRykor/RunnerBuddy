@@ -6,7 +6,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-public abstract class GearContainer {
+public class GearContainer {
 
     String itemName;
     String category;
@@ -25,6 +25,14 @@ public abstract class GearContainer {
         ProcessItem();
     }
 
+    public GearContainer(GearContainer gearTemplate) {
+        itemName = gearTemplate.itemName;
+        this.category = gearTemplate.category;
+        this.subcategory = gearTemplate.subcategory;
+        this.jsonObject = gearTemplate.jsonObject;
+        ProcessItem();
+    }
+
     private void ProcessItem() {
         CalculateCost();
 
@@ -39,7 +47,9 @@ public abstract class GearContainer {
         if (jsonObject.get("cost") instanceof Integer) {
             baseCost = jsonObject.getInt("cost");
         } else {
-            String costString = jsonObject.getString("cost").replaceAll("RATING", String.valueOf(itemRating).replaceAll("X", "*"));
+            String costString = jsonObject.getString("cost").replaceAll("RATING", String.valueOf(itemRating));
+            costString = costString.replaceAll("X", "\\*");
+            System.out.println(costString);
 
             ScriptEngineManager manager = new ScriptEngineManager();
             ScriptEngine engine = manager.getEngineByName("js");

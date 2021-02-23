@@ -7,6 +7,7 @@ import java.io.*;
 
 public class CharacterContainer {
 
+    private final PriorityController priorityController;
     DescriptionController descriptionController;
     FileController fileController;
     ContactsController contactsController;
@@ -21,52 +22,20 @@ public class CharacterContainer {
 
         //Start the Controllers | Uses "this" so that each controller can access the others through the CharacterContainer
         fileController = new FileController(this);
-        descriptionController = new DescriptionController(this);
         raceController = new RaceController(this);
         attributeController = new AttributeController(this);
         skillsController = new SkillsController(this);
-        gearController = new GearController(this);
         magicController = new MagicController(this);
         resourceController = new ResourceController(this);
-        contactsController = new ContactsController(this);
+        //descriptionController = new DescriptionController(this);
+        //gearController = new GearController(this);
+        //contactsController = new ContactsController(this);
+        priorityController = new PriorityController(this);
     }
 
-    public void ExportToText() {
-        String fileName = fileController.getCharacterDirectory() + File.separator + descriptionController.getNameStreet() + ".txt";
-
-        File file = new File(fileName);
-        if (!file.exists()) {
-            try {
-                if (file.createNewFile()) {
-                    System.out.println("Created New Text File: " + file);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(file));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        assert writer != null;
-        String descriptionBlock = descriptionController.getFinalText();
-        String attributeBlock = attributeController.getFinalText();
-        String skillsBlock = skillsController.getFinalText();
 
 
-        try {
-            writer.write(descriptionBlock);
-            writer.append("\n\n").append(attributeBlock);
-            writer.append("\n").append(skillsBlock);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
+    public PriorityController getPriorityController() { return priorityController; }
 
     public DescriptionController getDescriptionController() { return descriptionController; }
 

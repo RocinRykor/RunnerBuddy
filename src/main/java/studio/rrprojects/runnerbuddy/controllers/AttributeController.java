@@ -1,136 +1,68 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
-import studio.rrprojects.runnerbuddy.containers.attributes.AttributePriorityContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
+import studio.rrprojects.runnerbuddy.misc.PriorityGroup;
 
-import javax.swing.*;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class AttributeController {
-    LinkedHashMap<String, AttributePriorityContainer> getPriorityTableAttributes;
-    HashMap<String, AttributeArray> racialModTable;
-    private AttributePriorityContainer selectedAttributePriority, defaultPriority;
-    private AttributeArray selectedAttributes;
+
+    private PriorityGroup priorityGroup;
+    private HashMap<String, Integer> mapAttribute;
+    private PriorityGroup.PriorityOption selectedPriorityOption;
+    private Attributes attributes;
 
     public AttributeController(CharacterContainer characterContainer) {
-        selectedAttributes = new AttributeArray(1, 1, 1, 1, 1, 1);
-        PopTables();
 
-        defaultPriority = new AttributePriorityContainer("BLANK", 6);
-        SetPriority(defaultPriority);
+        GeneratePriorityGroup();
+        GenerateAttributeMap();
     }
 
-    private void PopTables() {
-        //Racial Mod Table
-        racialModTable = new HashMap<>();
-        racialModTable.put("Troll", new AttributeArray(5, -1, 4, -2, -2, 0));
-        racialModTable.put("Elf", new AttributeArray(0, 1, 0, 2, 0,0));
-        racialModTable.put("Dwarf", new AttributeArray(1, 0, 2, 0, 0,1));
-        racialModTable.put("Ork", new AttributeArray(3, 2, 0, -1, -1,0));
-        racialModTable.put("Human", new AttributeArray(0, 0, 0, 0, 0,0));
-
-        //Attribute Points Priority
-        getPriorityTableAttributes = new LinkedHashMap<>();
-        getPriorityTableAttributes.put("A", new AttributePriorityContainer("A", 30));
-        getPriorityTableAttributes.put("B", new AttributePriorityContainer("B", 27));
-        getPriorityTableAttributes.put("C", new AttributePriorityContainer("C", 24));
-        getPriorityTableAttributes.put("D", new AttributePriorityContainer("D", 21));
-        getPriorityTableAttributes.put("E", new AttributePriorityContainer("E", 18));
+    public void setSelectedPriorityOption(PriorityGroup.PriorityOption priorityOption) {
+        selectedPriorityOption = priorityOption;
+        attributes.MassUpdateEvent();
     }
 
-    public DefaultComboBoxModel<String> GetPriorityBox() {
-        DefaultComboBoxModel<String> box = new DefaultComboBoxModel<>();
-        box.addElement("-- Select Attribute Level --");
-        for (Map.Entry<String, AttributePriorityContainer> attribute: getPriorityTableAttributes.entrySet()) {
-            box.addElement(String.format("%s - %d Points", attribute.getValue().getPriorityLevel(), attribute.getValue().getAttributePoints()));
-        }
-        return box;
+    private void GenerateAttributeMap() {
+        mapAttribute = new HashMap<>();
+        mapAttribute.put("Body", 0);
+        mapAttribute.put("Strength", 0);
+        mapAttribute.put("Quickness", 0);
+        mapAttribute.put("Charisma", 0);
+        mapAttribute.put("Intelligence", 0);
+        mapAttribute.put("Willpower", 0);
+        mapAttribute.put("Essence", 0);
+        mapAttribute.put("Magic", 0);
+        mapAttribute.put("Reaction", 0);
     }
 
-    public void setSelectedAttributePriority(Object selectedItem) {
-        String searchTerm;
-
-        if (selectedItem.toString().startsWith("--")) {
-            SetPriority(defaultPriority);
-            return;
-        } else {
-            searchTerm = String.valueOf(selectedItem.toString().charAt(0));
-        }
-
-        SetPriority(getPriorityTableAttributes.get(searchTerm));
+    private void GeneratePriorityGroup() {
+        priorityGroup = new PriorityGroup("Attributes");
+        priorityGroup.addOption(1, "A", "30 Points", 30);
+        priorityGroup.addOption(2, "B", "27 Points", 27);
+        priorityGroup.addOption(3, "C", "24 Points", 24);
+        priorityGroup.addOption(4, "D", "21 Points", 21);
+        priorityGroup.addOption(5, "E", "18 Points", 18);
     }
 
-    private void SetPriority(AttributePriorityContainer priorityLevel) {
-        selectedAttributePriority = priorityLevel;
+    public HashMap<String, Integer> getMapAttribute() {
+        return mapAttribute;
     }
 
-    public AttributeArray getSelectedAttributes() {
-        return selectedAttributes;
+    public PriorityGroup.PriorityOption getSelectedPriorityOption() {
+        return selectedPriorityOption;
     }
 
-    public String getFinalText() {
-        return getSelectedAttributes().getString();
+    public PriorityGroup getPriorityGroup() {
+        return priorityGroup;
     }
 
-    public class AttributeArray {
-        private LinkedHashMap<String, Integer> attributeList;
-
-        public AttributeArray(int attrBody, int attrQuickness, int attrStrength, int attrCharisma, int attrIntelligence, int attrWillpower) {
-            attributeList = new LinkedHashMap<>();
-            attributeList.put("Body", attrBody);
-            attributeList.put("Quickness", attrQuickness);
-            attributeList.put("Strength", attrStrength);
-            attributeList.put("Charisma", attrCharisma);
-            attributeList.put("Intelligence", attrIntelligence);
-            attributeList.put("Willpower", attrWillpower);
-
-            attributeList.put("Essence", 6);
-            attributeList.put("Magic", 0);
-            CalcReaction();
-        }
-
-        private void CalcReaction() {
-            int quickness = attributeList.get("Quickness");
-            int intelligence = attributeList.get("Intelligence");
-
-            //Bit-shift to divide by two
-            int reaction = (int) Math.floor((quickness + intelligence) >> 1);
-
-            if (attributeList.containsKey("Reaction")) {
-                attributeList.replace("Reaction", reaction);
-            } else {
-                attributeList.put("Reaction", reaction);
-            }
-        }
-
-        public int getAttribute(String attributeName) {
-            return attributeList.get(attributeName);
-        }
-
-        public void UpdateBaseAttributes(LinkedHashMap<String, Integer> arrayList) {
-            for (Map.Entry<String, Integer> attribute: arrayList.entrySet()) {
-                attributeList.replace(attribute.getKey(), attribute.getValue());
-            }
-
-            CalcReaction();
-        }
-
-        public String getString() {
-            StringBuilder output = new StringBuilder("- - - ATTRIBUTES - - -");
-            for (Map.Entry<String, Integer> attribute: attributeList.entrySet()) {
-                output.append(attribute.getKey()).append(": ").append(attribute.getValue()).append("\n");
-            }
-            return output.toString();
-        }
+    public void passThisCard(Attributes attributes) {
+        this.attributes = attributes;
     }
 
-    public HashMap<String, AttributeArray> getRacialModTable() {
-        return racialModTable;
-    }
-
-    public AttributePriorityContainer getSelectedAttributePriority() {
-        return selectedAttributePriority;
+    public Attributes getAttributesCard() {
+        return attributes;
     }
 }

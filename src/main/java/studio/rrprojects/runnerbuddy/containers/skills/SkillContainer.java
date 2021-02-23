@@ -4,17 +4,17 @@ import com.eclipsesource.json.JsonObject;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SkillContainer {
-    private final String skillName;
-    private final String attribute;
-    private final boolean build_repair;
-    private final String category;
-    private final String defaults;
-    private final String description;
-    private final String source;
-    private final ArrayList<String> specialization;
+    private String skillName;
+    private String attribute;
+    private boolean build_repair;
+    private String category;
+    private String defaults;
+    private String description;
+    private String source;
+    private ArrayList<String> specialization;
+    private JsonObject.Member skill;
     private int baseLevel;
     private boolean isSpecialized;
     private String skillSpecialization;
@@ -23,6 +23,10 @@ public class SkillContainer {
     private String skillResultString;
     private int totalCost;
     private String skillType;
+
+    public SkillContainer(SkillContainer skillTemplate) {
+        ProcessSkill(skillTemplate.skill, skillTemplate.skillType);
+    }
 
     public String getSkillName() {
         return skillName;
@@ -56,7 +60,7 @@ public class SkillContainer {
         return specialization;
     }
 
-    public SkillContainer(String skillName, String attribute, boolean build_repair, String category, String defaults, String description, String source, ArrayList<String> specialization) {
+    public SkillContainer(String skillName, String attribute, boolean build_repair, String category, String defaults, String description, String source, ArrayList<String> specialization, JsonObject.Member skill) {
         this.skillName = skillName;
         this.attribute = attribute;
         this.build_repair = build_repair;
@@ -65,9 +69,14 @@ public class SkillContainer {
         this.description = description;
         this.source = source;
         this.specialization = specialization;
+        this.skill = skill;
     }
 
     public SkillContainer(JsonObject.Member skill, String skillType) {
+        ProcessSkill(skill, skillType);
+    }
+
+    private void ProcessSkill(JsonObject.Member skill, String skillType) {
         skillName = TextUtils.TitleCase(skill.getName());
         attribute = TextUtils.TitleCase(skill.getValue().asObject().getString("attribute", "Intelligence"));
         build_repair = skill.getValue().asObject().getBoolean("build_repair", false);
@@ -75,6 +84,7 @@ public class SkillContainer {
         defaults = skill.getValue().asObject().getString("defaults", "UNKNOWN");
         description = skill.getValue().asObject().getString("description", "UNKNOWN");
         source = TextUtils.TitleCase(skill.getValue().asObject().getString("source", "UNKNOWN"));
+        this.skill = skill;
         this.skillType = skillType;
 
         String specString = skill.getValue().asObject().getString("specialization", "UNKNOWN");
@@ -91,7 +101,6 @@ public class SkillContainer {
         } else {
             specialization.add("CUSTOM");
         }
-
     }
 
     public String getBuild_repairAsString() {
