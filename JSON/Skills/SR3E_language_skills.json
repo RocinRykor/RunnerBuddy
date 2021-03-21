@@ -1,0 +1,92 @@
+{
+"Chinese" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": "Cantonese"
+},
+"English" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": "Medieval English"
+},
+"Esperanto" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Estonian" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Finnish" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Greek" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": "Ancient Greek"
+},
+"German" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Hebrew" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Japanese" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Korean" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Polish" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Russian" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Spanish" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Sperethial" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+},
+"Welsh" : {
+    "category": "Languages",
+    "source": "SR3E Core p. 97",
+    "description": "",
+    "specialization": ""
+}
+}

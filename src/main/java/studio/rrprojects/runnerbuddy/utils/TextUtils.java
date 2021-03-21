@@ -8,7 +8,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class TextUtils {
-    public static String TitleCase(String input) {
+    public static String titleCase(String input) {
         StringBuilder titleCase = new StringBuilder(input.length());
         boolean nextTitleCase = true;
 
@@ -32,9 +32,9 @@ public class TextUtils {
         return numberFormat.format(input) + "¥";
     }
 
-    public static String PrettyKey(String input) {
+    public static String convertUnderscore(String input) {
         String output = input.replaceAll("_", " ");
-        return TitleCase(output);
+        return titleCase(output);
     }
 
     public static void CenterPaneText(JTextPane textPane) {

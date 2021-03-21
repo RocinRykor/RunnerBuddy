@@ -77,13 +77,13 @@ public class SkillContainer {
     }
 
     private void ProcessSkill(JsonObject.Member skill, String skillType) {
-        skillName = TextUtils.TitleCase(skill.getName());
-        attribute = TextUtils.TitleCase(skill.getValue().asObject().getString("attribute", "Intelligence"));
+        skillName = TextUtils.titleCase(skill.getName());
+        attribute = TextUtils.titleCase(skill.getValue().asObject().getString("attribute", "Intelligence"));
         build_repair = skill.getValue().asObject().getBoolean("build_repair", false);
-        category = TextUtils.TitleCase(skill.getValue().asObject().getString("category", "UNKNOWN"));
+        category = TextUtils.titleCase(skill.getValue().asObject().getString("category", "UNKNOWN"));
         defaults = skill.getValue().asObject().getString("defaults", "UNKNOWN");
         description = skill.getValue().asObject().getString("description", "UNKNOWN");
-        source = TextUtils.TitleCase(skill.getValue().asObject().getString("source", "UNKNOWN"));
+        source = TextUtils.titleCase(skill.getValue().asObject().getString("source", "UNKNOWN"));
         this.skill = skill;
         this.skillType = skillType;
 

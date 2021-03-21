@@ -23,5 +23,6 @@
     </orderEntry>
     <orderEntry type="library" name="Maven: com.eclipsesource.minimal-json:minimal-json:0.9.5" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20200518" level="project" />
+    <orderEntry type="library" name="Util_Library_jar" level="project" />
   </component>
 </module>

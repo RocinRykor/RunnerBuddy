@@ -63,6 +63,7 @@ public class ProgramWindow extends JFrame {
         listCards.add(new Info(controller, characterContainer));
         listCards.add(new Priority(controller, characterContainer));
         listCards.add(new Attributes(controller, characterContainer));
+        listCards.add(new Skills(controller, characterContainer));
     }
 
     private void FormatButtons() {

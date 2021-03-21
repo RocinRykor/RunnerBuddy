@@ -1,0 +1,434 @@
+{
+    "anthropology": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "archaeology": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "art": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "atlantis research": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "btl production": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "biology": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "botany": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "chemistry": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "combat biking": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "conspiracy theories": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "criminal organizations": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "cybertechnology": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "data havens": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "dragons": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "economics": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "elven society": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "elven wines": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "engineering": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "flatvid movies": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "fringe cults": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "gang identification": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "geology": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "history": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "humanis policlub": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "legendary deckers": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "literature": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "lone star tactics": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "mafia-controlled establishments": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "magic": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "medicine": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "megacorporate policies": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "metahumanity": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "music": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "opera": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "parabotany": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "paranormal animals": {
+        "category": "sixth world",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "parazoology": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "philosophy": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "physics": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "poetry": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "police/security procedures": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "politics": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "prostitution rackets": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "psychology": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "role-playing games of the late 20th century": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "safehouse locations": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "sci-fi simchips": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "sim starlets": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "smuggling routes": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "troll thrash metal bands": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "urban brawl": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "woodworking": {
+        "category": "interests",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "yakuza territory": {
+        "category": "street",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    },
+    "zoology": {
+        "category": "academic",
+        "source": "SR3E Core p. 90",
+        "description": "",
+        "specializations": {},
+        "value": 0,
+        "attribute": "intelligence"
+    }
+}
