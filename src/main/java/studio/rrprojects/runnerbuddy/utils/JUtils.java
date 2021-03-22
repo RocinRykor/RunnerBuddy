@@ -58,4 +58,13 @@ public class JUtils {
         button.setForeground(color);
         SetDefaultButtonFont(button, size);
     }
+
+    public static void SetDefaultTextAreaColors(JTextArea textArea) {
+        textArea.setForeground(ColorUtils.getColorForeground());
+        textArea.setBackground(ColorUtils.getColorBackground());
+    }
+
+    public static void SetDefaultTextAreaFont(JTextArea textAreaSkills, int textSize) {
+        textAreaSkills.setFont(FontUtils.getFont(textSize));
+    }
 }
