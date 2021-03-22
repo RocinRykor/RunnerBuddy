@@ -25,6 +25,11 @@ import java.util.Map;
 public class Skills extends Card {
     private JPanel panelMain;
     private JTree treeSkillList;
+    private JTree treeSelectedSkills;
+    private JButton addSelectedSkillButton;
+    private JButton createCustomSkillButton;
+    private JButton clearButton;
+    private JTextArea textAreaSkills;
 
     public Skills(RunnerBuilderController controller, CharacterContainer characterContainer) {
         this.controller = controller;
@@ -34,7 +39,12 @@ public class Skills extends Card {
         $$$setupUI$$$();
         SetColorsAndFonts();
         FormatTree(treeSkillList);
+        FormatTree(treeSelectedSkills);
         PopulateSkillList();
+
+        textAreaSkills.setText("Active Skills: 27/27 \n" +
+                "Knowledge Skills 15/15\n" +
+                "Language Skills 4/4");
     }
 
     private void PopulateSkillList() {
@@ -96,7 +106,10 @@ public class Skills extends Card {
 
 
     private void SetColorsAndFonts() {
+
         JUtils.SetDefaultPanelColors(panelMain);
+        JUtils.SetDefaultTextAreaColors(textAreaSkills);
+        JUtils.SetDefaultTextAreaFont(textAreaSkills, 18);
     }
 
 
@@ -120,12 +133,30 @@ public class Skills extends Card {
     private void $$$setupUI$$$() {
         createUIComponents();
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(1, 2, new Insets(10, 10, 10, 10), -1, -1));
+        panelMain.setLayout(new GridLayoutManager(5, 4, new Insets(10, 10, 10, 10), -1, -1));
         final Spacer spacer1 = new Spacer();
-        panelMain.add(spacer1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panelMain.add(spacer1, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
-        panelMain.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panelMain.add(scrollPane1, new GridConstraints(1, 0, 4, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         scrollPane1.setViewportView(treeSkillList);
+        final JScrollPane scrollPane2 = new JScrollPane();
+        panelMain.add(scrollPane2, new GridConstraints(1, 3, 4, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        treeSelectedSkills = new JTree();
+        scrollPane2.setViewportView(treeSelectedSkills);
+        addSelectedSkillButton = new JButton();
+        addSelectedSkillButton.setText("-> Add Selected Skill -> ->");
+        panelMain.add(addSelectedSkillButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        createCustomSkillButton = new JButton();
+        createCustomSkillButton.setText("<- Create Custom Skill <-");
+        panelMain.add(createCustomSkillButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        clearButton = new JButton();
+        clearButton.setText("Clear");
+        panelMain.add(clearButton, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        textAreaSkills = new JTextArea();
+        textAreaSkills.setLineWrap(false);
+        textAreaSkills.setText("Skills");
+        textAreaSkills.setWrapStyleWord(false);
+        panelMain.add(textAreaSkills, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
