@@ -5,6 +5,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
 import studio.rrprojects.runnerbuddy.utils.ColorUtils;
 import studio.rrprojects.runnerbuddy.utils.FontUtils;
@@ -14,13 +15,11 @@ import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Skills extends Card {
     private JPanel panelMain;
@@ -45,6 +44,24 @@ public class Skills extends Card {
         textAreaSkills.setText("Active Skills: 27/27 \n" +
                 "Knowledge Skills 15/15\n" +
                 "Language Skills 4/4");
+
+        addSelectedSkillButton.addActionListener(actionEvent -> {
+            SelectASkillButton();
+        });
+    }
+
+    private void SelectASkillButton() {
+        TreePath path = treeSkillList.getSelectionPath();
+        SkillContainer skillContainer = null;
+
+        if (path.getPathCount() >= 4) {
+            skillContainer = characterContainer.getSkillsController().searchSkillFromPath(path);
+        } else {
+            return;
+        }
+
+        System.out.println(skillContainer);
+        //TODO Check this against skillList in SkillsController
     }
 
     private void PopulateSkillList() {
@@ -52,17 +69,11 @@ public class Skills extends Card {
         model.setRoot(new DefaultMutableTreeNode("Skills"));
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
 
-        root.add(loadJSONAndConvert("SR3E_active_skills.json", "Active Skills"));
-        root.add(loadJSONAndConvert("SR3E_knowledge_skills.json", "Knowledge Skills"));
-        root.add(loadJSONAndConvert("SR3E_language_skills.json", "Language Skills"));
+        root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapActiveSkills(), "Active Skills"));
+        root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapKnowledgeSkills(), "Knowledge Skills"));
+        root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapLanguageSkills(), "Language Skills"));
 
         model.reload(root);
-    }
-
-    private MutableTreeNode loadJSONAndConvert(String jsonName, String nodeName) {
-        JSONObject obj = JSONUtil.loadJsonFromFile(FileUtil.loadFileFromPath("JSON/Skills/" + jsonName));
-        Map<String, JSONObject> map = JSONUtil.JsonToMap(obj);
-        return convertMapToTreeNode(map, nodeName);
     }
 
     private MutableTreeNode convertMapToTreeNode(Map<String, JSONObject> map, String nodeName) {
@@ -147,6 +158,7 @@ public class Skills extends Card {
         addSelectedSkillButton.setText("-> Add Selected Skill -> ->");
         panelMain.add(addSelectedSkillButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         createCustomSkillButton = new JButton();
+        createCustomSkillButton.setEnabled(false);
         createCustomSkillButton.setText("<- Create Custom Skill <-");
         panelMain.add(createCustomSkillButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         clearButton = new JButton();

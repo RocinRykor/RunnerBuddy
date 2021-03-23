@@ -1,7 +1,8 @@
 package studio.rrprojects.runnerbuddy.containers.skills;
 
-import com.eclipsesource.json.JsonObject;
+import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
+import studio.rrprojects.util_library.JSONUtil;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,6 @@ public class SkillContainer {
     private String description;
     private String source;
     private ArrayList<String> specialization;
-    private JsonObject.Member skill;
     private int baseLevel;
     private boolean isSpecialized;
     private String skillSpecialization;
@@ -24,8 +24,61 @@ public class SkillContainer {
     private int totalCost;
     private String skillType;
 
-    public SkillContainer(SkillContainer skillTemplate) {
-        ProcessSkill(skillTemplate.skill, skillTemplate.skillType);
+    public SkillContainer(String skillName, String skillType, JSONObject jsonObject) {
+        this.skillName = skillName;
+        this.skillType = skillType;
+        attribute = TextUtils.titleCase(JSONUtil.getString(jsonObject, "attribute", "Intelligence"));
+        build_repair = JSONUtil.getBool(jsonObject, "build_repair", false);
+        category = TextUtils.titleCase(JSONUtil.getString(jsonObject, "category", "Unknown"));
+        defaults = JSONUtil.getString(jsonObject, "defaults", "Unknown");
+        description = JSONUtil.getString(jsonObject, "description", "Unknown");
+        source = TextUtils.titleCase(JSONUtil.getString(jsonObject, "source", "Unknown"));
+
+        String specString = JSONUtil.getString(jsonObject, "specialization", "Unknown");
+        specialization = new ArrayList<>();
+        if (specString.length() > 0) {
+            String[] splitString = specString.split(",");
+            for (String spec: splitString) {
+                if (spec.startsWith(" ")) {
+                    specialization.add(spec.replaceFirst(" ",""));
+                } else {
+                    specialization.add(spec);
+                }
+            }
+        } else {
+            specialization.add("CUSTOM");
+        }
+    }
+
+    private void ProcessSkill(JSONObject skill) {
+
+        /*
+        skillName = TextUtils.titleCase(skill.getName());
+        attribute = TextUtils.titleCase(skill.getValue().asObject().getString("attribute", "Intelligence"));
+        build_repair = skill.getValue().asObject().getBoolean("build_repair", false);
+        category = TextUtils.titleCase(skill.getValue().asObject().getString("category", "UNKNOWN"));
+        defaults = skill.getValue().asObject().getString("defaults", "UNKNOWN");
+        description = skill.getValue().asObject().getString("description", "UNKNOWN");
+        source = TextUtils.titleCase(skill.getValue().asObject().getString("source", "UNKNOWN"));
+        this.skill = skill;
+        this.skillType = skillType;
+
+        String specString = skill.getValue().asObject().getString("specialization", "UNKNOWN");
+        specialization = new ArrayList<>();
+        if (specString.length() > 0) {
+            String[] splitString = specString.split(",");
+            for (String spec: splitString) {
+                if (spec.startsWith(" ")) {
+                    specialization.add(spec.replaceFirst(" ",""));
+                } else {
+                    specialization.add(spec);
+                }
+            }
+        } else {
+            specialization.add("CUSTOM");
+        }
+
+         */
     }
 
     public String getSkillName() {
@@ -58,49 +111,6 @@ public class SkillContainer {
 
     public ArrayList<String> getSpecialization() {
         return specialization;
-    }
-
-    public SkillContainer(String skillName, String attribute, boolean build_repair, String category, String defaults, String description, String source, ArrayList<String> specialization, JsonObject.Member skill) {
-        this.skillName = skillName;
-        this.attribute = attribute;
-        this.build_repair = build_repair;
-        this.category = category;
-        this.defaults = defaults;
-        this.description = description;
-        this.source = source;
-        this.specialization = specialization;
-        this.skill = skill;
-    }
-
-    public SkillContainer(JsonObject.Member skill, String skillType) {
-        ProcessSkill(skill, skillType);
-    }
-
-    private void ProcessSkill(JsonObject.Member skill, String skillType) {
-        skillName = TextUtils.titleCase(skill.getName());
-        attribute = TextUtils.titleCase(skill.getValue().asObject().getString("attribute", "Intelligence"));
-        build_repair = skill.getValue().asObject().getBoolean("build_repair", false);
-        category = TextUtils.titleCase(skill.getValue().asObject().getString("category", "UNKNOWN"));
-        defaults = skill.getValue().asObject().getString("defaults", "UNKNOWN");
-        description = skill.getValue().asObject().getString("description", "UNKNOWN");
-        source = TextUtils.titleCase(skill.getValue().asObject().getString("source", "UNKNOWN"));
-        this.skill = skill;
-        this.skillType = skillType;
-
-        String specString = skill.getValue().asObject().getString("specialization", "UNKNOWN");
-        specialization = new ArrayList<>();
-        if (specString.length() > 0) {
-            String[] splitString = specString.split(",");
-            for (String spec: splitString) {
-                if (spec.startsWith(" ")) {
-                    specialization.add(spec.replaceFirst(" ",""));
-                } else {
-                    specialization.add(spec);
-                }
-            }
-        } else {
-            specialization.add("CUSTOM");
-        }
     }
 
     public String getBuild_repairAsString() {

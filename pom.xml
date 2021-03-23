@@ -17,12 +17,6 @@
     </properties>
 
     <dependencies>
-        <!-- Minimal JSON -->
-        <dependency>
-            <groupId>com.eclipsesource.minimal-json</groupId>
-            <artifactId>minimal-json</artifactId>
-            <version>0.9.5</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
@@ -30,7 +24,6 @@
             <artifactId>json</artifactId>
             <version>20200518</version>
         </dependency>
-
 
     </dependencies>
 
