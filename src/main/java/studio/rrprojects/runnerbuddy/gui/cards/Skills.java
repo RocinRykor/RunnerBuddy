@@ -7,19 +7,17 @@ import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
+import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
 import studio.rrprojects.runnerbuddy.utils.ColorUtils;
 import studio.rrprojects.runnerbuddy.utils.FontUtils;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
-import studio.rrprojects.util_library.FileUtil;
-import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Skills extends Card {
     private JPanel panelMain;
@@ -60,8 +58,9 @@ public class Skills extends Card {
             return;
         }
 
-        System.out.println(skillContainer);
-        //TODO Check this against skillList in SkillsController
+        if (skillContainer != null) {
+           new SelectSkillPopup(skillContainer, this);
+        }
     }
 
     private void PopulateSkillList() {
