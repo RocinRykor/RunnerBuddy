@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
+import studio.rrprojects.runnerbuddy.gui.popups.NewCharacterPriorityPopup;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
 
 import javax.swing.*;
@@ -35,7 +36,8 @@ public class LaunchWindow extends JFrame {
         setVisible(true);
         buttonNew.addActionListener(actionEvent -> {
             // Start Controller
-            RunnerBuilderController RBC = new RunnerBuilderController(title);
+            NewCharacterPriorityPopup priorityPopup = new NewCharacterPriorityPopup("Select Character Priority", this);
+            //RunnerBuilderController RBC = new RunnerBuilderController(title);
             this.dispose();
         });
     }
