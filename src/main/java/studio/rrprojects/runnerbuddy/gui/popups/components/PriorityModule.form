@@ -8,31 +8,31 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="1e835" class="javax.swing.JLabel" binding="labelName">
+      <component id="d619f" class="javax.swing.JLabel" binding="labelPriority">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="PRIORITY"/>
+          <text value="Priority"/>
         </properties>
       </component>
-      <hspacer id="6bc60">
+      <hspacer id="99650">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="b250f" class="javax.swing.JComboBox" binding="boxPriorityOptions">
+      <component id="a0b61" class="javax.swing.JComboBox" binding="boxPriorityOption">
         <constraints>
           <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <hspacer id="fb90b">
+      <hspacer id="d440d">
         <constraints>
           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="d29df" class="javax.swing.JComboBox" binding="boxSubOption">
+      <component id="c94e7" class="javax.swing.JComboBox" binding="boxSubOption">
         <constraints>
           <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
