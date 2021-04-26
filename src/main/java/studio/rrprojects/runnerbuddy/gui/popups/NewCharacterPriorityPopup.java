@@ -37,6 +37,7 @@ public class NewCharacterPriorityPopup extends JFrame {
     private void Initialize() {
         ArrayList<PriorityModule> listPriority = new ArrayList<>();
         listPriority.add(priorityModuleA);
+        priorityModuleA.SetPriority(characterContainer, "A");
     }
 
     {

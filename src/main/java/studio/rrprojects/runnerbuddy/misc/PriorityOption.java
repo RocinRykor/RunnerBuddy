@@ -37,8 +37,6 @@ public class PriorityOption {
         } else {
             displayString = valueInt + " Points";
         }
-
-        System.out.println(displayString);
     }
 
     private String ListToDisplayName() {
@@ -55,5 +53,17 @@ public class PriorityOption {
                 valueList.add(value.toString());
             }
         }
+    }
+
+    public String getPriorityLevel() {
+        return priorityLevel;
+    }
+
+    public String getPriorityCategory() {
+        return priorityCategory;
+    }
+
+    public String getDisplayString() {
+        return displayString;
     }
 }

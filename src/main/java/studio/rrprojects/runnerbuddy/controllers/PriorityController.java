@@ -2,19 +2,18 @@ package studio.rrprojects.runnerbuddy.controllers;
 
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.misc.PriorityGroup;
 import studio.rrprojects.runnerbuddy.misc.PriorityOption;
 import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class PriorityController {
     private final CharacterContainer characterContainer;
-    private final HashMap<Object, Object> masterPriorityMap;
+    private final HashMap<String, ArrayList<PriorityOption>> masterPriorityMap;
     private JSONObject priorityJson;
 
     public PriorityController(CharacterContainer characterContainer) {
@@ -28,20 +27,27 @@ public class PriorityController {
     private void PopulatePriorityMap() {
         priorityJson.keySet().forEach(priorityKey -> {
 
-            CreatePriorityOptionArrayList(priorityKey, priorityJson.getJSONObject(priorityKey));
+            ArrayList<PriorityOption> tmpList = CreatePriorityOptionArrayList(priorityKey, priorityJson.getJSONObject(priorityKey));
 
-            masterPriorityMap.put(priorityKey, new ArrayList<>());
+            masterPriorityMap.put(priorityKey, tmpList);
 
         });
+
+        //Debuging
+        System.out.println(masterPriorityMap.size());
+        for (Map.Entry<String, ArrayList<PriorityOption>> key: masterPriorityMap.entrySet()) {
+            System.out.println(key.getKey() + ": " + key.getValue().size());
+        }
     }
 
-    private void CreatePriorityOptionArrayList(String priorityKey, JSONObject jsonObject) {
-        ArrayList<Object> arrayList = new ArrayList<>();
+    private ArrayList<PriorityOption> CreatePriorityOptionArrayList(String priorityKey, JSONObject jsonObject) {
+        ArrayList<PriorityOption> arrayList = new ArrayList<>();
 
-        jsonObject.keySet().forEach(categoryKey -> {
+        for (String categoryKey : jsonObject.keySet()) {
             arrayList.add(new PriorityOption(priorityKey, categoryKey, jsonObject.get(categoryKey)));
-        });
+        }
 
+        return arrayList;
     }
 
     private void LoadPriorityFile() {
@@ -49,4 +55,7 @@ public class PriorityController {
     }
 
 
+    public ArrayList<PriorityOption> getOptionsByLevel(String priorityKey) {
+        return masterPriorityMap.get(priorityKey.toLowerCase(Locale.ROOT));
+    }
 }
