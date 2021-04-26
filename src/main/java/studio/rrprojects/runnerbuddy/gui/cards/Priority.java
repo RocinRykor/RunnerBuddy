@@ -145,21 +145,10 @@ public class Priority extends Card {
         // TODO: place custom component creation code here
     }
 
-    public void UpdateButtons() {
-        for (MyButtonGroup buttonGroup : listButtonGroups) {
-            PriorityGroup.PriorityOption selectedOption = characterContainer.getPriorityController().getPriorityGroupByKeyword(buttonGroup.keyword).getSelectedOption();
-            if (selectedOption == null) {
-                buttonGroup.button.setText(defaultText);
-            } else {
-                buttonGroup.button.setText(selectedOption.getDisplayName());
-            }
-        }
-    }
-
     public void SubmitEvent(String keyword, PriorityGroup.PriorityOption priorityOption) {
         HashMap<String, Runnable> mapRunnable = new HashMap<>();
-        mapRunnable.put("Race", () -> characterContainer.getRaceController().setSelectedPriorityOption(priorityOption));
-        mapRunnable.put("Attributes", () -> characterContainer.getAttributeController().setSelectedPriorityOption(priorityOption));
+        //mapRunnable.put("Race", () -> characterContainer.getRaceController().setSelectedPriorityOption(priorityOption));
+        //mapRunnable.put("Attributes", () -> characterContainer.getAttributeController().setSelectedPriorityOption(priorityOption));
 
         if (mapRunnable.containsKey(keyword)) {
             mapRunnable.get(keyword).run();

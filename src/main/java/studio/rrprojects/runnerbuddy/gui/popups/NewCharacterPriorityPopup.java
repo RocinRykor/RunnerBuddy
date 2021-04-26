@@ -5,8 +5,6 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.controllers.PriorityController;
-import studio.rrprojects.runnerbuddy.gui.LaunchWindow;
 import studio.rrprojects.runnerbuddy.gui.popups.components.PriorityModule;
 import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
@@ -23,10 +21,10 @@ public class NewCharacterPriorityPopup extends JFrame {
     private PriorityModule priorityModuleD;
     private PriorityModule priorityModuleE;
     private CharacterContainer characterContainer;
-    private PriorityController priorityController;
 
-    public NewCharacterPriorityPopup(String title, LaunchWindow launchWindow) {
+    public NewCharacterPriorityPopup(String title, CharacterContainer characterContainer) {
         super(title);
+        this.characterContainer = characterContainer;
 
         setContentPane(panelMain);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -37,20 +35,8 @@ public class NewCharacterPriorityPopup extends JFrame {
     }
 
     private void Initialize() {
-        characterContainer = new CharacterContainer();
-        priorityController = characterContainer.getPriorityController();
-
         ArrayList<PriorityModule> listPriority = new ArrayList<>();
         listPriority.add(priorityModuleA);
-
-
-        LoadFile();
-    }
-
-    private void LoadFile() {
-        JSONObject file = JSONUtil.loadJsonFromFile(FileUtil.loadFileFromPath("JSON/Misc/SR3E_priority_table.json"));
-        System.out.println(file.toString());
-        priorityModuleA.initialize(file.getJSONObject("a"));
     }
 
     {

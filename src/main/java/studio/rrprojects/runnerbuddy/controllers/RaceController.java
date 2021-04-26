@@ -75,7 +75,7 @@ public class RaceController {
         } else {
             setSelectedRace(priorityOption.getDisplayName());
         }
-        characterContainer.getAttributeController().getAttributesCard().MassUpdateEvent();
+        //characterContainer.getAttributeController().getAttributesCard().MassUpdateEvent();
     }
 
     public class RaceContainer {

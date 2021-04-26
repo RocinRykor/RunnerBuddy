@@ -39,7 +39,7 @@ public class Attributes extends Card {
         this.controller = controller;
         this.characterContainer = characterContainer;
 
-        characterContainer.getAttributeController().passThisCard(this);
+        //characterContainer.getAttributeController().passThisCard(this);
 
         Formatting();
         SettingUpAttributes();

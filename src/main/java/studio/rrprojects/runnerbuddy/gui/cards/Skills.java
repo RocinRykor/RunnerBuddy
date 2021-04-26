@@ -53,7 +53,7 @@ public class Skills extends Card {
         SkillContainer skillContainer = null;
 
         if (path.getPathCount() >= 4) {
-            skillContainer = characterContainer.getSkillsController().searchSkillFromPath(path);
+            //skillContainer = characterContainer.getSkillsController().searchSkillFromPath(path);
         } else {
             return;
         }
@@ -68,9 +68,9 @@ public class Skills extends Card {
         model.setRoot(new DefaultMutableTreeNode("Skills"));
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
 
-        root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapActiveSkills(), "Active Skills"));
-        root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapKnowledgeSkills(), "Knowledge Skills"));
-        root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapLanguageSkills(), "Language Skills"));
+        //root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapActiveSkills(), "Active Skills"));
+        //root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapKnowledgeSkills(), "Knowledge Skills"));
+        //root.add(convertMapToTreeNode(characterContainer.getSkillsController().getMapLanguageSkills(), "Language Skills"));
 
         model.reload(root);
     }

@@ -3,7 +3,7 @@ package studio.rrprojects.runnerbuddy.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.popups.NewCharacterPriorityPopup;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
 
@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class LaunchWindow extends JFrame {
     private JPanel panelMain;
-    private JButton buttonNew;
+    private JButton buttonNewCharacter;
     private JButton buttonRandom;
     private JButton buttonLoad;
     private JTextPane textPaneIntro;
@@ -34,12 +34,22 @@ public class LaunchWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        buttonNew.addActionListener(actionEvent -> {
-            // Start Controller
-            NewCharacterPriorityPopup priorityPopup = new NewCharacterPriorityPopup("Select Character Priority", this);
-            //RunnerBuilderController RBC = new RunnerBuilderController(title);
-            this.dispose();
+        buttonNewCharacter.addActionListener(actionEvent -> {
+            CreateNewCharacter();
         });
+    }
+
+    private void CreateNewCharacter() {
+        //Create a new CharacterContainer for use going forward.
+        CharacterContainer characterContainer = new CharacterContainer();
+
+        //Priority Selection Popup Window
+        NewCharacterPriorityPopup priorityPopup = new NewCharacterPriorityPopup("Select Character Priority", characterContainer);
+
+        // Start Controller
+        //RunnerBuilderController RBC = new RunnerBuilderController(title);
+
+        this.dispose();
     }
 
     private void BeginInit() {
@@ -66,7 +76,7 @@ public class LaunchWindow extends JFrame {
 
     private void CreateButtonArrayList() {
         listButtons = new ArrayList<>();
-        listButtons.add(buttonNew);
+        listButtons.add(buttonNewCharacter);
         listButtons.add(buttonRandom);
         listButtons.add(buttonLoad);
     }
@@ -116,9 +126,9 @@ public class LaunchWindow extends JFrame {
         panelMain.setForeground(new Color(-11805347));
         panelMain.setMinimumSize(new Dimension(800, 600));
         panelMain.setPreferredSize(new Dimension(800, 600));
-        buttonNew = new JButton();
-        buttonNew.setText("CREATE NEW CHARACTER");
-        panelMain.add(buttonNew, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonNewCharacter = new JButton();
+        buttonNewCharacter.setText("CREATE NEW CHARACTER");
+        panelMain.add(buttonNewCharacter, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         panelMain.add(spacer1, new GridConstraints(2, 0, 5, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();

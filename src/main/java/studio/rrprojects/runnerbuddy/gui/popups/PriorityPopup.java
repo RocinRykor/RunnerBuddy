@@ -44,27 +44,10 @@ public class PriorityPopup {
         CreateListOfOptionButtons();
         Formatting();
         GrabPriorityOptions();
-        DisableUnavailableOptions();
-    }
-
-    private void DisableUnavailableOptions() {
-        ArrayList<String> takenPriorityLevels = new ArrayList<>();
-        ArrayList<PriorityGroup> listPriorityGroup = characterContainer.getPriorityController().getListPriorityGroup();
-
-        for (PriorityGroup group : listPriorityGroup) {
-            if (group.getSelectedOption() != null) {
-                takenPriorityLevels.add(group.getSelectedOption().getPriorityLevel());
-            }
-        }
-
-        for (ButtonPriorityGroup group : listButtons) {
-            group.button.setEnabled(!takenPriorityLevels.contains(group.priorityOption.getPriorityLevel()));
-        }
-
     }
 
     private void GrabPriorityOptions() {
-        priorityGroup = characterContainer.getPriorityController().getPriorityGroupByKeyword(keyword);
+        //priorityGroup = characterContainer.getPriorityController().getPriorityGroupByKeyword(keyword);
 
         //Each button is loaded with just a number 1-5, this converts each one to a readable string
         for (ButtonPriorityGroup buttonGroup : listButtons) {
@@ -75,7 +58,7 @@ public class PriorityPopup {
 
     private void ChoosePriority(PriorityGroup.PriorityOption priorityOption) {
         priorityGroup.setSelectedOption(priorityOption);
-        priority.UpdateButtons();
+        //priority.UpdateButtons();
         priority.SubmitEvent(keyword, priorityOption);
         frame.dispose();
     }

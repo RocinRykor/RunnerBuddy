@@ -93,7 +93,7 @@ public class AttributeModule extends JPanel {
 
     public void UpdateValues() {
         //Racial Modifier
-        modValue = characterContainer.getRaceController().getSelectedRace().getModAttributeMap().get(attributeName);
+        //modValue = characterContainer.getRaceController().getSelectedRace().getModAttributeMap().get(attributeName);
         labelRacialMod.setText(String.valueOf(modValue));
 
         //Allotted Points
