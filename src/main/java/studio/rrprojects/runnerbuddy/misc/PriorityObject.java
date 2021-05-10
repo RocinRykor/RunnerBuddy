@@ -4,9 +4,8 @@ import org.json.JSONArray;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class PriorityOption {
+public class PriorityObject {
     private final String priorityLevel;
     private final String priorityCategory;
     private final Object valueRaw;
@@ -14,7 +13,7 @@ public class PriorityOption {
     private ArrayList<String> valueList;
     private String displayString;
 
-    public PriorityOption(String priorityKey, String categoryKey, Object priorityObject) {
+    public PriorityObject(String priorityKey, String categoryKey, Object priorityObject) {
         //Main three, will never change
         priorityLevel = priorityKey;
         priorityCategory = TextUtils.titleCase(categoryKey);

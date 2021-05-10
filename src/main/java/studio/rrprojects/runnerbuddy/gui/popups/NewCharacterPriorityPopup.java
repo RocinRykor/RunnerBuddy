@@ -2,25 +2,25 @@ package studio.rrprojects.runnerbuddy.gui.popups;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
-import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.controllers.PriorityController;
 import studio.rrprojects.runnerbuddy.gui.popups.components.PriorityModule;
-import studio.rrprojects.util_library.FileUtil;
-import studio.rrprojects.util_library.JSONUtil;
+import studio.rrprojects.runnerbuddy.misc.PriorityOptions;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class NewCharacterPriorityPopup extends JFrame {
     private JPanel panelMain;
-    private PriorityModule priorityModuleA;
-    private PriorityModule priorityModuleB;
-    private PriorityModule priorityModuleC;
-    private PriorityModule priorityModuleD;
-    private PriorityModule priorityModuleE;
+    private JLabel labelHeader;
+    private JButton buttonCancel;
+    private JButton buttonSubmit;
+    private JPanel panelPrimary;
     private CharacterContainer characterContainer;
+    private LinkedHashMap<String, PriorityModule> priorityModuleMasterList;
+    private PriorityOptions priorityOptions;
 
     public NewCharacterPriorityPopup(String title, CharacterContainer characterContainer) {
         super(title);
@@ -28,16 +28,34 @@ public class NewCharacterPriorityPopup extends JFrame {
 
         setContentPane(panelMain);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
-        setVisible(true);
+
 
         Initialize();
+
+        pack();
+        setSize(900, 400);
+        setVisible(true);
     }
 
     private void Initialize() {
-        ArrayList<PriorityModule> listPriority = new ArrayList<>();
-        listPriority.add(priorityModuleA);
-        priorityModuleA.SetPriority(characterContainer, "A");
+        PriorityController priorityController = characterContainer.getPriorityController();
+        String[] priorityLevelList = {"a", "b", "c", "d", "e"};
+        priorityModuleMasterList = new LinkedHashMap<>();
+
+        for (String priorityLevel : priorityLevelList) {
+            priorityOptions = priorityController.getOptionsByLevel(priorityLevel);
+            priorityModuleMasterList.put(priorityLevel, new PriorityModule(priorityLevel, priorityOptions));
+        }
+
+        panelPrimary.setLayout(new GridLayout(0, 1, 0, 10));
+
+        for (Map.Entry<String, PriorityModule> entry : priorityModuleMasterList.entrySet()) {
+            AddNewComponent(entry.getValue());
+        }
+    }
+
+    private void AddNewComponent(PriorityModule priorityModule) {
+        panelPrimary.add(priorityModule);
     }
 
     {
@@ -56,25 +74,21 @@ public class NewCharacterPriorityPopup extends JFrame {
      */
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(9, 1, new Insets(10, 10, 10, 10), -1, -1));
-        priorityModuleA = new PriorityModule();
-        panelMain.add(priorityModuleA.$$$getRootComponent$$$(), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        final Spacer spacer1 = new Spacer();
-        panelMain.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        priorityModuleB = new PriorityModule();
-        panelMain.add(priorityModuleB.$$$getRootComponent$$$(), new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        final Spacer spacer2 = new Spacer();
-        panelMain.add(spacer2, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        priorityModuleC = new PriorityModule();
-        panelMain.add(priorityModuleC.$$$getRootComponent$$$(), new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        final Spacer spacer3 = new Spacer();
-        panelMain.add(spacer3, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        priorityModuleD = new PriorityModule();
-        panelMain.add(priorityModuleD.$$$getRootComponent$$$(), new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        final Spacer spacer4 = new Spacer();
-        panelMain.add(spacer4, new GridConstraints(7, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        priorityModuleE = new PriorityModule();
-        panelMain.add(priorityModuleE.$$$getRootComponent$$$(), new GridConstraints(8, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panelMain.setLayout(new GridLayoutManager(3, 2, new Insets(10, 10, 10, 10), -1, -1));
+        panelMain.setMinimumSize(new Dimension(-1, -1));
+        panelMain.setPreferredSize(new Dimension(-1, -1));
+        labelHeader = new JLabel();
+        labelHeader.setText("Shadowrun 3e Character Creation: Priority");
+        panelMain.add(labelHeader, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonCancel = new JButton();
+        buttonCancel.setText("Cancel");
+        panelMain.add(buttonCancel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonSubmit = new JButton();
+        buttonSubmit.setText("Submit");
+        panelMain.add(buttonSubmit, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelPrimary = new JPanel();
+        panelPrimary.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.add(panelPrimary, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**
