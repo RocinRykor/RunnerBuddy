@@ -3,8 +3,6 @@ package studio.rrprojects.runnerbuddy.gui.popups;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
-import studio.rrprojects.runnerbuddy.gui.cards.Skills;
 import studio.rrprojects.runnerbuddy.utils.ColorUtils;
 import studio.rrprojects.runnerbuddy.utils.FontUtils;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
@@ -13,8 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SelectSkillPopup {
-    private final SkillContainer skillContainer;
-    private final Skills skillsCard;
+    //private final SkillContainer skillContainer;
+    //private final Skills skillsCard;
     private final JFrame frame;
     private JPanel panelMain;
     private JTextArea textAreaDescription;
@@ -28,10 +26,7 @@ public class SelectSkillPopup {
     private JLabel labelSkillLevel;
     private JTextArea textAreaCalculations;
 
-    public SelectSkillPopup(SkillContainer skillContainer, Skills skillsCard) {
-        this.skillContainer = skillContainer;
-        this.skillsCard = skillsCard;
-
+    public SelectSkillPopup() {
         frame = new JFrame();
         $$$setupUI$$$();
         JUtils.OpenFrameAtMouseLocation(frame);
@@ -40,155 +35,9 @@ public class SelectSkillPopup {
         frame.setVisible(true);
         frame.pack();
 
-        FormatVisuals();
-        SetDescription();
-        PopulateSpecializationBox();
-        SetCheckBox();
-        UpdateDisplayName();
-        UpdateCalculations();
-
         frame.repaint();
         panelMain.repaint();
     }
-
-    private void UpdateCalculations() {
-    }
-
-    private void UpdateDisplayName() {
-        String displayName = skillContainer.getSkillName() + " (" + sliderPointsAllotted.getValue() + ")";
-        labelDisplayName.setText(displayName);
-    }
-
-    private void SetCheckBox() {
-        checkboxBuildRepair.setEnabled(skillContainer.getBuild_repair());
-    }
-
-    private void PopulateSpecializationBox() {
-        DefaultComboBoxModel<String> box = new DefaultComboBoxModel<>();
-        for (String spec : skillContainer.getSpecialization()) {
-            box.addElement(spec);
-        }
-        boxSpecialization.setModel(box);
-    }
-
-    private void FormatVisuals() {
-
-        JUtils.SetDefaultPanelColors(panelMain);
-        JUtils.SetDefaultButtonColorsAndFont(buttonSubmit, 18);
-        JUtils.SetDefaultButtonColorsAndFont(buttonCancel, 18);
-        JUtils.SetDefaultTextAreaColors(textAreaDescription);
-        JUtils.SetDefaultTextAreaFont(textAreaDescription, 18);
-
-        JUtils.SetDefaultTextAreaColors(textAreaCalculations);
-        JUtils.SetDefaultTextAreaFont(textAreaCalculations, 18);
-
-        checkboxBuildRepair.setBackground(ColorUtils.getColorBackground());
-        checkboxBuildRepair.setForeground(ColorUtils.getColorForeground());
-        checkboxBuildRepair.setFont(FontUtils.getFont(18));
-
-        checkboxSpecialization.setBackground(ColorUtils.getColorBackground());
-        checkboxSpecialization.setForeground(ColorUtils.getColorForeground());
-        checkboxSpecialization.setFont(FontUtils.getFont(18));
-
-        labelDisplayName.setBackground(ColorUtils.getColorBackground());
-        labelDisplayName.setForeground(ColorUtils.getColorForeground());
-        labelDisplayName.setFont(FontUtils.getFont(18));
-
-        boxSpecialization.setBackground(ColorUtils.getColorBackground());
-        boxSpecialization.setForeground(ColorUtils.getColorForeground());
-        boxSpecialization.setFont(FontUtils.getFont(18));
-
-        labelSkillLevel.setBackground(ColorUtils.getColorBackground());
-        labelSkillLevel.setForeground(ColorUtils.getColorForeground());
-        labelSkillLevel.setFont(FontUtils.getFont(18));
-
-
-        sliderPointsAllotted.setBackground(ColorUtils.getColorBackground());
-        sliderPointsAllotted.setForeground(ColorUtils.getColorForeground());
-        sliderPointsAllotted.setFont(FontUtils.getFont(18));
-    }
-
-    private void SetDescription() {
-        String string = "";
-        string += "Name: " + skillContainer.getSkillName() + "\n\n";
-        string += "Attribute: " + skillContainer.getAttribute() + "\n\n";
-        string += "(B/R): " + skillContainer.getBuild_repairAsString() + "\n\n";
-        string += "Description: " + skillContainer.getDescription() + "\n\n";
-        string += "Source: " + skillContainer.getSource() + "\n\n";
-
-        textAreaDescription.setText(string);
-    }
-
-    /*
-
-    private void Submit(JFrame frame, SkillContainer baseSkill) {
-        baseSkill.setBaseLevel(Integer.parseInt(Objects.requireNonNull(boxSkillLevel.getSelectedItem()).toString()));
-        baseSkill.setIsSpecialized(checkSpecialization.isSelected());
-
-        if (checkSpecialization.isSelected()) {
-            baseSkill.setSpecialization(Objects.requireNonNull(boxSpecialization.getSelectedItem()).toString());
-        }
-        baseSkill.setSkillResultString(textResult.getText());
-        character.getSkillsController().addNewSkill(baseSkill, textResult.getText());
-        skillCard.UpdateAll();
-        frame.dispose();
-    }
-
-    private void Exit(JFrame frame) {
-        frame.dispose();
-    }
-
-    private void UpdateAll() {
-        CalculateTotalCost();
-        SetResult();
-    }
-
-    private void CalculateTotalCost() {
-        String linkedAttribute = skill.getAttribute();
-        int attributeLevel = character.getAttributeController().getSelectedAttributes().getAttribute(linkedAttribute);
-        int skillLevel = Integer.parseInt(Objects.requireNonNull(boxSkillLevel.getSelectedItem()).toString());
-
-        int totalCost = 0;
-        if (skillLevel <= attributeLevel) {
-            totalCost = skillLevel;
-        } else {
-            int excess = skillLevel - attributeLevel;
-            totalCost = attributeLevel + (excess * 2);
-        }
-
-        skill.setSkillLevel(skillLevel);
-        skill.setTotalCost(totalCost);
-    }
-
-    private void PopulateSpecializationBox() {
-        DefaultComboBoxModel<String> box = new DefaultComboBoxModel<>();
-        for (String spec : skill.getSpecialization()) {
-            box.addElement(spec);
-        }
-        boxSpecialization.setModel(box);
-    }
-
-    private void SetResult() {
-        String string;
-
-        String skillName = skill.getSkillName();
-
-        if (checkBuildRepair.isSelected()) {
-            skillName += " (B/R)";
-        }
-
-        if (checkSpecialization.isSelected()) {
-            int skillLevel = Integer.parseInt(Objects.requireNonNull(boxSkillLevel.getSelectedItem()).toString());
-            string = String.format("%s (%d), %s (%d) | Total Cost: %d", skillName, skillLevel - 1, Objects.requireNonNull(boxSpecialization.getSelectedItem()).toString(), skillLevel + 1, skill.getTotalCost());
-        } else {
-            int skillLevel = Integer.parseInt(Objects.requireNonNull(boxSkillLevel.getSelectedItem()).toString());
-            string = String.format("%s (%d) | Total Cost: %d", skillName, skillLevel, skill.getTotalCost());
-        }
-
-        textResult.setText(string);
-    }
-
-     */
 
 
     /**

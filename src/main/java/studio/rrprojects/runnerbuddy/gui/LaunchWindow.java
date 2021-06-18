@@ -24,8 +24,9 @@ public class LaunchWindow extends JFrame {
     private JButton buttonLoad;
     private JTextPane textPaneIntro;
     private ArrayList<JButton> listButtons;
+    private static final String title = "RunnerBuddy v1";
 
-    public LaunchWindow(String title) {
+    public LaunchWindow() {
         super(title);
 
         BeginInit();

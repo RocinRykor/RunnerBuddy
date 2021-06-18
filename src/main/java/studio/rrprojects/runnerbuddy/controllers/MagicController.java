@@ -1,32 +1,36 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.containers.magic.MagicPriorityContainer;
-import studio.rrprojects.runnerbuddy.misc.PriorityGroup;
+import studio.rrprojects.runnerbuddy.misc.PriorityObject;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+public class MagicController extends ControllerClass{
+    private final CharacterContainer characterContainer;
+    private boolean isMagical = false;
 
-public class MagicController {
-    private PriorityGroup priorityGroup;
-
-    public MagicController(CharacterContainer characterContainer){
-
-    GeneratePriorityGroup();
-}
-
-    private void GeneratePriorityGroup() {
-        priorityGroup = new PriorityGroup("Magic");
-        priorityGroup.addOption(1, "A", "Full Magician");
-        priorityGroup.addOption(2, "B", "Aspected Magician");
-        priorityGroup.addOption(3, "B", "Adept");
-        priorityGroup.addOption(4, "D", "Mundane");
-        priorityGroup.addOption(5, "E", "Mundane");
+    public MagicController(CharacterContainer characterContainer) {
+        this.characterContainer = characterContainer;
     }
 
+    public CharacterContainer getCharacterContainer() {
+        return characterContainer;
+    }
 
-    public PriorityGroup getPriorityGroup() {
-        return priorityGroup;
+    public boolean isMagical() {
+        return isMagical;
+    }
+
+    public void setMagical(boolean magical) {
+        isMagical = magical;
+    }
+
+    @Override
+    public void setSelectedPriority(PriorityObject priorityObject) {
+        super.setSelectedPriority(priorityObject);
+
+        //Check for if magical
+        System.out.println("MAGIC CONTROLLER : CHECKING IF MAGICAL");
+        if (!priorityObject.getDisplayString().equalsIgnoreCase("Mundane")) {
+            setMagical(true);
+        }
     }
 }

@@ -2,103 +2,151 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
-import studio.rrprojects.runnerbuddy.gui.cards.components.AttributeModule;
-import studio.rrprojects.runnerbuddy.utils.JUtils;
+import studio.rrprojects.runnerbuddy.controllers.AttributeController;
+import studio.rrprojects.runnerbuddy.gui.cards.components.*;
+import studio.rrprojects.runnerbuddy.utils.MiscUtils;
+import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Attributes extends Card {
+    private final CharacterContainer characterContainer;
     private JPanel panelMain;
-    private AttributeModule attributeModuleBody;
-    private JLabel labelName;
-    private JLabel labelAllotted;
-    private JLabel labelRacialMod;
-    private JLabel labelTotal;
-    private JLabel labelAddRemove;
-    private AttributeModule attributeModuleQuickness;
-    private AttributeModule attributeModuleStrength;
-    private AttributeModule attributeModuleCharisma;
-    private AttributeModule attributeModuleIntelligence;
-    private AttributeModule attributeModuleWillpower;
-    private AttributeModule attributeModuleMagic;
-    private AttributeModule attributeModuleReaction;
-    private AttributeModule attributeModuleEssence;
+    private SmallProgressBar progressBarAttributes;
+    private JPanel panelAttributes;
+    private JLabel labelSelectedRace;
 
-    private ArrayList<JPanel> listPanels;
-    private ArrayList<JLabel> listLabels;
+    private String selectedRace = "None";
+    private LinkedHashMap<String, AttributeModule> attributeMap;
 
-    private int labelSize = 18;
-    private ArrayList<AttributeModule> listAttributeModules;
-
-    public Attributes(RunnerBuilderController controller, CharacterContainer characterContainer) {
-        this.controller = controller;
+    public Attributes(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
+        setPanel(panelMain);
 
-        //characterContainer.getAttributeController().passThisCard(this);
+        progressBarAttributes.setTitle("Attribute Points");
+        progressBarAttributes.setMin(0);
 
-        Formatting();
-        SettingUpAttributes();
+        int maxAttributes = characterContainer.getAttributeController().getSelectedPriority().getValueInt();
+
+        progressBarAttributes.setMax(maxAttributes);
+        progressBarAttributes.setValue(6);
+
+        FormatAttributesPanel();
     }
 
-    private void Formatting() {
-        JUtils.SetDefaultPanelColors(panelMain);
+    public void UpdateProgressBar() {
+        int allotedPoints = 0;
 
-        listLabels = new ArrayList<>();
-        listLabels.add(labelName);
-        listLabels.add(labelAllotted);
-        listLabels.add(labelRacialMod);
-        listLabels.add(labelTotal);
-        listLabels.add(labelAddRemove);
+        ArrayList<String> basicAttributes = MiscUtils.basicAttributes();
+        for (String attribute : basicAttributes) {
+            AttributeModule attributeMod = attributeMap.get(attribute);
+            allotedPoints += attributeMod.getAllottedPoints();
+        }
 
-        for (JLabel label : listLabels) {
-            JUtils.SetDefaultLabelColorsAndFont(label, labelSize);
+        progressBarAttributes.setValue(allotedPoints);
+        int currentPoints = progressBarAttributes.getValue();
+        int maxPoints = progressBarAttributes.getValueMax();
+
+        if (currentPoints >= maxPoints) {
+            DisablePlusButtons();
+        } else {
+            RestorePlusButtons();
         }
     }
 
-    private void SettingUpAttributes() {
-        listAttributeModules = new ArrayList<>();
-        ProcessAttribute(attributeModuleBody, "Body");
-        ProcessAttribute(attributeModuleQuickness, "Quickness");
-        ProcessAttribute(attributeModuleStrength, "Strength");
-        ProcessAttribute(attributeModuleCharisma, "Charisma");
-        ProcessAttribute(attributeModuleIntelligence, "Intelligence");
-        ProcessAttribute(attributeModuleWillpower, "Willpower");
-
-        ProcessAttribute(attributeModuleEssence, "Essence", false);
-        ProcessAttribute(attributeModuleMagic, "Magic", false);
-        ProcessAttribute(attributeModuleReaction, "Reaction", false);
-    }
-
-    private void ProcessAttribute(AttributeModule attributeModule, String attributeName) {
-        ProcessAttribute(attributeModule, attributeName, true);
-    }
-
-    private void ProcessAttribute(AttributeModule attributeModule, String attributeName, boolean isEditable) {
-        //Add the attributeModule to a list
-        listAttributeModules.add(attributeModule);
-
-        attributeModule.LinkAttribute(characterContainer, attributeName, isEditable);
-    }
-
-    public void MassUpdateEvent() {
-        for (AttributeModule module : listAttributeModules) {
-            module.UpdateValues();
+    private void RestorePlusButtons() {
+        for (Map.Entry<String, AttributeModule> attributeKey : attributeMap.entrySet()) {
+            attributeKey.getValue().RestorePlusButtons();
         }
     }
 
-    @Override
-    public String getTitle() {
-        return "CardAttributes";
+    private void DisablePlusButtons() {
+        for (Map.Entry<String, AttributeModule> attributeKey : attributeMap.entrySet()) {
+            attributeKey.getValue().DisablePlusButtons();
+        }
+    }
+
+    private void FormatAttributesPanel() {
+        GridLayout layout = new GridLayout();
+        layout.setColumns(1);
+        layout.setRows(0);
+        panelAttributes.setLayout(layout);
+
+        attributeMap = new LinkedHashMap<>();
+        //Basic Attributes
+        ArrayList<String> basicAttributes = MiscUtils.basicAttributes();
+
+        for (String attribute : basicAttributes) {
+            AttributeModule attributeModule = new AttributeModule();
+            attributeModule.UpdateValues();
+            panelAttributes.add(attributeModule.getPanel());
+
+            attributeModule.LinkAttribute(characterContainer, attribute, this);
+
+            attributeMap.put(attribute, attributeModule);
+        }
+
+        //Custom Attributes
+
+        //Reaction
+        AttributeModule reactionModule = new ReactionModule();
+        panelAttributes.add(reactionModule.getPanel());
+        reactionModule.LinkAttribute(characterContainer, "Reaction", this);
+        attributeMap.put("Reaction", reactionModule);
+
+        //Essence
+        AttributeModule essenceModule = new EssenceModule();
+        panelAttributes.add(essenceModule.getPanel());
+        essenceModule.LinkAttribute(characterContainer, "Essence", this);
+        attributeMap.put("Essence", essenceModule);
+
+        //Magic
+        System.out.println("ATTRIBUTES: " + characterContainer);
+        AttributeModule magicModule = new MagicModule(characterContainer, "Magic", this);
+        panelAttributes.add(magicModule.getPanel());
+        attributeMap.put("Magic", magicModule);
+
+
+        panelMain.repaint();
+        panelAttributes.repaint();
     }
 
     @Override
-    public JPanel getPanel() {
-        return panelMain;
+    public void Update() {
+        super.Update();
+        String raceName = characterContainer.getRaceController().getSelectedRace().getName();
+        if (!selectedRace.equalsIgnoreCase(raceName)) {
+            labelSelectedRace.setText("Race: " + TextUtils.titleCase(raceName));
+            UpdateRacialMods();
+        }
+    }
+
+    private void UpdateRacialMods() {
+        ArrayList<String> basicAttributes = MiscUtils.basicAttributes();
+        LinkedHashMap<String, Integer> modMap = characterContainer.getRaceController().getSelectedRace().getModifiersAttributes();
+
+        for (String attribute : basicAttributes) {
+            int modValue = 0;
+
+            try {
+                modValue = modMap.get(attribute);
+            } catch (NullPointerException ignored) {
+            }
+
+            attributeMap.get(attribute).setRacialMod(modValue);
+        }
+
+    }
+
+    public LinkedHashMap<String, AttributeModule> getAttributeMap() {
+        return attributeMap;
     }
 
     {
@@ -117,40 +165,38 @@ public class Attributes extends Card {
      */
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(10, 5, new Insets(0, 0, 0, 0), -1, -1));
-        attributeModuleBody = new AttributeModule();
-        panelMain.add(attributeModuleBody.$$$getRootComponent$$$(), new GridConstraints(1, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        attributeModuleQuickness = new AttributeModule();
-        panelMain.add(attributeModuleQuickness.$$$getRootComponent$$$(), new GridConstraints(2, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        attributeModuleStrength = new AttributeModule();
-        panelMain.add(attributeModuleStrength.$$$getRootComponent$$$(), new GridConstraints(3, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        attributeModuleCharisma = new AttributeModule();
-        panelMain.add(attributeModuleCharisma.$$$getRootComponent$$$(), new GridConstraints(4, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        attributeModuleIntelligence = new AttributeModule();
-        panelMain.add(attributeModuleIntelligence.$$$getRootComponent$$$(), new GridConstraints(5, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        attributeModuleWillpower = new AttributeModule();
-        panelMain.add(attributeModuleWillpower.$$$getRootComponent$$$(), new GridConstraints(6, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        attributeModuleMagic = new AttributeModule();
-        panelMain.add(attributeModuleMagic.$$$getRootComponent$$$(), new GridConstraints(8, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        attributeModuleReaction = new AttributeModule();
-        panelMain.add(attributeModuleReaction.$$$getRootComponent$$$(), new GridConstraints(9, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        labelName = new JLabel();
-        labelName.setText("Attribute Name");
-        panelMain.add(labelName, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        labelAllotted = new JLabel();
-        labelAllotted.setText("Allotted Points");
-        panelMain.add(labelAllotted, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        labelRacialMod = new JLabel();
-        labelRacialMod.setText("Racial Modifer");
-        panelMain.add(labelRacialMod, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        labelTotal = new JLabel();
-        labelTotal.setText("Total Points");
-        panelMain.add(labelTotal, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        labelAddRemove = new JLabel();
-        labelAddRemove.setText("Add/Remove Points");
-        panelMain.add(labelAddRemove, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        attributeModuleEssence = new AttributeModule();
-        panelMain.add(attributeModuleEssence.$$$getRootComponent$$$(), new GridConstraints(7, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panelMain.setLayout(new GridLayoutManager(3, 10, new Insets(10, 10, 10, 10), -1, -1));
+        labelSelectedRace = new JLabel();
+        labelSelectedRace.setText("Race: X");
+        panelMain.add(labelSelectedRace, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label1 = new JLabel();
+        label1.setText("Attribute Name");
+        panelMain.add(label1, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label2 = new JLabel();
+        label2.setText("Allotted Points");
+        panelMain.add(label2, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label3 = new JLabel();
+        label3.setText("Racial Modifier");
+        panelMain.add(label3, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label4 = new JLabel();
+        label4.setText("Total Points");
+        panelMain.add(label4, new GridConstraints(1, 7, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label5 = new JLabel();
+        label5.setText("Add/Remove");
+        panelMain.add(label5, new GridConstraints(1, 9, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelAttributes = new JPanel();
+        panelAttributes.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.add(panelAttributes, new GridConstraints(2, 0, 1, 10, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        progressBarAttributes = new SmallProgressBar();
+        panelMain.add(progressBarAttributes.$$$getRootComponent$$$(), new GridConstraints(0, 3, 1, 7, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, 1, null, null, null, 0, false));
+        final JSeparator separator1 = new JSeparator();
+        panelMain.add(separator1, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JSeparator separator2 = new JSeparator();
+        panelMain.add(separator2, new GridConstraints(1, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JSeparator separator3 = new JSeparator();
+        panelMain.add(separator3, new GridConstraints(1, 8, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JSeparator separator4 = new JSeparator();
+        panelMain.add(separator4, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -160,4 +206,9 @@ public class Attributes extends Card {
         return panelMain;
     }
 
+    public void UpdateAll() {
+        for (Map.Entry<String, AttributeModule> attributeModule : attributeMap.entrySet()) {
+            attributeModule.getValue().UpdateValues();
+        }
+    }
 }

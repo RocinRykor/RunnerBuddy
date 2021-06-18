@@ -20,7 +20,6 @@ public class PriorityObject {
         valueRaw = priorityObject;
 
         //Generate both int value and List(String) value even though we will only ever use one of them
-        valueInt = 0;
         valueList = new ArrayList<>();
 
         ProcessRawValue();
@@ -64,5 +63,13 @@ public class PriorityObject {
 
     public String getDisplayString() {
         return displayString;
+    }
+
+    public ArrayList<String> getValueList() {
+        return valueList;
+    }
+
+    public int getValueInt() {
+        return valueInt;
     }
 }

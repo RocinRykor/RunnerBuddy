@@ -1,17 +1,30 @@
 package studio.rrprojects.runnerbuddy.gui.cards;
 
-import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
-
 import javax.swing.*;
-import java.util.ArrayList;
 
-public abstract class Card {
+public class Card {
+    private String title;
+    private JPanel panel;
 
-    protected RunnerBuilderController controller;
-    protected CharacterContainer characterContainer;
+    public Card() {
+    }
 
-    public void Initialize() { }
-    public abstract String getTitle();
-    public abstract JPanel getPanel();
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public void Update() {
+    }
 }

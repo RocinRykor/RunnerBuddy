@@ -1,98 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="studio.rrprojects.runnerbuddy.gui.cards.Attributes">
-  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="10" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="3" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="924" height="959"/>
+      <xy x="20" y="20" width="767" height="664"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <nested-form id="b007f" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleBody">
+      <component id="d8474" class="javax.swing.JLabel" binding="labelSelectedRace">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
-      </nested-form>
-      <nested-form id="db38a" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleQuickness">
+        <properties>
+          <text value="Race: X"/>
+        </properties>
+      </component>
+      <component id="7773" class="javax.swing.JLabel">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="b864c" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleStrength">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="a170d" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleCharisma">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="94bc1" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleIntelligence">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="6a9a9" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleWillpower">
-        <constraints>
-          <grid row="6" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="c27d8" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleMagic">
-        <constraints>
-          <grid row="8" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="423b0" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleReaction">
-        <constraints>
-          <grid row="9" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <component id="22f16" class="javax.swing.JLabel" binding="labelName">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Attribute Name"/>
         </properties>
       </component>
-      <component id="af011" class="javax.swing.JLabel" binding="labelAllotted">
+      <component id="266b4" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Allotted Points"/>
         </properties>
       </component>
-      <component id="fee18" class="javax.swing.JLabel" binding="labelRacialMod">
+      <component id="5dfe0" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Racial Modifer"/>
+          <text value="Racial Modifier"/>
         </properties>
       </component>
-      <component id="9b4e3" class="javax.swing.JLabel" binding="labelTotal">
+      <component id="a65cb" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Total Points"/>
         </properties>
       </component>
-      <component id="1840a" class="javax.swing.JLabel" binding="labelAddRemove">
+      <component id="67e52" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="9" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Add/Remove Points"/>
+          <text value="Add/Remove"/>
         </properties>
       </component>
-      <nested-form id="ada62" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/AttributeModule.form" binding="attributeModuleEssence">
+      <grid id="44038" binding="panelAttributes" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="7" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="10" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <nested-form id="56fe2" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/SmallProgressBar.form" binding="progressBarAttributes">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="7" vsize-policy="1" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
       </nested-form>
+      <component id="b6753" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="469af" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="844a9" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="1" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="2a0e9" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
     </children>
   </grid>
 </form>

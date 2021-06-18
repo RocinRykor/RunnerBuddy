@@ -2,36 +2,89 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
+import studio.rrprojects.runnerbuddy.containers.RaceContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.controllers.RunnerBuilderController;
-import studio.rrprojects.runnerbuddy.utils.JUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 public class Info extends Card {
-
+    private final CharacterContainer characterContainer;
     private JPanel panelMain;
+    private JPanel panelRace;
+    private JPanel panelInfo;
+    private JPanel panelRaceButtons;
+    private JScrollPane panelRaceDescription;
+    private JTextArea textRaceDescription;
 
-    public Info(RunnerBuilderController controller, CharacterContainer characterContainer) {
-        this.controller = controller;
+    private String[] raceNames = {"Troll", "Elf", "Orc", "Dwarf", "Human"};
+    private ButtonGroup buttonGroup;
+
+    public Info(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
+        setPanel(panelMain);
+        setTitle("Info/Race");
 
-        SetColors();
+
+        FormatRacePanel();
+        FormatButtonGroup();
     }
 
-    private void SetColors() {
-        JUtils.SetDefaultPanelColors(panelMain);
+    private void FormatButtonGroup() {
+        Enumeration<AbstractButton> buttonList = buttonGroup.getElements();
+
+        ArrayList<String> availibleRaces = characterContainer.getRaceController().getAvailibleRaces();
+
+        for (Iterator<AbstractButton> it = buttonList.asIterator(); it.hasNext(); ) {
+            AbstractButton button = it.next();
+            String buttonName = button.getActionCommand();
+
+            Boolean bool = characterContainer.getRaceController().getAvailibleRaces().contains(buttonName);
+
+            button.setEnabled(bool);
+        }
+
     }
 
-    @Override
-    public String getTitle() {
-        return "CardInfo";
+    private void FormatRacePanel() {
+        panelRace.setBorder(BorderFactory.createTitledBorder("Select a Race"));
+        panelRaceButtons.setBorder(BorderFactory.createTitledBorder("Race"));
+        panelRaceDescription.setBorder(BorderFactory.createTitledBorder("Race Modifiers"));
+
+        GridLayout gridLayout = new GridLayout();
+        gridLayout.setColumns(1);
+        gridLayout.setRows(0);
+        panelRaceButtons.setLayout(gridLayout);
+        buttonGroup = new ButtonGroup();
+
+
+        for (String race : raceNames) {
+            JRadioButton button = new JRadioButton(race);
+            button.addActionListener(actionEvent -> {
+                SelectRace(button.getActionCommand());
+            });
+
+            button.setHorizontalAlignment(SwingConstants.CENTER);
+
+            buttonGroup.add(button);
+            panelRaceButtons.add(button);
+        }
+
+}
+
+    private void SelectRace(String actionCommand) {
+        characterContainer.getRaceController().setSelectedRace(actionCommand);
+        RaceContainer selectedRace = characterContainer.getRaceController().getSelectedRace();
+
+        SetDescription(selectedRace.getDescription());
     }
 
-    @Override
-    public JPanel getPanel() {
-        return panelMain;
+    private void SetDescription(String description) {
+        textRaceDescription.setText(description);
     }
 
     {
@@ -50,10 +103,23 @@ public class Info extends Card {
      */
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        final JLabel label1 = new JLabel();
-        label1.setText("THIS IS A TEST!");
-        panelMain.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelMain.setLayout(new GridLayoutManager(1, 2, new Insets(10, 10, 10, 10), -1, -1));
+        panelRace = new JPanel();
+        panelRace.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.add(panelRace, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panelRaceButtons = new JPanel();
+        panelRaceButtons.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelRace.add(panelRaceButtons, new GridConstraints(0, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panelRaceDescription = new JScrollPane();
+        panelRace.add(panelRaceDescription, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        textRaceDescription = new JTextArea();
+        textRaceDescription.setEditable(false);
+        panelRaceDescription.setViewportView(textRaceDescription);
+        final Spacer spacer1 = new Spacer();
+        panelRace.add(spacer1, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panelInfo = new JPanel();
+        panelInfo.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.add(panelInfo, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**
