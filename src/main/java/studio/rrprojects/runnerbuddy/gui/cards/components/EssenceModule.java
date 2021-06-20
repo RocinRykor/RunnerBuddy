@@ -5,6 +5,7 @@ public class EssenceModule extends AttributeModule {
     double totalPoints;
 
     public EssenceModule() {
+        setAllottedPoints(0);
         UpdateValues();
         setEditable(false);
     }

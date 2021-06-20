@@ -2,6 +2,7 @@ package studio.rrprojects.runnerbuddy.containers.character;
 
 import studio.rrprojects.runnerbuddy.controllers.*;
 import studio.rrprojects.runnerbuddy.misc.PriorityObject;
+import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 
 import java.util.LinkedHashMap;
 
@@ -11,6 +12,7 @@ public class CharacterContainer {
     private final AttributeController attributeController;
     private final RaceController raceController;
     private final MagicController magicController;
+    private final DescriptionController descriptionController;
 
     public CharacterContainer() {
 
@@ -19,10 +21,11 @@ public class CharacterContainer {
         attributeController = new AttributeController(this);
         raceController = new RaceController(this);
         magicController = new MagicController(this);
+        descriptionController = new DescriptionController(this);
 
         //skillsController = new SkillsController(this);
         //resourceController = new ResourceController(this);
-        //descriptionController = new DescriptionController(this);
+
         //gearController = new GearController(this);
         //contactsController = new ContactsController(this);
 
@@ -32,6 +35,7 @@ public class CharacterContainer {
         raceController.setAvailibleRaces(priorityMap.get("Race"));
         attributeController.setSelectedPriority(priorityMap.get("Attributes"));
         magicController.setSelectedPriority(priorityMap.get("Magic"));
+
     }
 
     public PriorityController getPriorityController() {
@@ -46,8 +50,14 @@ public class CharacterContainer {
         return raceController;
     }
 
-    public MagicController getMagicController() {
-        return magicController;
+    public MagicController getMagicController() { return magicController; }
+
+    public DescriptionController getDescriptionController() { return descriptionController; }
+
+    public ValidChecker ValidCheck() {
+        ValidChecker validChecker = new ValidChecker();
+        validChecker.ProcessCharacter(this);
+        return validChecker;
     }
 }
 

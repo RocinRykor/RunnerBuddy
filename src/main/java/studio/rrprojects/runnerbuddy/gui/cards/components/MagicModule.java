@@ -7,6 +7,7 @@ public class MagicModule extends AttributeModule {
     int basePoint = 0;
 
     public MagicModule(CharacterContainer characterContainer, String string, Attributes attributes) {
+        setAllottedPoints(0);
         LinkAttribute(characterContainer, string, attributes);
 
         UpdateValues();

@@ -5,8 +5,9 @@ import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
 public class ReactionModule extends AttributeModule {
 
     public ReactionModule() {
+        setAllottedPoints(0);
         UpdateValues();
-        super.setEditable(false);
+        setEditable(false);
     }
 
     @Override

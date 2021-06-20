@@ -54,7 +54,7 @@ public class AttributeModule extends JComponent {
 
          */
         modValue = 0;
-        allottedPoints = 1;
+        allottedPoints = 0;
 
         panelButtons.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1, true));
         AddFunctionToButtons();

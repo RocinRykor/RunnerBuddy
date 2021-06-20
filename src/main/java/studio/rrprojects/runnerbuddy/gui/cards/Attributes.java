@@ -3,15 +3,12 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.controllers.AttributeController;
 import studio.rrprojects.runnerbuddy.gui.cards.components.*;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -39,6 +36,8 @@ public class Attributes extends Card {
         progressBarAttributes.setValue(6);
 
         FormatAttributesPanel();
+
+        characterContainer.getAttributeController().LinkCard(this);
     }
 
     public void UpdateProgressBar() {

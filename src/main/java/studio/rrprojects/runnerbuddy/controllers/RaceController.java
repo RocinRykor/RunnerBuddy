@@ -61,6 +61,15 @@ public class RaceController extends ControllerClass {
         System.out.println("Selected: " + selectedRace.getName());
     }
 
+    @Override
+    public String ValidCheck() {
+        if (getSelectedRace() != null) {
+            return "Valid";
+        } else {
+            return "Error - No Race Chosen";
+        }
+    }
+
     public RaceContainer getSelectedRace() {
         return selectedRace;
     }
