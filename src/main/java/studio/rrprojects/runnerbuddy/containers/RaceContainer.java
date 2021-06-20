@@ -84,7 +84,7 @@ public class RaceContainer {
     public String getDescription() {
         String title = "Name: " + TextUtils.titleCase(name) + "\n\n";
 
-        String attributes = "Racial Attribute Modieifers:\n";
+        String attributes = "Racial Attribute Modifiers:\n";
         for (String attribute :MiscUtils.basicAttributes()) {
             int modValue = 0;
             if (modifiersAttributes.containsKey(attribute)) {
