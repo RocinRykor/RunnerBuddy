@@ -14,9 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class NewCharacterPriorityPopup extends JFrame {
     private JPanel panelMain;
@@ -199,6 +197,8 @@ public class NewCharacterPriorityPopup extends JFrame {
     private void PopulateCategoryList() {
         modelCategory = new DefaultListModel<>();
         String[] priorityCategoryList = characterContainer.getPriorityController().getListCategory();
+
+        Collections.shuffle(Arrays.asList(priorityCategoryList)); //Random starting priority
 
         for (String category : priorityCategoryList) {
             modelCategory.addElement(category);

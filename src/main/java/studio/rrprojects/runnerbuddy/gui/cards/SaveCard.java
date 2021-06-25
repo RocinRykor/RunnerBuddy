@@ -130,7 +130,9 @@ public class SaveCard extends Card {
         label1.setText(".txt");
         panelExport.add(label1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         exportButton = new JButton();
+        exportButton.setEnabled(false);
         exportButton.setText("Export");
+        exportButton.setToolTipText("Currently Not Enabled");
         panelExport.add(exportButton, new GridConstraints(1, 1, 2, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         detailedCheckBox = new JCheckBox();
         detailedCheckBox.setText("Detailed");

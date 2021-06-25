@@ -1,10 +1,7 @@
 package studio.rrprojects.runnerbuddy.gui;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
-import studio.rrprojects.runnerbuddy.gui.cards.Card;
-import studio.rrprojects.runnerbuddy.gui.cards.Info;
-import studio.rrprojects.runnerbuddy.gui.cards.SaveCard;
+import studio.rrprojects.runnerbuddy.gui.cards.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,6 +52,7 @@ public class CharacterCreationWindow extends JFrame {
         listButtons = new ArrayList<>();
         listButtons.add(new ButtonObject("Info/Race"));
         listButtons.add(new ButtonObject("Attributes"));
+        listButtons.add(new ButtonObject("Skills"));
         listButtons.add(new ButtonObject("Save/Export"));
     }
 
@@ -68,6 +66,7 @@ public class CharacterCreationWindow extends JFrame {
         cardsMap = new LinkedHashMap<>();
         cardsMap.put("Info/Race", new Info(characterContainer));
         cardsMap.put("Attributes", new Attributes(characterContainer));
+        cardsMap.put("Skills", new SkillsCard(characterContainer));
         cardsMap.put("Save/Export", new SaveCard(characterContainer));
     }
 
