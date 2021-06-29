@@ -3,30 +3,37 @@ package studio.rrprojects.runnerbuddy.gui.popups;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import studio.rrprojects.runnerbuddy.containers.SkillMap;
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.utils.ColorUtils;
 import studio.rrprojects.runnerbuddy.utils.FontUtils;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
+import studio.rrprojects.runnerbuddy.utils.MiscUtils;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import java.awt.*;
+import java.util.LinkedHashMap;
 
 public class SelectSkillPopup {
-    //private final SkillContainer skillContainer;
-    //private final Skills skillsCard;
     private final JFrame frame;
+    private final CharacterContainer characterContainer;
     private JPanel panelMain;
-    private JTextArea textAreaDescription;
-    private JButton buttonSubmit;
-    private JButton buttonCancel;
-    private JComboBox<String> boxSpecialization;
-    private JCheckBox checkboxSpecialization;
-    private JCheckBox checkboxBuildRepair;
-    private JSlider sliderPointsAllotted;
-    private JLabel labelDisplayName;
-    private JLabel labelSkillLevel;
-    private JTextArea textAreaCalculations;
+    private JTree treeSkills;
+    private JSlider sliderPoints;
+    private JCheckBox checkBoxSpecialization;
+    private JComboBox comboBoxSpecialization;
+    private JTable tableDescription;
+    private JButton submitButton;
+    private JButton cancelButton;
+    private JPanel panelSkills;
+    private JPanel panelInformation;
+    private LinkedHashMap<String, SkillMap> skillMap;
 
-    public SelectSkillPopup() {
+    public SelectSkillPopup(CharacterContainer characterContainer) {
+        this.characterContainer = characterContainer;
         frame = new JFrame();
         $$$setupUI$$$();
         JUtils.OpenFrameAtMouseLocation(frame);
@@ -37,6 +44,25 @@ public class SelectSkillPopup {
 
         frame.repaint();
         panelMain.repaint();
+
+        FormatPanels();
+        PopulateSkillTree();
+    }
+
+    private void PopulateSkillTree() {
+        //First Get the skill map
+        skillMap = characterContainer.getSkillsController().getMasterSkillMap();
+
+        //convert map to Tree model
+        DefaultTreeModel treeModel = MiscUtils.convertMasterSkillMapToJTree(skillMap, "All Skills");
+        //set tree to use new model
+
+        treeSkills.setModel(treeModel);
+    }
+
+    private void FormatPanels() {
+        panelSkills.setBorder(BorderFactory.createTitledBorder("Select A Skill"));
+        panelInformation.setBorder(BorderFactory.createTitledBorder("Skill Information"));
     }
 
 
@@ -49,54 +75,44 @@ public class SelectSkillPopup {
      */
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(6, 3, new Insets(10, 10, 10, 10), -1, -1));
+        panelMain.setLayout(new GridLayoutManager(1, 2, new Insets(10, 10, 10, 10), -1, -1));
         panelMain.setMinimumSize(new Dimension(800, 600));
         panelMain.setPreferredSize(new Dimension(800, 600));
-        textAreaDescription = new JTextArea();
-        textAreaDescription.setEditable(false);
-        textAreaDescription.setLineWrap(true);
-        textAreaDescription.setText("");
-        textAreaDescription.setWrapStyleWord(true);
-        panelMain.add(textAreaDescription, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        buttonSubmit = new JButton();
-        buttonSubmit.setText("Submit");
-        panelMain.add(buttonSubmit, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buttonCancel = new JButton();
-        buttonCancel.setText("Cancel");
-        panelMain.add(buttonCancel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        checkboxSpecialization = new JCheckBox();
-        checkboxSpecialization.setText("Specialization");
-        panelMain.add(checkboxSpecialization, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        checkboxBuildRepair = new JCheckBox();
-        checkboxBuildRepair.setText("Build/Repair");
-        panelMain.add(checkboxBuildRepair, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        boxSpecialization = new JComboBox();
-        panelMain.add(boxSpecialization, new GridConstraints(4, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        final Spacer spacer1 = new Spacer();
-        panelMain.add(spacer1, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        sliderPointsAllotted = new JSlider();
-        sliderPointsAllotted.setEnabled(true);
-        sliderPointsAllotted.setMajorTickSpacing(1);
-        sliderPointsAllotted.setMaximum(6);
-        sliderPointsAllotted.setMinimum(1);
-        sliderPointsAllotted.setPaintLabels(true);
-        sliderPointsAllotted.setPaintTicks(true);
-        sliderPointsAllotted.setSnapToTicks(true);
-        sliderPointsAllotted.setValue(3);
-        sliderPointsAllotted.setValueIsAdjusting(false);
-        panelMain.add(sliderPointsAllotted, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        labelDisplayName = new JLabel();
-        labelDisplayName.setText("Label");
-        panelMain.add(labelDisplayName, new GridConstraints(2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        labelSkillLevel = new JLabel();
-        labelSkillLevel.setText("Skill Level:");
-        panelMain.add(labelSkillLevel, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textAreaCalculations = new JTextArea();
-        textAreaCalculations.setEditable(false);
-        textAreaCalculations.setLineWrap(true);
-        textAreaCalculations.setText("");
-        textAreaCalculations.setWrapStyleWord(true);
-        panelMain.add(textAreaCalculations, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        panelSkills = new JPanel();
+        panelSkills.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.add(panelSkills, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        panelSkills.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        treeSkills = new JTree();
+        scrollPane1.setViewportView(treeSkills);
+        panelInformation = new JPanel();
+        panelInformation.setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.add(panelInformation, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        sliderPoints = new JSlider();
+        sliderPoints.setMajorTickSpacing(1);
+        sliderPoints.setMaximum(6);
+        sliderPoints.setMinimum(1);
+        sliderPoints.setPaintLabels(true);
+        sliderPoints.setPaintTicks(true);
+        sliderPoints.setSnapToTicks(true);
+        sliderPoints.setValue(3);
+        panelInformation.add(sliderPoints, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkBoxSpecialization = new JCheckBox();
+        checkBoxSpecialization.setText("Specialization");
+        panelInformation.add(checkBoxSpecialization, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        comboBoxSpecialization = new JComboBox();
+        panelInformation.add(comboBoxSpecialization, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        tableDescription = new JTable();
+        panelInformation.add(tableDescription, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        submitButton = new JButton();
+        submitButton.setText("Submit");
+        panelInformation.add(submitButton, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cancelButton = new JButton();
+        cancelButton.setText("Cancel");
+        panelInformation.add(cancelButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label1 = new JLabel();
+        label1.setText("Choose a Skill");
+        panelInformation.add(label1, new GridConstraints(1, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

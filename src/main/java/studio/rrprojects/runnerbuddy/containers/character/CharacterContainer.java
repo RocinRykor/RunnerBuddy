@@ -13,6 +13,7 @@ public class CharacterContainer {
     private final RaceController raceController;
     private final MagicController magicController;
     private final DescriptionController descriptionController;
+    private final SkillsController skillsController;
 
     public CharacterContainer() {
 
@@ -22,8 +23,8 @@ public class CharacterContainer {
         raceController = new RaceController(this);
         magicController = new MagicController(this);
         descriptionController = new DescriptionController(this);
+        skillsController = new SkillsController(this);
 
-        //skillsController = new SkillsController(this);
         //resourceController = new ResourceController(this);
 
         //gearController = new GearController(this);
@@ -35,7 +36,7 @@ public class CharacterContainer {
         raceController.setAvailibleRaces(priorityMap.get("Race"));
         attributeController.setSelectedPriority(priorityMap.get("Attributes"));
         magicController.setSelectedPriority(priorityMap.get("Magic"));
-
+        skillsController.setSelectedPriority(priorityMap.get("Skills"));
     }
 
     public PriorityController getPriorityController() {
@@ -53,6 +54,10 @@ public class CharacterContainer {
     public MagicController getMagicController() { return magicController; }
 
     public DescriptionController getDescriptionController() { return descriptionController; }
+
+    public SkillsController getSkillsController() {
+        return skillsController;
+    }
 
     public ValidChecker ValidCheck() {
         ValidChecker validChecker = new ValidChecker();

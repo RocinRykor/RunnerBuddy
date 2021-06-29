@@ -1,6 +1,14 @@
 package studio.rrprojects.runnerbuddy.utils;
 
+import studio.rrprojects.runnerbuddy.containers.SkillContainer;
+import studio.rrprojects.runnerbuddy.containers.SkillMap;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class MiscUtils {
 
@@ -23,4 +31,49 @@ public class MiscUtils {
 
         return tmp;
     }
+
+    public static DefaultTreeModel convertMasterSkillMapToJTree(LinkedHashMap<String, SkillMap> masterMap, String treeTitle) {
+        System.out.println("NEW MAP -? Size: " + masterMap.size());
+
+        DefaultMutableTreeNode masterNode = new DefaultMutableTreeNode(treeTitle);
+
+
+        for (Map.Entry<String, SkillMap> entry: masterMap.entrySet()) {
+            DefaultMutableTreeNode baseNode = new DefaultMutableTreeNode(entry.getKey());
+
+            SkillMap skillMap = entry.getValue();
+            HashMap<String, ArrayList<SkillContainer>> categoryMap = skillMap.getMapSkillsByCategory();
+
+            for (String skillCategory: categoryMap.keySet()) {
+                ArrayList<SkillContainer> listSkills = categoryMap.get(skillCategory);
+                DefaultMutableTreeNode categoryNode = new DefaultMutableTreeNode(skillCategory);
+
+                for (SkillContainer skill: listSkills) {
+                    DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill.getSkillName());
+                    categoryNode.add(skillNode);
+                }
+
+
+                baseNode.add(categoryNode);
+            }
+
+            masterNode.add(baseNode);
+
+        }
+        /*
+        for (int i = 0; i < 10; i++) {
+            DefaultMutableTreeNode baseNode = new DefaultMutableTreeNode(i);
+            for (int j = 0; j < 5; j++) {
+                DefaultMutableTreeNode finalNode = new DefaultMutableTreeNode(j);
+                baseNode.add(finalNode);
+            }
+
+            masterNode.add(baseNode);
+        }
+
+         */
+
+        return new DefaultTreeModel(masterNode);
+    }
+
 }

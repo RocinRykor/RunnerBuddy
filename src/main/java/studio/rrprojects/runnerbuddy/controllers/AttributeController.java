@@ -14,6 +14,7 @@ public class AttributeController extends ControllerClass {
     private final LinkedHashMap<String, Double> basePointsMap;
     private int maxAttributePoints;
     private Attributes attributeCard;
+    private LinkedHashMap<String, AttributeModule> attributeMap;
 
     public AttributeController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
@@ -36,8 +37,6 @@ public class AttributeController extends ControllerClass {
     public String ValidCheck() {
         attributeCard.Update();
         attributeCard.UpdateAll();
-
-        LinkedHashMap<String, AttributeModule> attributeMap = attributeCard.getAttributeMap();
 
         int allocatedPoints = 0;
 
@@ -65,5 +64,13 @@ public class AttributeController extends ControllerClass {
             return "Valid";
         }
 
+    }
+
+    public void setAttributeMap(LinkedHashMap<String, AttributeModule> attributeMap) {
+        this.attributeMap = attributeMap;
+    }
+
+    public LinkedHashMap<String, AttributeModule> getAttributeMap() {
+        return attributeMap;
     }
 }
