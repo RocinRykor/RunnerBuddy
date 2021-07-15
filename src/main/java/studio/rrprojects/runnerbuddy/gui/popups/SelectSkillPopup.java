@@ -5,7 +5,9 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.Constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
+import studio.rrprojects.runnerbuddy.controllers.SkillsController;
 import studio.rrprojects.runnerbuddy.gui.cards.SkillsCard;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
@@ -98,7 +100,14 @@ public class SelectSkillPopup {
         baseValue = sliderPoints.getValue();
         selectedSkill.setSkillLevel(baseValue);
 
-        characterContainer.getSkillsController().addSkillFromPopup(this);
+        //Check to see if the slectedSkill is already in the SkillsController list
+        SkillsController skillsController = characterContainer.getSkillsController();
+        if (!skillsController.contains(selectedSkill)) {
+            SelectedSkillContainer selectedSkillContainer = new SelectedSkillContainer(selectedSkill);
+            skillsController.getSelectedSkillList().add(selectedSkillContainer);
+        } else {
+            System.out.println("SelectSkillPopup: Skill already on list!");
+        }
         skillsCard.Update();
     }
 
@@ -131,9 +140,12 @@ public class SelectSkillPopup {
     private void ProcessSkillContainer(SkillContainer skillContainer) {
         selectedSkill = skillContainer;
 
-        SetDescription();
+        UpdateDescription();
 
         updateBuildRepair();
+
+        //Reset Specializtion
+        checkBoxSpecialization.setSelected(false);
 
         ResetSlider();
 
@@ -172,7 +184,7 @@ public class SelectSkillPopup {
             selectedSkill.setLinkedAttribute(selectedSkill.getBaseAttribute());
         }
 
-        UpdateTable();
+        UpdateDescription();
 
         baseValue = sliderPoints.getValue();
 
@@ -198,10 +210,6 @@ public class SelectSkillPopup {
         labelDisplayString.setText(displayString);
     }
 
-    private void UpdateTable() {
-        //TODO Update the description table to reflect the Linked Attribute change
-    }
-
     private int calculateSkillCost(int baseValue, int attributeScore) {
         if (baseValue <= attributeScore) {
             return baseValue;
@@ -212,9 +220,7 @@ public class SelectSkillPopup {
 
     }
 
-    private void SetDescription() {
-        System.out.println("SelectSkill Popup: Setting Description!");
-
+    private void UpdateDescription() {
         discriptionTableModel = selectedSkill.getTableDiscription();
 
         //create table with data

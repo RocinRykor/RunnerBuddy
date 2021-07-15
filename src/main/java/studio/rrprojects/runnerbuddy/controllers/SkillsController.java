@@ -69,4 +69,16 @@ public class SkillsController extends ControllerClass {
     public ArrayList<SelectedSkillContainer> getSelectedSkillList() {
         return selectedSkillList;
     }
+
+    public boolean contains(SkillContainer selectedSkill) {
+        String skillName = selectedSkill.getSkillName();
+
+        for (SelectedSkillContainer selectedSkillContainer : selectedSkillList) {
+            if (selectedSkillContainer.getSkillName().equalsIgnoreCase(skillName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

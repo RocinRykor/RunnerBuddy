@@ -167,7 +167,7 @@ public class SkillsCard extends Card {
             DefaultMutableTreeNode categoryNode = new DefaultMutableTreeNode(skillCategory);
 
             for (SelectedSkillContainer skill : skillMap.get(skillCategory)) {
-                DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill);  //TODO FIX
+                DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill);
                 categoryNode.add(skillNode);
             }
 
