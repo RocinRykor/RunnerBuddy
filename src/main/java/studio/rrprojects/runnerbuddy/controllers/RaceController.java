@@ -55,10 +55,7 @@ public class RaceController extends ControllerClass {
     }
 
     public void setSelectedRace(String raceName) {
-        System.out.println(masterRaceMap.toString());
-
         selectedRace = masterRaceMap.get(raceName.toLowerCase(Locale.ROOT));
-        System.out.println("Selected: " + selectedRace.getName());
     }
 
     @Override

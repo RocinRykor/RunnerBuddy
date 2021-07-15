@@ -137,7 +137,7 @@ public class NewCharacterPriorityPopup extends JFrame {
         int input = JOptionPane.showConfirmDialog(null, confirmationString, confirmationTitleString,
                 JOptionPane.OK_CANCEL_OPTION);
 
-        System.out.println(input);
+        System.out.println("NewCharacterPriority: " + input);
 
         return input;
     }

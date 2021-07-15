@@ -64,9 +64,6 @@ public class RaceContainer {
             }
         }
 
-
-        System.out.println(modifiersAttributes.size());
-
     }
 
     public String getName() {

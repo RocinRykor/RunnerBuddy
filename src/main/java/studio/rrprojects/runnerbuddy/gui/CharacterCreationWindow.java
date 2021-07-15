@@ -84,7 +84,7 @@ public class CharacterCreationWindow extends JFrame {
     }
 
     private void SwitchTo(String cardName) {
-        System.out.println("Switching To -> " + cardName);
+        System.out.println("CharacterCreationWindow: Switching To -> " + cardName);
 
         Card card = cardsMap.get(cardName);
         cardLayout.show(panelCards, cardName);

@@ -41,6 +41,7 @@ public class SelectSkillPopup {
     private LinkedHashMap<String, SkillMap> skillMap;
     private SkillContainer selectedSkill;
     private DefaultTableModel discriptionTableModel;
+    private int baseValue = 1;
 
     public SelectSkillPopup(CharacterContainer characterContainer, SkillsCard skillsCard) {
         this.characterContainer = characterContainer;
@@ -121,6 +122,8 @@ public class SelectSkillPopup {
     private void ProcessSkillContainer(SkillContainer skillContainer) {
         selectedSkill = skillContainer;
 
+        //skillContainer.setSkillLevel(baseValue);
+
         SetDescription();
 
         updateBuildRepair();
@@ -150,7 +153,7 @@ public class SelectSkillPopup {
         String displayString = "";
         Boolean buildRepair = checkboxBuildRepair.isSelected();
         Boolean isSpecialized = checkBoxSpecialization.isSelected();
-        int baseValue = sliderPoints.getValue();
+        baseValue = sliderPoints.getValue();
         int attributeScore = 1;
 
         try {
@@ -188,7 +191,7 @@ public class SelectSkillPopup {
     }
 
     private void SetDescription() {
-        System.out.println("Setting Description!");
+        System.out.println("SelectSkill Popup: Setting Description!");
 
         discriptionTableModel = selectedSkill.getTableDiscription();
 

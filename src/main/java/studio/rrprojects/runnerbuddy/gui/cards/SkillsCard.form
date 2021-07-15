@@ -39,7 +39,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="c2eb9" binding="panelProgressBars" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="c2eb9" binding="panelProgressBars" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -49,25 +49,33 @@
             <children>
               <nested-form id="22b95" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/SmallProgressBar.form" binding="progressBarActive">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="30" height="10"/>
                   </grid>
                 </constraints>
               </nested-form>
               <nested-form id="a038e" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/SmallProgressBar.form" binding="progressBarKnowledge">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="30" height="10"/>
                   </grid>
                 </constraints>
               </nested-form>
               <nested-form id="46df0" form-file="studio/rrprojects/runnerbuddy/gui/cards/components/SmallProgressBar.form" binding="progressBarLanguage">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="30" height="10"/>
                   </grid>
                 </constraints>
               </nested-form>
+              <component id="585af" class="javax.swing.JButton" binding="recalculateButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Recalculate"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="a5226" binding="panelTable" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

@@ -34,12 +34,6 @@ public class PriorityController {
             masterPriorityMap.put(priorityKey, priorityOptions);
 
         });
-
-        //Debuging
-        System.out.println(masterPriorityMap.size());
-        for (Map.Entry<String, PriorityOptions> key: masterPriorityMap.entrySet()) {
-            System.out.println(key.getKey() + ": " + key.getValue().size());
-        }
     }
 
     private void LoadPriorityFile() {

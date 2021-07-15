@@ -48,7 +48,7 @@ public class MiscUtils {
 
                 for (SkillContainer skill: listSkills) {
 
-                    System.out.println(skill);
+                    //System.out.println("MiscUtils: " + skill);
 
                     DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill);
                     categoryNode.add(skillNode);

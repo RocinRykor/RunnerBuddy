@@ -4,7 +4,6 @@ import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
 import studio.rrprojects.runnerbuddy.gui.cards.components.AttributeModule;
 import studio.rrprojects.runnerbuddy.misc.PriorityObject;
-import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -53,7 +52,7 @@ public class AttributeController extends ControllerClass {
 
             allocatedPoints += attribute.getValue().getAllottedPoints();
 
-            System.out.println("Running Total: " + attributeName + " -> " + allocatedPoints);
+            //System.out.println("Running Total: " + attributeName + " -> " + allocatedPoints);
         }
 
         if (allocatedPoints > maxAttributePoints) {
