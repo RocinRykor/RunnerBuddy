@@ -8,7 +8,6 @@ import studio.rrprojects.runnerbuddy.misc.PriorityOptions;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class PriorityController {
     private final CharacterContainer characterContainer;
@@ -39,6 +38,8 @@ public class PriorityController {
     private void LoadPriorityFile() {
 
         InputStream is = getClass().getResourceAsStream("/JSON/Misc/SR3E_priority_table.json");
+        
+        assert is != null;
         JSONTokener token = new JSONTokener(is);
 
         priorityJson = new JSONObject(token);

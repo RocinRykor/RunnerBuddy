@@ -31,7 +31,7 @@ public class PriorityGroup {
     }
 
     public PriorityOption getOptionByNumber(String text) {
-        int value = Integer.valueOf(text);
+        int value = Integer.parseInt(text);
         for (PriorityOption option : listPriorityOptions) {
             if (option.optionNumber == value) {
                 return option;
@@ -48,7 +48,7 @@ public class PriorityGroup {
         this.selectedOption = selectedOption;
     }
 
-    public class PriorityOption {
+    public static class PriorityOption {
         private final String priorityLevel;
         private final String displayName;
         private final int optionNumber;

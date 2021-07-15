@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.utils;
 
+import studio.rrprojects.runnerbuddy.Constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 
@@ -14,21 +15,12 @@ public class MiscUtils {
 
     public static ArrayList<String> basicAttributes() {
         ArrayList<String> tmp = new ArrayList<>();
-        tmp.add("Body");
-        tmp.add("Quickness");
-        tmp.add("Strength");
-        tmp.add("Charisma");
-        tmp.add("Intelligence");
-        tmp.add("Willpower");
-        return tmp;
-    }
-
-    public static ArrayList<String> allAttributes() {
-        ArrayList<String> tmp = basicAttributes();
-        tmp.add("Reaction");
-        tmp.add("Essence");
-        tmp.add("Magic");
-
+        tmp.add(AttributeConstants.BODY);
+        tmp.add(AttributeConstants.QUICKNESS);
+        tmp.add(AttributeConstants.STRENGTH);
+        tmp.add(AttributeConstants.CHARISMA);
+        tmp.add(AttributeConstants.INTELLIGENCE);
+        tmp.add(AttributeConstants.WILLPOWER);
         return tmp;
     }
 
@@ -61,18 +53,6 @@ public class MiscUtils {
             masterNode.add(baseNode);
 
         }
-        /*
-        for (int i = 0; i < 10; i++) {
-            DefaultMutableTreeNode baseNode = new DefaultMutableTreeNode(i);
-            for (int j = 0; j < 5; j++) {
-                DefaultMutableTreeNode finalNode = new DefaultMutableTreeNode(j);
-                baseNode.add(finalNode);
-            }
-
-            masterNode.add(baseNode);
-        }
-
-         */
 
         return new DefaultTreeModel(masterNode);
     }

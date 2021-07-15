@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class JsonUtils {
     public static boolean getBoolOrDefault(JSONObject jsonObject, String key, boolean defualtBool) {
-        Boolean b;
+        boolean b;
 
         try {
             b = jsonObject.getBoolean(key);

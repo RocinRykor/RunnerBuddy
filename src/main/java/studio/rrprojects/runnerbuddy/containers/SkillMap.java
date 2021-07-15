@@ -37,8 +37,7 @@ public class SkillMap {
     }
 
     private void SortEverything() {
-        Comparator<SkillContainer> compareBySkillName = (SkillContainer s1, SkillContainer s2) ->
-                s1.getSkillName().compareTo( s2.getSkillName());
+        Comparator<SkillContainer> compareBySkillName = Comparator.comparing(SkillContainer::getSkillName);
 
         listSkillsMaster.sort(compareBySkillName);
 

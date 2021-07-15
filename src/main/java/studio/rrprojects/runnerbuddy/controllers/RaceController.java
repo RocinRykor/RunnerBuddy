@@ -41,6 +41,8 @@ public class RaceController extends ControllerClass {
     private void LoadPriorityFile() {
 
         InputStream is = getClass().getResourceAsStream("/JSON/Misc/SR3E_race_table.json");
+
+        assert is != null;
         JSONTokener token = new JSONTokener(is);
 
         raceTableJson = new JSONObject(token);

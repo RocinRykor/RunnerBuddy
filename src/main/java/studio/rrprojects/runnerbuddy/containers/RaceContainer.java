@@ -3,7 +3,6 @@ package studio.rrprojects.runnerbuddy.containers;
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
-import studio.rrprojects.util_library.JSONUtil;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -81,14 +80,14 @@ public class RaceContainer {
     public String getDescription() {
         String title = "Name: " + TextUtils.titleCase(name) + "\n\n";
 
-        String attributes = "Racial Attribute Modifiers:\n";
+        StringBuilder attributes = new StringBuilder("Racial Attribute Modifiers:\n");
         for (String attribute :MiscUtils.basicAttributes()) {
             int modValue = 0;
             if (modifiersAttributes.containsKey(attribute)) {
                 modValue = modifiersAttributes.get(attribute);
             }
 
-            attributes += TextUtils.titleCase(attribute) + ": " + modValue + "\n";
+            attributes.append(TextUtils.titleCase(attribute)).append(": ").append(modValue).append("\n");
         }
 
         return title + attributes;
