@@ -2,17 +2,19 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
-import studio.rrprojects.runnerbuddy.containers.SkillContainer;
+import studio.rrprojects.runnerbuddy.containers.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.components.SmallProgressBar;
 import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
-import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class SkillsCard extends Card {
     private final CharacterContainer characterContainer;
@@ -27,6 +29,7 @@ public class SkillsCard extends Card {
     private SmallProgressBar progressBarKnowledge;
     private SmallProgressBar progressBarLanguage;
     private JTree treeSkills;
+    private ArrayList<SelectedSkillContainer> selectedSkillList;
 
     public SkillsCard(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
@@ -44,7 +47,7 @@ public class SkillsCard extends Card {
     }
 
     private void AddNewSkill() {
-        new SelectSkillPopup(characterContainer);
+        new SelectSkillPopup(characterContainer, this);
     }
 
     private void populateInformationPanel() {
@@ -84,7 +87,45 @@ public class SkillsCard extends Card {
     @Override
     public void Update() {
         super.Update();
+        updateSkillsPanel();
         populateInformationPanel();
+    }
+
+    private void updateSkillsPanel() {
+        selectedSkillList = characterContainer.getSkillsController().getSelectedSkillList();
+        DefaultTreeModel treeModel = convertSkillListToTreeNode();
+        treeSkills.setModel(treeModel);
+    }
+
+    private DefaultTreeModel convertSkillListToTreeNode() {
+        LinkedHashMap<String, ArrayList<SelectedSkillContainer>> skillMap = new LinkedHashMap<>();
+
+        //TODO - Make tree like the Add Skill Tree
+
+        for (SelectedSkillContainer skill : selectedSkillList) {
+            String skillType = skill.getSkillType();
+            String skillCategory = skill.getCategory();
+
+            if (!skillMap.containsKey(skillType)) {
+                skillMap.put(skillType, new ArrayList<SelectedSkillContainer>());
+            }
+            skillMap.get(skillType).add(skill);
+        }
+
+        DefaultMutableTreeNode masterNode = new DefaultMutableTreeNode("Selected Skills");
+
+        for (String skillCategory : skillMap.keySet()) {
+            DefaultMutableTreeNode categoryNode = new DefaultMutableTreeNode(skillCategory);
+
+            for (SelectedSkillContainer skill : skillMap.get(skillCategory)) {
+                DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill);  //TODO FIX
+                categoryNode.add(skillNode);
+            }
+
+            masterNode.add(categoryNode);
+        }
+
+        return new DefaultTreeModel(masterNode);
     }
 
     {

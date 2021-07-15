@@ -33,8 +33,6 @@ public class MiscUtils {
     }
 
     public static DefaultTreeModel convertMasterSkillMapToJTree(LinkedHashMap<String, SkillMap> masterMap, String treeTitle) {
-        System.out.println("NEW MAP -? Size: " + masterMap.size());
-
         DefaultMutableTreeNode masterNode = new DefaultMutableTreeNode(treeTitle);
 
 
@@ -49,7 +47,10 @@ public class MiscUtils {
                 DefaultMutableTreeNode categoryNode = new DefaultMutableTreeNode(skillCategory);
 
                 for (SkillContainer skill: listSkills) {
-                    DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill.getSkillName());
+
+                    System.out.println(skill);
+
+                    DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill);
                     categoryNode.add(skillNode);
                 }
 

@@ -18,7 +18,7 @@ public class SkillMap {
 
         for (String skillName: jsonObject.keySet()) {
             JSONObject skill = jsonObject.getJSONObject(skillName);
-            SkillContainer skillContainer = new SkillContainer(skillName, skill);
+            SkillContainer skillContainer = new SkillContainer(skillName, skill, skillType);
             String category = skillContainer.getCategory();
 
             if (!mapSkillsByCategory.containsKey(category)) {

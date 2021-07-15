@@ -21,7 +21,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: org.json:json:20200518" level="project" />
     <orderEntry type="library" name="Util_Library" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20200518" level="project" />
   </component>
 </module>

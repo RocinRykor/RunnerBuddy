@@ -346,7 +346,7 @@
         "defaults": "",
         "description": "Biotech governs basic medicine and first aid. A character with this skill understands basic medicine in a hands-on sense, as a paramedic would rather than a physician. Though familiar with the techniques and materials of cyberwear, a character with this skill would still need a computer expert to collaborate on the interface systems.",
         "source": "SR3E Core p. 88",
-        "specialization": "Cybertechnology Implantation",
+        "specialization": "Cybertechnology Implantation, Extended Care, First Aid, Organ Culture & Growth, Surgery, Transimplant Surgery",
         "category": "technical",
         "specializations": {},
         "value": 0
