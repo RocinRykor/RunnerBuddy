@@ -15,14 +15,13 @@ public class SelectedSkillContainer extends SkillContainer {
         setAvailableSpecializations(selectedSkill.getAvailableSpecializations());
         setSelectedSpecializations(selectedSkill.getSelectedSpecializations());
         setLinkedAttribute(selectedSkill.getLinkedAttribute());
-        setSkillLevel(selectedSkill.getSkillLevel());
-
-        System.out.println("Skill Level: " + getSkillLevel());
-
+        setBaseLevel(selectedSkill.getBaseLevel());
+        setActualLevel(selectedSkill.getActualLevel());
         setCategory(selectedSkill.getCategory());
         setSkillName(selectedSkill.getSkillName());
         setDescription(selectedSkill.getDescription());
         setSource(selectedSkill.getSource());
+        setSelectedSpecializations(selectedSkill.getSelectedSpecializations());
     }
 
     public SkillContainer getSelectedSkill() {
@@ -35,7 +34,7 @@ public class SelectedSkillContainer extends SkillContainer {
 
         int attributeLevel = characterContainer.getAttributeController().getAttributeMap().get(linkedAttribute).getTotalPoints();
 
-        int skillLevel = getSkillLevel();
+        int skillLevel = getBaseLevel();
 
         if (skillLevel <= attributeLevel) {
             pointCost = skillLevel;
@@ -51,5 +50,22 @@ public class SelectedSkillContainer extends SkillContainer {
 
     public void setPointCost(int pointCost) {
         this.pointCost = pointCost;
+    }
+
+    @Override
+    public String toString() {
+        return getDisplayString();
+    }
+
+    private String getDisplayString() {
+        String string = getSkillName() + " " + getActualLevel();
+
+        for (SpecializationContainer specializationContainer: getSelectedSpecializations()) {
+            string += ", " + specializationContainer.getName() + " " + specializationContainer.getLevel();
+        }
+
+        string += " | Points Spent: " + getPointCost();
+
+        return string;
     }
 }

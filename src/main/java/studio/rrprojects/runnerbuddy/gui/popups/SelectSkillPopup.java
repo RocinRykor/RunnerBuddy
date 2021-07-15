@@ -7,6 +7,7 @@ import studio.rrprojects.runnerbuddy.containers.SkillMap;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SpecializationContainer;
 import studio.rrprojects.runnerbuddy.controllers.SkillsController;
 import studio.rrprojects.runnerbuddy.gui.cards.SkillsCard;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
@@ -24,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 public class SelectSkillPopup {
     private final JFrame frame;
@@ -98,7 +100,20 @@ public class SelectSkillPopup {
     private void SubmitEvent() {
         //Runs whem the skill is being added to the player list
         baseValue = sliderPoints.getValue();
-        selectedSkill.setSkillLevel(baseValue);
+        selectedSkill.setBaseLevel(baseValue);
+
+        //Handle Specilizations
+        if (checkBoxSpecialization.isSelected()) {
+            selectedSkill.setActualLevel(baseValue - 1);
+
+            String specializationName = Objects.requireNonNull(comboBoxSpecialization.getSelectedItem()).toString();
+            int specializationLevel = baseValue + 1;
+
+            SpecializationContainer specializtionContainer = new SpecializationContainer(specializationName, specializationLevel);
+            selectedSkill.addSpecialization(specializtionContainer);
+        } else {
+            selectedSkill.setActualLevel(baseValue);
+        }
 
         //Check to see if the slectedSkill is already in the SkillsController list
         SkillsController skillsController = characterContainer.getSkillsController();
@@ -133,7 +148,6 @@ public class SelectSkillPopup {
             SkillContainer skillContainer = (SkillContainer) selectedObject;
             ProcessSkillContainer(skillContainer);
         }
-
 
     }
 

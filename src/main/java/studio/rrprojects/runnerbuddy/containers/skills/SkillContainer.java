@@ -21,8 +21,9 @@ public class SkillContainer{
     private String source;
     private ArrayList<String> availableSpecializations;
     private String category;
-    private int skillLevel;
-    private ArrayList<SpecializationObject> selectedSpecializations;
+    private int baseLevel;
+    private int actualLevel;
+    private ArrayList<SpecializationContainer> selectedSpecializations;
 
     public SkillContainer(String name, String type) {
         skillBaseName = TextUtils.titleCase(name);
@@ -48,7 +49,7 @@ public class SkillContainer{
 
         selectedSpecializations = new ArrayList<>();
 
-        skillLevel = JsonUtils.getIntOrDefault(skill, "value", 1);
+        baseLevel = JsonUtils.getIntOrDefault(skill, "value", 1);
 
         //System.out.println("Skill Loaded: " + skillName);
     }
@@ -119,12 +120,20 @@ public class SkillContainer{
         this.category = category;
     }
 
-    public int getSkillLevel() {
-        return skillLevel;
+    public int getBaseLevel() {
+        return baseLevel;
     }
 
-    public void setSkillLevel(int skillLevel) {
-        this.skillLevel = skillLevel;
+    public void setBaseLevel(int baseLevel) {
+        this.baseLevel = baseLevel;
+    }
+
+    public int getActualLevel() {
+        return actualLevel;
+    }
+
+    public void setActualLevel(int actualLevel) {
+        this.actualLevel = actualLevel;
     }
 
     public String getBaseAttribute() {
@@ -151,11 +160,11 @@ public class SkillContainer{
         this.availableSpecializations = availableSpecializations;
     }
 
-    public ArrayList<SpecializationObject> getSelectedSpecializations() {
+    public ArrayList<SpecializationContainer> getSelectedSpecializations() {
         return selectedSpecializations;
     }
 
-    public void setSelectedSpecializations(ArrayList<SpecializationObject> selectedSpecializations) {
+    public void setSelectedSpecializations(ArrayList<SpecializationContainer> selectedSpecializations) {
         this.selectedSpecializations = selectedSpecializations;
     }
 
@@ -199,25 +208,8 @@ public class SkillContainer{
         return new Object[]{o1, o2};
     }
 
-    private class SpecializationObject {
-        private String specializationName;
-        private int skillLevel;
-
-        public String getSpecializationName() {
-            return specializationName;
-        }
-
-        public void setSpecializationName(String specializationName) {
-            this.specializationName = specializationName;
-        }
-
-        public int getSkillLevel() {
-            return skillLevel;
-        }
-
-        public void setSkillLevel(int skillLevel) {
-            this.skillLevel = skillLevel;
-        }
+    public void addSpecialization(SpecializationContainer specializationContainer) {
+        selectedSpecializations.add(specializationContainer);
     }
 
     @Override

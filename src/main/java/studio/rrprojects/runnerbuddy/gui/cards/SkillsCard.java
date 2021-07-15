@@ -11,7 +11,10 @@ import studio.rrprojects.runnerbuddy.Constants.SkillConstants;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -41,6 +44,61 @@ public class SkillsCard extends Card {
         populateInformationPanel();
         addSkillButton.addActionListener(actionEvent -> AddNewSkill());
         recalculateButton.addActionListener(actionEvent -> CalculateSkillPoints());
+
+        treeSkills.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selRow = treeSkills.getRowForLocation(e.getX(), e.getY());
+                TreePath selPath = treeSkills.getPathForLocation(e.getX(), e.getY());
+                if (selRow != -1) {
+                    if (e.getClickCount() == 2) {
+                        DoubleClickEvent(selRow, selPath);
+                    } else if (SwingUtilities.isRightMouseButton(e)) {
+                        RightClickEvent(selRow, selPath, e);
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void DoubleClickEvent(int selRow, TreePath selPath) {
+        DefaultMutableTreeNode finalNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
+        Object selectedObject = finalNode.getUserObject();
+
+        if (selectedObject instanceof SelectedSkillContainer) {
+            SelectedSkillContainer skillContainer = (SelectedSkillContainer) selectedObject;
+            EditSkill(skillContainer);
+        }
+    }
+
+    private void RightClickEvent(int selRow, TreePath selPath, MouseEvent e) {
+        DefaultMutableTreeNode finalNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
+        Object selectedObject = finalNode.getUserObject();
+
+        if (selectedObject instanceof SelectedSkillContainer) {
+            SelectedSkillContainer skillContainer = (SelectedSkillContainer) selectedObject;
+            RightClickPopup(skillContainer, e.getX(), e.getY());
+        }
+    }
+
+    private void RightClickPopup(SelectedSkillContainer skillContainer, int x, int y) {
+        JPopupMenu popup = new JPopupMenu();
+        JMenuItem editOption = new JMenuItem("EDIT");
+        JMenuItem deleteOption = new JMenuItem("REMOVE");
+        JSeparator separator = new JPopupMenu.Separator();
+        JMenuItem cancelOption = new JMenuItem("CANCEL");
+
+        popup.add(editOption);
+        popup.add(deleteOption);
+        popup.add(separator);
+        popup.add(cancelOption);
+
+        popup.show(panelMain, x, y);
+    }
+
+    private void EditSkill(SelectedSkillContainer skillContainer) {
+
     }
 
     private void CalculateSkillPoints() {
