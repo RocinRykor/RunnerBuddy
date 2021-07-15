@@ -1,6 +1,6 @@
 package studio.rrprojects.runnerbuddy.utils;
 
-import studio.rrprojects.runnerbuddy.containers.SkillContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 
 import javax.swing.tree.DefaultMutableTreeNode;

@@ -1,4 +1,4 @@
-package studio.rrprojects.runnerbuddy.containers;
+package studio.rrprojects.runnerbuddy.containers.skills;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 
@@ -7,12 +7,14 @@ public class SelectedSkillContainer extends SkillContainer {
     private int pointCost = 1;
 
     public SelectedSkillContainer(SkillContainer selectedSkill) {
+        super(selectedSkill.getSkillName(), selectedSkill.getSkillType());
+
         this.selectedSkill = selectedSkill;
 
         setSkillType(selectedSkill.getSkillType());
         setAvailableSpecializations(selectedSkill.getAvailableSpecializations());
         setSelectedSpecializations(selectedSkill.getSelectedSpecializations());
-        setAttribute(selectedSkill.getAttribute());
+        setLinkedAttribute(selectedSkill.getLinkedAttribute());
         setSkillLevel(selectedSkill.getSkillLevel());
 
         System.out.println("Skill Level: " + getSkillLevel());
@@ -29,16 +31,11 @@ public class SelectedSkillContainer extends SkillContainer {
 
     public void CaculatePointCost(CharacterContainer characterContainer) {
 
-        System.out.println("RECALCULATE: ");
+        String linkedAttribute = getLinkedAttribute();
 
-        String attribute = getAttribute();
-        System.out.println("RECALCULATE: " + attribute);
-
-        int attributeLevel = characterContainer.getAttributeController().getAttributeMap().get(attribute).getTotalPoints();
-        System.out.println("RECALCULATE: " + attributeLevel);
+        int attributeLevel = characterContainer.getAttributeController().getAttributeMap().get(linkedAttribute).getTotalPoints();
 
         int skillLevel = getSkillLevel();
-        System.out.println("RECALCULATE: " + skillLevel);
 
         if (skillLevel <= attributeLevel) {
             pointCost = skillLevel;

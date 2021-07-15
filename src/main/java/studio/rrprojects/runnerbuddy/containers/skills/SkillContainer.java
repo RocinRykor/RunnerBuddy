@@ -1,6 +1,7 @@
-package studio.rrprojects.runnerbuddy.containers;
+package studio.rrprojects.runnerbuddy.containers.skills;
 
 import org.json.JSONObject;
+import studio.rrprojects.runnerbuddy.Constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.utils.JsonUtils;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
@@ -9,9 +10,11 @@ import java.util.ArrayList;
 
 public class SkillContainer{
 
+    private final String skillBaseName;
     private String skillType;
     private String skillName;
-    private String attribute;
+    private String baseAttribute;
+    private String linkedAttribute;
     private boolean isBuildRepairAvailible;
     private String defaults;
     private String description;
@@ -21,12 +24,18 @@ public class SkillContainer{
     private int skillLevel;
     private ArrayList<SpecializationObject> selectedSpecializations;
 
-    public SkillContainer(String name, JSONObject skill, String type) {
-        skillName = TextUtils.titleCase(name);
+    public SkillContainer(String name, String type) {
+        skillBaseName = TextUtils.titleCase(name);
+        skillName = skillBaseName;
         skillType = TextUtils.titleCase(type);
-        
-        attribute = TextUtils.titleCase(JsonUtils.getStringOrDefault(skill, "attribute", "Intelligence"));
+    }
+
+    public void processJSONObject(JSONObject skill) {
+        baseAttribute = TextUtils.titleCase(JsonUtils.getStringOrDefault(skill, "attribute", AttributeConstants.INTELLIGENCE));
+        linkedAttribute = baseAttribute;
+
         isBuildRepairAvailible = JsonUtils.getBoolOrDefault(skill, "build_repair", false);
+
         defaults = TextUtils.titleCase(JsonUtils.getStringOrDefault(skill, "defaults", "None"));
         description = skill.getString("description");
         source = skill.getString("source");
@@ -39,12 +48,9 @@ public class SkillContainer{
 
         selectedSpecializations = new ArrayList<>();
 
-        skillLevel = JsonUtils.getIntOrDefault(skill, "value", 0);
+        skillLevel = JsonUtils.getIntOrDefault(skill, "value", 1);
 
         //System.out.println("Skill Loaded: " + skillName);
-    }
-
-    public SkillContainer() {
     }
 
     private ArrayList<String> processSpecializationString(String string) {
@@ -61,20 +67,16 @@ public class SkillContainer{
         return tmp;
     }
 
+    public String getSkillBaseName() {
+        return skillBaseName;
+    }
+
     public String getSkillName() {
         return skillName;
     }
 
     public void setSkillName(String skillName) {
         this.skillName = skillName;
-    }
-
-    public String getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
     }
 
     public boolean isBuildRepairAvailible() {
@@ -125,6 +127,22 @@ public class SkillContainer{
         this.skillLevel = skillLevel;
     }
 
+    public String getBaseAttribute() {
+        return baseAttribute;
+    }
+
+    public void setBaseAttribute(String baseAttribute) {
+        this.baseAttribute = baseAttribute;
+    }
+
+    public String getLinkedAttribute() {
+        return linkedAttribute;
+    }
+
+    public void setLinkedAttribute(String linkedAttribute) {
+        this.linkedAttribute = linkedAttribute;
+    }
+
     public ArrayList<String> getAvailableSpecializations() {
         return availableSpecializations;
     }
@@ -160,7 +178,7 @@ public class SkillContainer{
         tableModel.addRow(addBlankRow());
         tableModel.addRow(addTableRow("Category", category));
         tableModel.addRow(addBlankRow());
-        tableModel.addRow(addTableRow("Attribute", attribute));
+        tableModel.addRow(addTableRow("Linked Attribute", linkedAttribute));
         tableModel.addRow(addBlankRow());
         tableModel.addRow(addTableRow("B/R", TextUtils.titleCase(String.valueOf(isBuildRepairAvailible))));
         tableModel.addRow(addBlankRow());

@@ -2,9 +2,10 @@ package studio.rrprojects.runnerbuddy.gui.popups;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import studio.rrprojects.runnerbuddy.containers.SkillContainer;
+import studio.rrprojects.runnerbuddy.Constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.SkillsCard;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
@@ -38,6 +39,7 @@ public class SelectSkillPopup {
     private JPanel panelInformation;
     private JCheckBox checkboxBuildRepair;
     private JLabel labelDisplayString;
+    private JButton submitCloseButton;
     private LinkedHashMap<String, SkillMap> skillMap;
     private SkillContainer selectedSkill;
     private DefaultTableModel discriptionTableModel;
@@ -66,11 +68,7 @@ public class SelectSkillPopup {
                 int selRow = treeSkills.getRowForLocation(e.getX(), e.getY());
                 TreePath selPath = treeSkills.getPathForLocation(e.getX(), e.getY());
                 if (selRow != -1) {
-                    if (e.getClickCount() == 1) {
-                        //mySingleClick(selRow, selPath);
-                    } else if (e.getClickCount() == 2) {
-                        DoubleClickEvent(selRow, selPath);
-                    }
+                    DoubleClickEvent(selRow, selPath);
                 }
             }
         });
@@ -87,10 +85,21 @@ public class SelectSkillPopup {
             frame.dispose();
         });
         submitButton.addActionListener(actionEvent -> {
-            characterContainer.getSkillsController().addSkillFromPopup(this);
-            skillsCard.Update();
+            SubmitEvent();
+        });
+        submitCloseButton.addActionListener(actionEvent -> {
+            SubmitEvent();
             frame.dispose();
         });
+    }
+
+    private void SubmitEvent() {
+        //Runs whem the skill is being added to the player list
+        baseValue = sliderPoints.getValue();
+        selectedSkill.setSkillLevel(baseValue);
+
+        characterContainer.getSkillsController().addSkillFromPopup(this);
+        skillsCard.Update();
     }
 
     private void checkSpecialization() {
@@ -122,11 +131,11 @@ public class SelectSkillPopup {
     private void ProcessSkillContainer(SkillContainer skillContainer) {
         selectedSkill = skillContainer;
 
-        //skillContainer.setSkillLevel(baseValue);
-
         SetDescription();
 
         updateBuildRepair();
+
+        ResetSlider();
 
         ArrayList<String> availableSpecializations = selectedSkill.getAvailableSpecializations();
         DefaultComboBoxModel boxModel = new DefaultComboBoxModel();
@@ -137,36 +146,45 @@ public class SelectSkillPopup {
         updateDisplayString();
     }
 
-    private void updateBuildRepair() {
-        //TODO - If Build repair is active attribute changes to Intelligence
+    private void ResetSlider() {
+        sliderPoints.setValue(3);
+    }
 
+    private void updateBuildRepair() {
         boolean buildRepair = selectedSkill.isBuildRepairAvailible();
 
         checkboxBuildRepair.setVisible(buildRepair);
 
-        if (!buildRepair) {
-            checkboxBuildRepair.setSelected(false);
-        }
+        checkboxBuildRepair.setSelected(false);
     }
 
     private void updateDisplayString() {
         String displayString = "";
+
         Boolean buildRepair = checkboxBuildRepair.isSelected();
         Boolean isSpecialized = checkBoxSpecialization.isSelected();
+
+        if (buildRepair) {
+            selectedSkill.setSkillName("(B/R) " + selectedSkill.getSkillBaseName());
+            selectedSkill.setLinkedAttribute(AttributeConstants.INTELLIGENCE);
+        } else {
+            selectedSkill.setSkillName(selectedSkill.getSkillBaseName());
+            selectedSkill.setLinkedAttribute(selectedSkill.getBaseAttribute());
+        }
+
+        UpdateTable();
+
         baseValue = sliderPoints.getValue();
+
         int attributeScore = 1;
 
         try {
-            attributeScore = characterContainer.getAttributeController().getAttributeMap().get(selectedSkill.getAttribute()).getTotalPoints();
+            attributeScore = characterContainer.getAttributeController().getAttributeMap().get(selectedSkill.getLinkedAttribute()).getTotalPoints();
         } catch (NullPointerException ignored) {
         }
 
 
         int totalCost = calculateSkillCost(baseValue, attributeScore);
-
-        if (buildRepair) {
-            displayString += "(B/R) ";
-        }
 
         if (isSpecialized) {
             displayString += selectedSkill.getSkillName() + " (" + (baseValue - 1) + "), "
@@ -178,6 +196,10 @@ public class SelectSkillPopup {
         displayString += "| Total Points: " + totalCost;
 
         labelDisplayString.setText(displayString);
+    }
+
+    private void UpdateTable() {
+        //TODO Update the description table to reflect the Linked Attribute change
     }
 
     private int calculateSkillCost(int baseValue, int attributeScore) {
@@ -282,6 +304,9 @@ public class SelectSkillPopup {
         checkboxBuildRepair = new JCheckBox();
         checkboxBuildRepair.setText("Build/Repair");
         panelInformation.add(checkboxBuildRepair, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        submitCloseButton = new JButton();
+        submitCloseButton.setText("Submit and Close");
+        panelInformation.add(submitCloseButton, new GridConstraints(4, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

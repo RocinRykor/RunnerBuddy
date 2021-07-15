@@ -2,12 +2,12 @@ package studio.rrprojects.runnerbuddy.controllers;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import studio.rrprojects.runnerbuddy.containers.SelectedSkillContainer;
-import studio.rrprojects.runnerbuddy.containers.SkillContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
-import studio.rrprojects.runnerbuddy.misc.SkillConstants;
+import studio.rrprojects.runnerbuddy.Constants.SkillConstants;
 
 import java.io.InputStream;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package studio.rrprojects.runnerbuddy.containers;
 
 import org.json.JSONObject;
-import studio.rrprojects.runnerbuddy.utils.TextUtils;
+import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 
 import java.util.*;
 
@@ -18,7 +18,10 @@ public class SkillMap {
 
         for (String skillName: jsonObject.keySet()) {
             JSONObject skill = jsonObject.getJSONObject(skillName);
-            SkillContainer skillContainer = new SkillContainer(skillName, skill, skillType);
+
+            SkillContainer skillContainer = new SkillContainer(skillName, skillType);
+            skillContainer.processJSONObject(skill);
+
             String category = skillContainer.getCategory();
 
             if (!mapSkillsByCategory.containsKey(category)) {

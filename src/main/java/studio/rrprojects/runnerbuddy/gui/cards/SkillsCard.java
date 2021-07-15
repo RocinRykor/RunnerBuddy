@@ -2,18 +2,16 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import studio.rrprojects.runnerbuddy.containers.SelectedSkillContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.components.SmallProgressBar;
 import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
-import studio.rrprojects.runnerbuddy.misc.SkillConstants;
+import studio.rrprojects.runnerbuddy.Constants.SkillConstants;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -127,6 +125,18 @@ public class SkillsCard extends Card {
         super.Update();
         updateSkillsPanel();
         populateInformationPanel();
+        CalculateSkillPoints();
+        expandTree(treeSkills);
+    }
+
+    private void expandTree(JTree tree) {
+        int j = tree.getRowCount();
+        int i = 0;
+        while (i < j) {
+            tree.expandRow(i);
+            i += 1;
+            j = tree.getRowCount();
+        }
     }
 
     private void updateSkillsPanel() {
@@ -138,7 +148,8 @@ public class SkillsCard extends Card {
     private DefaultTreeModel convertSkillListToTreeNode() {
         LinkedHashMap<String, ArrayList<SelectedSkillContainer>> skillMap = new LinkedHashMap<>();
 
-        //TODO - Make tree like the Add Skill Tree
+        //TODO - Make tree like the Add Skill Tree -> Active, Knowledge, and Language in that order and subcategories
+
 
         for (SelectedSkillContainer skill : selectedSkillList) {
             String skillType = skill.getSkillType();

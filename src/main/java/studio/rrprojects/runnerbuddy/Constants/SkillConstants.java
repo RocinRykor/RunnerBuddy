@@ -1,4 +1,4 @@
-package studio.rrprojects.runnerbuddy.misc;
+package studio.rrprojects.runnerbuddy.Constants;
 
 public class SkillConstants {
     public static final String ACTIVE = "Active";
