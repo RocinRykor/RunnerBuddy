@@ -1,6 +1,6 @@
 package studio.rrprojects.runnerbuddy.utils;
 
-import studio.rrprojects.runnerbuddy.Constants.AttributeConstants;
+import studio.rrprojects.runnerbuddy.constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 

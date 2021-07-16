@@ -2,7 +2,7 @@ package studio.rrprojects.runnerbuddy.gui.popups;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import studio.rrprojects.runnerbuddy.Constants.AttributeConstants;
+import studio.rrprojects.runnerbuddy.constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
@@ -117,7 +117,7 @@ public class SelectSkillPopup {
 
         //Check to see if the slectedSkill is already in the SkillsController list
         SkillsController skillsController = characterContainer.getSkillsController();
-        if (!skillsController.contains(selectedSkill)) {
+        if (!skillsController.containsSkill(selectedSkill)) {
             SelectedSkillContainer selectedSkillContainer = new SelectedSkillContainer(selectedSkill);
             skillsController.getSelectedSkillList().add(selectedSkillContainer);
         } else {

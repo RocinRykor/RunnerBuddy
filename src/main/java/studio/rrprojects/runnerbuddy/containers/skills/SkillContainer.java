@@ -1,7 +1,7 @@
 package studio.rrprojects.runnerbuddy.containers.skills;
 
 import org.json.JSONObject;
-import studio.rrprojects.runnerbuddy.Constants.AttributeConstants;
+import studio.rrprojects.runnerbuddy.constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.utils.JsonUtils;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 

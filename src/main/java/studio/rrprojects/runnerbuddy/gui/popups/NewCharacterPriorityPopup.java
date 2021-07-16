@@ -294,7 +294,7 @@ public class NewCharacterPriorityPopup extends JFrame {
         final JSeparator separator2 = new JSeparator();
         panelPrimary.add(separator2, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
-        label3.setText("Select a category and use the Up/Down buttons on the right to move and rank them.");
+        label3.setText("Select a skillType and use the Up/Down buttons on the right to move and rank them.");
         panelMain.add(label3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 

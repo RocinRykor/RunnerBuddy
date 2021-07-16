@@ -1,4 +1,4 @@
-package studio.rrprojects.runnerbuddy.Constants;
+package studio.rrprojects.runnerbuddy.constants;
 
 public class AttributeConstants {
     public static final String BODY = "Body";

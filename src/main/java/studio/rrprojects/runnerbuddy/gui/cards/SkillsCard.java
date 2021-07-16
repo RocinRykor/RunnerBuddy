@@ -6,7 +6,7 @@ import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.components.SmallProgressBar;
 import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
-import studio.rrprojects.runnerbuddy.Constants.SkillConstants;
+import studio.rrprojects.runnerbuddy.constants.SkillConstants;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -42,8 +42,8 @@ public class SkillsCard extends Card {
 
         formatPanels();
         populateInformationPanel();
+
         addSkillButton.addActionListener(actionEvent -> AddNewSkill());
-        recalculateButton.addActionListener(actionEvent -> CalculateSkillPoints());
 
         treeSkills.addMouseListener(new MouseAdapter() {
             @Override
@@ -113,13 +113,9 @@ public class SkillsCard extends Card {
             String skillType = skill.getSkillType();
             int pointsSpent = skill.getPointCost();
 
-            System.out.println("SkillsCard: " + skillType);
-
             int oldValue = spentPointMap.get(skillType);
 
             int newValue = pointsSpent + oldValue;
-
-            System.out.println("SkillsCard: " + newValue);
 
             spentPointMap.replace(skillType, newValue);
         }
@@ -174,7 +170,7 @@ public class SkillsCard extends Card {
     }
 
     private void formatPanels() {
-        //panelAvailiable.setBorder(BorderFactory.createTitledBorder("Select A Skill - Double Click to Add"));
+        //panelAvailable.setBorder(BorderFactory.createTitledBorder("Select A Skill - Double Click to Add"));
         //panelSelected.setBorder(BorderFactory.createTitledBorder("Selected Skills - Double Click to Edit"));
     }
 
@@ -198,41 +194,9 @@ public class SkillsCard extends Card {
     }
 
     private void updateSkillsPanel() {
-        selectedSkillList = characterContainer.getSkillsController().getSelectedSkillList();
-        DefaultTreeModel treeModel = convertSkillListToTreeNode();
+        DefaultTreeModel treeModel = characterContainer.getSkillsController().getSelectedSkillTree();
+
         treeSkills.setModel(treeModel);
-    }
-
-    private DefaultTreeModel convertSkillListToTreeNode() {
-        LinkedHashMap<String, ArrayList<SelectedSkillContainer>> skillMap = new LinkedHashMap<>();
-
-        //TODO - Make tree like the Add Skill Tree -> Active, Knowledge, and Language in that order and subcategories
-
-
-        for (SelectedSkillContainer skill : selectedSkillList) {
-            String skillType = skill.getSkillType();
-            String skillCategory = skill.getCategory();
-
-            if (!skillMap.containsKey(skillType)) {
-                skillMap.put(skillType, new ArrayList<SelectedSkillContainer>());
-            }
-            skillMap.get(skillType).add(skill);
-        }
-
-        DefaultMutableTreeNode masterNode = new DefaultMutableTreeNode("Selected Skills");
-
-        for (String skillCategory : skillMap.keySet()) {
-            DefaultMutableTreeNode categoryNode = new DefaultMutableTreeNode(skillCategory);
-
-            for (SelectedSkillContainer skill : skillMap.get(skillCategory)) {
-                DefaultMutableTreeNode skillNode = new DefaultMutableTreeNode(skill);
-                categoryNode.add(skillNode);
-            }
-
-            masterNode.add(categoryNode);
-        }
-
-        return new DefaultTreeModel(masterNode);
     }
 
     {
@@ -263,17 +227,14 @@ public class SkillsCard extends Card {
         panelInformation.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.add(panelInformation, new GridConstraints(0, 1, 4, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         panelProgressBars = new JPanel();
-        panelProgressBars.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelProgressBars.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         panelInformation.add(panelProgressBars, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         progressBarActive = new SmallProgressBar();
-        panelProgressBars.add(progressBarActive.$$$getRootComponent$$$(), new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(30, 10), null, 0, false));
+        panelProgressBars.add(progressBarActive.$$$getRootComponent$$$(), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(30, 10), null, 0, false));
         progressBarKnowledge = new SmallProgressBar();
-        panelProgressBars.add(progressBarKnowledge.$$$getRootComponent$$$(), new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(30, 10), null, 0, false));
+        panelProgressBars.add(progressBarKnowledge.$$$getRootComponent$$$(), new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(30, 10), null, 0, false));
         progressBarLanguage = new SmallProgressBar();
-        panelProgressBars.add(progressBarLanguage.$$$getRootComponent$$$(), new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(30, 10), null, 0, false));
-        recalculateButton = new JButton();
-        recalculateButton.setText("Recalculate");
-        panelProgressBars.add(recalculateButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelProgressBars.add(progressBarLanguage.$$$getRootComponent$$$(), new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(30, 10), null, 0, false));
         panelTable = new JPanel();
         panelTable.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         panelInformation.add(panelTable, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
