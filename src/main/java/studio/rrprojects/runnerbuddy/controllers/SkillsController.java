@@ -88,6 +88,18 @@ public class SkillsController extends ControllerClass {
         return false;
     }
 
+    public SelectedSkillContainer getSkill(SkillContainer skill) {
+        String skillName = skill.getSkillName();
+
+        for (SelectedSkillContainer selectedSkillContainer : getSelectedSkillList()) {
+            if (selectedSkillContainer.getSkillName().equalsIgnoreCase(skillName)) {
+                return selectedSkillContainer;
+            }
+        }
+
+        return null;
+    }
+
     public DefaultTreeModel getSelectedSkillTree() {
         //Programmer's Note* - That could have gone worse... ultimtly being able to search nodes really helped
 
@@ -169,7 +181,20 @@ public class SkillsController extends ControllerClass {
 
         return null;
     }
-    
+
+    public void removeSkill(SkillContainer skill) {
+        selectedSkillList.remove(skill);
+    }
+
+    public void removeSkillByName(String skillName) {
+        System.out.println("REMOVING SKILL: " + skillName);
+        for (SelectedSkillContainer skill: selectedSkillList) {
+            if (skill.getSkillName().equalsIgnoreCase(skillName)) {
+                selectedSkillList.remove(skill);
+            }
+        }
+    }
+
     private class SkillGroup {
         private final String skillType;
         private final String[] categories;

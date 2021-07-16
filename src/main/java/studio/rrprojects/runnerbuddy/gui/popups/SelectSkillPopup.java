@@ -117,12 +117,24 @@ public class SelectSkillPopup {
 
         //Check to see if the slectedSkill is already in the SkillsController list
         SkillsController skillsController = characterContainer.getSkillsController();
+
+        if (skillsController.containsSkill(selectedSkill)) {
+            SelectedSkillContainer tmp = skillsController.getSkill(selectedSkill);
+            skillsController.removeSkill(tmp);
+        }
+
+        SelectedSkillContainer selectedSkillContainer = new SelectedSkillContainer(selectedSkill);
+        skillsController.getSelectedSkillList().add(selectedSkillContainer);
+
+        /*
         if (!skillsController.containsSkill(selectedSkill)) {
             SelectedSkillContainer selectedSkillContainer = new SelectedSkillContainer(selectedSkill);
             skillsController.getSelectedSkillList().add(selectedSkillContainer);
         } else {
             System.out.println("SelectSkillPopup: Skill already on list!");
         }
+
+         */
         skillsCard.Update();
     }
 

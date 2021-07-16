@@ -209,6 +209,7 @@ public class SkillContainer{
     }
 
     public void addSpecialization(SpecializationContainer specializationContainer) {
+        selectedSpecializations.clear(); //Right now characters are limited to 1 spec, so this forces that
         selectedSpecializations.add(specializationContainer);
     }
 
