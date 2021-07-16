@@ -2,11 +2,11 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
+import studio.rrprojects.runnerbuddy.constants.SkillConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.components.SmallProgressBar;
 import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
-import studio.rrprojects.runnerbuddy.constants.SkillConstants;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -17,7 +17,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class SkillsCard extends Card {
     private final CharacterContainer characterContainer;
@@ -32,8 +31,6 @@ public class SkillsCard extends Card {
     private SmallProgressBar progressBarKnowledge;
     private SmallProgressBar progressBarLanguage;
     private JTree treeSkills;
-    private JButton recalculateButton;
-    private ArrayList<SelectedSkillContainer> selectedSkillList;
 
     public SkillsCard(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
@@ -94,7 +91,17 @@ public class SkillsCard extends Card {
         popup.add(separator);
         popup.add(cancelOption);
 
+        editOption.setEnabled(false);
+        editOption.setToolTipText("Not Yet Implemented");
+
+        deleteOption.addActionListener(actionEvent -> DeleteSkill(skillContainer));
+
         popup.show(panelMain, x, y);
+    }
+
+    private void DeleteSkill(SelectedSkillContainer skillContainer) {
+        characterContainer.getSkillsController().getSelectedSkillList().remove(skillContainer);
+        Update();
     }
 
     private void EditSkill(SelectedSkillContainer skillContainer) {
