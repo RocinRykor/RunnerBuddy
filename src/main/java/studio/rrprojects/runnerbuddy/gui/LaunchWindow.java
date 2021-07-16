@@ -3,6 +3,7 @@ package studio.rrprojects.runnerbuddy.gui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import studio.rrprojects.runnerbuddy.constants.ProgramInfoConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.popups.NewCharacterPriorityPopup;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
@@ -24,7 +25,7 @@ public class LaunchWindow extends JFrame {
     private JButton buttonLoad;
     private JTextPane textPaneIntro;
     private ArrayList<JButton> listButtons;
-    private static final String title = "RunnerBuddy v1";
+    private static final String title = ProgramInfoConstants.PROGRAM_NAME + " " + ProgramInfoConstants.CURRENT_VERSION;
 
     public LaunchWindow() {
         super(title);
@@ -45,7 +46,7 @@ public class LaunchWindow extends JFrame {
         CharacterContainer characterContainer = new CharacterContainer();
 
         //Priority Selection Popup Window
-        NewCharacterPriorityPopup priorityPopup = new NewCharacterPriorityPopup("Select Character Priority", characterContainer);
+        NewCharacterPriorityPopup priorityPopup = new NewCharacterPriorityPopup(characterContainer);
 
         // Start Controller
         //RunnerBuilderController RBC = new RunnerBuilderController(title);

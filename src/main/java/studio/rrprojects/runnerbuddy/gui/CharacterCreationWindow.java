@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.gui;
 
+import studio.rrprojects.runnerbuddy.constants.ProgramInfoConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.*;
 
@@ -22,7 +23,7 @@ public class CharacterCreationWindow extends JFrame {
     private ArrayList<ButtonObject> listButtons;
     private JPanel panelMenu;
 
-    private static final String title = "RunnerBuddy v1";
+    private static final String title = ProgramInfoConstants.PROGRAM_NAME + " " + ProgramInfoConstants.CURRENT_VERSION;
     private LinkedHashMap<String, Card> cardsMap;
 
     public CharacterCreationWindow(CharacterContainer characterContainer) {

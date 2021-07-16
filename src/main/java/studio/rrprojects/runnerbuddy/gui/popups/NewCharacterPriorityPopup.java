@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.*;
 
 public class NewCharacterPriorityPopup extends JFrame {
+    private final String title = "Select Character Priority";
     private JPanel panelMain;
     private JLabel labelHeader;
     private JPanel panelPrimary;
@@ -40,8 +41,8 @@ public class NewCharacterPriorityPopup extends JFrame {
             "Character priorities can not be changed after this point.";
     private final String confirmationTitleString = "Confirm Priority Choice...";
 
-    public NewCharacterPriorityPopup(String title, CharacterContainer characterContainer) {
-        super(title);
+    public NewCharacterPriorityPopup(CharacterContainer characterContainer) {
+        setTitle(title);
         this.characterContainer = characterContainer;
 
         setContentPane(panelMain);
