@@ -25,6 +25,7 @@ public class CharacterCreationWindow extends JFrame {
 
     private static final String title = ProgramInfoConstants.PROGRAM_NAME + " " + ProgramInfoConstants.CURRENT_VERSION;
     private LinkedHashMap<String, Card> cardsMap;
+    private Card selectedCard;
 
     public CharacterCreationWindow(CharacterContainer characterContainer) {
         super(title);
@@ -69,6 +70,8 @@ public class CharacterCreationWindow extends JFrame {
         cardsMap.put("Attributes", new Attributes(characterContainer));
         cardsMap.put("Skills", new SkillsCard(characterContainer));
         //cardsMap.put("Save/Export", new SaveCard(characterContainer));
+
+        selectedCard = cardsMap.get("Info/Race"); //Ideal will get whatever one is first but here we have to specify
     }
 
     private void FormatCards() {
@@ -85,12 +88,20 @@ public class CharacterCreationWindow extends JFrame {
     }
 
     private void SwitchTo(String cardName) {
+        if (selectedCard.getTitle().equalsIgnoreCase(cardName)) {
+            return;
+        }
+
         System.out.println("CharacterCreationWindow: Switching To -> " + cardName);
 
-        Card card = cardsMap.get(cardName);
+        //Update the current card before switching
+        selectedCard.Update();
+
+        //Change which card is selected
+        selectedCard = cardsMap.get(cardName);
         cardLayout.show(panelCards, cardName);
 
-        card.Update();
+        selectedCard.Update();
 
         repaint();
     }

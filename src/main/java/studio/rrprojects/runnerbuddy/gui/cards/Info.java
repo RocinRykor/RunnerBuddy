@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -33,11 +35,11 @@ public class Info extends Card {
     private JTextField textHeight;
     private JTextField textHair;
     private JTextField textSkin;
-    private JButton saveDescriptionButton;
     private JTextField textNameStreet;
 
     private String[] raceNames = {"Troll", "Elf", "Orc", "Dwarf", "Human"};
     private ButtonGroup buttonGroup;
+    private ArrayList<JTextField> textFieldList;
 
     public Info(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
@@ -48,9 +50,7 @@ public class Info extends Card {
         FormatRacePanel();
         FormatButtonGroup();
         FormatInfoPanel();
-        saveDescriptionButton.addActionListener(actionEvent -> {
-            SaveDescription();
-        });
+
     }
 
     private void SaveDescription() {
@@ -65,13 +65,22 @@ public class Info extends Card {
         descriptionController.setHair(textHair.getText());
         descriptionController.setSkin(textSkin.getText());
         descriptionController.setNotes(textAreaNotes.getText());
-
     }
 
     private void FormatInfoPanel() {
         panelDescription.setBorder(BorderFactory.createTitledBorder("Description"));
         panelNames.setBorder(BorderFactory.createTitledBorder("Names"));
         panelInfo.setBorder(BorderFactory.createTitledBorder("Character Information"));
+
+        textFieldList = new ArrayList<>();
+        textFieldList.add(textNameReal);
+        textFieldList.add(textNameStreet);
+        textFieldList.add(textGender);
+        textFieldList.add(textEyes);
+        textFieldList.add(textWeight);
+        textFieldList.add(textHeight);
+        textFieldList.add(textHair);
+        textFieldList.add(textSkin);
     }
 
     private void FormatButtonGroup() {
@@ -123,6 +132,12 @@ public class Info extends Card {
         SetDescription(selectedRace.getDescription());
     }
 
+    @Override
+    public void Update() {
+        super.Update();
+        SaveDescription();
+    }
+
     private void SetDescription(String description) {
         textRaceDescription.setText(description);
     }
@@ -158,7 +173,7 @@ public class Info extends Card {
         final Spacer spacer1 = new Spacer();
         panelRace.add(spacer1, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         panelInfo = new JPanel();
-        panelInfo.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelInfo.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.add(panelInfo, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         panelNames = new JPanel();
         panelNames.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
@@ -217,9 +232,6 @@ public class Info extends Card {
         textAreaNotes.setLineWrap(true);
         textAreaNotes.setWrapStyleWord(true);
         panelDescription.add(textAreaNotes, new GridConstraints(3, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        saveDescriptionButton = new JButton();
-        saveDescriptionButton.setText("Save Description");
-        panelInfo.add(saveDescriptionButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
         panelMain.add(spacer3, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
     }
