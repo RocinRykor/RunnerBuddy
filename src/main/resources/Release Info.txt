@@ -9,8 +9,6 @@ Removed:
 BugFixes
 -   Attributes tab no longer throws errors if no race is selected, just acts like you picked human
 
-
-
 v0.1.0
 Features:
 New Character Creation
