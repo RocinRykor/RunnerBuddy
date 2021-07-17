@@ -34,6 +34,7 @@ public class SkillsCard extends Card {
 
     public SkillsCard(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
+        setTitle("Skills");
 
         setPanel(panelMain);
 

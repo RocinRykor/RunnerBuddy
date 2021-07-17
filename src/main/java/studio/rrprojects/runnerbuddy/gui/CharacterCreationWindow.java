@@ -88,6 +88,9 @@ public class CharacterCreationWindow extends JFrame {
     }
 
     private void SwitchTo(String cardName) {
+        System.out.println("CARD NAME: " + cardName);
+        System.out.println("SELECTED CARD TITLE: " + selectedCard.getTitle());
+
         if (selectedCard.getTitle().equalsIgnoreCase(cardName)) {
             return;
         }

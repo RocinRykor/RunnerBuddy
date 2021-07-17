@@ -2,6 +2,8 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import studio.rrprojects.runnerbuddy.constants.MetaHumanConstants;
+import studio.rrprojects.runnerbuddy.containers.RaceContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.components.*;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
@@ -20,12 +22,14 @@ public class Attributes extends Card {
     private JPanel panelAttributes;
     private JLabel labelSelectedRace;
 
-    private String selectedRace = "None";
+    private RaceContainer selectedRace;
+    private String currentRaceName = MetaHumanConstants.HUMAN;
     private LinkedHashMap<String, AttributeModule> attributeMap;
 
     public Attributes(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
         setPanel(panelMain);
+        setTitle("Attributes");
 
         progressBarAttributes.setTitle("Attribute Points");
         progressBarAttributes.setMin(0);
@@ -120,11 +124,23 @@ public class Attributes extends Card {
     @Override
     public void Update() {
         super.Update();
-        String raceName = characterContainer.getRaceController().getSelectedRace().getName();
-        if (!selectedRace.equalsIgnoreCase(raceName)) {
-            labelSelectedRace.setText("Race: " + TextUtils.titleCase(raceName));
+
+        selectedRace = characterContainer.getRaceController().getSelectedRace();
+
+        if (selectedRace == null) {
+            characterContainer.getRaceController().setSelectedRace(MetaHumanConstants.HUMAN);
+            selectedRace = characterContainer.getRaceController().getSelectedRace();
+        }
+
+        String raceName = selectedRace.getName();
+
+        if (!selectedRace.getName().equalsIgnoreCase(currentRaceName)) {
+            currentRaceName = selectedRace.getName();
             UpdateRacialMods();
         }
+
+        //Update this everytime even if not needed
+        labelSelectedRace.setText("Race: " + TextUtils.titleCase(currentRaceName));
     }
 
     private void UpdateRacialMods() {
