@@ -54,7 +54,7 @@ public class CharacterCreationWindow extends JFrame {
         listButtons.add(new ButtonObject("Info/Race"));
         listButtons.add(new ButtonObject("Attributes"));
         listButtons.add(new ButtonObject("Skills"));
-        listButtons.add(new ButtonObject("Save/Export"));
+        //listButtons.add(new ButtonObject("Save/Export"));
     }
 
     private void FormatButtons() {
@@ -68,7 +68,7 @@ public class CharacterCreationWindow extends JFrame {
         cardsMap.put("Info/Race", new Info(characterContainer));
         cardsMap.put("Attributes", new Attributes(characterContainer));
         cardsMap.put("Skills", new SkillsCard(characterContainer));
-        cardsMap.put("Save/Export", new SaveCard(characterContainer));
+        //cardsMap.put("Save/Export", new SaveCard(characterContainer));
     }
 
     private void FormatCards() {
