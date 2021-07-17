@@ -48,6 +48,17 @@ public class CharacterCreationWindow extends JFrame {
 
         CreateListOfCards();
         FormatCards();
+
+        InitialCardPass();
+    }
+
+    private void InitialCardPass() {
+        //One everything is created a ready to go, go through each card one time and make sure it is updated
+        for (String cardName: cardsMap.keySet()) {
+            Card card = cardsMap.get(cardName);
+
+            card.Update();
+        }
     }
 
     private void CreateListOfButtons() {

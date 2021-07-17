@@ -32,7 +32,13 @@ public class SelectedSkillContainer extends SkillContainer {
 
         String linkedAttribute = getLinkedAttribute();
 
-        int attributeLevel = characterContainer.getAttributeController().getAttributeMap().get(linkedAttribute).getTotalPoints();
+        int attributeLevel = 1;
+
+        try {
+            attributeLevel = characterContainer.getAttributeController().getAttributeMap().get(linkedAttribute).getTotalPoints();
+        } catch (NullPointerException e) {
+            System.out.println("SelectedSkillContainer ERROR: " + e);
+        }
 
         int skillLevel = getBaseLevel();
 
