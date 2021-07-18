@@ -3,6 +3,7 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import studio.rrprojects.runnerbuddy.constants.MetaHumanConstants;
 import studio.rrprojects.runnerbuddy.containers.RaceContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.controllers.DescriptionController;
@@ -37,7 +38,7 @@ public class Info extends Card {
     private JTextField textSkin;
     private JTextField textNameStreet;
 
-    private String[] raceNames = {"Troll", "Elf", "Orc", "Dwarf", "Human"};
+    private String[] raceNames = MetaHumanConstants.RACE_NAMES;
     private ButtonGroup buttonGroup;
     private ArrayList<JTextField> textFieldList;
 
@@ -92,7 +93,10 @@ public class Info extends Card {
             AbstractButton button = it.next();
             String buttonName = button.getActionCommand();
 
+            System.out.println("BUTTON NAME: " + buttonName);
+
             Boolean bool = characterContainer.getRaceController().getAvailibleRaces().contains(buttonName);
+            System.out.println("Contains? " + bool);
 
             button.setEnabled(bool);
         }

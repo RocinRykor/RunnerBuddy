@@ -6,4 +6,6 @@ public class MetaHumanConstants {
     public static final String DWARF = "Dwarf";
     public static final String ELF = "Elf";
     public static final String TROLL = "Troll";
+
+    public static final String[] RACE_NAMES = {HUMAN, ORK, DWARF, ELF, TROLL} ;
 }

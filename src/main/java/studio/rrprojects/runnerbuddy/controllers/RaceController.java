@@ -2,6 +2,7 @@ package studio.rrprojects.runnerbuddy.controllers;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
 import studio.rrprojects.runnerbuddy.containers.RaceContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.misc.PriorityObject;
@@ -40,7 +41,7 @@ public class RaceController extends ControllerClass {
 
     private void LoadPriorityFile() {
 
-        InputStream is = getClass().getResourceAsStream("/JSON/Misc/SR3E_race_table.json");
+        InputStream is = getClass().getResourceAsStream("/JSON/Misc/" + JsonFileConstants.METATYPE_TABLE);
 
         assert is != null;
         JSONTokener token = new JSONTokener(is);
