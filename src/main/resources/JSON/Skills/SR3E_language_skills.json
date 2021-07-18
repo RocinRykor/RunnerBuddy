@@ -1,92 +1,137 @@
 {
-"Chinese" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": "Cantonese"
-},
-"English" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": "Medieval English"
-},
-"Esperanto" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Estonian" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Finnish" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Greek" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": "Ancient Greek"
-},
-"German" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Hebrew" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Japanese" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Korean" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Polish" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Russian" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Spanish" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Sperethial" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-},
-"Welsh" : {
-    "category": "Languages",
-    "source": "SR3E Core p. 97",
-    "description": "",
-    "specialization": ""
-}
+    "chinese" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "Cantonese",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "english" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "Medieval English",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "esperanto" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "estonian" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "finnish" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "greek" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "Ancient Greek",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "german" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "hebrew" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "japanese" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "korean" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "polish" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "russian" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "spanish" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "sperethial" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    },
+    "welsh" : {
+        "category": "Languages",
+        "source": "SR3E Core p. 97",
+        "description": "",
+        "specialization": "",
+        "value": 0,
+        "specializations": {},
+        "attribute": "intelligence"
+    }
 }

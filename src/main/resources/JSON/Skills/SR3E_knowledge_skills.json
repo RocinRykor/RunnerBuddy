@@ -2,7 +2,7 @@
     "anthropology": {
         "category": "academic",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "A character with anthropology has studied human culture and it's development.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -10,7 +10,7 @@
     "archaeology": {
         "category": "academic",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Archaeology governs the study of human pre-history and activity through the recovery and analysis of materials.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -18,7 +18,7 @@
     "art": {
         "category": "academic",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "A character with a deep knowledge of art may find themselves appreciating a CEO's decor, know the difference between a Rembrandt and Picasso painting, or distinguish between authentic, original pieces and fake knockoffs.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -26,7 +26,7 @@
     "atlantis research": {
         "category": "sixth world",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Atlantis has become a hot topic in the sixth world, and a character with this skill has taken a bit of an interest in this loct civilization.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -34,7 +34,7 @@
     "btl production": {
         "category": "street",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "A character with knowledge of how BTLs are produced might know where production takes place, how simsense information is gathered, etc",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -42,7 +42,7 @@
     "biology": {
         "category": "academic",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Biology is the study of living things.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -50,7 +50,7 @@
     "botany": {
         "category": "academic",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Botany is the study of plants.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -58,7 +58,7 @@
     "chemistry": {
         "category": "academic",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Chemisty is the scientific discipline involved with elements and compounds composed of atoms, molecules and ions, and their behaviours during interactions with other substances.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -66,7 +66,7 @@
     "combat biking": {
         "category": "interests",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Combat biking takes many forms. A character with this skill can distinguish between the sports played for practice, actual combat, know good gear to take for combat biking, etc.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -74,7 +74,7 @@
     "conspiracy theories": {
         "category": "interests",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Conspiracy theories of today have nothing on the consparicy theories in the sixth world. With corporations often acting against public interest, shifty Johnsons around, and dragons afoot, one can never be too sure if the nonsense that homeless man was spouting was fact or fiction....",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -82,7 +82,7 @@
     "criminal organizations": {
         "category": "street",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Criminal organizations have far more sway and power than one would expect. A character with this skill would have more knowledge of what a yakuza oyabun is than someone who has only ever heard the title.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -90,7 +90,7 @@
     "cybertechnology": {
         "category": "sixth world",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Cybertechnology is everywhere around you in the sixth-world, so learning a bit about it might just save your skin.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -98,7 +98,7 @@
     "data havens": {
         "category": "sixth world",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Data havens are places setup by deckers to chill, hangout, share info, and otherwise get information out that the corps might want to keep hidden.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -106,7 +106,7 @@
     "dragons": {
         "category": "sixth world",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "With Dunkelzahn bursting into the scene with his Wyrm talks, Firewing rampaging, Ghost dancer returning and taking over large parts of the (former) United States, dragons are powerful and enigmatic players. Knowing which dragons treat metahumainty with more than passing distain can be useful.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -114,7 +114,7 @@
     "economics": {
         "category": "academic",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "Economics is the branch of knowledge concerned with the production, consumption, and transfer of wealth.",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -122,7 +122,7 @@
     "elven society": {
         "category": "sixth world",
         "source": "SR3E Core p. 90",
-        "description": "",
+        "description": "While elven society as seen in the sixth world is still quite new, there are some traditions brought in by old, immortal elves that can seem byzantine to an outsider. Don't be caught unawares when visiting the Tir!",
         "specializations": {},
         "value": 0,
         "attribute": "intelligence"
@@ -319,7 +319,7 @@
         "value": 0,
         "attribute": "intelligence"
     },
-    "police/security procedures": {
+    "police & security procedures": {
         "category": "street",
         "source": "SR3E Core p. 90",
         "description": "",
