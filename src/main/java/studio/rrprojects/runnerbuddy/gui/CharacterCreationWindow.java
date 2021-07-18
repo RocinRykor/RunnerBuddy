@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.gui;
 
+import studio.rrprojects.runnerbuddy.constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.constants.ProgramInfoConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.*;
@@ -26,6 +27,7 @@ public class CharacterCreationWindow extends JFrame {
     private static final String title = ProgramInfoConstants.PROGRAM_NAME + " " + ProgramInfoConstants.CURRENT_VERSION;
     private LinkedHashMap<String, Card> cardsMap;
     private Card selectedCard;
+    private ButtonObject buttonMagic;
 
     public CharacterCreationWindow(CharacterContainer characterContainer) {
         super(title);
@@ -50,6 +52,17 @@ public class CharacterCreationWindow extends JFrame {
         FormatCards();
 
         InitialCardPass();
+        
+        MagicCardCheck();
+    }
+
+    private void MagicCardCheck() {
+        ArrayList<String> magicList = characterContainer.getMagicController().getSelectedPriority().getValueList();
+        if (!magicList.contains("Mundane")) {
+            buttonMagic.getJButton().setVisible(true);
+        } else {
+            buttonMagic.getJButton().setVisible(false);
+        }
     }
 
     private void InitialCardPass() {
@@ -66,6 +79,10 @@ public class CharacterCreationWindow extends JFrame {
         listButtons.add(new ButtonObject("Info/Race"));
         listButtons.add(new ButtonObject("Attributes"));
         listButtons.add(new ButtonObject("Skills"));
+
+        buttonMagic = new ButtonObject("Magic");
+        listButtons.add(buttonMagic);
+
         //listButtons.add(new ButtonObject("Save/Export"));
     }
 
@@ -80,6 +97,7 @@ public class CharacterCreationWindow extends JFrame {
         cardsMap.put("Info/Race", new Info(characterContainer));
         cardsMap.put("Attributes", new Attributes(characterContainer));
         cardsMap.put("Skills", new SkillsCard(characterContainer));
+        cardsMap.put(("Magic"), new MagicCard(characterContainer));
         //cardsMap.put("Save/Export", new SaveCard(characterContainer));
 
         selectedCard = cardsMap.get("Info/Race"); //Ideal will get whatever one is first but here we have to specify
