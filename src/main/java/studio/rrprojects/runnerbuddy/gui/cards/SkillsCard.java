@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -40,6 +41,8 @@ public class SkillsCard extends Card {
 
         formatPanels();
         populateInformationPanel();
+
+        treeSkills.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         addSkillButton.addActionListener(actionEvent -> AddNewSkill());
 

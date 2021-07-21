@@ -20,6 +20,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -65,6 +66,8 @@ public class SelectSkillPopup {
 
         FormatPanels();
         PopulateSkillTree();
+
+        treeSkills.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         treeSkills.addMouseListener(new MouseAdapter() {
             @Override
@@ -112,6 +115,7 @@ public class SelectSkillPopup {
             SpecializationContainer specializtionContainer = new SpecializationContainer(specializationName, specializationLevel);
             selectedSkill.addSpecialization(specializtionContainer);
         } else {
+            selectedSkill.getSelectedSpecializations().clear();
             selectedSkill.setActualLevel(baseValue);
         }
 
