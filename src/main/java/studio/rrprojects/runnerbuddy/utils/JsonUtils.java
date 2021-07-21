@@ -39,4 +39,16 @@ public class JsonUtils {
 
         return i;
     }
+
+    public static Object getObjOrDefault(JSONObject jsonObject, String key, Object defaultObj) {
+        Object o;
+
+        try {
+            o = jsonObject.get(key);
+        } catch(JSONException e) {
+            return defaultObj;
+        }
+
+        return o;
+    }
 }

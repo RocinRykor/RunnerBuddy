@@ -2,23 +2,25 @@ package studio.rrprojects.runnerbuddy.controllers;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
+import studio.rrprojects.runnerbuddy.constants.PriorityConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.misc.PriorityOptions;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityLevelGroup;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class PriorityController {
     private final CharacterContainer characterContainer;
-    private final HashMap<String, PriorityOptions> masterPriorityMap;
-    private final String[] listCategory = {"Magic", "Resources", "Attributes", "Skills", "Race"};
+    private final HashMap<String, PriorityLevelGroup> masterPriorityMap = new HashMap<String, PriorityLevelGroup>();
+    private final String[] listCategory = PriorityConstants.PRIORITIES;
     private JSONObject priorityJson;
-
+    private ArrayList<PriorityContainer> takenPriorities = new ArrayList<>();
 
     public PriorityController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
-        masterPriorityMap = new HashMap<>();
 
         LoadPriorityFile();
         PopulatePriorityMap();
@@ -26,18 +28,18 @@ public class PriorityController {
 
 
     private void PopulatePriorityMap() {
-        priorityJson.keySet().forEach(priorityKey -> {
+        priorityJson.keySet().forEach(priorityLevelKey -> {
+            String titlecaseKey = priorityLevelKey.toUpperCase();
 
-            PriorityOptions priorityOptions =  new PriorityOptions(priorityKey, priorityJson.getJSONObject(priorityKey));
+            PriorityLevelGroup priorityLevelGroup = new PriorityLevelGroup(titlecaseKey, priorityJson.getJSONObject(priorityLevelKey));
 
-            masterPriorityMap.put(priorityKey, priorityOptions);
-
+            masterPriorityMap.put(titlecaseKey, priorityLevelGroup);
         });
     }
 
     private void LoadPriorityFile() {
 
-        InputStream is = getClass().getResourceAsStream("/JSON/Misc/SR3E_priority_table.json");
+        InputStream is = getClass().getResourceAsStream("/JSON/Misc/" + JsonFileConstants.PRIORITY_TABLE);
         
         assert is != null;
         JSONTokener token = new JSONTokener(is);
@@ -46,11 +48,34 @@ public class PriorityController {
     }
 
 
-    public PriorityOptions getOptionsByLevel(String priorityKey) {
-        return masterPriorityMap.get(priorityKey.toLowerCase(Locale.ROOT));
+    public PriorityLevelGroup getOptionsByLevel(String priorityKey) {
+        return masterPriorityMap.get(priorityKey);
     }
 
     public String[] getListCategory() {
         return listCategory;
+    }
+
+    public HashMap<String, PriorityLevelGroup> getMasterPriorityMap() {
+        return masterPriorityMap;
+    }
+
+    public void addTakenPriority(PriorityContainer priorityContainer) {
+        takenPriorities.add(priorityContainer);
+    }
+
+    public ArrayList<PriorityContainer> getTakenPriorities() {
+        return takenPriorities;
+    }
+
+    public void removeTakenPriority(PriorityContainer priorityContainer) {
+        if (takenPriorities.contains(priorityContainer)) {
+            takenPriorities.remove(priorityContainer);
+        } else {
+            System.out.println("PRIORITY CONTROLLER ERROR: CANNNOT REMOVE " + priorityContainer);
+        }
+    }
+
+    public void processPriorityList() {
     }
 }

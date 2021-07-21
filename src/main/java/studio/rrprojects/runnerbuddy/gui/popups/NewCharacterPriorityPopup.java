@@ -3,43 +3,41 @@ package studio.rrprojects.runnerbuddy.gui.popups;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.controllers.PriorityController;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityLevelGroup;
 import studio.rrprojects.runnerbuddy.gui.CharacterCreationWindow;
 import studio.rrprojects.runnerbuddy.gui.LaunchWindow;
-import studio.rrprojects.runnerbuddy.misc.PriorityObject;
-import studio.rrprojects.runnerbuddy.misc.PriorityOptions;
+import studio.rrprojects.runnerbuddy.gui.cards.components.PriorityModule;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class NewCharacterPriorityPopup extends JFrame {
     private final String title = "Select Character Priority";
     private JPanel panelMain;
     private JLabel labelHeader;
     private JPanel panelPrimary;
-    private JList<String> listCategory;
-    private JList<String> listSelectedValue;
-    private JButton buttonUp;
-    private JButton buttonDown;
-    private JList<String> listPriorityLevel;
     private JButton submitButton;
     private JButton buttonCancel;
-    private CharacterContainer characterContainer;
-    private LinkedHashMap<String, PriorityOptions> priorityMasterList;
-    private PriorityOptions priorityOptions;
 
-    private final String upString = "Move Up";
-    private final String downString = "Move Down";
-    private DefaultListModel<String> modelCategory;
+    private PriorityModule priorityModuleA;
+    private PriorityModule priorityModuleB;
+    private PriorityModule priorityModuleC;
+    private PriorityModule priorityModuleD;
+    private PriorityModule priorityModuleE;
+    private JPanel panelModules;
+    private CharacterContainer characterContainer;
+
+    private LinkedHashMap<String, PriorityModule> priorityModuleMap = new LinkedHashMap<>();
 
     private final String confirmationString = "Are you sure?\n" +
             "\n" +
             "Character priorities can not be changed after this point.";
     private final String confirmationTitleString = "Confirm Priority Choice...";
+
+    private final String panelTitle = "Right Click!";
 
     public NewCharacterPriorityPopup(CharacterContainer characterContainer) {
         setTitle(title);
@@ -52,86 +50,30 @@ public class NewCharacterPriorityPopup extends JFrame {
         setSize(600, 400);
         setVisible(true);
 
-        //Load the JSON Information to the lists
-        CreatePriorityTable();
-        PopulateCategoryList();
-        PopulateSelectedValueList();
-
-        //Formats the Lists
-        FormatList(listCategory, SwingConstants.CENTER);
-        FormatList(listSelectedValue, SwingConstants.CENTER);
-        FormatList(listPriorityLevel, SwingConstants.CENTER);
-
-        //Setup Buttons
-        ClassLoader cl = this.getClass().getClassLoader();
-
-        buttonUp.setEnabled(false);
-        buttonUp.setActionCommand(upString);
-        buttonUp.setText("");
-        Icon upIcon = loadAndResize(cl.getResource("IMG/arrow_up.png"));
-        buttonUp.setIcon(upIcon);
-        buttonUp.setHideActionText(true);
-
-        buttonDown.setEnabled(false);
-        buttonDown.setActionCommand(downString);
-        buttonDown.setText("");
-        Icon downIcon = loadAndResize(cl.getResource("IMG/arrow_down.png"));
-        buttonDown.setIcon(downIcon);
-        buttonDown.setHideActionText(true);
-
-        buttonUp.addActionListener(new UpDownListener());
-
-        buttonDown.addActionListener(new UpDownListener());
-
-        listCategory.addListSelectionListener(listSelectionEvent -> {
-            UpdateButtons();
-        });
-        listSelectedValue.addListSelectionListener(listSelectionEvent -> {
-            listSelectedValue.clearSelection();
-        });
+        InitModules();
         submitButton.addActionListener(actionEvent -> {
-            if (ConfirmChoice() == 0) {
-                //Save the current map to the PriorityController
-                LinkedHashMap<String, PriorityObject> priorityMap = savePriorityMap();
-                characterContainer.ProcessPriorityMap(priorityMap);
-
-                new CharacterCreationWindow(characterContainer);
-
-                this.dispose();
-            }
+            SubmitEvent();
         });
         buttonCancel.addActionListener(actionEvent -> {
-            LaunchWindow launch = new LaunchWindow();
-            this.dispose();
+            CancelEvent();
         });
     }
 
-    private Icon loadAndResize(URL resource) {
-        ImageIcon imageIcon = new ImageIcon(resource); // load the image to a imageIcon
-        Image image = imageIcon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH); // scale it the smooth way
-        return new ImageIcon(newimg);  // transform it back
-    }
-
-    private LinkedHashMap<String, PriorityObject> savePriorityMap() {
-        LinkedHashMap<String, PriorityObject> temp = new LinkedHashMap<>();
-
-        PriorityController priorityController = characterContainer.getPriorityController();
-
-        for (int i = 0; i < modelCategory.getSize(); i++) {
-            String priorityLevel = getCharForNumber(i);
-
-            String category = modelCategory.getElementAt(i);
-
-            assert priorityLevel != null;
-            PriorityOptions priortyOption = priorityController.getOptionsByLevel(priorityLevel);
-
-            PriorityObject priorityObject = priortyOption.get(category);
-
-            temp.put(category, priorityObject);
+    private void SubmitEvent() {
+        ArrayList<PriorityContainer> priorityList = characterContainer.getPriorityController().getTakenPriorities();
+        if (priorityList.size() != 5) {
+            System.out.println("INVALID PRIORITY SELECTION!");
+            return;
         }
 
-        return temp;
+        if (ConfirmChoice() == 0) {
+            //Process the takenPriority List
+            characterContainer.getPriorityController().processPriorityList();
+
+            new CharacterCreationWindow(characterContainer);
+
+            this.dispose();
+        }
     }
 
     private int ConfirmChoice() {
@@ -143,80 +85,30 @@ public class NewCharacterPriorityPopup extends JFrame {
         return input;
     }
 
-    private void UpdateButtons() {
-        int index = listCategory.getSelectedIndex();
-        int maxIndex = listCategory.getModel().getSize() - 1;
-
-        buttonUp.setEnabled(true);
-        buttonDown.setEnabled(true);
-
-        if (index <= 0) {
-            buttonUp.setEnabled(false);
-        }
-
-        if (index >= maxIndex) {
-            buttonDown.setEnabled(false);
-        }
+    private void CancelEvent() {
+        LaunchWindow launch = new LaunchWindow();
+        this.dispose();
     }
 
-    private void PopulateSelectedValueList() {
-        DefaultListModel<String> model = new DefaultListModel<>();
-
-        PriorityController priorityController = characterContainer.getPriorityController();
-
-        for (int i = 0; i < modelCategory.getSize(); i++) {
-            String priorityLevel = getCharForNumber(i);
-
-            String category = modelCategory.getElementAt(i);
-
-            assert priorityLevel != null;
-            PriorityOptions priortyOption = priorityController.getOptionsByLevel(priorityLevel);
-
-            PriorityObject priorityObject = priortyOption.get(category);
-            String display = priorityObject.getPriorityCategory() + ": " + priorityObject.getDisplayString();
-            model.addElement(display);
-        }
-
-        listSelectedValue.setModel(model);
+    private void InitModules() {
+        FormatModule(priorityModuleA, "A");
+        FormatModule(priorityModuleB, "B");
+        FormatModule(priorityModuleC, "C");
+        FormatModule(priorityModuleD, "D");
+        FormatModule(priorityModuleE, "E");
     }
 
-    private String getCharForNumber(int i) {
-        return i > -1 && i < 26 ? String.valueOf((char) (i + 65)) : null;
+    private void FormatModule(PriorityModule priorityModule, String priorityKey) {
+        priorityModuleMap.put(priorityKey, priorityModule);
+
+        PriorityLevelGroup priorityGroup = characterContainer.getPriorityController().getOptionsByLevel(priorityKey);
+        priorityModule.process(priorityGroup);
+        priorityModule.setParent(this);
+        panelModules.setBorder(BorderFactory.createTitledBorder(panelTitle));
     }
 
-    private void FormatList(JList<String> list, int swingAlignment) {
-        int listHeight = (int) list.getSize().getHeight();
-        int listSize = list.getModel().getSize();
-
-        int evenSpacing = (listHeight / listSize);
-        list.setFixedCellHeight(evenSpacing);
-
-        DefaultListCellRenderer renderer = (DefaultListCellRenderer) list.getCellRenderer();
-        renderer.setHorizontalAlignment(swingAlignment);
-    }
-
-    private void PopulateCategoryList() {
-        modelCategory = new DefaultListModel<>();
-        String[] priorityCategoryList = characterContainer.getPriorityController().getListCategory();
-
-        Collections.shuffle(Arrays.asList(priorityCategoryList)); //Random starting priority
-
-        for (String category : priorityCategoryList) {
-            modelCategory.addElement(category);
-        }
-
-        listCategory.setModel(modelCategory);
-    }
-
-    private void CreatePriorityTable() {
-        PriorityController priorityController = characterContainer.getPriorityController();
-        String[] priorityLevelList = {"a", "b", "c", "d", "e"};
-        priorityMasterList = new LinkedHashMap<>();
-
-        for (String priorityLevel : priorityLevelList) {
-            priorityOptions = priorityController.getOptionsByLevel(priorityLevel);
-            priorityMasterList.put(priorityLevel, priorityOptions);
-        }
+    public CharacterContainer getCharacterContainer() {
+        return characterContainer;
     }
 
     {
@@ -242,61 +134,30 @@ public class NewCharacterPriorityPopup extends JFrame {
         labelHeader.setText("Shadowrun 3e Character Creation: Priority");
         panelMain.add(labelHeader, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panelPrimary = new JPanel();
-        panelPrimary.setLayout(new GridLayoutManager(8, 3, new Insets(0, 0, 0, 0), -1, -1));
+        panelPrimary.setLayout(new GridLayoutManager(6, 2, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.add(panelPrimary, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        final JLabel label1 = new JLabel();
-        label1.setText("Final Results:");
-        panelPrimary.add(label1, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         buttonCancel = new JButton();
         buttonCancel.setText("Cancel");
-        panelPrimary.add(buttonCancel, new GridConstraints(7, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelPrimary.add(buttonCancel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         submitButton = new JButton();
         submitButton.setText("Submit");
-        panelPrimary.add(submitButton, new GridConstraints(7, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label2 = new JLabel();
-        label2.setText("Category (Select One)");
-        panelPrimary.add(label2, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        listPriorityLevel = new JList();
-        listPriorityLevel.setEnabled(false);
-        listPriorityLevel.setLayoutOrientation(0);
-        final DefaultListModel defaultListModel1 = new DefaultListModel();
-        defaultListModel1.addElement("Priorty A");
-        defaultListModel1.addElement("Priorty B");
-        defaultListModel1.addElement("Priorty C");
-        defaultListModel1.addElement("Priorty D");
-        defaultListModel1.addElement("Priorty E");
-        listPriorityLevel.setModel(defaultListModel1);
-        listPriorityLevel.setSelectionMode(0);
-        listPriorityLevel.setVisibleRowCount(5);
-        panelPrimary.add(listPriorityLevel, new GridConstraints(2, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        buttonUp = new JButton();
-        buttonUp.setText("UP");
-        panelPrimary.add(buttonUp, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buttonDown = new JButton();
-        buttonDown.setText("DOWN");
-        panelPrimary.add(buttonDown, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JSeparator separator1 = new JSeparator();
-        panelPrimary.add(separator1, new GridConstraints(4, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        listSelectedValue = new JList();
-        listSelectedValue.setEnabled(true);
-        final DefaultListModel defaultListModel2 = new DefaultListModel();
-        listSelectedValue.setModel(defaultListModel2);
-        listSelectedValue.setSelectionMode(0);
-        listSelectedValue.setVisibleRowCount(5);
-        panelPrimary.add(listSelectedValue, new GridConstraints(6, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        listCategory = new JList();
-        listCategory.setEnabled(true);
-        listCategory.setLayoutOrientation(0);
-        final DefaultListModel defaultListModel3 = new DefaultListModel();
-        listCategory.setModel(defaultListModel3);
-        listCategory.setSelectionMode(0);
-        listCategory.setVisibleRowCount(5);
-        panelPrimary.add(listCategory, new GridConstraints(2, 1, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
-        final JSeparator separator2 = new JSeparator();
-        panelPrimary.add(separator2, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final JLabel label3 = new JLabel();
-        label3.setText("Select a skillType and use the Up/Down buttons on the right to move and rank them.");
-        panelMain.add(label3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelPrimary.add(submitButton, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelModules = new JPanel();
+        panelModules.setLayout(new GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelPrimary.add(panelModules, new GridConstraints(0, 0, 5, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        priorityModuleA = new PriorityModule();
+        panelModules.add(priorityModuleA.$$$getRootComponent$$$(), new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        priorityModuleB = new PriorityModule();
+        panelModules.add(priorityModuleB.$$$getRootComponent$$$(), new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        priorityModuleC = new PriorityModule();
+        panelModules.add(priorityModuleC.$$$getRootComponent$$$(), new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        priorityModuleD = new PriorityModule();
+        panelModules.add(priorityModuleD.$$$getRootComponent$$$(), new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        priorityModuleE = new PriorityModule();
+        panelModules.add(priorityModuleE.$$$getRootComponent$$$(), new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        final JLabel label1 = new JLabel();
+        label1.setText("Right Click a priority level to change it");
+        panelMain.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -306,41 +167,4 @@ public class NewCharacterPriorityPopup extends JFrame {
         return panelMain;
     }
 
-    private class UpDownListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //This method can be called only when
-            //there's a valid selection,
-            //so go ahead and move the list item.
-            int moveMe = listCategory.getSelectedIndex();
-
-            if (e.getActionCommand().equals(upString)) {
-                //UP ARROW BUTTON
-                if (moveMe != 0) {
-                    //not already at top
-                    swap(moveMe, moveMe - 1);
-                    listCategory.setSelectedIndex(moveMe - 1);
-                    listCategory.ensureIndexIsVisible(moveMe - 1);
-                }
-            } else {
-                //DOWN ARROW BUTTON
-                if (moveMe != listCategory.getModel().getSize() - 1) {
-                    //not already at bottom
-                    swap(moveMe, moveMe + 1);
-                    listCategory.setSelectedIndex(moveMe + 1);
-                    listCategory.ensureIndexIsVisible(moveMe + 1);
-                }
-            }
-        }
-    }
-
-    //Swap two elements in the list.
-    private void swap(int a, int b) {
-        String aString = modelCategory.getElementAt(a);
-        String bString = modelCategory.getElementAt(b);
-        modelCategory.set(a, bString);
-        modelCategory.set(b, aString);
-
-        PopulateSelectedValueList();
-    }
 }

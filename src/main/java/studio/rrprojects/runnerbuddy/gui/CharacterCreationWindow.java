@@ -82,7 +82,7 @@ public class CharacterCreationWindow extends JFrame {
 
         buttonMagic = new ButtonObject("Magic");
         listButtons.add(buttonMagic);
-
+        
         //listButtons.add(new ButtonObject("Save/Export"));
     }
 
