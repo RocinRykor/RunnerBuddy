@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.containers.character;
 
+import studio.rrprojects.runnerbuddy.constants.PriorityConstants;
 import studio.rrprojects.runnerbuddy.controllers.*;
 import studio.rrprojects.runnerbuddy.misc.PriorityObject;
 import studio.rrprojects.runnerbuddy.misc.ValidChecker;
@@ -14,6 +15,7 @@ public class CharacterContainer {
     private final MagicController magicController;
     private final DescriptionController descriptionController;
     private final SkillsController skillsController;
+    private final ResourceController resourceController;
 
     public CharacterContainer() {
 
@@ -24,19 +26,19 @@ public class CharacterContainer {
         magicController = new MagicController(this);
         descriptionController = new DescriptionController(this);
         skillsController = new SkillsController(this);
-
-        //resourceController = new ResourceController(this);
+        resourceController = new ResourceController(this);
 
         //gearController = new GearController(this);
         //contactsController = new ContactsController(this);
 
     }
 
-    public void ProcessPriorityMap(LinkedHashMap<String, PriorityObject> priorityMap) {
-        raceController.setAvailibleRaces(priorityMap.get("Race"));
-        attributeController.setSelectedPriority(priorityMap.get("Attributes"));
-        magicController.setSelectedPriority(priorityMap.get("Magic"));
-        skillsController.setSelectedPriority(priorityMap.get("Skills"));
+    public void ProcessPriorities() {
+        raceController.setAvailibleRaces(priorityController.getPriorityByCategory(PriorityConstants.RACE));
+        attributeController.setSelectedPriority(priorityController.getPriorityByCategory(PriorityConstants.ATTRIBUTES));
+        magicController.setSelectedPriority(priorityController.getPriorityByCategory(PriorityConstants.MAGIC));
+        skillsController.setSelectedPriority(priorityController.getPriorityByCategory(PriorityConstants.SKILLS));
+        resourceController.setSelectedPriority(priorityController.getPriorityByCategory(PriorityConstants.RESOURCES));
     }
 
     public PriorityController getPriorityController() {

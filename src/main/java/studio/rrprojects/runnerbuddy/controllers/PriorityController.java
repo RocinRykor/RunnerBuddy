@@ -78,4 +78,15 @@ public class PriorityController {
 
     public void processPriorityList() {
     }
+
+    public PriorityContainer getPriorityByCategory(String categoryKey) {
+        for (PriorityContainer priorityContainer: takenPriorities) {
+            if (priorityContainer.getPriorityCategory().equalsIgnoreCase(categoryKey)) {
+                return priorityContainer;
+            }
+        }
+
+        System.out.println("PRIORITY CONTROLLER ERROR: \"" + categoryKey + "\" NOT FOUND");
+        return null;
+    }
 }

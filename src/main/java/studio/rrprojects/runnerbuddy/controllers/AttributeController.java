@@ -1,9 +1,10 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.priority.PointPriority;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
 import studio.rrprojects.runnerbuddy.gui.cards.components.AttributeModule;
-import studio.rrprojects.runnerbuddy.misc.PriorityObject;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class AttributeController extends ControllerClass {
     private int maxAttributePoints;
     private Attributes attributeCard;
     private LinkedHashMap<String, AttributeModule> attributeMap;
+    private PointPriority selectedPriority;
 
     public AttributeController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
@@ -22,10 +24,10 @@ public class AttributeController extends ControllerClass {
     }
 
     @Override
-    public void setSelectedPriority(PriorityObject priorityObject) {
-        super.setSelectedPriority(priorityObject);
+    public void setSelectedPriority(PriorityContainer priorityContainer) {
+        selectedPriority = (PointPriority) priorityContainer;
         
-        maxAttributePoints = getSelectedPriority().getValueInt();
+        maxAttributePoints = selectedPriority.getPointValue();
     }
 
     public void LinkCard(Attributes attributeCard) {
@@ -71,5 +73,9 @@ public class AttributeController extends ControllerClass {
 
     public LinkedHashMap<String, AttributeModule> getAttributeMap() {
         return attributeMap;
+    }
+
+    public int getMaxAttributePoints() {
+        return maxAttributePoints;
     }
 }

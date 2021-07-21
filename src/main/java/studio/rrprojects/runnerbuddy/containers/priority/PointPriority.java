@@ -16,4 +16,8 @@ public class PointPriority extends PriorityContainer {
 
         return getPriorityCategory() + ": " + pointValue + " Points";
     }
+
+    public int getPointValue() {
+        return pointValue;
+    }
 }

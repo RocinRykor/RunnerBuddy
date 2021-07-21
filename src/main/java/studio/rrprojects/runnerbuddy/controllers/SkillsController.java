@@ -5,6 +5,8 @@ import org.json.JSONTokener;
 import studio.rrprojects.runnerbuddy.constants.SkillConstants;
 import studio.rrprojects.runnerbuddy.containers.SkillMap;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.priority.PointPriority;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 
@@ -27,6 +29,8 @@ public class SkillsController extends ControllerClass {
     private LinkedHashMap<String, SkillMap> masterSkillMap;
     private ArrayList<SkillGroup> skillGroupList;
     private ArrayList<SelectedSkillContainer> selectedSkillList;
+    private PointPriority selectedPriority;
+    private int maxActiveSkillPoints;
 
     public SkillsController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
@@ -232,5 +236,16 @@ public class SkillsController extends ControllerClass {
                     ", hasCategories=" + hasCategories +
                     '}';
         }
+    }
+
+    @Override
+    public void setSelectedPriority(PriorityContainer priorityContainer) {
+        selectedPriority = (PointPriority) priorityContainer;
+
+        maxActiveSkillPoints = selectedPriority.getPointValue();
+    }
+
+    public int getMaxActiveSkillPoints() {
+        return maxActiveSkillPoints;
     }
 }

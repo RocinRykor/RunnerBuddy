@@ -2,6 +2,7 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 
 import javax.swing.*;
@@ -38,10 +39,20 @@ public class MagicCard extends Card {
      */
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
-        panelMain.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelMain.setLayout(new GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
         final JLabel label1 = new JLabel();
-        label1.setText("YOU SHOULD ONLY BE ABLE TO SEE THIS IS YOU HAVE MAGIC");
-        panelMain.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label1.setText("Congrats, Your character is Awakened!");
+        panelMain.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label2 = new JLabel();
+        label2.setText("Unfortunetly, this section is not yet implemented");
+        panelMain.add(label2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panelMain.add(spacer1, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        panelMain.add(spacer2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        final JLabel label3 = new JLabel();
+        label3.setText("Please check back in the next release!");
+        panelMain.add(label3, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -50,4 +61,5 @@ public class MagicCard extends Card {
     public JComponent $$$getRootComponent$$$() {
         return panelMain;
     }
+
 }

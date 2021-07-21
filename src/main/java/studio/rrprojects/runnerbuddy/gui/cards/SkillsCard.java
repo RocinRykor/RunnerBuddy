@@ -150,7 +150,7 @@ public class SkillsCard extends Card {
 
     private void populateInformationPanel() {
         //panelInformation.setLayout(new GridLayout(0, 1));
-        int skillPoints = characterContainer.getSkillsController().getSelectedPriority().getValueInt();
+        int skillPoints = characterContainer.getSkillsController().getMaxActiveSkillPoints();
         int intelligence = 1;
 
         try {

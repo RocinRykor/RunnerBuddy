@@ -1,16 +1,16 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
-import studio.rrprojects.runnerbuddy.misc.PriorityObject;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 
 public class ControllerClass {
 
-    private PriorityObject selectedPriority;
+    private PriorityContainer selectedPriority;
 
-    public void setSelectedPriority(PriorityObject priorityObject) {
-        selectedPriority = priorityObject;
+    public void setSelectedPriority(PriorityContainer priorityContainer) {
+        selectedPriority = priorityContainer;
     }
 
-    public PriorityObject getSelectedPriority() {
+    public PriorityContainer getSelectedPriority() {
         return selectedPriority;
     }
 

@@ -18,4 +18,8 @@ public class ResourcePriority extends PriorityContainer {
 
         return getPriorityCategory() + ": " + pointString;
     }
+
+    public Integer getPointValue() {
+        return pointValue;
+    }
 }

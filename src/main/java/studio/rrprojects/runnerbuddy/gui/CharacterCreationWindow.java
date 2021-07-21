@@ -57,7 +57,7 @@ public class CharacterCreationWindow extends JFrame {
     }
 
     private void MagicCardCheck() {
-        ArrayList<String> magicList = characterContainer.getMagicController().getSelectedPriority().getValueList();
+        ArrayList<String> magicList = characterContainer.getMagicController().getMagicalOptions();
         if (!magicList.contains("Mundane")) {
             buttonMagic.getJButton().setVisible(true);
         } else {

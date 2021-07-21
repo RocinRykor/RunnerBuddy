@@ -5,7 +5,8 @@ import org.json.JSONTokener;
 import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
 import studio.rrprojects.runnerbuddy.containers.RaceContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.misc.PriorityObject;
+import studio.rrprojects.runnerbuddy.containers.priority.ListPriority;
+import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class RaceController extends ControllerClass {
     private ArrayList<String> availibleRaces;
     private LinkedHashMap<String, RaceContainer> masterRaceMap;
     private RaceContainer selectedRace;
+    private ListPriority selectedPriority;
 
     public RaceController(CharacterContainer characterContainer){
         this.characterContainer = characterContainer;
@@ -49,8 +51,9 @@ public class RaceController extends ControllerClass {
         raceTableJson = new JSONObject(token);
     }
 
-    public void setAvailibleRaces(PriorityObject priorityObject) {
-        availibleRaces = priorityObject.getValueList();
+    public void setAvailibleRaces(PriorityContainer priorityContainer) {
+        selectedPriority = (ListPriority) priorityContainer;
+        availibleRaces = selectedPriority.getAvailableOptions();
     }
 
     public ArrayList<String> getAvailibleRaces() {

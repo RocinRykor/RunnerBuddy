@@ -34,7 +34,7 @@ public class Attributes extends Card {
         progressBarAttributes.setTitle("Attribute Points");
         progressBarAttributes.setMin(0);
 
-        int maxAttributes = characterContainer.getAttributeController().getSelectedPriority().getValueInt();
+        int maxAttributes = characterContainer.getAttributeController().getMaxAttributePoints();
 
         progressBarAttributes.setMax(maxAttributes);
         progressBarAttributes.setValue(6);

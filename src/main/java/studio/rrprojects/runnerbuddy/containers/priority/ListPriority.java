@@ -37,4 +37,8 @@ public class ListPriority extends PriorityContainer {
 
         return getPriorityCategory() + ": " + outputString;
     }
+
+    public ArrayList<String> getAvailableOptions() {
+        return availableOptions;
+    }
 }

@@ -37,7 +37,7 @@ public class NewCharacterPriorityPopup extends JFrame {
             "Character priorities can not be changed after this point.";
     private final String confirmationTitleString = "Confirm Priority Choice...";
 
-    private final String panelTitle = "Right Click!";
+    private final String panelTitle = "Priority Selection";
 
     public NewCharacterPriorityPopup(CharacterContainer characterContainer) {
         setTitle(title);
@@ -58,13 +58,16 @@ public class NewCharacterPriorityPopup extends JFrame {
     private void SubmitEvent() {
         ArrayList<PriorityContainer> priorityList = characterContainer.getPriorityController().getTakenPriorities();
         if (priorityList.size() != 5) {
-            System.out.println("INVALID PRIORITY SELECTION!");
+            String title = "INVALID SELCTION";
+            String errorString = "Please ensure all priority levels are selected and try again!";
+            JOptionPane.showConfirmDialog(null, errorString, title,
+                    JOptionPane.OK_OPTION);
             return;
         }
 
         if (ConfirmChoice() == 0) {
             //Process the takenPriority List
-            characterContainer.getPriorityController().processPriorityList();
+            characterContainer.ProcessPriorities();
 
             new CharacterCreationWindow(characterContainer);
 
@@ -152,7 +155,7 @@ public class NewCharacterPriorityPopup extends JFrame {
         priorityModuleE = new PriorityModule();
         panelModules.add(priorityModuleE.$$$getRootComponent$$$(), new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
-        label1.setText("Right Click a priority level to change it");
+        label1.setText("Click a priority level to change it!");
         panelMain.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
