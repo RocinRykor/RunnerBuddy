@@ -28,9 +28,9 @@ public class NewCharacterPriorityPopup extends JFrame {
     private PriorityModule priorityModuleD;
     private PriorityModule priorityModuleE;
     private JPanel panelModules;
-    private CharacterContainer characterContainer;
+    private final CharacterContainer characterContainer;
 
-    private LinkedHashMap<String, PriorityModule> priorityModuleMap = new LinkedHashMap<>();
+    private final LinkedHashMap<String, PriorityModule> priorityModuleMap = new LinkedHashMap<>();
 
     private final String confirmationString = "Are you sure?\n" +
             "\n" +
@@ -51,12 +51,8 @@ public class NewCharacterPriorityPopup extends JFrame {
         setVisible(true);
 
         InitModules();
-        submitButton.addActionListener(actionEvent -> {
-            SubmitEvent();
-        });
-        buttonCancel.addActionListener(actionEvent -> {
-            CancelEvent();
-        });
+        submitButton.addActionListener(actionEvent -> SubmitEvent());
+        buttonCancel.addActionListener(actionEvent -> CancelEvent());
     }
 
     private void SubmitEvent() {
@@ -86,7 +82,7 @@ public class NewCharacterPriorityPopup extends JFrame {
     }
 
     private void CancelEvent() {
-        LaunchWindow launch = new LaunchWindow();
+        new LaunchWindow();
         this.dispose();
     }
 
