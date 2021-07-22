@@ -26,6 +26,8 @@ public class LaunchWindow extends JFrame {
     private JTextPane textPaneIntro;
     private ArrayList<JButton> listButtons;
     private static final String title = ProgramInfoConstants.PROGRAM_NAME + " " + ProgramInfoConstants.CURRENT_VERSION;
+    private CharacterContainer characterContainer;
+    private NewCharacterPriorityPopup priorityPopup;
 
     public LaunchWindow() {
         super(title);
@@ -37,19 +39,24 @@ public class LaunchWindow extends JFrame {
         pack();
         setVisible(true);
         buttonNewCharacter.addActionListener(actionEvent -> {
-            CreateNewCharacter();
+            CreateNewCharacter(false);
+        });
+
+        buttonRandom.addActionListener(actionEvent -> {
+            CreateNewCharacter(true);
         });
     }
 
-    private void CreateNewCharacter() {
+    private void CreateNewCharacter(boolean isRandomCharacter) {
         //Create a new CharacterContainer for use going forward.
-        CharacterContainer characterContainer = new CharacterContainer();
+        characterContainer = new CharacterContainer();
 
         //Priority Selection Popup Window
-        NewCharacterPriorityPopup priorityPopup = new NewCharacterPriorityPopup(characterContainer);
+        priorityPopup = new NewCharacterPriorityPopup(characterContainer);
 
-        // Start Controller
-        //RunnerBuilderController RBC = new RunnerBuilderController(title);
+        if (isRandomCharacter) {
+            priorityPopup.RandomizeCharacter();
+        }
 
         this.dispose();
     }
@@ -71,9 +78,6 @@ public class LaunchWindow extends JFrame {
 
         buttonLoad.setEnabled(false);
         buttonLoad.setToolTipText(tooltipText);
-
-        buttonRandom.setEnabled(false);
-        buttonRandom.setToolTipText(tooltipText);
     }
 
     private void CreateButtonArrayList() {

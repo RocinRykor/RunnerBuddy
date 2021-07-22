@@ -146,4 +146,8 @@ public class PriorityLevelGroup {
             parent.Update();
         }
     }
+
+    public void setSelectionByCategory(String category) {
+        SelectPriority(priorityContainerMap.get(category));
+    }
 }

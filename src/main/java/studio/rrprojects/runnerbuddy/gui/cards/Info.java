@@ -3,17 +3,12 @@ package studio.rrprojects.runnerbuddy.gui.cards;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import studio.rrprojects.runnerbuddy.constants.MetaHumanConstants;
 import studio.rrprojects.runnerbuddy.containers.RaceContainer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.controllers.DescriptionController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -107,6 +102,9 @@ public class Info extends Card {
 
 
         raceNames = characterContainer.getRaceController().getAvailibleRaces();
+
+        System.out.println(raceNames);
+
         for (String race : raceNames) {
             JRadioButton button = new JRadioButton(race);
             button.addActionListener(actionEvent -> {

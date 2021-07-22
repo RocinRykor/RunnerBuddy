@@ -75,8 +75,7 @@ public class PriorityModule extends JComponent {
         popup.add(clearOption);
         popup.add(cancelOption);
 
-        clearOption.addActionListener(actionEvent ->
-                priorityLevelGroup.ClearSelection());
+        clearOption.addActionListener(actionEvent -> priorityLevelGroup.ClearSelection());
 
 
         popup.show(panelMain, x, y);
@@ -142,5 +141,14 @@ public class PriorityModule extends JComponent {
 
     public NewCharacterPriorityPopup getParent() {
         return parent;
+    }
+
+    public PriorityLevelGroup getPriorityLevelGroup() {
+        return priorityLevelGroup;
+    }
+
+    public void ClearSelection() {
+        priorityLevelGroup.ClearSelection();
+        Update();
     }
 }
