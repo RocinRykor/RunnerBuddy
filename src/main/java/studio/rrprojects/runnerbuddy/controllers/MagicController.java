@@ -5,15 +5,23 @@ import studio.rrprojects.runnerbuddy.containers.priority.ListPriority;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class MagicController extends ControllerClass{
     private final CharacterContainer characterContainer;
     private boolean isMagical = false;
     private ArrayList<String> magicalOptions;
     private ListPriority selectedPriority;
+    private LinkedHashMap<String, Object> magicTypeMap = new LinkedHashMap<>();
 
     public MagicController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
+
+        CreateMagicTypeMap();
+    }
+
+    private void CreateMagicTypeMap() {
+
     }
 
     public CharacterContainer getCharacterContainer() {

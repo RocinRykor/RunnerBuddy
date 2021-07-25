@@ -16,6 +16,9 @@ import java.util.*;
 
 public class NewCharacterPriorityPopup extends JFrame {
     private final String title = "Select Character Priority";
+
+    private final Boolean forceMagic = true;
+
     private JPanel panelMain;
     private JLabel labelHeader;
     private JPanel panelPrimary;
@@ -71,13 +74,33 @@ public class NewCharacterPriorityPopup extends JFrame {
         availiableOptions = new ArrayList<>();
         availiableOptions.addAll(Arrays.asList("A", "B", "C", "D", "E"));
 
-        RadomRace();
-        RandomChoice(PriorityConstants.RESOURCES);
-        RandomChoice(PriorityConstants.ATTRIBUTES);
-        RandomChoice(PriorityConstants.SKILLS);
-        RandomChoice(PriorityConstants.MAGIC);
+        if (forceMagic) {
+            RadomRace();
+            RandomMagic();
+            RandomChoice(PriorityConstants.RESOURCES);
+            RandomChoice(PriorityConstants.ATTRIBUTES);
+            RandomChoice(PriorityConstants.SKILLS);
 
+        } else {
+            RadomRace();
+            RandomChoice(PriorityConstants.RESOURCES);
+            RandomChoice(PriorityConstants.ATTRIBUTES);
+            RandomChoice(PriorityConstants.SKILLS);
+            RandomChoice(PriorityConstants.MAGIC);
+        }
 
+    }
+
+    private void RandomMagic() {
+        ArrayList<String> choices = new ArrayList<>(Arrays.asList("A", "B"));
+
+        Collections.shuffle(choices);
+
+        String selectedKey = choices.get(0);
+
+        priorityModuleMap.get(selectedKey).getPriorityLevelGroup().setSelectionByCategory(PriorityConstants.MAGIC);
+
+        availiableOptions.remove(selectedKey);
     }
 
     private void RandomChoice(String category) {
