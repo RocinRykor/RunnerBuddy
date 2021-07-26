@@ -2,41 +2,78 @@ package studio.rrprojects.runnerbuddy.gui.cards.magic;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.containers.magic.MagicUserContainer;
+import studio.rrprojects.runnerbuddy.containers.priority.ListPriority;
+import studio.rrprojects.runnerbuddy.controllers.MagicController;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.gui.cards.components.BasicComboBox;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MagicalInfoCard extends Card {
     private final CharacterContainer characterContainer;
     private JPanel panelMain;
     private JPanel panelMagic;
-    private JScrollPane panelMagicDescription;
     private JPanel panelMagicBoxes;
+    private JPanel panelMagicDescription;
+    private BasicComboBox boxMagicType;
+    private BasicComboBox boxMagicTradition;
+    private BasicComboBox boxMagicAspect;
+    private BasicComboBox boxTotemSelection;
+
+    private MagicUserContainer currentlySelectedType = null;
+    private Object currentlySelectedTradition = null;
+    private Object currentlySelectedAspect = null;
+    private Object currentlySelectedTotem= null;
 
     public MagicalInfoCard(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
         setPanel(panelMain);
 
         FormatBoxPanel();
+        PopulateBoxes();
+    }
+
+    private void PopulateBoxes() {
+        ListPriority magicPriority = characterContainer.getMagicController().getSelectedPriority();
+        ArrayList<String> availableOptions = magicPriority.getAvailableOptions();
+        MagicController magicController = characterContainer.getMagicController();
+
+        for (String magicType : availableOptions) {
+            MagicUserContainer magicUser = magicController.getMagicUserTypeMap().get(magicType);
+
+            if (magicUser != null) {
+                boxMagicType.addOption(magicUser);
+            }
+        }
     }
 
     private void FormatBoxPanel() {
         GridLayout gridLayout = new GridLayout();
         gridLayout.setColumns(0);
-        gridLayout.setRows(1);
+        gridLayout.setRows(2);
         panelMagicBoxes.setLayout(gridLayout);
 
-        BasicComboBox boxMagicType = new BasicComboBox("Magic Type");
-        BasicComboBox boxMagicTradition = new BasicComboBox("Tradition");
-        BasicComboBox boxTotemSelection = new BasicComboBox("Totem/Element");
+        boxMagicType = CreateComboBox("Magic Type");
+        boxMagicTradition = CreateComboBox("Tradition");
+        boxMagicAspect = CreateComboBox("Aspect");
+        boxTotemSelection = CreateComboBox("Totem/Element");
+    }
 
+    private BasicComboBox CreateComboBox(String title) {
+        BasicComboBox combobox = new BasicComboBox(title);
+        combobox.addEvenet(this);
+        panelMagicBoxes.add(combobox.getPanel());
+        return combobox;
+    }
 
-        panelMagicBoxes.add(boxMagicType.getPanel());
-        panelMagicBoxes.add(boxMagicTradition.getPanel());
-        panelMagicBoxes.add(boxTotemSelection.getPanel());
+    @Override
+    public void Update() {
+
     }
 
     {
@@ -57,13 +94,18 @@ public class MagicalInfoCard extends Card {
         panelMain = new JPanel();
         panelMain.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         panelMagic = new JPanel();
-        panelMagic.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelMagic.setLayout(new GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.add(panelMagic, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(320, 44), null, 0, false));
-        panelMagicDescription = new JScrollPane();
-        panelMagic.add(panelMagicDescription, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         panelMagicBoxes = new JPanel();
         panelMagicBoxes.setLayout(new GridLayoutManager(1, 1, new Insets(10, 10, 10, 10), -1, -1));
-        panelMagic.add(panelMagicBoxes, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(-1, 60), new Dimension(-1, 60), new Dimension(-1, 60), 0, false));
+        panelMagic.add(panelMagicBoxes, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panelMagicDescription = new JPanel();
+        panelMagicDescription.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelMagic.add(panelMagicDescription, new GridConstraints(1, 1, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panelMagic.add(spacer1, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        final Spacer spacer2 = new Spacer();
+        panelMagic.add(spacer2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     /**

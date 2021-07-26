@@ -2,7 +2,7 @@ package studio.rrprojects.runnerbuddy.gui.cards.components;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
+import studio.rrprojects.runnerbuddy.gui.cards.magic.MagicalInfoCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,5 +50,15 @@ public class BasicComboBox extends JPanel {
 
     public Component getPanel() {
         return panelMain;
+    }
+
+    public void addOption(Object object) {
+        comboBox.addItem(object);
+    }
+
+    public void addEvenet(MagicalInfoCard magicalInfoCard) {
+        comboBox.addActionListener(actionEvent -> {
+            magicalInfoCard.Update();
+        });
     }
 }
