@@ -1,6 +1,10 @@
 package studio.rrprojects.runnerbuddy.constants;
 
 public class MagicConstants {
+    //Files
+    public static final String FILE_ASPECTS = "/JSON/Misc/magic_aspects.json";
+    public static final String FILE_TOTEMS = "/JSON/Misc/SR3E_totems.json";
+    public static final String FILE_ELEMENTS = "/JSON/Misc/SR3E_elements.json";
 
     //Magic Types  - Options at various priority levels
     public static final String FULL_MAGICIAN = "Full Magician";
@@ -12,7 +16,8 @@ public class MagicConstants {
     //Traditions
     public static final String HERMETIC = "Hermetic";
     public static final String MAGE = "Mage"; //Shorthand
-    public static final String SHAMAN = "Shaman";
+    public static final String SHAMANIC = "Shamanic";
+    public static final String SHAMAN = "Shaman"; //Shorthand
 
     //Aspects
     public static final String FULL_MAGE = "Full Mage";
@@ -33,19 +38,8 @@ public class MagicConstants {
     public static final String TAG_SORCERY = "Sorcery";
     public static final String TAG_CONJURING = "Conjuring";
 
-    public static final String TAG_LIMIT_TOTEM = "Limited (Totem)";
-    public static final String TAG_LIMIT_ELEMENT = "Limited (Element)";
+    public static final String TOTEM = "Totem";
+    public static final String ELEMENT = "Element";
 
-    //Collections
-    public static final String[] COLLECTION_ASPECTS = new String[]{ELEMENTALIST, SHAMINIST, SHAMAN_CONJURER, SHAMAN_SORCERER, MAGE_CONJURER, MAGE_SORCERER};
-
-    public static final String[] COLLECTION_FULL = new String[]{TAG_ASTRAL_PROJECTION, TAG_ASTRAL_PERCEPTION, TAG_SORCERY, TAG_CONJURING};
-
-    public static final String[] COLLECTION_SHAMANIST = new String[]{TAG_ASTRAL_PERCEPTION, TAG_SORCERY + TAG_LIMIT_TOTEM, TAG_CONJURING + TAG_LIMIT_TOTEM};
-    public static final String[] COLLECTION_SHAMAN_SORCERER = new String[]{TAG_ASTRAL_PERCEPTION, TAG_SORCERY};
-    public static final String[] COLLECTION_SHAMAN_CONJURER = new String[]{TAG_ASTRAL_PERCEPTION, TAG_CONJURING};
-
-    public static final String[] COLLECTION_ELEMENTALIST = new String[]{TAG_ASTRAL_PERCEPTION, TAG_SORCERY + TAG_LIMIT_ELEMENT, TAG_CONJURING + TAG_LIMIT_ELEMENT};
-    public static final String[] COLLECTION_MAGE_SORCERER = new String[]{TAG_ASTRAL_PERCEPTION, TAG_SORCERY};
-    public static final String[] COLLECTION_MAGE_CONJURER = new String[]{TAG_ASTRAL_PERCEPTION, TAG_CONJURING};
+    public static final String TAG_LIMIT_MODIFIER = " - Limited";
 }

@@ -6,6 +6,8 @@ import studio.rrprojects.runnerbuddy.gui.cards.magic.MagicalInfoCard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BasicComboBox extends JPanel {
 
@@ -60,5 +62,29 @@ public class BasicComboBox extends JPanel {
         comboBox.addActionListener(actionEvent -> {
             magicalInfoCard.Update();
         });
+    }
+
+    public Object getSelectedItem() {
+        return comboBox.getSelectedItem();
+    }
+
+    public void setOptions(Object[] objectArray) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addAll(Arrays.asList(objectArray));
+        comboBox.setModel(model);
+    }
+
+    public void setOptions(ArrayList<String> stringArray) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        model.addAll(Arrays.asList(stringArray));
+        comboBox.setModel(model);
+    }
+
+    public void clearOptions() {
+        comboBox.removeAllItems();
+    }
+
+    public void setBoxEnabled(boolean b) {
+        comboBox.setEnabled(b);
     }
 }

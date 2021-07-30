@@ -110,7 +110,6 @@ public class SkillsController extends ControllerClass {
         DefaultMutableTreeNode masterNode = new DefaultMutableTreeNode("Selected Skills");
 
         //Create the hash map that we wiill use for organizing
-        //I'm gonna have to get creative when searching through this
 
         LinkedHashMap<String, DefaultMutableTreeNode> skillTypeMap = new LinkedHashMap<>();
 
@@ -126,6 +125,7 @@ public class SkillsController extends ControllerClass {
 
             //Lets get the easy one out of the way so I dont have to fuck with it - Language
             //Language doesnt have subcategories so I dont have to worry about them
+
             if (!skillGroup.hasCategories) {
                 skillTypeMap.get(skillType).add(new DefaultMutableTreeNode(skill));
             } else {
@@ -144,7 +144,6 @@ public class SkillsController extends ControllerClass {
             }
 
         }
-
 
         for (String key: skillTypeMap.keySet()) {
             masterNode.add(skillTypeMap.get(key));

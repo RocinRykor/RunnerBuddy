@@ -1,0 +1,346 @@
+{
+    "bear": {
+        "description": "Bear is a totem found in cultures wherever bears are known, from North America to Europe and Asia. He is powerful, but gentle and wise. He tends to be slow-moving and easygoing unless he has to move fast. Bear is slow to anger, bt terrifying in battle. Bear shamans tend to be calm, cool, and collected. They are healers and protectors of the natral world as they see it. A bear shaman cannot turn down someone who needs healin without good reason.",
+        "environment": "Forest",
+        "advantages": {
+                "spells": {
+                    "health": 2
+                },
+                "spirits": {
+                    "forest": 2
+                },
+                "special": ""
+            },
+        "disadvantages": {
+            "berserk": true,
+            "spells": {},
+            "spirits": {},
+            "special": ""
+        }
+    },
+    "buffalo": {
+        "description": "Buffalo is a uniquely North American totem. She knows much medicine, which she uses to aid her people. She is kind and giving, strong and tireless in her work. The people take from Buffalo and honor her spirit for the bounty she provides. Buffalo shamans are healers and protectors; they cannot turn down an honest request for aid from anyone who needs it. A Buffalo shaman will lay down her life for a true friend or ally in need and will often take great risks to help others.",
+        "environment": "Plains",
+        "advantages": {
+                "spells": {
+                    "health": 2
+                },
+                "spirits": {
+                    "praire": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {
+                    "illusion": -1
+                },
+                "spirits": {},
+                "special": ""
+            }
+    },
+    "cat": {
+        "description": "Cat is honored in cultures around the world. She is stealthy, sly and rather vain. Cat knows many secrets, but shares few of them. Cat shamans tend to be loners who keep their own council. They are fastidiously clean and presentable whenever possible. Cat shamans generally toy with their opponents—threatening, taunting and confusing—rather than going directly for the kill.",
+        "environment": "Urban",
+        "advantages": {
+                "spells": {
+                    "illusion": 2
+                },
+                "spirits": {
+                    "city": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {},
+                "spirits": {},
+                "special": "+1 to all Mental target numbers if dirty or unkempt. An unwounded Cat shaman must make a Willpower (6) Test when casting a damaging spell. If the test fails, the shaman must cast her least-damaging spell (at it's minimum damage level, for a variable damage spell, and at 1/2 Force). If the shaman is wounded, all this playing around stops."
+            }
+    },
+    "coyote": {
+        "description": "Coyote the Trickster is a uniquely North American totem. He is unpredictable and ever-changing; bold one minute, cowardly the next. Old Man Coyote can be a friend or a deceiver. He is intensely curious and fond of taking risks just for the fun of it. Coyote shamans are independent and refuse to be bound by anything other than their word. They live by their own rules, surviving on wit and charm.",
+        "environment": "Anywhere on Land",
+        "advantages": {
+                "spells": {},
+                "spirits": {},
+                "special": ""
+            },
+        "disadvantages": {
+            "berserk": false,
+            "spells": {},
+            "spirits": {},
+            "special": ""
+        }
+    },
+    "dog": {
+        "description": "Dog is a loyal friend honored by shamans around the world. He fights ferociously to defend his home and those under his protection. Dog shamans protect people from harmful magic and dangerous spirits. They are loyal, generous and helpful to those who show them kindness and loyalty in return. They are single-minded, often to the point of stubbornness.",
+        "environment": "Urban",
+        "advantages": {
+                "spells": {
+                    "detection": 2
+                },
+                "spirits": {
+                    "field": 2,
+                    "hearth": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {},
+                "spirits": {},
+                "special": "A Dog shaman must make a Willpower(6) Test to change a declared course of action. The test requires a Complex Action as Dog struggles to change his mind."
+            }
+    },
+    "dolphin": {
+        "description": "Dolphin is the free spirit of the sea, dancer on the waves. She is wise, yet playful, and a friend of man. Dolphin helps people against the threats of the sea (like Shark). Dolphin shamans are staunch protectors and helpers. They cannot turn down a deserving person who needs their help and must fight against evil that threatens people or nature.",
+        "environment": "On or by the sea",
+        "advantages": {
+                "spells": {
+                    "detection": 2
+                },
+                "spirits": {
+                    "sea": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {
+                    "combat": -1
+                },
+                "spirits": {},
+                "special": ""
+            }
+    },
+    "eagle": {
+        "description": "Eagle is the highest-flying bird in the sky, considered the most noble by shamans in North America, Central America and Europe. He is proud and solitary, and sees everything happening in the world he soars over. Eagle shamans are proud and noble defenders of the purity of nature. They are intolerant of those who do not share their views, and have a strong distrust of technology and its tools. Those who damage nature are Eagle’s enemies, and Eagle shamans brave great danger to defeat polluters and other evildoers.",
+        "environment": "Mountains",
+        "advantages": {
+                "spells": {
+                    "detection": 2
+                },
+                "spirits": {
+                    "sky": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {},
+                "spirits": {},
+                "special": "Double the Essence loss caused by adding cyberware because of the psychological impact this has on the Eagle shaman."
+            }
+    },
+    "gator": {
+        "description": "Found among shamans living near swamps and rivers, Gator also flourishes among urban shamans, since legend has it that he dwells in the sewers and storm drains of the city. He is ill-tempered and lazy, a strong fighter and a big eater. Gator shamans like big payoffs that allow them to take it easy for a while. It can take a hefty argument to talk a Gator shaman into any unnecessary exertion, but once a Gator shaman decides to do something, it is just as difficult to talk him out of it.",
+        "environment": "Swamps, Rivers, or Urban",
+        "advantages": {
+                "spells": {
+                    "combat": 2,
+                    "detection": 2
+                },
+                "spirits": {
+                    "swamp": 2,
+                    "lake": 2,
+                    "river": 2,
+                    "urban": 2
+                },
+                "special": "Player must choose one of the spirits to have an advantage with."
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {
+                    "illusion": -1
+                },
+                "spirits": {},
+                "special": "It takes a Willpower (6) Test for a Gator shaman to break off a fight, chase, or other direct action."
+            }
+    },
+    "lion": {
+        "description": "Lion is followed by shamans from the veldts of Africa to the plains of Europe. He is a brave and powerful warrior, who protects his family with his life. Lion prefers to work from surprise or ambush, but will take the direct approach when necessary. Lion shamans demand the best from themselves. They also demand respect from those around them. A Lion shaman makes a loyal friend and a deadly enemy.",
+        "environment": "Praire",
+        "advantages": {
+                "spells": {
+                    "combat": 2
+                },
+                "spirits": {
+                    "praire": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {
+                    "health": -1
+                },
+                "spirits": {},
+                "special": ""
+            }
+    },
+    "mouse": {
+        "description": "Mouse knows just where to find the right thing for every situation. She is clever and resourceful; her wisdom often helps fierce and proud totems like Lion and Wolf out of trouble, showing them the common sense they might otherwise miss. Mouse is no one’s enemy and, if she has a flaw, it is that curiosity sometimes gets the better of her. Mouse shamans tend to be hoarders, collecting all manner of junk along with useless information and trivia, storing everything away “for a rainy day.”",
+        "environment": "Urban or Fields",
+        "advantages": {
+                "spells": {
+                    "detection": 2,
+                    "health": 2
+                },
+                "spirits": {
+                    "field": 2,
+                    "hearth": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {
+                    "combat": -2
+                },
+                "spirits": {},
+                "special": ""
+            }
+    },
+    "owl": {
+        "description": "Owl is wise and sees all. She rules the night sky and what she hunts, she finds. By day, she is nearly helpless. Owl is honored by cultures around the world, although some consider her appearance a bad omen. Owl shamans are nocturnal loners well-suited for life in the shadows. Their magic is weaker during the day, and owl shamans tend to remain in the shadows even during daytime.",
+        "environment": "Anywhere",
+        "advantages": {
+                "spells": {},
+                "spirits": {},
+                "special": "+2 dice for any Sorcery or Conjouring at night."
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {},
+                "spirits": {},
+                "special": "+2 to all magical target numbers during the daytime."
+            }
+    },
+    "raccoon": {
+        "description": "Raccoon is a cunning bandit who can break into any trap and steal the bait. He fights when he must, but prefers strategy and trickery. Raccoon shamans are intensely curious, which often leads them into danger. They can be greedy (Raccoon is a thief totem) and many steal only the very best. Petty thefts and violent robberies are beneath a Raccoon shaman’s dignity.",
+        "environment": "Anywhere but the desert",
+        "advantages": {
+                "spells": {
+                    "manipulation": 2
+                },
+                "spirits": {
+                    "city": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {
+                    "combat": -1
+                },
+                "spirits": {},
+                "special": ""
+            }
+    },
+    "rat": {
+        "description": "Rat is found wherever humans are, for who else’s bounty can sustain him? Rat is a stealthy thief too selfish to share anything. He is a coward who would rather run than fight. Rat shamans tend to be dirty and unkempt. They dislike working out in the open, preferring to stick to the shadows. Rat shamans avoid fights whenever they can. When they must fight, they fight to kill.",
+        "environment": "Urban",
+        "advantages": {
+                "spells": {
+                    "detection": 2,
+                    "illusion": 2
+                },
+                "spirits": {
+                    "city": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {
+                    "combat": -1
+                },
+                "spirits": {},
+                "special": ""
+            }
+    },
+    "raven": {
+        "description": "Raven is a harbinger of trouble in cultures world-wide. He is a trickster, dark and devious, and a transformer, responsible for changes. Raven thrives off the bounty of carnage and chaos, but does not cause them. He merely knows an opportunity when he sees one. Raven shamans love to eat, and rarely refuse an offer of food.",
+        "environment": "Anywhere under the open sky",
+        "advantages": {
+                "spells": {
+                    "manipulation": 2
+                },
+                "spirits": {
+                    "sky": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {},
+                "spirits": {},
+                "special": "+1 to all target numbers while not under the open sky"
+            }
+    },
+    "shark": {
+        "description": "Shark is a cold and relentless hunter. When Shark strikes, he does so without mercy, driven into a frenzy by the blood of his prey. Shark shamans tend to be wanderers, always on the move. They are fierce and deadly warriors. A Shark shaman believes the only good enemy is a dead enemy. If challenged, they do not waste time with threats or boasts, but strike to kill.",
+        "environment": "On or by the sea",
+        "advantages": {
+                "spells": {
+                    "combat": 2,
+                    "detection": 2
+                },
+                "spirits": {
+                    "sea": 2
+                },
+                "special": ""
+            },
+            "disadvantages": {
+                "berserk": true,
+                "spells": {},
+                "spirits": {},
+                "special": "Shark shamans can go berserk in combat when they are wounded or when they kill an opponent (SR3E Core P. 163). A berserk Shark shaman may, instead of attacking a living target, continue to attack the body of his last victim  if the player chooses."
+            }
+    },
+    "snake": {
+        "description": "Snake is wise and knows many secrets. She is a good councilor, but always exacts a price for her advice. Snake shamans are pacifists; they only fight to protect themselves and others. Snake shamans are obsessed with learning secrets and take great risks in order to do so. They trade their knowledge to others for whatever they can get in exchange.",
+        "environment": "Anywhere on Land",
+        "advantages": {
+                "spells": {
+                    "detection": 2,
+                    "health": 2,
+                    "illusion": 2
+                },
+                "spirits": {
+                    "land": 2,
+                    "man": 2
+                },
+                "special": "Player must choose one of the spirit types that gains the dice benefit."
+            },
+            "disadvantages": {
+                "berserk": false,
+                "spells": {},
+                "spirits": {},
+                "special": "-1 die for all spells cast during combat"
+            }
+    },
+    "wolf": {
+        "description": "Wolf is recognized as a hunter and warrior worldwide. He is fiercely loyal to the other members of his pack. As the ancient saying goes, Wolf wins every fight but one, and in that one, he dies. Wolf shamans are loyal to friends and family unto death. They do not show cowardice in battle and their word is their bond.",
+        "environment": "Forest, Praire, or Mountains",
+        "advantages": {
+                "spells": {
+                    "combat": 2,
+                    "detection": 2
+                },
+                "spirits": {
+                    "forest": 2,
+                    "mountain": 2,
+                    "praire": 2
+                },
+                "special": "Player must choose one of the spirit types that gains the dice benefit."
+            },
+            "disadvantages": {
+                "berserk": true,
+                "spells": {},
+                "spirits": {},
+                "special": ""
+            }
+    }
+}

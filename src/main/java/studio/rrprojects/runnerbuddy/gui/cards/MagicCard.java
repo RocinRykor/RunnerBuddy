@@ -111,8 +111,8 @@ public class MagicCard extends Card {
 
             JPanel panel = card.getPanel();
 
-            System.out.println("PANEL " + panel);
-            System.out.println("CARD_NAME " + cardName);
+            //System.out.println("PANEL " + panel);
+            //System.out.println("CARD_NAME " + cardName);
 
             panelCards.add(panel, cardName);
         }

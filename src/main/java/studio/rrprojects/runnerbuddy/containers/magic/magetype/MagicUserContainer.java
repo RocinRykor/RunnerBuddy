@@ -1,11 +1,12 @@
-package studio.rrprojects.runnerbuddy.containers.magic;
+package studio.rrprojects.runnerbuddy.containers.magic.magetype;
 
 public class MagicUserContainer {
+    private final String mageType;
     double spellPointsBase;
     double adeptPointsBase;
 
-    public MagicUserContainer() {
-
+    public MagicUserContainer(String mageType) {
+        this.mageType = mageType;
     }
 
     public double getSpellPointsBase() {
@@ -24,4 +25,7 @@ public class MagicUserContainer {
         this.adeptPointsBase = adeptPointsBase;
     }
 
+    public String getMageType() {
+        return mageType;
+    }
 }

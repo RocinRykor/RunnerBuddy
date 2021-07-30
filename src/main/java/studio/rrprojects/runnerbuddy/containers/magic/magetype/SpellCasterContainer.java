@@ -1,4 +1,4 @@
-package studio.rrprojects.runnerbuddy.containers.magic;
+package studio.rrprojects.runnerbuddy.containers.magic.magetype;
 
 import studio.rrprojects.runnerbuddy.constants.MagicConstants;
 
@@ -6,15 +6,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class SpellCasterContainer extends MagicUserContainer{
-    private final String magicType;
     private LinkedHashMap<String, ArrayList<String>> traditionOptions = new LinkedHashMap<>();
 
-    public SpellCasterContainer(String magicType, double basePoints) {
-        this.magicType = magicType;
+    public SpellCasterContainer(String mageType, double basePoints) {
+        super(mageType);
         setSpellPointsBase(basePoints);
 
         traditionOptions.put(MagicConstants.HERMETIC, new ArrayList<>());
-        traditionOptions.put(MagicConstants.SHAMAN, new ArrayList<>());
+        traditionOptions.put(MagicConstants.SHAMANIC, new ArrayList<>());
     }
 
     public void addHermeticOption(String s) {
@@ -27,18 +26,22 @@ public class SpellCasterContainer extends MagicUserContainer{
         }
     }
 
-    public void addShamanOption(String s) {
-        traditionOptions.get(MagicConstants.SHAMAN).add(s);
+    public void addShamanicOption(String s) {
+        traditionOptions.get(MagicConstants.SHAMANIC).add(s);
     }
 
-    public void addShamanOptions(String[] list) {
+    public void addShamanicOptions(String[] list) {
         for (String s: list) {
-            traditionOptions.get(MagicConstants.SHAMAN).add(s);
+            traditionOptions.get(MagicConstants.SHAMANIC).add(s);
         }
+    }
+
+    public LinkedHashMap<String, ArrayList<String>> getTraditionOptions() {
+        return traditionOptions;
     }
 
     @Override
     public String toString() {
-        return magicType;
+        return getMageType();
     }
 }
