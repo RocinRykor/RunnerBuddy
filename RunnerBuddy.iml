@@ -23,5 +23,6 @@
     </orderEntry>
     <orderEntry type="library" name="Util_Library" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20200518" level="project" />
+    <orderEntry type="library" name="Maven: com.formdev:flatlaf:1.4" level="project" />
   </component>
 </module>
