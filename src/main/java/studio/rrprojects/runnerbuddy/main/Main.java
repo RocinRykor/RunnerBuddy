@@ -6,15 +6,15 @@ import studio.rrprojects.runnerbuddy.gui.LaunchWindow;
 import studio.rrprojects.runnerbuddy.gui.popups.NewCharacterPriorityPopup;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        UIManager.LookAndFeelInfo[] listLAF = UIManager.getInstalledLookAndFeels();
-
-
         try {
             UIManager.setLookAndFeel( new FlatDarculaLaf() );
+            UIManager.put( "Button.arc", 999 );
+            //UIManager.put("Panel.background", Color.BLACK);
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
