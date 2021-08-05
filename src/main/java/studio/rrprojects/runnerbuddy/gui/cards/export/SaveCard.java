@@ -1,8 +1,9 @@
-package studio.rrprojects.runnerbuddy.gui.cards;
+package studio.rrprojects.runnerbuddy.gui.cards.export;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 
 import javax.swing.*;

@@ -1,6 +1,4 @@
-package studio.rrprojects.runnerbuddy.gui.cards.components;
-
-import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
+package studio.rrprojects.runnerbuddy.gui.cards.attributes;
 
 public class ReactionModule extends AttributeModule {
 

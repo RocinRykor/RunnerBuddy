@@ -1,7 +1,6 @@
-package studio.rrprojects.runnerbuddy.gui.cards.components;
+package studio.rrprojects.runnerbuddy.gui.cards.attributes;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
 
 public class MagicModule extends AttributeModule {
     int basePoint = 0;

@@ -1,10 +1,11 @@
-package studio.rrprojects.runnerbuddy.gui.cards;
+package studio.rrprojects.runnerbuddy.gui.cards.skills;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.constants.SkillConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
+import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.gui.cards.components.SmallProgressBar;
 import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
 

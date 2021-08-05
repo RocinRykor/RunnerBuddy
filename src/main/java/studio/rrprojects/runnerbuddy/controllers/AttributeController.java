@@ -3,8 +3,8 @@ package studio.rrprojects.runnerbuddy.controllers;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.priority.PointPriority;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
-import studio.rrprojects.runnerbuddy.gui.cards.Attributes;
-import studio.rrprojects.runnerbuddy.gui.cards.components.AttributeModule;
+import studio.rrprojects.runnerbuddy.gui.cards.attributes.Attributes;
+import studio.rrprojects.runnerbuddy.gui.cards.attributes.AttributeModule;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

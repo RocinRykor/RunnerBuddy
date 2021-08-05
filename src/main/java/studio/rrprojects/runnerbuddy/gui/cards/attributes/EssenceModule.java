@@ -1,4 +1,4 @@
-package studio.rrprojects.runnerbuddy.gui.cards.components;
+package studio.rrprojects.runnerbuddy.gui.cards.attributes;
 
 public class EssenceModule extends AttributeModule {
     double basePoint = 6; //Everyone starts out at 6 Essence

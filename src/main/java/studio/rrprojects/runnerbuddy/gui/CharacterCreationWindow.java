@@ -1,9 +1,12 @@
 package studio.rrprojects.runnerbuddy.gui;
 
-import studio.rrprojects.runnerbuddy.constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.constants.ProgramInfoConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.*;
+import studio.rrprojects.runnerbuddy.gui.cards.attributes.Attributes;
+import studio.rrprojects.runnerbuddy.gui.cards.information.Info;
+import studio.rrprojects.runnerbuddy.gui.cards.magic.MagicCard;
+import studio.rrprojects.runnerbuddy.gui.cards.skills.SkillsCard;
 
 import javax.swing.*;
 import java.awt.*;

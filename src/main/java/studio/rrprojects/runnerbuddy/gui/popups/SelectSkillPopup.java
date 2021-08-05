@@ -9,7 +9,7 @@ import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SpecializationContainer;
 import studio.rrprojects.runnerbuddy.controllers.SkillsController;
-import studio.rrprojects.runnerbuddy.gui.cards.SkillsCard;
+import studio.rrprojects.runnerbuddy.gui.cards.skills.SkillsCard;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
 

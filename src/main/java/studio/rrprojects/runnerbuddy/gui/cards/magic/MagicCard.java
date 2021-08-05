@@ -1,7 +1,8 @@
-package studio.rrprojects.runnerbuddy.gui.cards;
+package studio.rrprojects.runnerbuddy.gui.cards.magic;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.CharacterCreationWindow;
+import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.gui.cards.magic.MagicalInfoCard;
 import studio.rrprojects.runnerbuddy.gui.cards.magic.SpellsCard;
 
