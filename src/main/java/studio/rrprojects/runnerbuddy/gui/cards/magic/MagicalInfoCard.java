@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class MagicalInfoCard extends Card {
-    private final CharacterContainer characterContainer;
     private JPanel panelMain;
     private JPanel panelMagic;
     private JPanel panelMagicBoxes;
@@ -36,19 +35,22 @@ public class MagicalInfoCard extends Card {
     private AspectContainer currentlySelectedAspect = null;
     private DominionContainer currentlySelectedDominion = null;
 
-    public MagicalInfoCard(String magic_info, CharacterContainer characterContainer) {
-        super(magic_info);
-        this.characterContainer = characterContainer;
+    public MagicalInfoCard(String title) {
+        super(title);
         setPanel(panelMain);
+    }
 
+    @Override
+    public void Initialize() {
+        super.Initialize();
         FormatBoxPanel();
         PopulateMageTypeBox();
     }
 
     private void PopulateMageTypeBox() {
-        ListPriority magicPriority = characterContainer.getMagicController().getSelectedPriority();
+        ListPriority magicPriority = getCharacterContainer().getMagicController().getSelectedPriority();
         ArrayList<String> availableOptions = magicPriority.getAvailableOptions();
-        MagicController magicController = characterContainer.getMagicController();
+        MagicController magicController = getCharacterContainer().getMagicController();
 
         for (String magicType : availableOptions) {
             MagicUserContainer magicUser = magicController.getMagicUserTypeMap().get(magicType);
@@ -128,14 +130,14 @@ public class MagicalInfoCard extends Card {
         boxDominionSelection.setBoxEnabled(true);
 
         if (currentlySelectedAspect.containsTag(MagicConstants.TOTEM)) {
-            ArrayList<DominionContainer> listTotems = characterContainer.getMagicController().getMapDominions().get(MagicConstants.TOTEM);
+            ArrayList<DominionContainer> listTotems = getCharacterContainer().getMagicController().getMapDominions().get(MagicConstants.TOTEM);
             for (DominionContainer totem : listTotems) {
                 boxDominionSelection.addOption(totem);
             }
 
         } else if (currentlySelectedAspect.containsTag(MagicConstants.ELEMENT)) {
             System.out.println("DING ELEMENTALIST!");
-            ArrayList<DominionContainer> listElements = characterContainer.getMagicController().getMapDominions().get(MagicConstants.ELEMENT);
+            ArrayList<DominionContainer> listElements = getCharacterContainer().getMagicController().getMapDominions().get(MagicConstants.ELEMENT);
             for (DominionContainer element : listElements) {
                 boxDominionSelection.addOption(element);
             }
@@ -151,7 +153,7 @@ public class MagicalInfoCard extends Card {
 
         System.out.println(listOptions.toString());
 
-        LinkedHashMap<String, AspectContainer> mapAspects = characterContainer.getMagicController().getMapAspects();
+        LinkedHashMap<String, AspectContainer> mapAspects = getCharacterContainer().getMagicController().getMapAspects();
 
         for (String aspectName : listOptions) {
             boxMagicAspect.addOption(mapAspects.get(aspectName));

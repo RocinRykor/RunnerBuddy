@@ -9,15 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SpellsCard extends Card {
-    private final CharacterContainer characterContainer;
     private JPanel panelMain;
 
-    public SpellsCard(String title, CharacterContainer characterContainer) {
+    public SpellsCard(String title) {
         super(title);
-        this.characterContainer = characterContainer;
-
         setPanel(panelMain);
-
     }
 
     {

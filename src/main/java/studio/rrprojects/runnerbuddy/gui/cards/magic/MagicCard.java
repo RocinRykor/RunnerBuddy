@@ -1,5 +1,6 @@
 package studio.rrprojects.runnerbuddy.gui.cards.magic;
 
+import studio.rrprojects.runnerbuddy.gui.CardManager;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MagicCard extends Card {
+    private final JButton jButton;
     private JPanel panelMain;
     private JSplitPane splitPane;
     private JPanel panelMenu;
@@ -21,24 +23,26 @@ public class MagicCard extends Card {
     public MagicCard(String title) {
         super(title);
         setPanel(panelMain);
+        jButton = new JButton(title);
     }
 
     @Override
     public void Initialize() {
         super.Initialize();
-        /*
-                SetMainPanel();
-        SetMenuPanel();
-        SetCardsPanel();
 
-        CreateListOfButtons();
-        FormatButtons();
+        CheckMagical();
 
-        CreateListOfCards();
-        FormatCards();
+        CardManager cardManager = new CardManager(panelMain);
 
-        InitialCardPass();
-         */
+        cardManager.setCharacterContainer(getCharacterContainer());
+
+        cardManager.addCard(new MagicalInfoCard("Magic Info"));
+        cardManager.addCard(new SpellsCard("Spells"));
+
+    }
+
+    private void CheckMagical() {
+        jButton.setVisible(getCharacterContainer().getMagicController().isMagical());
     }
 
     private void SetMainPanel() {
@@ -82,8 +86,8 @@ public class MagicCard extends Card {
 
     private void CreateListOfCards() {
         cardsMap = new LinkedHashMap<>();
-        cardsMap.put("Magic Info", new MagicalInfoCard("Magic Info", getCharacterContainer()));
-        cardsMap.put("Spells", new SpellsCard("Spells", getCharacterContainer()));
+        cardsMap.put("Magic Info", new MagicalInfoCard("Magic Info"));
+        cardsMap.put("Spells", new SpellsCard("Spells"));
         //cardsMap.put("Save/Export", new SaveCard(characterContainer));
 
         for (Map.Entry<String, Card> entry : cardsMap.entrySet()) {
@@ -184,4 +188,8 @@ public class MagicCard extends Card {
         selectedCard.Update();
     }
 
+    @Override
+    public JButton getButton() {
+        return jButton;
+    }
 }

@@ -10,14 +10,13 @@ import java.util.ArrayList;
 public class CardManager {
 
     private final JPanel workingPanel;
-    private int defaultDividerSize = 50;
-    private JSplitPane splitPane;
+    private static final int defaultDividerSize = 50;
     private JPanel panelMenu;
     private JPanel panelCards;
-    private ArrayList<Card> listCards = new ArrayList<>();
+    private final ArrayList<Card> listCards = new ArrayList<>();
     private CharacterContainer characterContainer;
-    private Card selectedCard;
     private CardLayout cardLayout;
+    private Card currentCard;
 
     public CardManager(JPanel jPanel) {
         workingPanel = jPanel;
@@ -30,7 +29,7 @@ public class CardManager {
         workingPanel.setLayout(new BorderLayout(0, 0));
 
         //Split Panel
-        splitPane = new JSplitPane();
+        JSplitPane splitPane = new JSplitPane();
         splitPane.setDividerLocation(defaultDividerSize);
         splitPane.setDividerSize(0);
         splitPane.setOrientation(0);
@@ -67,18 +66,21 @@ public class CardManager {
 
         card.setCharacterContainer(characterContainer);
 
+        card.Initialize();
+
         card.Update();
     }
 
     private void SwtichToThisCard(Card card) {
-        //Update the current card before switching
-        //selectedCard.Update();
+        if (currentCard != null) {
+            currentCard.Update();
+        }
 
-        //Change which card is selected
-        selectedCard = card;
         cardLayout.show(panelCards, card.getTitle());
 
-        selectedCard.Update();
+        card.Update();
+
+        currentCard = card;
     }
 
     public void setCharacterContainer(CharacterContainer characterContainer) {
