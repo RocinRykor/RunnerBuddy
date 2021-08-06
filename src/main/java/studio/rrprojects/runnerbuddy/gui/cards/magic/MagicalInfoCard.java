@@ -36,7 +36,8 @@ public class MagicalInfoCard extends Card {
     private AspectContainer currentlySelectedAspect = null;
     private DominionContainer currentlySelectedDominion = null;
 
-    public MagicalInfoCard(CharacterContainer characterContainer) {
+    public MagicalInfoCard(String magic_info, CharacterContainer characterContainer) {
+        super(magic_info);
         this.characterContainer = characterContainer;
         setPanel(panelMain);
 

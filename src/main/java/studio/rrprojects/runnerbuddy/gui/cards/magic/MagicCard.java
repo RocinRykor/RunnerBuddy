@@ -1,10 +1,7 @@
 package studio.rrprojects.runnerbuddy.gui.cards.magic;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
-import studio.rrprojects.runnerbuddy.gui.CharacterCreationWindow;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
-import studio.rrprojects.runnerbuddy.gui.cards.magic.MagicalInfoCard;
-import studio.rrprojects.runnerbuddy.gui.cards.magic.SpellsCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +20,8 @@ public class MagicCard extends Card {
     private CardLayout cardLayout;
     private ArrayList<ButtonObject> listButtons;
 
-    public MagicCard(CharacterContainer characterContainer) {
+    public MagicCard(String title, CharacterContainer characterContainer) {
+        super(title);
         this.characterContainer = characterContainer;
         setPanel(panelMain);
         setTitle("Magic");
@@ -72,10 +70,6 @@ public class MagicCard extends Card {
         listButtons = new ArrayList<>();
         listButtons.add(new ButtonObject("Magic Info"));
         listButtons.add(new ButtonObject("Spells"));
-        listButtons.add(new ButtonObject("Adept Powers"));
-        listButtons.add(new ButtonObject("Foci"));
-        listButtons.add(new ButtonObject("Spirits"));
-
     }
 
     private void FormatButtons() {
@@ -86,11 +80,8 @@ public class MagicCard extends Card {
 
     private void CreateListOfCards() {
         cardsMap = new LinkedHashMap<>();
-        cardsMap.put("Magic Info", new MagicalInfoCard(characterContainer));
-        cardsMap.put("Spells", new SpellsCard(characterContainer));
-        cardsMap.put("Adept Powers", new SpellsCard(characterContainer));
-        cardsMap.put("Foci", new SpellsCard(characterContainer));
-        cardsMap.put("Spirits", new SpellsCard(characterContainer));
+        cardsMap.put("Magic Info", new MagicalInfoCard("Magic Info", characterContainer));
+        cardsMap.put("Spells", new SpellsCard("Spells", characterContainer));
         //cardsMap.put("Save/Export", new SaveCard(characterContainer));
 
         for (Map.Entry<String, Card> entry : cardsMap.entrySet()) {

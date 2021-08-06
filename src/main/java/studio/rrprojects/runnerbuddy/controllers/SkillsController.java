@@ -9,6 +9,8 @@ import studio.rrprojects.runnerbuddy.containers.priority.PointPriority;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SkillContainer;
+import studio.rrprojects.runnerbuddy.textbuilder.TextBuilder;
+import studio.rrprojects.runnerbuddy.textbuilder.TextObject;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -246,5 +248,42 @@ public class SkillsController extends ControllerClass {
 
     public int getMaxActiveSkillPoints() {
         return maxActiveSkillPoints;
+    }
+
+    @Override
+    public void toTextObject(TextBuilder textBuilder) {
+        super.toTextObject(textBuilder);
+        TextObject mainObj = new TextObject("=== Skills ===");
+
+        LinkedHashMap<String, ArrayList<SkillContainer>> skillMap = SelectedSkillsToMap();
+
+        for (String key: skillMap.keySet()) {
+            TextObject groupObject = new TextObject("> " + key);
+
+            ArrayList<SkillContainer> skillList = skillMap.get(key);
+            for (SkillContainer skill : skillList) {
+                groupObject.add(new TextObject(skill.toString()));
+            }
+
+            mainObj.add(groupObject);
+        }
+
+        textBuilder.add(mainObj);
+    }
+
+    private LinkedHashMap<String, ArrayList<SkillContainer>> SelectedSkillsToMap() {
+        LinkedHashMap<String, ArrayList<SkillContainer>> map = new LinkedHashMap<>();
+
+        for (SkillContainer skill : selectedSkillList) {
+            String skillType = skill.getSkillType();
+
+            if (!map.containsKey(skillType)) {
+                map.put(skillType, new ArrayList<SkillContainer>());
+            }
+
+            map.get(skillType).add(skill);
+        }
+
+        return map;
     }
 }

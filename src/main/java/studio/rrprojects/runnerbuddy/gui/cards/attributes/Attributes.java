@@ -27,7 +27,8 @@ public class Attributes extends Card {
     private String currentRaceName = MetaHumanConstants.HUMAN;
     private LinkedHashMap<String, AttributeModule> attributeMap;
 
-    public Attributes(CharacterContainer characterContainer) {
+    public Attributes(String title, CharacterContainer characterContainer) {
+        super(title);
         this.characterContainer = characterContainer;
         setPanel(panelMain);
         setTitle("Attributes");

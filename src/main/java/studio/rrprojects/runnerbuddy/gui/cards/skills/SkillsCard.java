@@ -34,7 +34,8 @@ public class SkillsCard extends Card {
     private SmallProgressBar progressBarLanguage;
     private JTree treeSkills;
 
-    public SkillsCard(CharacterContainer characterContainer) {
+    public SkillsCard(String title, CharacterContainer characterContainer) {
+        super(title);
         this.characterContainer = characterContainer;
         setTitle("Skills");
 

@@ -38,7 +38,8 @@ public class Info extends Card {
     private ArrayList<JTextField> textFieldList;
     private ArrayList<String> raceNames;
 
-    public Info(CharacterContainer characterContainer) {
+    public Info(String title, CharacterContainer characterContainer) {
+        super(title);
         this.characterContainer = characterContainer;
         setPanel(panelMain);
         setTitle("Info/Race");

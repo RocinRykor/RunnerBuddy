@@ -25,7 +25,8 @@ public class SaveCard extends Card {
     private JButton buttonExportJSON;
     private JLabel labelExportFile;
 
-    public SaveCard(CharacterContainer characterContainer) {
+    public SaveCard(String s, CharacterContainer characterContainer) {
+        super(s);
         this.characterContainer = characterContainer;
         setPanel(panelMain);
         setTitle("Save/Export");

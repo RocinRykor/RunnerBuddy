@@ -1,23 +1,21 @@
-package studio.rrprojects.runnerbuddy.gui.cards.magic;
+package studio.rrprojects.runnerbuddy.gui.cards.gear;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SpellsCard extends Card {
-    private final CharacterContainer characterContainer;
+public class WeaponGearCard extends Card {
     private JPanel panelMain;
+    private JLabel labelDisplayString;
 
-    public SpellsCard(String title, CharacterContainer characterContainer) {
+    public WeaponGearCard(String title) {
         super(title);
-        this.characterContainer = characterContainer;
-
         setPanel(panelMain);
 
+        labelDisplayString.setText("This is the " + title + " card!");
     }
 
     {
@@ -37,9 +35,9 @@ public class SpellsCard extends Card {
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
         panelMain.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        final JLabel label1 = new JLabel();
-        label1.setText("Insert [SkillsCard] here!");
-        panelMain.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        labelDisplayString = new JLabel();
+        labelDisplayString.setText("Label");
+        panelMain.add(labelDisplayString, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

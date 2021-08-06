@@ -81,6 +81,7 @@ public class CharacterContainer {
 
         descriptionController.toTextObject(builder);
         attributeController.toTextObject(builder);
+        skillsController.toTextObject(builder);
 
         File file = new File(FileConstants.CHARACTER_DIRECTORY + "Test.txt");
 

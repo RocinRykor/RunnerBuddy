@@ -5,6 +5,7 @@ import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.*;
 import studio.rrprojects.runnerbuddy.gui.cards.attributes.Attributes;
 import studio.rrprojects.runnerbuddy.gui.cards.export.SaveCard;
+import studio.rrprojects.runnerbuddy.gui.cards.gear.StreetGear;
 import studio.rrprojects.runnerbuddy.gui.cards.information.Info;
 import studio.rrprojects.runnerbuddy.gui.cards.magic.MagicCard;
 import studio.rrprojects.runnerbuddy.gui.cards.skills.SkillsCard;
@@ -83,10 +84,11 @@ public class CharacterCreationWindow extends JFrame {
         listButtons.add(new ButtonObject("Info/Race"));
         listButtons.add(new ButtonObject("Attributes"));
         listButtons.add(new ButtonObject("Skills"));
+        listButtons.add(new ButtonObject("Street Gear"));
 
         buttonMagic = new ButtonObject("Magic");
         listButtons.add(buttonMagic);
-        
+
         listButtons.add(new ButtonObject("Save/Export"));
     }
 
@@ -98,11 +100,12 @@ public class CharacterCreationWindow extends JFrame {
 
     private void CreateListOfCards() {
         cardsMap = new LinkedHashMap<>();
-        cardsMap.put("Info/Race", new Info(characterContainer));
-        cardsMap.put("Attributes", new Attributes(characterContainer));
-        cardsMap.put("Skills", new SkillsCard(characterContainer));
-        cardsMap.put(("Magic"), new MagicCard(characterContainer));
-        cardsMap.put("Save/Export", new SaveCard(characterContainer));
+        cardsMap.put("Info/Race", new Info("Info", characterContainer));
+        cardsMap.put("Attributes", new Attributes("Attributes", characterContainer));
+        cardsMap.put("Skills", new SkillsCard("Skills", characterContainer));
+        cardsMap.put(("Street Gear"), new StreetGear("Street Gear", characterContainer));
+        cardsMap.put(("Magic"), new MagicCard("Magic", characterContainer));
+        cardsMap.put("Save/Export", new SaveCard("Save/Export", characterContainer));
 
         selectedCard = cardsMap.get("Info/Race"); //Ideal will get whatever one is first but here we have to specify
     }
