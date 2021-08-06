@@ -3,7 +3,6 @@ package studio.rrprojects.runnerbuddy.gui.cards.skills;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.constants.SkillConstants;
-import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.gui.cards.components.SmallProgressBar;
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SkillsCard extends Card {
-    private final CharacterContainer characterContainer;
     private JPanel panelMain;
     private JButton addSkillButton;
     private JTable tableDescription;
@@ -34,14 +32,14 @@ public class SkillsCard extends Card {
     private SmallProgressBar progressBarLanguage;
     private JTree treeSkills;
 
-    public SkillsCard(String title, CharacterContainer characterContainer) {
+    public SkillsCard(String title) {
         super(title);
-        this.characterContainer = characterContainer;
-        setTitle("Skills");
-
         setPanel(panelMain);
+    }
 
-        formatPanels();
+    @Override
+    public void Initialize() {
+        super.Initialize();
         populateInformationPanel();
 
         treeSkills.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -106,22 +104,22 @@ public class SkillsCard extends Card {
     }
 
     private void DeleteSkill(SelectedSkillContainer skillContainer) {
-        characterContainer.getSkillsController().getSelectedSkillList().remove(skillContainer);
+        getCharacterContainer().getSkillsController().getSelectedSkillList().remove(skillContainer);
         Update();
     }
 
     private void EditSkill(SelectedSkillContainer skillContainer) {
-
+        // TODO: 8/6/21 ADD EDIT SKILL
     }
 
     private void CalculateSkillPoints() {
-        ArrayList<SelectedSkillContainer> skillList = characterContainer.getSkillsController().getSelectedSkillList();
+        ArrayList<SelectedSkillContainer> skillList = getCharacterContainer().getSkillsController().getSelectedSkillList();
 
         HashMap<String, Integer> spentPointMap = NewSpentPointMap();
 
 
         for (SelectedSkillContainer skill : skillList) {
-            skill.CaculatePointCost(characterContainer);
+            skill.CaculatePointCost(getCharacterContainer());
 
             String skillType = skill.getSkillType();
             int pointsSpent = skill.getPointCost();
@@ -150,16 +148,16 @@ public class SkillsCard extends Card {
     }
 
     private void AddNewSkill() {
-        new SelectSkillPopup(characterContainer, this);
+        new SelectSkillPopup(getCharacterContainer(), this);
     }
 
     private void populateInformationPanel() {
         //panelInformation.setLayout(new GridLayout(0, 1));
-        int skillPoints = characterContainer.getSkillsController().getMaxActiveSkillPoints();
+        int skillPoints = getCharacterContainer().getSkillsController().getMaxActiveSkillPoints();
         int intelligence = 1;
 
         try {
-            intelligence = characterContainer.getAttributeController().getAttributeMap().get("Intelligence").getTotalPoints();
+            intelligence = getCharacterContainer().getAttributeController().getAttributeMap().get("Intelligence").getTotalPoints();
         } catch (NullPointerException e) {
             System.out.println("SkillsCard Error: " + e);
         }
@@ -167,24 +165,15 @@ public class SkillsCard extends Card {
         progressBarActive.setTitle("Active Skills");
         progressBarActive.setMax(skillPoints);
         progressBarActive.UpdateValueString();
-        //.add(activeSkillsProgress);
 
-        //knowledgeSkillsProgress = new SmallProgressBar();
         progressBarKnowledge.setTitle("Knowledge Skills");
         progressBarKnowledge.setMax(intelligence * 5);
         progressBarKnowledge.UpdateValueString();
-        //panelInformation.add(knowledgeSkillsProgress);
 
-        //languageSkillsProgress = new SmallProgressBar();
         progressBarLanguage.setTitle("Language Skills");
         progressBarLanguage.setMax((int) Math.floor(intelligence * 1.5));
         progressBarLanguage.UpdateValueString();
-        //panelInformation.add(languageSkillsProgress);
-    }
 
-    private void formatPanels() {
-        //panelAvailable.setBorder(BorderFactory.createTitledBorder("Select A Skill - Double Click to Add"));
-        //panelSelected.setBorder(BorderFactory.createTitledBorder("Selected Skills - Double Click to Edit"));
     }
 
     @Override
@@ -207,7 +196,7 @@ public class SkillsCard extends Card {
     }
 
     private void updateSkillsPanel() {
-        DefaultTreeModel treeModel = characterContainer.getSkillsController().getSelectedSkillTree();
+        DefaultTreeModel treeModel = getCharacterContainer().getSkillsController().getSelectedSkillTree();
 
         treeSkills.setModel(treeModel);
     }

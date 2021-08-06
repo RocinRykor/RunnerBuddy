@@ -46,19 +46,18 @@ public class CharacterCreationWindow extends JFrame {
 
 
     private void BeginInit() {
-        SetMainPanel();
-        SetMenuPanel();
-        SetCardsPanel();
+        panelMain = new JPanel();
+        panelMain.setPreferredSize(new Dimension(800, 800));
+        CardManager cardManager = new CardManager(panelMain);
 
-        CreateListOfButtons();
-        FormatButtons();
+        cardManager.setCharacterContainer(characterContainer);
 
-        CreateListOfCards();
-        FormatCards();
-
-        InitialCardPass();
-        
-        MagicCardCheck();
+        cardManager.addCard(new Info("Info"));
+        cardManager.addCard(new Attributes("Attributes"));
+        cardManager.addCard(new SkillsCard("Skills"));
+        cardManager.addCard(new StreetGear("Street Gear"));
+        cardManager.addCard(new MagicCard("Magic"));
+        cardManager.addCard(new SaveCard("Save/Export"));
     }
 
     private void MagicCardCheck() {
@@ -100,12 +99,12 @@ public class CharacterCreationWindow extends JFrame {
 
     private void CreateListOfCards() {
         cardsMap = new LinkedHashMap<>();
-        cardsMap.put("Info/Race", new Info("Info", characterContainer));
-        cardsMap.put("Attributes", new Attributes("Attributes", characterContainer));
-        cardsMap.put("Skills", new SkillsCard("Skills", characterContainer));
-        cardsMap.put(("Street Gear"), new StreetGear("Street Gear", characterContainer));
-        cardsMap.put(("Magic"), new MagicCard("Magic", characterContainer));
-        cardsMap.put("Save/Export", new SaveCard("Save/Export", characterContainer));
+        cardsMap.put("Info/Race", new Info("Info"));
+        cardsMap.put("Attributes", new Attributes("Attributes"));
+        cardsMap.put("Skills", new SkillsCard("Skills"));
+        cardsMap.put(("Street Gear"), new StreetGear("Street Gear"));
+        cardsMap.put(("Magic"), new MagicCard("Magic"));
+        cardsMap.put("Save/Export", new SaveCard("Save/Export"));
 
         selectedCard = cardsMap.get("Info/Race"); //Ideal will get whatever one is first but here we have to specify
     }
@@ -146,7 +145,6 @@ public class CharacterCreationWindow extends JFrame {
     }
 
     private void SetMainPanel() {
-        panelMain = new JPanel();
         panelMain.setLayout(new BorderLayout(0, 0));
 
         //Split Panel

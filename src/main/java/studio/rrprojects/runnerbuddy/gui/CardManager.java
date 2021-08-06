@@ -53,6 +53,8 @@ public class CardManager {
     }
 
     public void addCard(Card card){
+        card.getPanel().setPreferredSize(workingPanel.getPreferredSize());
+
         listCards.add(card);
 
         JButton button = card.getButton();

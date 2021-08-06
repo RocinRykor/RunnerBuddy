@@ -8,13 +8,9 @@ import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 
 public class SaveCard extends Card {
-    private final CharacterContainer characterContainer;
     private JPanel panelMain;
     private JPanel panelValidation;
     private JPanel panelExport;
@@ -25,20 +21,14 @@ public class SaveCard extends Card {
     private JButton buttonExportJSON;
     private JLabel labelExportFile;
 
-    public SaveCard(String s, CharacterContainer characterContainer) {
-        super(s);
-        this.characterContainer = characterContainer;
+    public SaveCard(String title) {
+        super(title);
         setPanel(panelMain);
-        setTitle("Save/Export");
+    }
 
-        FormatPanels();
-        buttonExportText.addActionListener(actionEvent -> {
-            characterContainer.exportToText();
-        });
-
-        buttonExportJSON.addActionListener(actionEvent -> {
-            characterContainer.exportToJSON();
-        });
+    @Override
+    public void Initialize() {
+        super.Initialize();
     }
 
     @Override
@@ -47,7 +37,7 @@ public class SaveCard extends Card {
     }
 
     private void CheckValidation() {
-        ValidChecker validChecker = characterContainer.ValidCheck();
+        ValidChecker validChecker = getCharacterContainer().ValidCheck();
 
         if (validChecker.isValid()) {
             if (validChecker.isSoftError()) {

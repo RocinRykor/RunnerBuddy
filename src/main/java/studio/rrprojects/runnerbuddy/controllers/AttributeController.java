@@ -39,6 +39,10 @@ public class AttributeController extends ControllerClass {
 
     @Override
     public String ValidCheck() {
+        if (attributeCard == null) {
+            return "Error";
+        }
+
         attributeCard.Update();
         attributeCard.UpdateAll();
 

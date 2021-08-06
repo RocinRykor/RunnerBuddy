@@ -38,6 +38,10 @@ public class Card {
         this.characterContainer = characterContainer;
     }
 
+    public void Initialize() {
+
+    }
+
     public void Update() {
     }
 

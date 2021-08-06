@@ -17,7 +17,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Attributes extends Card {
-    private final CharacterContainer characterContainer;
     private JPanel panelMain;
     private SmallProgressBar progressBarAttributes;
     private JPanel panelAttributes;
@@ -27,23 +26,25 @@ public class Attributes extends Card {
     private String currentRaceName = MetaHumanConstants.HUMAN;
     private LinkedHashMap<String, AttributeModule> attributeMap;
 
-    public Attributes(String title, CharacterContainer characterContainer) {
+    public Attributes(String title) {
         super(title);
-        this.characterContainer = characterContainer;
         setPanel(panelMain);
-        setTitle("Attributes");
+    }
 
+    @Override
+    public void Initialize() {
+        super.Initialize();
         progressBarAttributes.setTitle("Attribute Points");
         progressBarAttributes.setMin(0);
 
-        int maxAttributes = characterContainer.getAttributeController().getMaxAttributePoints();
+        int maxAttributes = getCharacterContainer().getAttributeController().getMaxAttributePoints();
 
         progressBarAttributes.setMax(maxAttributes);
         progressBarAttributes.setValue(6);
 
         FormatAttributesPanel();
 
-        characterContainer.getAttributeController().LinkCard(this);
+        getCharacterContainer().getAttributeController().LinkCard(this);
     }
 
     public void UpdateProgressBar() {
@@ -93,7 +94,7 @@ public class Attributes extends Card {
             attributeModule.UpdateValues();
             panelAttributes.add(attributeModule.getPanel());
 
-            attributeModule.LinkAttribute(characterContainer, attribute, this);
+            attributeModule.LinkAttribute(getCharacterContainer(), attribute, this);
 
             attributeMap.put(attribute, attributeModule);
         }
@@ -103,18 +104,18 @@ public class Attributes extends Card {
         //Reaction
         AttributeModule reactionModule = new ReactionModule();
         panelAttributes.add(reactionModule.getPanel());
-        reactionModule.LinkAttribute(characterContainer, "Reaction", this);
+        reactionModule.LinkAttribute(getCharacterContainer(), "Reaction", this);
         attributeMap.put("Reaction", reactionModule);
 
         //Essence
         AttributeModule essenceModule = new EssenceModule();
         panelAttributes.add(essenceModule.getPanel());
-        essenceModule.LinkAttribute(characterContainer, "Essence", this);
+        essenceModule.LinkAttribute(getCharacterContainer(), "Essence", this);
         attributeMap.put("Essence", essenceModule);
 
         //Magic
-        System.out.println("ATTRIBUTES: " + characterContainer);
-        AttributeModule magicModule = new MagicModule(characterContainer, "Magic", this);
+        System.out.println("ATTRIBUTES: " + getCharacterContainer());
+        AttributeModule magicModule = new MagicModule(getCharacterContainer(), "Magic", this);
         panelAttributes.add(magicModule.getPanel());
         attributeMap.put("Magic", magicModule);
 
@@ -127,11 +128,11 @@ public class Attributes extends Card {
     public void Update() {
         super.Update();
 
-        selectedRace = characterContainer.getRaceController().getSelectedRace();
+        selectedRace = getCharacterContainer().getRaceController().getSelectedRace();
 
         if (selectedRace == null) {
-            characterContainer.getRaceController().setSelectedRace(MetaHumanConstants.HUMAN);
-            selectedRace = characterContainer.getRaceController().getSelectedRace();
+            getCharacterContainer().getRaceController().setSelectedRace(MetaHumanConstants.HUMAN);
+            selectedRace = getCharacterContainer().getRaceController().getSelectedRace();
         }
 
         String raceName = selectedRace.getName();
@@ -147,7 +148,7 @@ public class Attributes extends Card {
 
     private void UpdateRacialMods() {
         ArrayList<String> basicAttributes = MiscUtils.basicAttributes();
-        LinkedHashMap<String, Integer> modMap = characterContainer.getRaceController().getSelectedRace().getModifiersAttributes();
+        LinkedHashMap<String, Integer> modMap = getCharacterContainer().getRaceController().getSelectedRace().getModifiersAttributes();
 
         for (String attribute : basicAttributes) {
             int modValue = 0;
@@ -167,7 +168,7 @@ public class Attributes extends Card {
             attributeModule.getValue().UpdateValues();
         }
 
-        characterContainer.getAttributeController().setAttributeMap(attributeMap);
+        getCharacterContainer().getAttributeController().setAttributeMap(attributeMap);
     }
 
     public LinkedHashMap<String, AttributeModule> getAttributeMap() {

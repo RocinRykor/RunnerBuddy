@@ -1,6 +1,5 @@
 package studio.rrprojects.runnerbuddy.gui.cards.magic;
 
-import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 
 import javax.swing.*;
@@ -10,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MagicCard extends Card {
-    private final CharacterContainer characterContainer;
     private JPanel panelMain;
     private JSplitPane splitPane;
     private JPanel panelMenu;
@@ -20,13 +18,16 @@ public class MagicCard extends Card {
     private CardLayout cardLayout;
     private ArrayList<ButtonObject> listButtons;
 
-    public MagicCard(String title, CharacterContainer characterContainer) {
+    public MagicCard(String title) {
         super(title);
-        this.characterContainer = characterContainer;
         setPanel(panelMain);
-        setTitle("Magic");
+    }
 
-        SetMainPanel();
+    @Override
+    public void Initialize() {
+        super.Initialize();
+        /*
+                SetMainPanel();
         SetMenuPanel();
         SetCardsPanel();
 
@@ -37,6 +38,7 @@ public class MagicCard extends Card {
         FormatCards();
 
         InitialCardPass();
+         */
     }
 
     private void SetMainPanel() {
@@ -80,8 +82,8 @@ public class MagicCard extends Card {
 
     private void CreateListOfCards() {
         cardsMap = new LinkedHashMap<>();
-        cardsMap.put("Magic Info", new MagicalInfoCard("Magic Info", characterContainer));
-        cardsMap.put("Spells", new SpellsCard("Spells", characterContainer));
+        cardsMap.put("Magic Info", new MagicalInfoCard("Magic Info", getCharacterContainer()));
+        cardsMap.put("Spells", new SpellsCard("Spells", getCharacterContainer()));
         //cardsMap.put("Save/Export", new SaveCard(characterContainer));
 
         for (Map.Entry<String, Card> entry : cardsMap.entrySet()) {

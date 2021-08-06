@@ -4,7 +4,6 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import studio.rrprojects.runnerbuddy.containers.RaceContainer;
-import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.controllers.DescriptionController;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 
@@ -15,7 +14,6 @@ import java.util.Enumeration;
 import java.util.Iterator;
 
 public class Info extends Card {
-    private final CharacterContainer characterContainer;
     private JPanel panelMain;
     private JPanel panelRace;
     private JPanel panelInfo;
@@ -38,21 +36,22 @@ public class Info extends Card {
     private ArrayList<JTextField> textFieldList;
     private ArrayList<String> raceNames;
 
-    public Info(String title, CharacterContainer characterContainer) {
+    public Info(String title) {
         super(title);
-        this.characterContainer = characterContainer;
         setPanel(panelMain);
-        setTitle("Info/Race");
+    }
 
+    @Override
+    public void Initialize() {
+        super.Initialize();
 
         FormatRacePanel();
         FormatButtonGroup();
         FormatInfoPanel();
-
     }
 
     private void SaveDescription() {
-        DescriptionController descriptionController = characterContainer.getDescriptionController();
+        DescriptionController descriptionController = getCharacterContainer().getDescriptionController();
 
         descriptionController.setNameReal(textNameReal.getText());
         descriptionController.setNameStreet(textNameStreet.getText());
@@ -103,7 +102,7 @@ public class Info extends Card {
         buttonGroup = new ButtonGroup();
 
 
-        raceNames = characterContainer.getRaceController().getAvailibleRaces();
+        raceNames = getCharacterContainer().getRaceController().getAvailibleRaces();
 
         System.out.println(raceNames);
 
@@ -122,8 +121,8 @@ public class Info extends Card {
     }
 
     private void SelectRace(String actionCommand) {
-        characterContainer.getRaceController().setSelectedRace(actionCommand);
-        RaceContainer selectedRace = characterContainer.getRaceController().getSelectedRace();
+        getCharacterContainer().getRaceController().setSelectedRace(actionCommand);
+        RaceContainer selectedRace = getCharacterContainer().getRaceController().getSelectedRace();
 
         SetDescription(selectedRace.getDescription());
     }
