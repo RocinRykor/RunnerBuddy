@@ -1,6 +1,8 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
+import studio.rrprojects.runnerbuddy.textbuilder.TextBuilder;
+import studio.rrprojects.runnerbuddy.textbuilder.TextObject;
 
 public class DescriptionController extends ControllerClass {
     private final CharacterContainer characterContainer;
@@ -104,5 +106,18 @@ public class DescriptionController extends ControllerClass {
         }
 
         return "Valid";
+    }
+
+    @Override
+    public void toTextObject(TextBuilder textBuilder) {
+        super.toTextObject(textBuilder);
+        String names = nameReal + ", a.ka. " + nameStreet;
+        String basicDescription = gender + ", " + age;
+
+        TextObject object = new TextObject("=== Description ===");
+        object.add(names);
+        object.add(basicDescription);
+
+        textBuilder.add(object);
     }
 }

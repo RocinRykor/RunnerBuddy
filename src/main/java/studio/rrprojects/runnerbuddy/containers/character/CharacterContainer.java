@@ -1,10 +1,18 @@
 package studio.rrprojects.runnerbuddy.containers.character;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import studio.rrprojects.runnerbuddy.constants.FileConstants;
+import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
 import studio.rrprojects.runnerbuddy.constants.PriorityConstants;
 import studio.rrprojects.runnerbuddy.controllers.*;
 import studio.rrprojects.runnerbuddy.misc.PriorityObject;
 import studio.rrprojects.runnerbuddy.misc.ValidChecker;
+import studio.rrprojects.runnerbuddy.textbuilder.TextBuilder;
+import studio.rrprojects.util_library.FileUtil;
+import studio.rrprojects.util_library.JSONUtil;
 
+import java.io.*;
 import java.util.LinkedHashMap;
 
 public class CharacterContainer {
@@ -65,6 +73,53 @@ public class CharacterContainer {
         ValidChecker validChecker = new ValidChecker();
         validChecker.ProcessCharacter(this);
         return validChecker;
+    }
+
+    public void exportToText() {
+        //Create the TextBuilder
+        TextBuilder builder = new TextBuilder();
+
+        descriptionController.toTextObject(builder);
+        attributeController.toTextObject(builder);
+
+        File file = new File(FileConstants.CHARACTER_DIRECTORY + "Test.txt");
+
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String output = builder.build();
+        System.out.println(output);
+
+        try {
+            System.out.println("WRITING FILE");
+            Writer writer = new FileWriter(file);
+            writer.write(output);
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exportToJSON() {
+        //First creat the json
+        String jsonPath = FileConstants.RESOURCE_CHARACTER + JsonFileConstants.BLANK_CHARACTER;
+        InputStream is = getClass().getResourceAsStream(jsonPath);
+        JSONTokener token = new JSONTokener(is);
+        JSONObject blankCharacter = new JSONObject(token);
+
+        attributeController.toJSON(blankCharacter);
+
+        //Write the file;
+        String characterName = "Test Character";
+
+        FileUtil.createDirAndLoadFile(FileConstants.CHARACTER_DIRECTORY, characterName + ".json");
+
+        String filePath = FileConstants.CHARACTER_DIRECTORY + characterName + ".json";
+
+        JSONUtil.WriteJsonToFile(blankCharacter, FileUtil.loadFileFromPath(filePath));
     }
 }
 

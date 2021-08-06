@@ -8,6 +8,8 @@ import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -19,25 +21,23 @@ public class SaveCard extends Card {
     private JProgressBar progressBarValidation;
     private JLabel labelValidation;
     private JTextArea textAreaNotes;
-    private JTextField textFileName;
-    private JButton exportButton;
-    private JCheckBox detailedCheckBox;
-    private JLabel labelDirectory;
-    private String directory;
-    private String fileType = ".txt";
+    private JButton buttonExportText;
+    private JButton buttonExportJSON;
+    private JLabel labelExportFile;
 
     public SaveCard(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
         setPanel(panelMain);
+        setTitle("Save/Export");
 
         FormatPanels();
-        FormatExportInfo();
-    }
+        buttonExportText.addActionListener(actionEvent -> {
+            characterContainer.exportToText();
+        });
 
-    private void FormatExportInfo() {
-        directory = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "RunnerBuddy" + File.separator + "Characters" + File.separator;
-
-        labelDirectory.setText(directory);
+        buttonExportJSON.addActionListener(actionEvent -> {
+            characterContainer.exportToJSON();
+        });
     }
 
     @Override
@@ -123,24 +123,21 @@ public class SaveCard extends Card {
         textAreaNotes.setWrapStyleWord(true);
         panelValidation.add(textAreaNotes, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         panelExport = new JPanel();
-        panelExport.setLayout(new GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
+        panelExport.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
         panelMain.add(panelExport, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        textFileName = new JTextField();
-        panelExport.add(textFileName, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        final JLabel label1 = new JLabel();
-        label1.setText(".txt");
-        panelExport.add(label1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        exportButton = new JButton();
-        exportButton.setEnabled(false);
-        exportButton.setText("Export");
-        exportButton.setToolTipText("Currently Not Enabled");
-        panelExport.add(exportButton, new GridConstraints(1, 1, 2, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        detailedCheckBox = new JCheckBox();
-        detailedCheckBox.setText("Detailed");
-        panelExport.add(detailedCheckBox, new GridConstraints(1, 0, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        labelDirectory = new JLabel();
-        labelDirectory.setText("Prefix");
-        panelExport.add(labelDirectory, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonExportText = new JButton();
+        buttonExportText.setEnabled(true);
+        buttonExportText.setText("TEXT FILE");
+        buttonExportText.setToolTipText("Currently Not Enabled");
+        panelExport.add(buttonExportText, new GridConstraints(1, 2, 2, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonExportJSON = new JButton();
+        buttonExportJSON.setEnabled(true);
+        buttonExportJSON.setText("JSON FILE");
+        buttonExportJSON.setToolTipText("Currently Not Enabled");
+        panelExport.add(buttonExportJSON, new GridConstraints(1, 0, 2, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        labelExportFile = new JLabel();
+        labelExportFile.setText("Export character as:");
+        panelExport.add(labelExportFile, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

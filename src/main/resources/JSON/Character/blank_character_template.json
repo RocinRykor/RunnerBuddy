@@ -1,0 +1,112 @@
+{
+	"archetype": "",
+	"first_name": "",
+	"last_name": "",
+	"metatype": "",
+	"sex": "",
+	"age": 0,
+	"description": "",
+	"notes": "",
+	"karma": 0,
+	"nuyen": 0,
+	"handle": "",
+	"career": {
+	  "karma": 0,
+	  "nuyen" : 0
+	},
+	"character_creation": {
+		"is_finalized": false,
+		"attribute_points": 0,
+		"active_skill_points": 0,
+		"magic": {
+			"spell_points": 0,
+			"spell_points_bought": 0,
+			"total_spell_points": 0,
+			"spell_points_spent": 0,
+			"power_points": 0,
+			"power_points_spent": 0
+		}
+	},
+	"attributes": {
+		"body": {
+			"base": 0,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": 0,
+			"attribute_points_spent": 0
+		},
+		"strength": {
+			"base": 0,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": 0,
+			"attribute_points_spent": 0
+		},
+		"quickness": {
+			"base": 0,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": 0,
+			"attribute_points_spent": 0
+		},
+		"intelligence": {
+			"base": 0,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": 0,
+			"attribute_points_spent": 0
+		},
+		"willpower": {
+			"base": 0,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": 0,
+			"attribute_points_spent": 0
+		},
+		"charisma": {
+			"base": 0,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": 0,
+			"attribute_points_spent": 0
+		},
+		"magic": {
+			"base": 0,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": -1
+		},
+		"essence": {
+			"base": 6,
+			"override": 0,
+			"modifier": 0,
+			"racial_limit": -1
+		}
+	},
+	"skills": {
+		"active": {},
+		"knowledge": {},
+		"language": {}
+	},
+	"inventory" : {},
+	"magic" : {
+		"sorcerer": false,
+		"conjourer": false,
+		"astral_perception": false,
+		"mage_type": "",
+		"tradition": "",
+		"elementalist_type": "",
+		"subtype": "",
+		"spells" : {},
+		"totem": {},
+		"adept_powers" : {},
+		"spirits": {}
+	},
+	"condition" : {
+		"stun": 0,
+		"physical": 0,
+		"overflow": 0
+	},
+	"contacts" : {}
+}
+

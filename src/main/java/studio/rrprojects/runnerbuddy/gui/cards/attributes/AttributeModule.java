@@ -2,11 +2,15 @@ package studio.rrprojects.runnerbuddy.gui.cards.attributes;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import org.json.JSONException;
+import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.attributes.Attributes;
+import studio.rrprojects.runnerbuddy.textbuilder.TextObject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 
 public class AttributeModule extends JComponent {
     private CharacterContainer characterContainer;
@@ -235,5 +239,24 @@ public class AttributeModule extends JComponent {
 
     protected double getTotalPointsAsDouble() {
         return 0;
+    }
+
+    public void updateJson(JSONObject jsonObject) {
+
+        JSONObject attributeObject;
+
+        try {
+            attributeObject = jsonObject.getJSONObject(attributeName.toLowerCase(Locale.ROOT));
+        } catch (JSONException e) {
+            return;
+        }
+
+        attributeObject.put("base", getTotalPoints());
+    }
+
+    public TextObject toTextObject() {
+        String shortName = attributeName.toUpperCase().substring(0, 3); //Gets the first three letters of the attribute name
+        String title = shortName + ": " + getTotalPoints();
+        return new TextObject(title);
     }
 }

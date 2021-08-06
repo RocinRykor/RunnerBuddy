@@ -1,10 +1,13 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.priority.PointPriority;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.attributes.Attributes;
 import studio.rrprojects.runnerbuddy.gui.cards.attributes.AttributeModule;
+import studio.rrprojects.runnerbuddy.textbuilder.TextBuilder;
+import studio.rrprojects.runnerbuddy.textbuilder.TextObject;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -77,5 +80,32 @@ public class AttributeController extends ControllerClass {
 
     public int getMaxAttributePoints() {
         return maxAttributePoints;
+    }
+
+    @Override
+    public void toJSON(JSONObject jsonObject) {
+        super.toJSON(jsonObject);
+
+        JSONObject attributeObject = jsonObject.getJSONObject("attributes");
+
+        for (Map.Entry<String, AttributeModule> entry: attributeMap.entrySet()) {
+            AttributeModule module = entry.getValue();
+
+            module.updateJson(attributeObject);
+        }
+    }
+
+    @Override
+    public void toTextObject(TextBuilder textBuilder) {
+        super.toTextObject(textBuilder);
+        TextObject object = new TextObject("=== Attributes ===");
+
+        for (Map.Entry<String, AttributeModule> entry: attributeMap.entrySet()) {
+            AttributeModule module = entry.getValue();
+
+            object.add(module.toTextObject());
+        }
+
+        textBuilder.add(object);
     }
 }

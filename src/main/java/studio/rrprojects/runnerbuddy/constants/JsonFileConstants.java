@@ -9,4 +9,7 @@ public class JsonFileConstants {
     public static final String ACTIVE_SKILLS = "SR3E_active_skills.json";
     public static final String KNOWLEDGE_SKILLS = "SR3E_knowledge_skills.json";
     public static final String LANGUAGE_SKILLS = "SR3E_language_skills.json";
+
+    //Character
+    public static final String BLANK_CHARACTER = "blank_character_template.json";
 }

@@ -4,6 +4,7 @@ import studio.rrprojects.runnerbuddy.constants.ProgramInfoConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.*;
 import studio.rrprojects.runnerbuddy.gui.cards.attributes.Attributes;
+import studio.rrprojects.runnerbuddy.gui.cards.export.SaveCard;
 import studio.rrprojects.runnerbuddy.gui.cards.information.Info;
 import studio.rrprojects.runnerbuddy.gui.cards.magic.MagicCard;
 import studio.rrprojects.runnerbuddy.gui.cards.skills.SkillsCard;
@@ -86,7 +87,7 @@ public class CharacterCreationWindow extends JFrame {
         buttonMagic = new ButtonObject("Magic");
         listButtons.add(buttonMagic);
         
-        //listButtons.add(new ButtonObject("Save/Export"));
+        listButtons.add(new ButtonObject("Save/Export"));
     }
 
     private void FormatButtons() {
@@ -101,7 +102,7 @@ public class CharacterCreationWindow extends JFrame {
         cardsMap.put("Attributes", new Attributes(characterContainer));
         cardsMap.put("Skills", new SkillsCard(characterContainer));
         cardsMap.put(("Magic"), new MagicCard(characterContainer));
-        //cardsMap.put("Save/Export", new SaveCard(characterContainer));
+        cardsMap.put("Save/Export", new SaveCard(characterContainer));
 
         selectedCard = cardsMap.get("Info/Race"); //Ideal will get whatever one is first but here we have to specify
     }

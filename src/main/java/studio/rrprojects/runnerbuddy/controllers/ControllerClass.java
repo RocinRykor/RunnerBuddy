@@ -1,6 +1,8 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
+import studio.rrprojects.runnerbuddy.textbuilder.TextBuilder;
 
 public class ControllerClass {
 
@@ -22,5 +24,11 @@ public class ControllerClass {
         //If it returns 'null' it means that particular controller didn't set an override method
 
         return null;
+    }
+
+    public void toJSON(JSONObject jsonObject) {
+    }
+
+    public void toTextObject(TextBuilder textBuilder) {
     }
 }

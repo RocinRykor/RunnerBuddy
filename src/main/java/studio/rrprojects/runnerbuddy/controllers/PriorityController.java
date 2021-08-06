@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PriorityController {
+public class PriorityController extends ControllerClass{
     private final CharacterContainer characterContainer;
     private final HashMap<String, PriorityLevelGroup> masterPriorityMap = new HashMap<String, PriorityLevelGroup>();
     private final String[] listCategory = PriorityConstants.PRIORITIES;
@@ -76,9 +76,6 @@ public class PriorityController {
         }
     }
 
-    public void processPriorityList() {
-    }
-
     public PriorityContainer getPriorityByCategory(String categoryKey) {
         for (PriorityContainer priorityContainer: takenPriorities) {
             if (priorityContainer.getPriorityCategory().equalsIgnoreCase(categoryKey)) {
@@ -89,4 +86,5 @@ public class PriorityController {
         System.out.println("PRIORITY CONTROLLER ERROR: \"" + categoryKey + "\" NOT FOUND");
         return null;
     }
+
 }
