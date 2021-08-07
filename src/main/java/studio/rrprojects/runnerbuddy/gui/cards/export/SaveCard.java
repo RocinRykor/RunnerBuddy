@@ -2,7 +2,6 @@ package studio.rrprojects.runnerbuddy.gui.cards.export;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 
@@ -29,6 +28,16 @@ public class SaveCard extends Card {
     @Override
     public void Initialize() {
         super.Initialize();
+
+        FormatPanels();
+
+        buttonExportText.addActionListener(actionEvent -> {
+            getCharacterContainer().exportToText();
+        });
+
+        buttonExportJSON.addActionListener(actionEvent -> {
+            getCharacterContainer().exportToJSON();
+        });
     }
 
     @Override

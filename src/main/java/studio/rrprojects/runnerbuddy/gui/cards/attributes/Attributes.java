@@ -114,7 +114,6 @@ public class Attributes extends Card {
         attributeMap.put("Essence", essenceModule);
 
         //Magic
-        System.out.println("ATTRIBUTES: " + getCharacterContainer());
         AttributeModule magicModule = new MagicModule(getCharacterContainer(), "Magic", this);
         panelAttributes.add(magicModule.getPanel());
         attributeMap.put("Magic", magicModule);

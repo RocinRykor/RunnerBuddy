@@ -32,13 +32,10 @@ public class CharacterContainer {
         attributeController = new AttributeController(this);
         raceController = new RaceController(this);
         magicController = new MagicController(this);
-        descriptionController = new DescriptionController(this);
-        skillsController = new SkillsController(this);
         resourceController = new ResourceController(this);
 
-        //gearController = new GearController(this);
-        //contactsController = new ContactsController(this);
-
+        descriptionController = new DescriptionController(this);
+        skillsController = new SkillsController(this);
     }
 
     public void ProcessPriorities() {
@@ -67,6 +64,10 @@ public class CharacterContainer {
 
     public SkillsController getSkillsController() {
         return skillsController;
+    }
+
+    public ResourceController getResourceController() {
+        return resourceController;
     }
 
     public ValidChecker ValidCheck() {

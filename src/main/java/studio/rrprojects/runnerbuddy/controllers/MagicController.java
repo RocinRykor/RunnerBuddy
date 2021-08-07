@@ -124,7 +124,6 @@ public class MagicController extends ControllerClass{
         magicalOptions = selectedPriority.getAvailableOptions();
 
         //Check for if magical
-        System.out.println("MAGIC CONTROLLER : CHECKING IF MAGICAL");
         if (!magicalOptions.contains("Mundane")) {
             setMagical(true);
         }

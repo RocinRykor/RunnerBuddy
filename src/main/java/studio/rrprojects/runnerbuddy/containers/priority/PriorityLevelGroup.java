@@ -135,10 +135,6 @@ public class PriorityLevelGroup {
     }
 
     public void ClearSelection() {
-        String debugString = "CLEAR_SELECTION: ";
-
-        System.out.println(debugString + selectedPriority);
-
         if (selectedPriority != null) {
             CharacterContainer characterContainer = parent.getParent().getCharacterContainer();
             characterContainer.getPriorityController().removeTakenPriority(selectedPriority);

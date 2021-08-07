@@ -66,6 +66,8 @@ public class CardManager {
 
         card.setCharacterContainer(characterContainer);
 
+        System.out.println("CARD: " + card.toString() + ", SET TO: " + characterContainer);
+
         card.Initialize();
 
         card.Update();

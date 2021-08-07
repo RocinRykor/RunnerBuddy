@@ -159,7 +159,7 @@ public class SkillsCard extends Card {
         try {
             intelligence = getCharacterContainer().getAttributeController().getAttributeMap().get("Intelligence").getTotalPoints();
         } catch (NullPointerException e) {
-            System.out.println("SkillsCard Error: " + e);
+            //System.out.println("SkillsCard Error: " + e);
         }
 
         progressBarActive.setTitle("Active Skills");

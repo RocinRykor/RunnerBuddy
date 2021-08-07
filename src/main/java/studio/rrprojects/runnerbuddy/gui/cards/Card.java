@@ -48,4 +48,11 @@ public class Card {
     public JButton getButton() {
         return new JButton(title);
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "title='" + title + '\'' +
+                '}';
+    }
 }
