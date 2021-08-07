@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class WeaponGearCard extends Card {
     private JPanel panelMain;
-    private JLabel labelDisplayString;
+    private JTextArea areaDisplayText;
 
     public WeaponGearCard(String title) {
         super(title);
@@ -41,9 +41,10 @@ public class WeaponGearCard extends Card {
     private void $$$setupUI$$$() {
         panelMain = new JPanel();
         panelMain.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        labelDisplayString = new JLabel();
-        labelDisplayString.setText("Label");
-        panelMain.add(labelDisplayString, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        areaDisplayText = new JTextArea();
+        areaDisplayText.setLineWrap(true);
+        areaDisplayText.setWrapStyleWord(true);
+        panelMain.add(areaDisplayText, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
     }
 
     /**
@@ -60,8 +61,6 @@ public class WeaponGearCard extends Card {
 
         ArrayList<WeaponItem> weaponList = null;
 
-        System.out.println(getCharacterContainer());
-
         try {
             weaponList = getCharacterContainer().getResourceController().getWeaponList();
         } catch (NullPointerException e) {
@@ -71,6 +70,6 @@ public class WeaponGearCard extends Card {
             displayString += weapon + "\n";
         }
 
-        labelDisplayString.setText(displayString);
+        areaDisplayText.setText(displayString);
     }
 }

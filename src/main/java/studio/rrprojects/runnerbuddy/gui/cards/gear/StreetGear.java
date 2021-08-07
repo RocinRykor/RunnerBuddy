@@ -2,9 +2,9 @@ package studio.rrprojects.runnerbuddy.gui.cards.gear;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 import studio.rrprojects.runnerbuddy.gui.CardManager;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
+import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,12 +14,18 @@ public class StreetGear extends Card {
     private JPanel panelCard;
     private JPanel panelInformation;
     private JLabel labelResources;
+    private JTree tree1;
 
     public StreetGear(String title) {
         super(title);
         setPanel(panelMain);
 
         //System.out.println("STREET GEAR: " + getCharacterContainer());
+    }
+
+    @Override
+    public void Initialize() {
+        super.Initialize();
 
         CardManager cardManager = new CardManager(panelCard);
         cardManager.setCharacterContainer(getCharacterContainer());
@@ -30,6 +36,19 @@ public class StreetGear extends Card {
 
         panelCard.setBorder(BorderFactory.createTitledBorder("Purchase New Gear:"));
         panelInformation.setBorder(BorderFactory.createTitledBorder("Current Inventory:"));
+    }
+
+    @Override
+    public void Update() {
+        String moneyString = CalculateRemainingNuyen();
+
+        labelResources.setText("Reamining Nuyen: " + moneyString);
+    }
+
+    private String CalculateRemainingNuyen() {
+        int money = getCharacterContainer().getResourceController().getStartingNuyen();
+
+        return TextUtils.IntToCash(money);
     }
 
 
@@ -59,8 +78,8 @@ public class StreetGear extends Card {
         labelResources = new JLabel();
         labelResources.setText("Label");
         panelInformation.add(labelResources, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer1 = new Spacer();
-        panelInformation.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        tree1 = new JTree();
+        panelInformation.add(tree1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
     }
 
     /**
