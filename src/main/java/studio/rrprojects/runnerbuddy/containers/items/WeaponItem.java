@@ -13,16 +13,5 @@ public class WeaponItem extends Buyable{
     @Override
     public void ProcessJson(JSONObject object) {
         super.ProcessJson(object);
-
-        try {
-            setCost(object.getInt("cost"));
-        } catch (JSONException e) {
-            // TODO: 8/6/21
-            setCost(-1);
-            //e.printStackTrace();
-        }
-
-        setType(JSONUtil.getString(object, "type", "Misc"));
-
     }
 }

@@ -20,13 +20,13 @@ public class ResourceController extends ControllerClass {
 
     private void LoadAllGear() {
         //Weapons
-        WeaponGroup weaponGroup = new WeaponGroup("Weapons");
-        weaponGroup.addGeneric("Personal Weapons", JsonFileConstants.GEAR_PERSONAL);
-        weaponGroup.addGeneric("Firearms", JsonFileConstants.GEAR_FIREARMS);
-        weaponGroup.addGeneric("Heavy Weapons", JsonFileConstants.GEAR_HEAVY_WEAPONS);
+        GearGroup weaponGroup = new GearGroup("Weapons");
+        weaponGroup.addWeapon("Personal Weapons", JsonFileConstants.GEAR_PERSONAL);
+        weaponGroup.addWeapon("Firearms", JsonFileConstants.GEAR_FIREARMS);
+        weaponGroup.addWeapon("Heavy Weapons", JsonFileConstants.GEAR_HEAVY_WEAPONS);
 
-        WeaponGroup armorGroup = new WeaponGroup("Armor");
-        armorGroup.addGeneric("Armor and Clothing", JsonFileConstants.GEAR_ARMOR);
+        GearGroup armorGroup = new GearGroup("Clothing");
+        armorGroup.addClothing("Armor and Clothing", JsonFileConstants.GEAR_ARMOR);
 
         weaponGroup.ProcessSubcategoryMap();
         armorGroup.ProcessSubcategoryMap();

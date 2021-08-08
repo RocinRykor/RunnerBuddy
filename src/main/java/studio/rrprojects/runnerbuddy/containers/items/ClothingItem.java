@@ -1,7 +1,7 @@
 package studio.rrprojects.runnerbuddy.containers.items;
 
-public class ArmorItem extends Buyable {
-    public ArmorItem(String name) {
+public class ClothingItem extends Buyable {
+    public ClothingItem(String name) {
         super(name);
     }
 }

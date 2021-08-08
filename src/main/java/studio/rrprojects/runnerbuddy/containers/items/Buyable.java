@@ -1,7 +1,10 @@
 package studio.rrprojects.runnerbuddy.containers.items;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.constants.MiscConstants;
+import studio.rrprojects.runnerbuddy.utils.TextUtils;
+import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
@@ -32,6 +35,15 @@ public class Buyable {
     }
 
     public void ProcessJson(JSONObject object) {
+        try {
+            setCost(object.getInt("cost"));
+        } catch (JSONException e) {
+            // TODO: 8/6/21
+            setCost(-1);
+            //e.printStackTrace();
+        }
+
+        setType(JSONUtil.getString(object, "type", "Misc"));
     }
 
     public String getType() {
@@ -44,7 +56,7 @@ public class Buyable {
 
     @Override
     public String toString() {
-        return getName() + ", " + getCost() + MiscConstants.NUYEN;
+        return getName() + ", " + TextUtils.IntToCash(getCost());
     }
 
     public MutableTreeNode toNode() {

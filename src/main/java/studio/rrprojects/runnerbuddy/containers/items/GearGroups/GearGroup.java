@@ -4,6 +4,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import studio.rrprojects.runnerbuddy.constants.FileConstants;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
+import studio.rrprojects.runnerbuddy.containers.items.ClothingItem;
+import studio.rrprojects.runnerbuddy.containers.items.WeaponItem;
 import studio.rrprojects.util_library.ConsoleColors;
 import studio.rrprojects.util_library.DebugUtils;
 import studio.rrprojects.util_library.JSONUtil;
@@ -78,8 +80,36 @@ public class GearGroup {
         masterList.addAll(arrayList);
     }
 
-    public void addGeneric(String subcategory, String fileName) {
-        Map<String, JSONObject> tmp = ProcessJSON(subcategory, fileName);
+    public Map<String, JSONObject> addGeneric(String subcategory, String fileName) {
+        return ProcessJSON(subcategory, fileName);
+    }
+
+    public void addWeapon(String subcategory, String fileName) {
+        Map<String, JSONObject> tmp = addGeneric(subcategory, fileName);
+
+        ArrayList<Buyable> arrayList = getSubcategoryMap().get(subcategory);
+        for (String key: tmp.keySet()) {
+
+            JSONObject jsonObject = tmp.get(key);
+            WeaponItem item = new WeaponItem(key);
+            item.ProcessJson(jsonObject);
+
+            arrayList.add(item);
+        }
+    }
+
+    public void addClothing(String subcategory, String fileName) {
+        Map<String, JSONObject> tmp = addGeneric(subcategory, fileName);
+
+        ArrayList<Buyable> arrayList = getSubcategoryMap().get(subcategory);
+        for (String key: tmp.keySet()) {
+
+            JSONObject jsonObject = tmp.get(key);
+            ClothingItem item = new ClothingItem(key);
+            item.ProcessJson(jsonObject);
+
+            arrayList.add(item);
+        }
     }
 
     public String getCategory() {
@@ -111,17 +141,12 @@ public class GearGroup {
 
         for (Object obj : masterList) {
             if (obj instanceof GearGroup) {
-                //DebugUtils.newDebugOut(ConsoleColors.YELLOW, "LOADING GEAR GROUP");
 
                 GearGroup gearGroup = (GearGroup) obj;
 
-                //DebugUtils.newDebugOut(ConsoleColors.YELLOW, "GEAR GROUP SIZE: " + gearGroup.getMasterList().size());
-
-                //System.out.println(gearGroup);
-
                 node.add(gearGroup.toNode());
             } else if (obj instanceof Buyable) {
-                //System.out.println("ADDING BUYABLE");
+
                 Buyable buyable = (Buyable) obj;
 
                 node.add(buyable.toNode());
