@@ -2,6 +2,7 @@ package studio.rrprojects.runnerbuddy.containers.items;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import studio.rrprojects.util_library.JSONUtil;
 
 public class WeaponItem extends Buyable{
 
@@ -20,6 +21,8 @@ public class WeaponItem extends Buyable{
             setCost(-1);
             //e.printStackTrace();
         }
+
+        setType(JSONUtil.getString(object, "type", "Misc"));
 
     }
 }

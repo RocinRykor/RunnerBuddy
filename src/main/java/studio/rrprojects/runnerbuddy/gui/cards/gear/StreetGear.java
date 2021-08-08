@@ -29,10 +29,10 @@ public class StreetGear extends Card {
 
         CardManager cardManager = new CardManager(panelCard);
         cardManager.setCharacterContainer(getCharacterContainer());
-        cardManager.addCard(new WeaponGearCard("Weapons"));
-        cardManager.addCard(new WeaponGearCard("Armor"));
-        cardManager.addCard(new WeaponGearCard("Lifestyle"));
-        cardManager.addCard(new WeaponGearCard("Misc."));
+        cardManager.addCard(new BasicGearCard("Weapons"));
+        cardManager.addCard(new BasicGearCard("Armor"));
+        //cardManager.addCard(new BasicGearCard("Lifestyle"));
+        //cardManager.addCard(new BasicGearCard("Misc."));
 
         panelCard.setBorder(BorderFactory.createTitledBorder("Purchase New Gear:"));
         panelInformation.setBorder(BorderFactory.createTitledBorder("Current Inventory:"));

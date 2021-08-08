@@ -114,7 +114,7 @@ public class MagicalInfoCard extends Card {
 
     private void PopulateDescription() {
         if (currentlySelectedDominion == null) {
-            System.out.println("CLEARING TEXT DESCRIPTION");
+            //System.out.println("CLEARING TEXT DESCRIPTION");
             textAreaDescription.setText("");
             return;
         }

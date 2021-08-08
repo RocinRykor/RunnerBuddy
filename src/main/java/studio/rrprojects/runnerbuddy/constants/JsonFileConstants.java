@@ -12,6 +12,9 @@ public class JsonFileConstants {
 
     //Gear
     public static final String GEAR_PERSONAL = "SR3E_personal_weapons.json";
+    public static final String GEAR_FIREARMS = "SR3E_firearms.json";
+    public static final String GEAR_HEAVY_WEAPONS = "SR3E_heavy_weapons.json";
+    public static final String GEAR_ARMOR = "SR3E_clothing_and_armor.json";
 
     //Character
     public static final String BLANK_CHARACTER = "blank_character_template.json";
