@@ -2,12 +2,14 @@ package studio.rrprojects.runnerbuddy.gui.cards.gear;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import studio.rrprojects.runnerbuddy.containers.items.GearGroups.GearGroup;
 import studio.rrprojects.runnerbuddy.gui.CardManager;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedHashMap;
 
 public class StreetGear extends Card {
     private JPanel panelMain;
@@ -27,12 +29,14 @@ public class StreetGear extends Card {
     public void Initialize() {
         super.Initialize();
 
+        LinkedHashMap<String, GearGroup> resourceMap = getCharacterContainer().getResourceController().getMasterMap();
+
         CardManager cardManager = new CardManager(panelCard);
         cardManager.setCharacterContainer(getCharacterContainer());
-        cardManager.addCard(new BasicGearCard("Weapons"));
-        cardManager.addCard(new BasicGearCard("Armor"));
-        //cardManager.addCard(new BasicGearCard("Lifestyle"));
-        //cardManager.addCard(new BasicGearCard("Misc."));
+
+        for (String key : resourceMap.keySet()) {
+            cardManager.addCard(new BasicGearCard(key));
+        }
 
         panelCard.setBorder(BorderFactory.createTitledBorder("Purchase New Gear:"));
         panelInformation.setBorder(BorderFactory.createTitledBorder("Current Inventory:"));

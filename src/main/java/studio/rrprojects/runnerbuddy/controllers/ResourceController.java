@@ -25,10 +25,15 @@ public class ResourceController extends ControllerClass {
         weaponGroup.addGeneric("Firearms", JsonFileConstants.GEAR_FIREARMS);
         weaponGroup.addGeneric("Heavy Weapons", JsonFileConstants.GEAR_HEAVY_WEAPONS);
 
+        WeaponGroup armorGroup = new WeaponGroup("Armor");
+        armorGroup.addGeneric("Armor and Clothing", JsonFileConstants.GEAR_ARMOR);
+
         weaponGroup.ProcessSubcategoryMap();
+        armorGroup.ProcessSubcategoryMap();
 
 
         masterMap.put(weaponGroup.getCategory(), weaponGroup);
+        masterMap.put(armorGroup.getCategory(), armorGroup);
     }
 
     @Override
