@@ -30,6 +30,8 @@ public class GearGroup {
         InputStream is = getClass().getResourceAsStream(filePath);
         assert is != null;
 
+        DebugUtils.newDebugOut(ConsoleColors.RED, "PROCESSING: " + fileName);
+
         JSONTokener token = new JSONTokener(is);
         JSONObject mainJson = new JSONObject(token);
 

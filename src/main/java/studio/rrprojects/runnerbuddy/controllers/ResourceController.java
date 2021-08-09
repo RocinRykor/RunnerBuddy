@@ -24,16 +24,33 @@ public class ResourceController extends ControllerClass {
         weaponGroup.addWeapon("Personal Weapons", JsonFileConstants.GEAR_PERSONAL);
         weaponGroup.addWeapon("Firearms", JsonFileConstants.GEAR_FIREARMS);
         weaponGroup.addWeapon("Heavy Weapons", JsonFileConstants.GEAR_HEAVY_WEAPONS);
+        weaponGroup.addWeapon("Grenades and Explosives", JsonFileConstants.GEAR_GRENADES);
+        weaponGroup.addWeapon("Impact Ranged Weapons", JsonFileConstants.GEAR_IMPACT);
+        //weaponGroup.addWeapon("Rockets and Missiles", JsonFileConstants.GEAR_ROCKETS);
 
+        //Armor
         GearGroup armorGroup = new GearGroup("Clothing");
         armorGroup.addClothing("Armor and Clothing", JsonFileConstants.GEAR_ARMOR);
 
+        //Entertainment
+        GearGroup entertainmentGroup = new GearGroup("Entertainment");
+        //entertainmentGroup.addClothing("Entertainment", JsonFileConstants.GEAR_ENTERTAINMENT);
+
+        //Security
+        GearGroup securityGroup = new GearGroup("Security");
+        securityGroup.addClothing("Surveillance and Security", JsonFileConstants.GEAR_SECURITY);
+
         weaponGroup.ProcessSubcategoryMap();
         armorGroup.ProcessSubcategoryMap();
+        entertainmentGroup.ProcessSubcategoryMap();
+        securityGroup.ProcessSubcategoryMap();
+
 
 
         masterMap.put(weaponGroup.getCategory(), weaponGroup);
         masterMap.put(armorGroup.getCategory(), armorGroup);
+        masterMap.put(entertainmentGroup.getCategory(), entertainmentGroup);
+        masterMap.put(securityGroup.getCategory(), securityGroup);
     }
 
     @Override
