@@ -22,6 +22,7 @@ public class AddBuyablePopup {
     public AddBuyablePopup(Buyable buyable) {
         this.buyable = buyable;
         frame = new JFrame(buyable.getName());
+
         $$$setupUI$$$();
         JUtils.OpenFrameAtMouseLocation(frame);
 
@@ -107,4 +108,7 @@ public class AddBuyablePopup {
     }
 
 
+    public Buyable getBuyable() {
+        return buyable;
+    }
 }

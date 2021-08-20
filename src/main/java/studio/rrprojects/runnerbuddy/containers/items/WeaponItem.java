@@ -1,7 +1,6 @@
 package studio.rrprojects.runnerbuddy.containers.items;
 
 import org.json.JSONObject;
-import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.util_library.DebugUtils;
 
 import java.util.LinkedHashMap;
@@ -36,16 +35,10 @@ public class WeaponItem extends Buyable{
         getPopup().setDescription(getDescription());
     }
 
-    private String getDescription() {
+    public String getDescription() {
         System.out.println("GETTING DESCRIPTION:");
-        String description = "";
-
-        for (String key : jsonMap.keySet()) {
-            //DebugUtils.CautionMsg(key);
-            description += key + ": " + jsonMap.get(key) + "\n";
-        }
 
         //System.out.println(description);
-        return description;
+        return super.getDescription() + "\n";
     }
 }

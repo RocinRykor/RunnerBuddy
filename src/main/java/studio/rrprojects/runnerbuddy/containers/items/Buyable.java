@@ -123,4 +123,16 @@ public class Buyable {
     public JSONObject getJsonObject() {
         return jsonObject;
     }
+
+    protected String getDescription() {
+        String output = "";
+        output += ("Name: " + name) + "\n";
+        output += ("Type: " + type) + "\n";
+        output += ("Cost: " + cost) + "\n";
+        output += ("Availability: " + availability) + "\n";
+        output += ("Street Index: " + streetIndex) + "\n";
+        output += ("Legal: " + legal);
+
+        return output;
+    }
 }
