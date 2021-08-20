@@ -1,11 +1,16 @@
 package studio.rrprojects.runnerbuddy.containers.items;
 
 import org.json.JSONObject;
-import studio.rrprojects.util_library.DebugUtils;
+import studio.rrprojects.util_library.JSONUtil;
 
 import java.util.LinkedHashMap;
 
 public class WeaponItem extends Buyable{
+    int ammoCount;
+    String ammoType;
+    String firingModes;
+    String damageCode;
+    String recopilCompensation;
 
     private LinkedHashMap<String, Object> jsonMap;
 
@@ -17,14 +22,12 @@ public class WeaponItem extends Buyable{
     public void ProcessJson(JSONObject object) {
         super.ProcessJson(object);
 
-        DebugUtils.VaraibleMsg("PROCESSING JSON: " + object);
 
-        jsonMap = new LinkedHashMap<>();
-
-        for (String key : object.keySet()) {
-            //DebugUtils.UnknownMsg(key);
-            jsonMap.put(key, object.get(key));
-        }
+        ammoCount = JSONUtil.getInt(object, "ammo",  1);
+        ammoType = JSONUtil.getString(object, "ammo_type", "C");
+        firingModes = JSONUtil.getString(object, "mode", "SS");
+        damageCode = JSONUtil.getString(object, "damage", "-1M");
+        recopilCompensation = JSONUtil.getString(object, "rc", "N/A");
 
     }
 
@@ -39,6 +42,13 @@ public class WeaponItem extends Buyable{
         System.out.println("GETTING DESCRIPTION:");
 
         //System.out.println(description);
-        return super.getDescription() + "\n";
+        String output =  super.getDescription() + "\n\n";
+
+        output += ("Ammo: " + ammoCount + "(" + ammoType + ")") + "\n";
+        output += ("Firing Modes: " + firingModes) + "\n";
+        output += ("Damage Code: " + damageCode) + "\n";
+        output += ("Recopil Compensation: " + recopilCompensation);
+
+        return output;
     }
 }

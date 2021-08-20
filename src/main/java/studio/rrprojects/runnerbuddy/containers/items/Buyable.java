@@ -27,6 +27,10 @@ public class Buyable {
 
     double streetIndex;
 
+    int conceal;
+
+    double weight;
+
     private AddBuyablePopup popup;
     private JSONObject jsonObject;
 
@@ -84,14 +88,11 @@ public class Buyable {
         //VariableRating
         variableRating = JSONUtil.getBool(object, "variable_rating", false);
 
+        //Conceal
+        conceal = JSONUtil.getInt(object, "conceal",  0);
 
-
-        DebugUtils.CautionMsg("Name: " + name);
-        DebugUtils.CautionMsg("Type: " + type);
-        DebugUtils.CautionMsg("Cost: " + cost);
-        DebugUtils.CautionMsg("Availability: " + availability);
-        DebugUtils.CautionMsg("Street Index: " + streetIndex);
-        DebugUtils.CautionMsg("Legal: " + legal);
+        //Weight
+        weight = JSONUtil.getDouble(object, "weight", 0);
 
     }
 
@@ -128,9 +129,11 @@ public class Buyable {
         String output = "";
         output += ("Name: " + name) + "\n";
         output += ("Type: " + type) + "\n";
+        output += ("Weight: " + weight) + "\n";
         output += ("Cost: " + cost) + "\n";
         output += ("Availability: " + availability) + "\n";
         output += ("Street Index: " + streetIndex) + "\n";
+        output += ("Conceal Rating: " + conceal) + "\n";
         output += ("Legal: " + legal);
 
         return output;
