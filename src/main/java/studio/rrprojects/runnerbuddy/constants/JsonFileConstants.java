@@ -15,12 +15,12 @@ public class JsonFileConstants {
 
     //Gear
     //Weapons
-    public static final String GEAR_PERSONAL = "SR3E_personal_weapons.json";
-    public static final String GEAR_FIREARMS = "SR3E_firearms.json";
-    public static final String GEAR_HEAVY_WEAPONS = "SR3E_heavy_weapons.json";
-    public static final String GEAR_GRENADES = "SR3E_grenades.json";
-    public static final String GEAR_IMPACT = "SR3E_impact_projectile_weapons.json";
-    public static final String GEAR_ROCKETS = "SR3E_rockets_and_missiles.json";
+    public static final String GEAR_PERSONAL = "Weapons/SR3E_personal_weapons.json";
+    public static final String GEAR_FIREARMS = "Weapons/SR3E_firearms.json";
+    public static final String GEAR_HEAVY_WEAPONS = "Weapons/SR3E_heavy_weapons.json";
+    public static final String GEAR_GRENADES = "Weapons/SR3E_grenades.json";
+    public static final String GEAR_IMPACT = "Weapons/SR3E_impact_projectile_weapons.json";
+    public static final String GEAR_ROCKETS = "Weapons/SR3E_rockets_and_missiles.json";
 
     //Armor
     public static final String GEAR_ARMOR = "SR3E_clothing_and_armor.json";

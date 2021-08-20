@@ -2,7 +2,7 @@ package studio.rrprojects.runnerbuddy.containers.items;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import studio.rrprojects.runnerbuddy.constants.MiscConstants;
+import studio.rrprojects.runnerbuddy.gui.popups.gear.AddBuyablePopup;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 import studio.rrprojects.util_library.JSONUtil;
 
@@ -13,6 +13,8 @@ public class Buyable {
     String name;
     int cost = 0;
     String type = "Misc.";
+    private AddBuyablePopup popup;
+    private JSONObject jsonObject;
 
     public Buyable(String name) {
         this.name = name;
@@ -35,6 +37,7 @@ public class Buyable {
     }
 
     public void ProcessJson(JSONObject object) {
+        this.jsonObject = object;
         try {
             setCost(object.getInt("cost"));
         } catch (JSONException e) {
@@ -61,5 +64,17 @@ public class Buyable {
 
     public MutableTreeNode toNode() {
         return new DefaultMutableTreeNode(this);
+    }
+
+    public void PurchaseDialog() {
+        popup = new AddBuyablePopup(this);
+    }
+
+    public AddBuyablePopup getPopup() {
+        return popup;
+    }
+
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
 }

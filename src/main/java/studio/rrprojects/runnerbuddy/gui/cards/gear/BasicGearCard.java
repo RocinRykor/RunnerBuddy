@@ -2,13 +2,17 @@ package studio.rrprojects.runnerbuddy.gui.cards.gear;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import studio.rrprojects.runnerbuddy.containers.items.Buyable;
 import studio.rrprojects.runnerbuddy.containers.items.GearGroups.GearGroup;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class BasicGearCard extends Card {
     private JPanel panelMain;
@@ -32,16 +36,28 @@ public class BasicGearCard extends Card {
 
         DefaultMutableTreeNode treeNode = gearGroup.toNode();
 
-        /*
-        for (String key : map.keySet()) {
-            GearGroup gearGroup = map.get(key);
-
-            DefaultMutableTreeNode node = gearGroup.toNode();
-            treeNode.add(node);
-        }
-         */
-
         treeMain.setModel(new DefaultTreeModel(treeNode));
+
+        treeMain.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                TreePath selPath = treeMain.getPathForLocation(e.getX(), e.getY());
+                if (e.getClickCount() == 2) {
+                    assert selPath != null;
+                    DoubleClickEvent(selPath);
+                }
+            }
+        });
+    }
+
+    private void DoubleClickEvent(TreePath selPath) {
+        DefaultMutableTreeNode finalNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
+        Object selectedObject = finalNode.getUserObject();
+
+        if (selectedObject instanceof Buyable) {
+            Buyable buyable = (Buyable) selectedObject;
+            buyable.PurchaseDialog();
+        }
     }
 
     @Override
