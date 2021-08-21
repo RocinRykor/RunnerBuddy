@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.gui.popups.gear.AddBuyablePopup;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
-import studio.rrprojects.util_library.DebugUtils;
 import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
