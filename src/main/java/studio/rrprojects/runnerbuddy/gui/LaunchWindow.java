@@ -1,6 +1,5 @@
 package studio.rrprojects.runnerbuddy.gui;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -33,8 +32,6 @@ public class LaunchWindow extends JFrame {
     public LaunchWindow() {
         super(title);
 
-        InitLaF();
-
         BeginInit();
 
         setContentPane(panelMain);
@@ -46,11 +43,8 @@ public class LaunchWindow extends JFrame {
         });
 
         buttonRandom.addActionListener(actionEvent -> {
-            CreateNewCharacter(true);
+            CreateNewCharacter(false);
         });
-    }
-
-    private void InitLaF() {
     }
 
     private void CreateNewCharacter(boolean isRandomCharacter) {
