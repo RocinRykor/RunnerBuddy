@@ -35,4 +35,8 @@ public class PriorityContainer {
                 ", valueRaw=" + valueRaw +
                 '}';
     }
+
+    public String toMapDisplay() {
+        return "Level " + priorityKey + ": " + toString();
+    }
 }

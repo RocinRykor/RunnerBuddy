@@ -1,7 +1,5 @@
 package studio.rrprojects.runnerbuddy.containers.priority;
 
-import studio.rrprojects.runnerbuddy.utils.TextUtils;
-
 public class PointPriority extends PriorityContainer {
     int pointValue = 0;
 
@@ -14,7 +12,7 @@ public class PointPriority extends PriorityContainer {
     @Override
     public String toString() {
 
-        return getPriorityCategory() + ": " + pointValue + " Points";
+        return getPriorityCategory() + " (" + pointValue + " Points)";
     }
 
     public int getPointValue() {

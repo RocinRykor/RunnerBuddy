@@ -134,7 +134,11 @@ public class Info extends Card {
         SaveDescription();
     }
 
-    private void SetDescription(String description) {
+    private void SetDescription(String baseDescription) {
+        String PriorityMap = getCharacterContainer().getPriorityController().getPriorityMapString();
+
+        String description = baseDescription + "\n" + PriorityMap;
+
         textRaceDescription.setText(description);
     }
 

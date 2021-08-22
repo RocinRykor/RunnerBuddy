@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class PriorityController extends ControllerClass{
     private final CharacterContainer characterContainer;
-    private final HashMap<String, PriorityLevelGroup> masterPriorityMap = new HashMap<String, PriorityLevelGroup>();
+    private final HashMap<String, PriorityLevelGroup> masterPriorityMap = new HashMap<>();
     private final String[] listCategory = PriorityConstants.PRIORITIES;
     private JSONObject priorityJson;
     private ArrayList<PriorityContainer> takenPriorities = new ArrayList<>();
@@ -87,4 +87,13 @@ public class PriorityController extends ControllerClass{
         return null;
     }
 
+    public String getPriorityMapString() {
+        String output = "- Priority Map -\n";
+
+        for (PriorityContainer priorityContainer: takenPriorities) {
+            output += priorityContainer.toMapDisplay() + "\n";
+        }
+
+        return output;
+    }
 }

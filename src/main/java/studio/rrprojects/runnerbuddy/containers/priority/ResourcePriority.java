@@ -1,6 +1,5 @@
 package studio.rrprojects.runnerbuddy.containers.priority;
 
-import studio.rrprojects.runnerbuddy.constants.MiscConstants;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
 public class ResourcePriority extends PriorityContainer {
@@ -16,7 +15,7 @@ public class ResourcePriority extends PriorityContainer {
     public String toString() {
         String pointString = TextUtils.IntToCash(pointValue);
 
-        return getPriorityCategory() + ": " + pointString;
+        return getPriorityCategory() + " (" + pointString + ")";
     }
 
     public Integer getPointValue() {

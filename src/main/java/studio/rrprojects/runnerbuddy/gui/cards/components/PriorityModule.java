@@ -70,7 +70,6 @@ public class PriorityModule extends JComponent {
             popup.add(menuItem);
         }
 
-
         popup.add(separator);
         popup.add(clearOption);
         popup.add(cancelOption);

@@ -6,14 +6,12 @@ import studio.rrprojects.runnerbuddy.constants.FileConstants;
 import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
 import studio.rrprojects.runnerbuddy.constants.PriorityConstants;
 import studio.rrprojects.runnerbuddy.controllers.*;
-import studio.rrprojects.runnerbuddy.misc.PriorityObject;
 import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 import studio.rrprojects.runnerbuddy.textbuilder.TextBuilder;
 import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
 
 import java.io.*;
-import java.util.LinkedHashMap;
 
 public class CharacterContainer {
 
