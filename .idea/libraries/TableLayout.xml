@@ -2,7 +2,6 @@
   <library name="TableLayout">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/TableLayout.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/jgoodies-forms-1.4.0.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$PROJECT_DIR$/lib/TableLayout-javadoc.jar!/" />
