@@ -43,7 +43,7 @@ public class LaunchWindow extends JFrame {
         });
 
         buttonRandom.addActionListener(actionEvent -> {
-            CreateNewCharacter(false);
+            CreateNewCharacter(true);
         });
     }
 

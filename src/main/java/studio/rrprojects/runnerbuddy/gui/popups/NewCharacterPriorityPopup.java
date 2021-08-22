@@ -17,7 +17,7 @@ import java.util.*;
 public class NewCharacterPriorityPopup extends JFrame {
     private final String title = "Select Character Priority";
 
-    private final Boolean forceMagic = true;
+    private final Boolean forceMagic = false;
 
     private JPanel panelMain;
     private JLabel labelHeader;
