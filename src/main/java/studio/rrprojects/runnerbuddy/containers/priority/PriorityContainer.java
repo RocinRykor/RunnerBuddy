@@ -2,7 +2,7 @@ package studio.rrprojects.runnerbuddy.containers.priority;
 
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
-public class PriorityContainer {
+public class PriorityContainer implements Comparable<PriorityContainer>{
 
     private final String priorityKey;
     private final String priorityCategory;
@@ -38,5 +38,10 @@ public class PriorityContainer {
 
     public String toMapDisplay() {
         return "Level " + priorityKey + ": " + toString();
+    }
+
+    @Override
+    public int compareTo(PriorityContainer p) {
+        return this.getPriorityKey().compareTo(p.getPriorityKey());
     }
 }

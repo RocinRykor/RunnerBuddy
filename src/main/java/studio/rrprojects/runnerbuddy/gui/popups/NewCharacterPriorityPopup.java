@@ -144,6 +144,7 @@ public class NewCharacterPriorityPopup extends JFrame {
     }
 
     private void Finalize() {
+        characterContainer.getPriorityController().Sort();
         characterContainer.ProcessPriorities();
 
         new CharacterCreationWindow(characterContainer);

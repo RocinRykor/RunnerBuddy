@@ -10,6 +10,7 @@ import studio.rrprojects.runnerbuddy.containers.priority.PriorityLevelGroup;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class PriorityController extends ControllerClass{
@@ -95,5 +96,9 @@ public class PriorityController extends ControllerClass{
         }
 
         return output;
+    }
+
+    public void Sort() {
+        Collections.sort(takenPriorities);
     }
 }
