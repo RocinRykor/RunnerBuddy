@@ -10,7 +10,6 @@ import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Iterator;
 
 public class Info extends Card {
@@ -46,8 +45,22 @@ public class Info extends Card {
         super.Initialize();
 
         FormatRacePanel();
-        FormatButtonGroup();
         FormatInfoPanel();
+
+        SetDefaultRace();
+    }
+
+    private void SetDefaultRace() {
+        String selectedRace = raceNames.get(0);
+
+        SelectRace(selectedRace); //Selects the first available race by default
+
+        for (Iterator<AbstractButton> it = buttonGroup.getElements().asIterator(); it.hasNext(); ) {
+            AbstractButton button = it.next();
+            if (button.getActionCommand().equalsIgnoreCase(selectedRace)) {
+                button.setSelected(true);
+            }
+        }
     }
 
     private void SaveDescription() {
@@ -80,16 +93,6 @@ public class Info extends Card {
         textFieldList.add(textSkin);
     }
 
-    private void FormatButtonGroup() {
-        Enumeration<AbstractButton> buttonList = buttonGroup.getElements();
-
-        for (Iterator<AbstractButton> it = buttonList.asIterator(); it.hasNext(); ) {
-            AbstractButton button = it.next();
-            String buttonName = button.getActionCommand();
-        }
-
-    }
-
     private void FormatRacePanel() {
         panelRace.setBorder(BorderFactory.createTitledBorder("Select a Race"));
         panelRaceButtons.setBorder(BorderFactory.createTitledBorder("Race"));
@@ -118,8 +121,8 @@ public class Info extends Card {
 
     }
 
-    private void SelectRace(String actionCommand) {
-        getCharacterContainer().getRaceController().setSelectedRace(actionCommand);
+    private void SelectRace(String raceName) {
+        getCharacterContainer().getRaceController().setSelectedRace(raceName);
         RaceContainer selectedRace = getCharacterContainer().getRaceController().getSelectedRace();
 
         SetDescription(selectedRace.getDescription());
