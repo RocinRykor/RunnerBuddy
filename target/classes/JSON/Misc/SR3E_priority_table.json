@@ -1,0 +1,35 @@
+{
+  "a": {
+    "magic": ["Full Magician", "Adept (Way of the Magician)"],
+    "attributes": 30,
+    "skills": 50,
+    "resources" : 1000000
+  },
+  "b": {
+    "magic": ["Aspected Magician", "Adept"],
+    "attributes": 27,
+    "skills": 40,
+    "resources" : 400000
+  },
+  "c": {
+    "race" : ["Troll", "Elf"],
+    "magic": ["Mundane"],
+    "attributes": 24,
+    "skills": 34,
+    "resources" : 90000
+  },
+  "d": {
+    "race" : ["Dwarf", "Ork"],
+    "magic": ["Mundane"],
+    "attributes": 21,
+    "skills": 30,
+    "resources" : 20000
+  },
+  "e": {
+    "race" : ["Human"],
+    "magic": ["Mundane"],
+    "attributes": 18,
+    "skills": 27,
+    "resources" : 5000
+  }
+}

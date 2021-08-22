@@ -1,0 +1,112 @@
+{
+   "Disk/Chip, Music": {
+     "conceal": 12,
+     "cost": 20,
+     "street_index": 0.75,
+     "weight": 0,
+     "type": "Music",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Truman Paradiso (polyPOV ACT or DIR-X)": {
+     "conceal": 0,
+     "cost": 75000,
+     "street_index": 1,
+     "weight": 6,
+     "type": "Simsense Decks",
+     "availability_time_frame": "hrs",
+     "availability_interval": 36,
+     "availability_rating": 4
+   },
+   "Novatech Sandman (polyPOV ACT)": {
+     "conceal": 6,
+     "cost": 2500,
+     "street_index": 1,
+     "weight": 1,
+     "type": "Simsense Decks",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Sony Beautiful Dreamer (monoPOV ACT)": {
+     "conceal": 8,
+     "cost": 200,
+     "street_index": 1,
+     "weight": 0.5,
+     "type": "Simsense Decks",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Screen, Video": {
+     "conceal": 0,
+     "cost": 150,
+     "street_index": 0.75,
+     "weight": 3,
+     "type": "Video",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Playback Unit, Video": {
+     "conceal": 8,
+     "cost": 400,
+     "street_index": 0.75,
+     "weight": 0.5,
+     "type": "Video",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Disk/Chip, Video": {
+     "conceal": 12,
+     "cost": 20,
+     "street_index": 0.75,
+     "weight": 0,
+     "type": "Video",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "ACT Recordings": {
+     "conceal": 10,
+     "cost": "2/minute",
+     "street_index": 0.75,
+     "weight": 0,
+     "type": "Simsense Recordings",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Quad Speakers, Music": {
+     "conceal": 0,
+     "cost": 100,
+     "street_index": 0.75,
+     "weight": 5,
+     "type": "Music",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Dir-X Recordings": {
+     "conceal": 10,
+     "cost": "90/minute",
+     "street_index": 0.75,
+     "weight": 0,
+     "type": "Simsense Recordings",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   },
+   "Playback Unit, Music": {
+     "conceal": 9,
+     "cost": 200,
+     "street_index": 0.75,
+     "weight": 0.5,
+     "type": "Music",
+     "availability_time_frame": "hrs",
+     "availability_interval": 1,
+     "availability_rating": 1
+   }
+ }

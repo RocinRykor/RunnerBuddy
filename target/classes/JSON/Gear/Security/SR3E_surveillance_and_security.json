@@ -1,0 +1,98 @@
+{
+  "Binoculars": {
+    "type": "Vision Enhancer",
+    "conceal": 5,
+    "magnification": "50x",
+    "weight": 1,
+    "availability_rating": 1,
+    "availability_interval": 1,
+    "availability_time_frame": "hrs",
+    "cost": 100,
+    "street_index": 0.8,
+    "variable_rating": false
+  },
+  "Low-Light Binoculars": {
+    "type": "Vision Enhancer",
+    "conceal": 5,
+    "magnification": "50x",
+    "weight": 1,
+    "availability_rating": 4,
+    "availability_interval": 48,
+    "availability_time_frame": "hrs",
+    "cost": 200,
+    "street_index": 1.25,
+    "variable_rating": false
+  },
+  "Thermographic Binoculars": {
+    "type": "Vision Enhancer",
+    "conceal": 5,
+    "magnification": "50x",
+    "weight": 1,
+    "availability_rating": 4,
+    "availability_interval": 48,
+    "availability_time_frame": "hrs",
+    "cost": 250,
+    "street_index": 1.25,
+    "variable_rating": false
+  },
+  "Pocket Flashlight": {
+    "type": "Vision Enhancer",
+    "conceal": 12,
+    "magnification": 0,
+    "weight": 0,
+    "availability_rating": 1,
+    "availability_interval": 1,
+    "availability_time_frame": "hrs",
+    "cost": 10,
+    "street_index": 1,
+    "variable_rating": false
+  },
+  "Large Flashlight": {
+    "type": "Vision Enhancer",
+    "conceal": 7,
+    "magnification": 0,
+    "weight": 2,
+    "availability_rating": 1,
+    "availability_interval": 1,
+    "availability_time_frame": "hrs",
+    "cost": 25,
+    "street_index": 1,
+    "variable_rating": false
+  },
+  "Goggles": {
+    "type": "Vision Enhancer",
+    "conceal": 6,
+    "magnification": "20x",
+    "weight": 0,
+    "availability_rating": 4,
+    "availability_interval": 48,
+    "availability_time_frame": "hrs",
+    "cost": 1500,
+    "street_index": 1.5,
+    "variable_rating": false
+  },
+  "Low-Light Goggles": {
+    "type": "Vision Enhancer",
+    "conceal": 6,
+    "magnification": "20x",
+    "weight": 0,
+    "availability_rating": 6,
+    "availability_interval": 48,
+    "availability_time_frame": "hrs",
+    "cost": 500,
+    "street_index": 2,
+    "variable_rating": false
+  },
+  "Thermographic Goggles": {
+    "type": "Vision Enhancer",
+    "conceal": 6,
+    "magnification": "20x",
+    "weight": 0,
+    "availability_rating": 6,
+    "availability_interval": 48,
+    "availability_time_frame": "hrs",
+    "cost": 700,
+    "street_index": 2,
+    "variable_rating": false
+  }
+}

@@ -1,0 +1,77 @@
+ {
+   "Full Mage" : {
+        "tradition": "Hermetic",
+        "base_points" : 25,
+        "tags" : [
+          "Astral Perception",
+          "Astral Projection",
+          "Conjuration",
+          "Sorcery"
+        ]
+    },
+    "Full Shaman" : {
+         "tradition": "Shamanic",
+         "base_points" : 25,
+         "tags" : [
+           "Astral Perception",
+           "Astral Projection",
+           "Conjuration",
+           "Sorcery",
+           "Totem"
+         ]
+     },
+     "Elementalist" : {
+          "tradition": "Hermetic",
+          "base_points" : 35,
+          "tags" : [
+            "Astral Perception",
+            "Conjuration - Limited",
+            "Sorcery - Limited",
+            "Element"
+          ]
+      },
+      "Shamanist" : {
+           "tradition": "Shamanic",
+           "base_points" : 35,
+           "tags" : [
+             "Astral Perception",
+             "Conjuration - Limited",
+             "Sorcery - Limited",
+             "Totem - Limited"
+           ]
+       },
+       "Mage Conjurer" : {
+            "tradition": "Hermetic",
+            "base_points" : 35,
+            "tags" : [
+              "Astral Perception",
+              "Conjuration"
+            ]
+        },
+        "Shaman Conjurer" : {
+             "tradition": "Shamanic",
+             "base_points" : 35,
+             "tags" : [
+               "Astral Perception",
+               "Conjuration",
+               "Totem"
+             ]
+         },
+         "Mage Sorcerer" : {
+              "tradition": "Hermetic",
+              "base_points" : 35,
+              "tags" : [
+                "Astral Perception",
+                "Sorcery"
+              ]
+          },
+          "Shaman Sorcerer" : {
+               "tradition": "Shamanic",
+               "base_points" : 35,
+               "tags" : [
+                 "Astral Perception",
+                 "Sorcery",
+                 "Totem"
+               ]
+           }
+}

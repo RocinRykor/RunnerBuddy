@@ -1,0 +1,25 @@
+v0.1.1
+New Features
+- Descripion Panel (Info/Race Tab) saves automatically
+
+Removed:
+-   Save/Export Tab
+-   -   This tab is currently non-fucntional, will add it back when the ability to export is actually finished
+
+BugFixes
+-   Attributes tab no longer throws errors if no race is selected, just acts like you picked human
+
+v0.1.0
+Features:
+New Character Creation
+
+Priority System for character gen
+
+Attribute Allocation
+- Automatic Reaction attribute calculation
+- Magic attribute set based on priority
+
+Skill Allocation
+- Point limits based on priority and attributes
+- Can specialize skills when adding them
+- Can designate build/repair skills with proper attribute linking

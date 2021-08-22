@@ -1,0 +1,54 @@
+{
+  "fire": {
+      "description": "Fire mages are borne from the heat of combat, their skills allow them wield destruction, towards others or their surroundings, with frightening efficiency. However, as a fire mage relies on what he can see in order to focus his his destructive power, the subtle working of illusions can easily slip his notice and make them vulnerable.",
+      "linked_category" : "combat",
+      "disadvantages": {
+              "spells": {
+                  "illusion": 1
+              },
+              "spirits": {
+                  "water": 1
+              },
+              "special": ""
+    }
+  },
+  "water": {
+      "description": "Like water itself, changing to fill a container, water mages adept to a situation using their skills to blend into their surroundings or alter the surroundings in the minds of their opponents. However, since illusions are incapable of causing direct harm to it's target, a water mage is inexperienced when dealing with the might of one trained to wield combat spells.",
+      "linked_category" : "illusion",
+      "disadvantages": {
+              "spells": {
+                  "combat": 1
+              },
+              "spirits": {
+                  "fire": 1
+              },
+              "special": ""
+    }
+  },
+  "earth": {
+      "description": "Earth mages wield the very forces of creation to transform matter and energy to their will. From controlling the minds of others to manipulating the earth and its elements around them, an earth mage has the power to be a devastating foe or an invaluable ally. However, as the working of such primal forces to move mountains, the delicate spells of detection magic are oft-able to allude the defenses of an earth mage.",
+      "linked_category" : "manipulation",
+      "disadvantages": {
+              "spells": {
+                  "detection": 1
+              },
+              "spirits": {
+                  "air": 1
+              },
+              "special": ""
+    }
+  },
+  "air": {
+      "description": "Air mages are able to perceive the world around them on a scale not seen in most others. As if knowledge is brought to them on the winds themselves, an air mage is able to take stock of any situation and devise the most efficient plan imaginable. However, such knowledge relies on knowing exactly the way the world is, that is why air mages often find difficulty in countering the spells that alter and manipulate the very forces of creation.",
+      "linked_category" : "detection",
+      "disadvantages": {
+              "spells": {
+                  "manipulation": 1
+              },
+              "spirits": {
+                  "earth": 1
+              },
+              "special": ""
+    }
+  }
+}
