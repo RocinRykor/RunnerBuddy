@@ -8,6 +8,7 @@ import studio.rrprojects.runnerbuddy.constants.PriorityConstants;
 import studio.rrprojects.runnerbuddy.controllers.*;
 import studio.rrprojects.runnerbuddy.misc.ValidChecker;
 import studio.rrprojects.runnerbuddy.textbuilder.TextBuilder;
+import studio.rrprojects.util_library.DebugUtils;
 import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
 
@@ -84,10 +85,12 @@ public class CharacterContainer {
 
         File file = new File(FileConstants.CHARACTER_DIRECTORY + "Test.txt");
 
-        try {
-            file.createNewFile()
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!file.exists()) {
+            try {
+                DebugUtils.CautionMsg("CREATING NEW FILE: " + file + " > " + file.createNewFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         String output = builder.build();
