@@ -9,6 +9,7 @@ public class PriorityContainer implements Comparable<PriorityContainer>{
     private final Object valueRaw;
 
     public PriorityContainer(String priorityKey, String categoryKey, Object priorityObject) {
+        //This is just the base object is never used! Check PointPriority, ListPriority, and ResourcePriority
         //Main three, will never change
         this.priorityKey = priorityKey;
         this.priorityCategory = TextUtils.titleCase(categoryKey);
