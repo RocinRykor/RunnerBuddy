@@ -27,11 +27,11 @@ public class ListPriority extends PriorityContainer {
 
     @Override
     public String toString() {
-        String outputString = availableOptions.get(0);
+        StringBuilder outputString = new StringBuilder(availableOptions.get(0));
 
         if (availableOptions.size() > 1) {
             for (int i = 1; i < availableOptions.size(); i++) {
-                outputString += " / " + availableOptions.get(i);
+                outputString.append(" / ").append(availableOptions.get(i));
             }
         }
 

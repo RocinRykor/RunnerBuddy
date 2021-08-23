@@ -85,7 +85,7 @@ public class CharacterContainer {
         File file = new File(FileConstants.CHARACTER_DIRECTORY + "Test.txt");
 
         try {
-            file.createNewFile();
+            file.createNewFile()
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,10 +104,17 @@ public class CharacterContainer {
     }
 
     public void exportToJSON() {
-        //First creat the json
+        //First create the json
         String jsonPath = FileConstants.RESOURCE_CHARACTER + JsonFileConstants.BLANK_CHARACTER;
         InputStream is = getClass().getResourceAsStream(jsonPath);
-        JSONTokener token = new JSONTokener(is);
+        JSONTokener token = null;
+        if (is != null) {
+            token = new JSONTokener(is);
+        } else {
+            System.err.println(jsonPath + ": INPUT STREAM IS NULL!");
+        }
+
+        assert token != null;
         JSONObject blankCharacter = new JSONObject(token);
 
         attributeController.toJSON(blankCharacter);

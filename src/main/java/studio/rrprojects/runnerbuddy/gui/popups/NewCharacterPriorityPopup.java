@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class NewCharacterPriorityPopup extends JFrame {
     private final String title = "Select Character Priority";
 
@@ -43,7 +44,7 @@ public class NewCharacterPriorityPopup extends JFrame {
 
     private final String panelTitle = "Priority Selection";
 
-    private ArrayList<String> availiableOptions;
+    private ArrayList<String> availableOptions;
 
     public NewCharacterPriorityPopup(CharacterContainer characterContainer) {
         setTitle(title);
@@ -71,18 +72,18 @@ public class NewCharacterPriorityPopup extends JFrame {
             priorityModule.ClearSelection();
         }
 
-        availiableOptions = new ArrayList<>();
-        availiableOptions.addAll(Arrays.asList("A", "B", "C", "D", "E"));
+        availableOptions = new ArrayList<>();
+        availableOptions.addAll(Arrays.asList("A", "B", "C", "D", "E"));
 
         if (forceMagic) {
-            RadomRace();
+            RandomRace();
             RandomMagic();
             RandomChoice(PriorityConstants.RESOURCES);
             RandomChoice(PriorityConstants.ATTRIBUTES);
             RandomChoice(PriorityConstants.SKILLS);
 
         } else {
-            RadomRace();
+            RandomRace();
             RandomChoice(PriorityConstants.RESOURCES);
             RandomChoice(PriorityConstants.ATTRIBUTES);
             RandomChoice(PriorityConstants.SKILLS);
@@ -100,12 +101,12 @@ public class NewCharacterPriorityPopup extends JFrame {
 
         priorityModuleMap.get(selectedKey).getPriorityLevelGroup().setSelectionByCategory(PriorityConstants.MAGIC);
 
-        availiableOptions.remove(selectedKey);
+        availableOptions.remove(selectedKey);
     }
 
     private void RandomChoice(String category) {
 
-        ArrayList<String> choices = availiableOptions;
+        ArrayList<String> choices = availableOptions;
 
         Collections.shuffle(choices);
 
@@ -113,10 +114,10 @@ public class NewCharacterPriorityPopup extends JFrame {
 
         priorityModuleMap.get(selectedKey).getPriorityLevelGroup().setSelectionByCategory(category);
 
-        availiableOptions.remove(selectedKey);
+        availableOptions.remove(selectedKey);
     }
 
-    private void RadomRace() {
+    private void RandomRace() {
         ArrayList<String> choices = new ArrayList<>(Arrays.asList("C", "D", "E"));
 
         Collections.shuffle(choices);
@@ -125,13 +126,13 @@ public class NewCharacterPriorityPopup extends JFrame {
 
         priorityModuleMap.get(selectedKey).getPriorityLevelGroup().setSelectionByCategory(PriorityConstants.RACE);
 
-        availiableOptions.remove(selectedKey);
+        availableOptions.remove(selectedKey);
     }
 
     private void SubmitEvent() {
         ArrayList<PriorityContainer> priorityList = characterContainer.getPriorityController().getTakenPriorities();
         if (priorityList.size() != 5) {
-            String title = "INVALID SELCTION";
+            String title = "INVALID SELECTION";
             String errorString = "Please ensure all priority levels are selected and try again!";
             JOptionPane.showConfirmDialog(null, errorString, title,
                     JOptionPane.OK_OPTION);

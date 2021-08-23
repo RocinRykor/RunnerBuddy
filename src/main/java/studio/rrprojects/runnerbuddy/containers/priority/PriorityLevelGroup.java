@@ -13,17 +13,17 @@ import java.util.LinkedHashMap;
 public class PriorityLevelGroup {
 
     private final String priorityLevel;
-    private final JSONObject jsonObect;
-    private LinkedHashMap<String, PriorityContainer> priorityContainerMap = new LinkedHashMap<>();
-    private LinkedHashMap<String, PriorityContainer> popupMap = new LinkedHashMap<>();
+    private final JSONObject jsonObject;
+    private final LinkedHashMap<String, PriorityContainer> priorityContainerMap = new LinkedHashMap<>();
+    private final LinkedHashMap<String, PriorityContainer> popupMap = new LinkedHashMap<>();
     private PriorityContainer selectedPriority;
     private PriorityModule parent;
 
     public PriorityLevelGroup(String priorityLevel, JSONObject jsonObject) {
         this.priorityLevel = priorityLevel;
-        this.jsonObect = jsonObject;
+        this.jsonObject = jsonObject;
 
-        //I am doing this manually becuase the priority table should never change
+        //I am doing this manually because the priority table should never change
         //Race
         ListPriority racePriority = new ListPriority(priorityLevel, PriorityConstants.RACE, JsonUtils.getObjOrDefault(jsonObject, "race", null));
         priorityContainerMap.put(PriorityConstants.RACE, racePriority);
@@ -35,16 +35,16 @@ public class PriorityLevelGroup {
         popupMap.put(magicPriority.toString(), magicPriority);
 
         //Attributes
-        PointPriority attributePrioty = new PointPriority(priorityLevel, PriorityConstants.ATTRIBUTES, jsonObject.get("attributes"));
-        priorityContainerMap.put(PriorityConstants.ATTRIBUTES, attributePrioty);
-        popupMap.put(attributePrioty.toString(), attributePrioty);
+        PointPriority attributePriority = new PointPriority(priorityLevel, PriorityConstants.ATTRIBUTES, jsonObject.get("attributes"));
+        priorityContainerMap.put(PriorityConstants.ATTRIBUTES, attributePriority);
+        popupMap.put(attributePriority.toString(), attributePriority);
 
         //Skills
         PointPriority skillsPriority = new PointPriority(priorityLevel, PriorityConstants.SKILLS, jsonObject.get("skills"));
         priorityContainerMap.put(PriorityConstants.SKILLS, skillsPriority);
         popupMap.put(skillsPriority.toString(), skillsPriority);
 
-        //Rescources
+        //Resources
         ResourcePriority resourcePriority = new ResourcePriority(priorityLevel, PriorityConstants.RESOURCES, jsonObject.get("resources"));
         priorityContainerMap.put(PriorityConstants.RESOURCES, resourcePriority);
         popupMap.put(resourcePriority.toString(), resourcePriority);
@@ -54,16 +54,8 @@ public class PriorityLevelGroup {
         return priorityLevel;
     }
 
-    public LinkedHashMap<String, PriorityContainer> getPriorityContainerMap() {
-        return priorityContainerMap;
-    }
-
-    public JSONObject getJsonObect() {
-        return jsonObect;
-    }
-
-    public LinkedHashMap<String, PriorityContainer> getPopupMap() {
-        return popupMap;
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
 
     public ArrayList<JMenuItem> getPopupMapAsMenuItems(){

@@ -1,12 +1,12 @@
 package studio.rrprojects.runnerbuddy.containers.priority;
 
 public class PointPriority extends PriorityContainer {
-    int pointValue = 0;
+    int pointValue;
 
     public PointPriority(String priorityKey, String categoryKey, Object priorityObject) {
         super(priorityKey, categoryKey, priorityObject);
 
-        pointValue = Integer.valueOf(priorityObject.toString());
+        pointValue = Integer.parseInt(priorityObject.toString());
     }
 
     @Override

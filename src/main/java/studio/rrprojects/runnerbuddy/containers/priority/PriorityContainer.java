@@ -38,7 +38,7 @@ public class PriorityContainer implements Comparable<PriorityContainer>{
     }
 
     public String toMapDisplay() {
-        return "Level " + priorityKey + ": " + toString();
+        return "Level " + priorityKey + ": " + this;
     }
 
     @Override
