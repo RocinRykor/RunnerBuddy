@@ -16,7 +16,7 @@ public class Buyable {
     int cost = 0;
     String costRaw;
 
-    int availibilityRating;
+    int availabilityRating;
     int availabilityInterval;
     String availabilityTimeFrame;
 
@@ -62,20 +62,20 @@ public class Buyable {
         try {
             setCost(Integer.parseInt(costRaw));
         } catch (JSONException e) {
-            // TODO: 8/6/21
+            // TODO: 8/6/21 Process cost from a variable cost item
             setCost(-1);
             //e.printStackTrace();
         }
 
         //Availability
-        availibilityRating = JSONUtil.getInt(object, "availability_rating", 1);
+        availabilityRating = JSONUtil.getInt(object, "availability_rating", 1);
         availabilityInterval = JSONUtil.getInt(object, "availability_interval", 1);
         availabilityTimeFrame = JSONUtil.getString(object, "availability_time_frame", "hrs");
 
-        if (availibilityRating == 1 || availabilityInterval == 1) {
+        if (availabilityRating == 1 || availabilityInterval == 1) {
             availability = "Always";
         } else {
-            availability = availibilityRating + "/" + availabilityInterval + " " + availabilityTimeFrame;
+            availability = availabilityRating + "/" + availabilityInterval + " " + availabilityTimeFrame;
         }
 
         //Street Index
