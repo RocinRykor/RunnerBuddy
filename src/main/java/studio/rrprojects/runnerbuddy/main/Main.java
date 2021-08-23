@@ -9,6 +9,12 @@ public class Main {
 
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf");
+
+            //Rounded Components
+            UIManager.put( "Button.arc", 999 );
+            UIManager.put( "Component.arc", 999 );
+            UIManager.put( "ProgressBar.arc", 999 );
+            UIManager.put( "TextComponent.arc", 999 );
         } catch (Exception ex) {
             System.out.println(ex);
             System.err.println("Failed to initialize LaF");
