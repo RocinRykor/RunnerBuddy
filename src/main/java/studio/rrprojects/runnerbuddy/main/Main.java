@@ -16,7 +16,7 @@ public class Main {
             UIManager.put( "ProgressBar.arc", 999 );
             UIManager.put( "TextComponent.arc", 999 );
         } catch (Exception ex) {
-            System.out.println(ex);
+            System.err.println(ex);
             System.err.println("Failed to initialize LaF");
         }
 
