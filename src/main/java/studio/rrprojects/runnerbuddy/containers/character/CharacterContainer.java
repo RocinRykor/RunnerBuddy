@@ -38,7 +38,7 @@ public class CharacterContainer {
     }
 
     public void ProcessPriorities() {
-        raceController.setAvailibleRaces(priorityController.getPriorityByCategory(PriorityConstants.RACE));
+        raceController.setAvailableRaces(priorityController.getPriorityByCategory(PriorityConstants.RACE));
         attributeController.setSelectedPriority(priorityController.getPriorityByCategory(PriorityConstants.ATTRIBUTES));
         magicController.setSelectedPriority(priorityController.getPriorityByCategory(PriorityConstants.MAGIC));
         skillsController.setSelectedPriority(priorityController.getPriorityByCategory(PriorityConstants.SKILLS));

@@ -17,7 +17,7 @@ public class RaceController extends ControllerClass {
 
     private final CharacterContainer characterContainer;
     private JSONObject raceTableJson;
-    private ArrayList<String> availibleRaces;
+    private ArrayList<String> availableRaces;
     private LinkedHashMap<String, RaceContainer> masterRaceMap;
     private RaceContainer selectedRace;
     private ListPriority selectedPriority;
@@ -51,13 +51,13 @@ public class RaceController extends ControllerClass {
         raceTableJson = new JSONObject(token);
     }
 
-    public void setAvailibleRaces(PriorityContainer priorityContainer) {
+    public void setAvailableRaces(PriorityContainer priorityContainer) {
         selectedPriority = (ListPriority) priorityContainer;
-        availibleRaces = selectedPriority.getAvailableOptions();
+        availableRaces = selectedPriority.getAvailableOptions();
     }
 
-    public ArrayList<String> getAvailibleRaces() {
-        return availibleRaces;
+    public ArrayList<String> getAvailableRaces() {
+        return availableRaces;
     }
 
     public void setSelectedRace(String raceName) {

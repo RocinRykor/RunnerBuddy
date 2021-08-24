@@ -22,10 +22,10 @@ public class MagicController extends ControllerClass{
     private boolean isMagical = false;
     private ArrayList<String> magicalOptions;
     private ListPriority selectedPriority;
-    private LinkedHashMap<String, MagicUserContainer> magicUserTypeMap = new LinkedHashMap<>();
+    private final LinkedHashMap<String, MagicUserContainer> magicUserTypeMap = new LinkedHashMap<>();
     private JSONObject jsonAspects;
-    private LinkedHashMap<String, AspectContainer> mapAspects = new LinkedHashMap<>();
-    private LinkedHashMap<String, ArrayList<DominionContainer>> mapDominions = new LinkedHashMap<>();
+    private final LinkedHashMap<String, AspectContainer> mapAspects = new LinkedHashMap<>();
+    private final LinkedHashMap<String, ArrayList<DominionContainer>> mapDominions = new LinkedHashMap<>();
     private JSONObject jsonTotems;
     private JSONObject jsonElements;
 

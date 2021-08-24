@@ -38,13 +38,9 @@ public class LaunchWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-        buttonNewCharacter.addActionListener(actionEvent -> {
-            CreateNewCharacter(false);
-        });
+        buttonNewCharacter.addActionListener(actionEvent -> CreateNewCharacter(false));
 
-        buttonRandom.addActionListener(actionEvent -> {
-            CreateNewCharacter(true);
-        });
+        buttonRandom.addActionListener(actionEvent -> CreateNewCharacter(true));
     }
 
     private void CreateNewCharacter(boolean isRandomCharacter) {

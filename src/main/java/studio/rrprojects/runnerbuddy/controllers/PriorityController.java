@@ -18,7 +18,7 @@ public class PriorityController extends ControllerClass{
     private final HashMap<String, PriorityLevelGroup> masterPriorityMap = new HashMap<>();
     private final String[] listCategory = PriorityConstants.PRIORITIES;
     private JSONObject priorityJson;
-    private ArrayList<PriorityContainer> takenPriorities = new ArrayList<>();
+    private final ArrayList<PriorityContainer> takenPriorities = new ArrayList<>();
 
     public PriorityController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;
@@ -73,7 +73,7 @@ public class PriorityController extends ControllerClass{
         if (takenPriorities.contains(priorityContainer)) {
             takenPriorities.remove(priorityContainer);
         } else {
-            System.out.println("PRIORITY CONTROLLER ERROR: CANNNOT REMOVE " + priorityContainer);
+            System.out.println("PRIORITY CONTROLLER ERROR: CANNOT REMOVE " + priorityContainer);
         }
     }
 
@@ -89,13 +89,13 @@ public class PriorityController extends ControllerClass{
     }
 
     public String getPriorityMapString() {
-        String output = "- Priority Map -\n";
+        StringBuilder output = new StringBuilder("- Priority Map -\n");
 
         for (PriorityContainer priorityContainer: takenPriorities) {
-            output += priorityContainer.toMapDisplay() + "\n";
+            output.append(priorityContainer.toMapDisplay()).append("\n");
         }
 
-        return output;
+        return output.toString();
     }
 
     public void Sort() {

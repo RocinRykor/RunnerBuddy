@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 public class ResourceController extends ControllerClass {
     private final CharacterContainer characterContainer;
     int startingNuyen = 0;
-    private LinkedHashMap <String, GearGroup> masterMap = new LinkedHashMap<>();
+    private final LinkedHashMap <String, GearGroup> masterMap = new LinkedHashMap<>();
 
     public ResourceController(CharacterContainer characterContainer) {
         this.characterContainer = characterContainer;

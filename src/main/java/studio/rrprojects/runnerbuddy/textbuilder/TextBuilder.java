@@ -3,7 +3,7 @@ package studio.rrprojects.runnerbuddy.textbuilder;
 import java.util.ArrayList;
 
 public class TextBuilder {
-    private final ArrayList<TextObject> textObjectList = new ArrayList<>();;
+    private final ArrayList<TextObject> textObjectList = new ArrayList<>();
 
     public String build() {
         System.out.println("BUILDING!");

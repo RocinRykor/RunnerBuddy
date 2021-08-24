@@ -57,9 +57,7 @@ public class CardManager {
         listCards.add(card);
 
         JButton button = card.getButton();
-        button.addActionListener(actionEvent -> {
-            SwtichToThisCard(card);
-        });;
+        button.addActionListener(actionEvent -> SwitchToThisCard(card));
         panelMenu.add(button);
 
         panelCards.add(card.getPanel(), card.getTitle());
@@ -71,7 +69,7 @@ public class CardManager {
         card.Update();
     }
 
-    private void SwtichToThisCard(Card card) {
+    private void SwitchToThisCard(Card card) {
         if (currentCard != null) {
             currentCard.Update();
         }

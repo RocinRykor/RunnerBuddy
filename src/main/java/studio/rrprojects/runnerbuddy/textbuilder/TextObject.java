@@ -32,9 +32,9 @@ public class TextObject {
         textElementList.add(obj);
     }
 
-    public String toString(int newIntdentSpacing) {
+    public String toString(int newIndentSpacing) {
         StringBuilder string = new StringBuilder(title + "\n");
-        int totalIndentSpacingCount = baseIndentSpacing + newIntdentSpacing;
+        int totalIndentSpacingCount = baseIndentSpacing + newIndentSpacing;
         String indentString = getIndentString(totalIndentSpacingCount);
 
         for (TextObject element: textElementList) {

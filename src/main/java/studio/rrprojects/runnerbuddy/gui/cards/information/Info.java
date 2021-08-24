@@ -105,7 +105,7 @@ public class Info extends Card {
         buttonGroup = new ButtonGroup();
 
 
-        raceNames = getCharacterContainer().getRaceController().getAvailibleRaces();
+        raceNames = getCharacterContainer().getRaceController().getAvailableRaces();
 
         for (String race : raceNames) {
             JRadioButton button = new JRadioButton(race);
