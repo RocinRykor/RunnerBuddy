@@ -12,12 +12,12 @@ What is Working:
  * Race selection
  * Attribute Distributution
  * Skill Allocation
- * Basic Output to Text File
  
 Incomplete, These items are in the program but dont work (as intented): 
   * Character Description
   * Gear Selection
   * Magic Options
+  * Basic Output to Text File (Currently Broken)
   
 Planned:
   * All Gear Options (Weapons, Armors, Lifestyles, Vehicles, anything that can be purchased)
