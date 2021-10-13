@@ -3,7 +3,7 @@ Shadowrun 3rd Edition - Character Creator (WIP)
 
 
 Requires Java OpenJDK v11
-If you are having issues running the program start ensuring you have the latest OpenJDK - https://jdk.java.net/17/
+If you are having issues running the program start ensuring you have the latest OpenJDK - https://www.oracle.com/java/technologies/downloads/#jdk17-windows
 
 This is a Work-In-Progress, there are many features that are incomplete or missing all together.
 
