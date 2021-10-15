@@ -7,10 +7,10 @@ public class FileConstants {
     public static final String CHARACTER_DIRECTORY =  MAIN_DIRECTORY + "Characters" + File.separator;
 
     //Resource Directories
-    public static final String RESOURCE_JSON_DIR = "/JSON" + File.separator;
+    public static final String RESOURCE_JSON_DIR = "/JSON/";
 
-    public static final String RESOURCE_SKILLS = RESOURCE_JSON_DIR+ "Skills" + File.separator;
-    public static final String RESOURCE_MISC = RESOURCE_JSON_DIR + "Misc" + File.separator;
-    public static final String RESOURCE_CHARACTER = RESOURCE_JSON_DIR + "Character" + File.separator;
-    public static final String RESOURCE_GEAR = RESOURCE_JSON_DIR + "Gear" + File.separator;
+    public static final String RESOURCE_SKILLS = RESOURCE_JSON_DIR+ "Skills/";
+    public static final String RESOURCE_MISC = RESOURCE_JSON_DIR + "Misc/";
+    public static final String RESOURCE_CHARACTER = RESOURCE_JSON_DIR + "Character/";
+    public static final String RESOURCE_GEAR = RESOURCE_JSON_DIR + "Gear/";
 }
