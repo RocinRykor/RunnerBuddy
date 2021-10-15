@@ -38,8 +38,13 @@ public class GearGroup {
         JSONTokener token = new JSONTokener(is);
         JSONObject mainJson = new JSONObject(token);
          */
+        JSONObject mainJson = null;
+        try {
+            DebugUtils.VaraibleMsg("FILE PATH: " + FileConstants.RESOURCE_GEAR + fileName);
+            mainJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_GEAR + fileName);
+        } catch (NullPointerException ignored) {
 
-        JSONObject mainJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_GEAR + fileName);
+        }
 
         if (mainJson == null) {
             DebugUtils.ErrorMsg("ERROR InputStream is NULL");

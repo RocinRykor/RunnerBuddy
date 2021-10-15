@@ -7,7 +7,7 @@ public class FileConstants {
     public static final String CHARACTER_DIRECTORY =  MAIN_DIRECTORY + "Characters" + File.separator;
 
     //Resource Directories
-    public static final String RESOURCE_JSON_DIR =  File.separator +"JSON" + File.separator;
+    public static final String RESOURCE_JSON_DIR = "/JSON" + File.separator;
 
     public static final String RESOURCE_SKILLS = RESOURCE_JSON_DIR+ "Skills" + File.separator;
     public static final String RESOURCE_MISC = RESOURCE_JSON_DIR + "MISC" + File.separator;
