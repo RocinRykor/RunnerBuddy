@@ -43,7 +43,14 @@ public class PriorityController extends ControllerClass{
 
     private void LoadPriorityFile() {
 
-        priorityJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_MISC + JsonFileConstants.PRIORITY_TABLE);
+        System.out.println("=== COMPARE PATH");
+        String pathOne = FileConstants.RESOURCE_MISC + JsonFileConstants.PRIORITY_TABLE;
+        String pathTwo = "/JSON/Misc/" + JsonFileConstants.PRIORITY_TABLE;
+
+        System.out.println(pathOne);
+        System.out.println(pathTwo);
+
+        priorityJson = FileUtil.getJsonFromResource(pathOne);
 
         /*
         InputStream is = getClass().getResourceAsStream("/JSON/Misc/" + JsonFileConstants.PRIORITY_TABLE);
