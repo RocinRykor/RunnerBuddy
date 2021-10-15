@@ -28,7 +28,7 @@ public class GearGroup {
     public Map<String, JSONObject> ProcessJSON(String subcategory, String fileName) {
         DebugUtils.newDebugOut(ConsoleColors.RED, "PROCESSING: " + fileName);
         String filePath = FileConstants.RESOURCE_GEAR + fileName;
-        InputStream is = getClass().getResourceAsStream(filePath);
+        InputStream is = GearGroup.class.getResourceAsStream(filePath);
 
         if (is == null) {
             DebugUtils.ErrorMsg("ERROR InputStream is NULL");
