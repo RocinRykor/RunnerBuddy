@@ -83,6 +83,8 @@ public class CharacterContainer {
         attributeController.toTextObject(builder);
         skillsController.toTextObject(builder);
 
+        FileUtil.CreateDir(FileConstants.CHARACTER_DIRECTORY);
+
         File file = new File(FileConstants.CHARACTER_DIRECTORY + "Test.txt");
 
         if (!file.exists()) {
