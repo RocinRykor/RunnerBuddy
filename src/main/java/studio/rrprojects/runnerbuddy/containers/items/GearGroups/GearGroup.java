@@ -1,7 +1,6 @@
 package studio.rrprojects.runnerbuddy.containers.items.GearGroups;
 
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import studio.rrprojects.runnerbuddy.constants.FileConstants;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
 import studio.rrprojects.runnerbuddy.containers.items.ClothingItem;
@@ -12,7 +11,6 @@ import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -42,6 +40,11 @@ public class GearGroup {
          */
 
         JSONObject mainJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_GEAR + fileName);
+
+        if (mainJson == null) {
+            DebugUtils.ErrorMsg("ERROR InputStream is NULL");
+            return null;
+        }
 
         Map<String, JSONObject> mainMap = JSONUtil.JsonToMap(mainJson);
 
