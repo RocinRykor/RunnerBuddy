@@ -10,7 +10,7 @@ public class WeaponItem extends Buyable{
     String ammoType;
     String firingModes;
     String damageCode;
-    String recopilCompensation;
+    String recoilCompensation;
 
     private LinkedHashMap<String, Object> jsonMap;
 
@@ -27,7 +27,7 @@ public class WeaponItem extends Buyable{
         ammoType = JSONUtil.getString(object, "ammo_type", "C");
         firingModes = JSONUtil.getString(object, "mode", "SS");
         damageCode = JSONUtil.getString(object, "damage", "-1M");
-        recopilCompensation = JSONUtil.getString(object, "rc", "N/A");
+        recoilCompensation = JSONUtil.getString(object, "rc", "N/A");
 
     }
 
@@ -47,7 +47,7 @@ public class WeaponItem extends Buyable{
         output += ("Ammo: " + ammoCount + "(" + ammoType + ")") + "\n";
         output += ("Firing Modes: " + firingModes) + "\n";
         output += ("Damage Code: " + damageCode) + "\n";
-        output += ("Recopil Compensation: " + recopilCompensation);
+        output += ("Recoil Compensation: " + recoilCompensation);
 
         return output;
     }
