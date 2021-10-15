@@ -8,6 +8,7 @@ import studio.rrprojects.runnerbuddy.containers.items.ClothingItem;
 import studio.rrprojects.runnerbuddy.containers.items.WeaponItem;
 import studio.rrprojects.util_library.ConsoleColors;
 import studio.rrprojects.util_library.DebugUtils;
+import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -27,6 +28,7 @@ public class GearGroup {
 
     public Map<String, JSONObject> ProcessJSON(String subcategory, String fileName) {
         DebugUtils.newDebugOut(ConsoleColors.RED, "PROCESSING: " + fileName);
+        /*
         String filePath = FileConstants.RESOURCE_GEAR + fileName;
         InputStream is = GearGroup.class.getResourceAsStream(filePath);
 
@@ -34,10 +36,12 @@ public class GearGroup {
             DebugUtils.ErrorMsg("ERROR InputStream is NULL");
             return null;
         }
-
-
+        
         JSONTokener token = new JSONTokener(is);
         JSONObject mainJson = new JSONObject(token);
+         */
+
+        JSONObject mainJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_GEAR + fileName);
 
         Map<String, JSONObject> mainMap = JSONUtil.JsonToMap(mainJson);
 
