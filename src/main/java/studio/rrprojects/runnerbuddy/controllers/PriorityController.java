@@ -50,7 +50,13 @@ public class PriorityController extends ControllerClass{
         System.out.println(pathOne);
         System.out.println(pathTwo);
 
-        priorityJson = FileUtil.getJsonFromResource(pathOne);
+        try {
+            priorityJson = FileUtil.getJsonFromResource(pathTwo);
+            System.out.println("SUCCESS!");
+        } catch (NullPointerException e) {
+            System.out.println("FAILURE!");
+        }
+
 
         /*
         InputStream is = getClass().getResourceAsStream("/JSON/Misc/" + JsonFileConstants.PRIORITY_TABLE);
