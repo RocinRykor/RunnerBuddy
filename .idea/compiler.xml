@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RunnerBuddy" target="1.11" />
+      <module name="RunnerBuddy" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

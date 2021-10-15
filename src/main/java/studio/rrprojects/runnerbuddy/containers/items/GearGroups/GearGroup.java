@@ -26,11 +26,15 @@ public class GearGroup {
     }
 
     public Map<String, JSONObject> ProcessJSON(String subcategory, String fileName) {
+        DebugUtils.newDebugOut(ConsoleColors.RED, "PROCESSING: " + fileName);
         String filePath = FileConstants.RESOURCE_GEAR + fileName;
         InputStream is = getClass().getResourceAsStream(filePath);
-        assert is != null;
 
-        DebugUtils.newDebugOut(ConsoleColors.RED, "PROCESSING: " + fileName);
+        if (is == null) {
+            DebugUtils.ErrorMsg("ERROR InputStream is NULL");
+            return null;
+        }
+
 
         JSONTokener token = new JSONTokener(is);
         JSONObject mainJson = new JSONObject(token);
@@ -89,7 +93,12 @@ public class GearGroup {
     public void addWeapon(String subcategory, String fileName) {
         Map<String, JSONObject> tmp = addGeneric(subcategory, fileName);
 
+        if (tmp == null) {
+            return;
+        }
+
         ArrayList<Buyable> arrayList = getSubcategoryMap().get(subcategory);
+
         for (String key: tmp.keySet()) {
 
             JSONObject jsonObject = tmp.get(key);
