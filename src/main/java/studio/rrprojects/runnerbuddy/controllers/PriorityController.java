@@ -2,11 +2,14 @@ package studio.rrprojects.runnerbuddy.controllers;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import studio.rrprojects.runnerbuddy.constants.FileConstants;
 import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
 import studio.rrprojects.runnerbuddy.constants.PriorityConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityLevelGroup;
+import studio.rrprojects.runnerbuddy.utils.JsonUtils;
+import studio.rrprojects.util_library.FileUtil;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -40,12 +43,16 @@ public class PriorityController extends ControllerClass{
 
     private void LoadPriorityFile() {
 
+        priorityJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_MISC + JsonFileConstants.PRIORITY_TABLE);
+
+        /*
         InputStream is = getClass().getResourceAsStream("/JSON/Misc/" + JsonFileConstants.PRIORITY_TABLE);
         
         assert is != null;
         JSONTokener token = new JSONTokener(is);
 
         priorityJson = new JSONObject(token);
+         */
     }
 
 
