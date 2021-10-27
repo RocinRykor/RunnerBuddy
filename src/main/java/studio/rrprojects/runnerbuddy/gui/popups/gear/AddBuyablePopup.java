@@ -3,8 +3,10 @@ package studio.rrprojects.runnerbuddy.gui.popups.gear;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
+import studio.rrprojects.util_library.DebugUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +20,7 @@ public class AddBuyablePopup {
     private JTextArea textAreaDescription;
     private JSpinner spinnerRating;
     private JButton buttonCanel;
+    private CharacterContainer characterContainer;
 
     public AddBuyablePopup(Buyable buyable) {
         this.buyable = buyable;
@@ -34,6 +37,15 @@ public class AddBuyablePopup {
     }
 
     private void AddThisItem() {
+        // TODO: 10/15/21 Add Items to Resource Master List
+        if (characterContainer == null) {
+            frame.dispose();
+            DebugUtils.ErrorMsg("BUYABLE POPUP ERROR: NO CHARACTER CONTAINER");
+            return;
+        }
+
+        characterContainer.getResourceController().addItemToInventory(buyable);
+
         frame.dispose();
     }
 
@@ -107,8 +119,11 @@ public class AddBuyablePopup {
         setFrameOptions();
     }
 
-
     public Buyable getBuyable() {
         return buyable;
+    }
+
+    public void setCharacterContainer(CharacterContainer characterContainer) {
+        this.characterContainer = characterContainer;
     }
 }

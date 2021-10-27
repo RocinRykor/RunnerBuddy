@@ -26,25 +26,13 @@ public class GearGroup {
 
     public Map<String, JSONObject> ProcessJSON(String subcategory, String fileName) {
         DebugUtils.newDebugOut(ConsoleColors.RED, "PROCESSING: " + fileName);
-        /*
-        String filePath = FileConstants.RESOURCE_GEAR + fileName;
-        InputStream is = GearGroup.class.getResourceAsStream(filePath);
 
-        if (is == null) {
-            DebugUtils.ErrorMsg("ERROR InputStream is NULL");
-            return null;
-        }
-        
-        JSONTokener token = new JSONTokener(is);
-        JSONObject mainJson = new JSONObject(token);
-         */
         JSONObject mainJson = null;
+
         try {
             DebugUtils.VaraibleMsg("FILE PATH: " + FileConstants.RESOURCE_GEAR + fileName);
             mainJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_GEAR + fileName);
-        } catch (NullPointerException ignored) {
-
-        }
+        } catch (NullPointerException ignored) {}
 
         if (mainJson == null) {
             DebugUtils.ErrorMsg("ERROR InputStream is NULL");

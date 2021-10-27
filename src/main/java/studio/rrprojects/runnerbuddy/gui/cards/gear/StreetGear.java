@@ -16,7 +16,7 @@ public class StreetGear extends Card {
     private JPanel panelCard;
     private JPanel panelInformation;
     private JLabel labelResources;
-    private JTree tree1;
+    private JTree treeInventory;
 
     public StreetGear(String title) {
         super(title);
@@ -46,12 +46,13 @@ public class StreetGear extends Card {
     public void Update() {
         String moneyString = CalculateRemainingNuyen();
 
+        treeInventory.setModel(getCharacterContainer().getResourceController().InventoryToTree());
+
         labelResources.setText("Reamining Nuyen: " + moneyString);
     }
 
     private String CalculateRemainingNuyen() {
         int money = getCharacterContainer().getResourceController().getStartingNuyen();
-
         return TextUtils.IntToCash(money);
     }
 
@@ -82,8 +83,8 @@ public class StreetGear extends Card {
         labelResources = new JLabel();
         labelResources.setText("Label");
         panelInformation.add(labelResources, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        tree1 = new JTree();
-        panelInformation.add(tree1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        treeInventory = new JTree();
+        panelInformation.add(treeInventory, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
     }
 
     /**

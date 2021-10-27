@@ -37,6 +37,10 @@ public class Buyable {
         this.name = name;
     }
 
+    public Buyable(Buyable buyable) {
+        name = buyable.getName();
+    }
+
     public String getName() {
         return name;
     }
@@ -61,7 +65,7 @@ public class Buyable {
         costRaw = object.get("cost").toString();
         try {
             setCost(Integer.parseInt(costRaw));
-        } catch (JSONException e) {
+        } catch (NumberFormatException e) {
             // TODO: 8/6/21 Process cost from a variable cost item
             setCost(-1);
             //e.printStackTrace();
@@ -137,4 +141,5 @@ public class Buyable {
 
         return output;
     }
+
 }
