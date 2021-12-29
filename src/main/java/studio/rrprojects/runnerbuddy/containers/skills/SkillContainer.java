@@ -176,7 +176,7 @@ public class SkillContainer{
         this.skillType = skillType;
     }
 
-    public DefaultTableModel getTableDiscription() {
+    public DefaultTableModel getTableDescription() {
         String col[] = {"1", "2"};
 
         DefaultTableModel tableModel = new MyDefaultTableModel(col, 0);
@@ -216,6 +216,16 @@ public class SkillContainer{
     @Override
     public String toString() {
         return skillName;
+    }
+
+    public String getOverview() {
+        return "Skill Name: " + skillName + "\n\n" +
+                "Category: " + category +"\n\n" +
+                "Linked Attribute: " + linkedAttribute +"\n\n" +
+                "B/R: " + TextUtils.titleCase(String.valueOf(isBuildRepairAvailible)) + "\n\n" +
+                "Defaults: " + defaults +"\n\n" +
+                "Source: " + source + "\n\n" +
+                "Description: " + description;
     }
 
     private class MyDefaultTableModel extends DefaultTableModel {

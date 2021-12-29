@@ -8,12 +8,12 @@ If you are having issues running the program start ensuring you have the latest 
 This is a Work-In-Progress, there are many features that are incomplete or missing all together.
 
 What is Working: 
- * Priority Slection for new Characters
+ * Priority Selection for new Characters
  * Race selection
- * Attribute Distributution
+ * Attribute Distribution
  * Skill Allocation
  
-Incomplete, These items are in the program but dont work (as intented): 
+Incomplete, These items are in the program but don't work (as intended): 
   * Character Description
   * Gear Selection
   * Magic Options
@@ -24,5 +24,5 @@ Planned:
   * Cyberware
   * Decking
   * Custom Skills
-  * Supplimental Books
-  * Chracter Management for created characters
+  * Supplemental Books
+  * Character Management for created characters
