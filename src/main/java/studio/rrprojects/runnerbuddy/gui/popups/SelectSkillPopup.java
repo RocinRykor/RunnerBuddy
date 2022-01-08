@@ -14,7 +14,6 @@ import studio.rrprojects.runnerbuddy.utils.JUtils;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -47,7 +46,7 @@ public class SelectSkillPopup {
     private JButton submitCloseButton;
     private LinkedHashMap<String, SkillMap> skillMap;
     private SkillContainer selectedSkill;
-    private DefaultTableModel discriptionTableModel;
+    private DefaultTableModel descriptionTableModel;
     private int baseValue = 1;
 
     public SelectSkillPopup(CharacterContainer characterContainer, SkillsCard skillsCard) {
@@ -101,25 +100,25 @@ public class SelectSkillPopup {
     }
 
     private void SubmitEvent() {
-        //Runs whem the skill is being added to the player list
+        //Runs when the skill is being added to the player list
         baseValue = sliderPoints.getValue();
         selectedSkill.setBaseLevel(baseValue);
 
-        //Handle Specilizations
+        //Handle Specializations
         if (checkBoxSpecialization.isSelected()) {
             selectedSkill.setActualLevel(baseValue - 1);
 
             String specializationName = Objects.requireNonNull(comboBoxSpecialization.getSelectedItem()).toString();
             int specializationLevel = baseValue + 1;
 
-            SpecializationContainer specializtionContainer = new SpecializationContainer(specializationName, specializationLevel);
-            selectedSkill.addSpecialization(specializtionContainer);
+            SpecializationContainer specializationContainer = new SpecializationContainer(specializationName, specializationLevel);
+            selectedSkill.addSpecialization(specializationContainer);
         } else {
             selectedSkill.getSelectedSpecializations().clear();
             selectedSkill.setActualLevel(baseValue);
         }
 
-        //Check to see if the slectedSkill is already in the SkillsController list
+        //Check to see if the selectedSkill is already in the SkillsController list
         SkillsController skillsController = characterContainer.getSkillsController();
 
         if (skillsController.containsSkill(selectedSkill)) {
@@ -174,7 +173,7 @@ public class SelectSkillPopup {
 
         updateBuildRepair();
 
-        //Reset Specializtion
+        //Reset Specialization
         checkBoxSpecialization.setSelected(false);
 
         ResetSlider();
@@ -193,7 +192,7 @@ public class SelectSkillPopup {
     }
 
     private void updateBuildRepair() {
-        boolean buildRepair = selectedSkill.isBuildRepairAvailible();
+        boolean buildRepair = selectedSkill.isBuildRepairAvailable();
 
         checkboxBuildRepair.setVisible(buildRepair);
 
@@ -251,22 +250,7 @@ public class SelectSkillPopup {
     }
 
     private void UpdateDescription() {
-
         textDescription.setText(selectedSkill.getOverview());
-
-        /* Old Code
-        discriptionTableModel = selectedSkill.getTableDescription();
-
-        //create table with data
-        textDescription.setModel(discriptionTableModel);
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setVerticalAlignment(JLabel.TOP);
-
-        textDescription.getColumn("1").setCellRenderer(centerRenderer);
-        textDescription.getColumn("2").setCellRenderer(new MyCellRenderer());
-
-         */
     }
 
     private void PopulateSkillTree() {
@@ -307,16 +291,18 @@ public class SelectSkillPopup {
         panelMain.setPreferredSize(new Dimension(800, 600));
         panelSkills = new JPanel();
         panelSkills.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panelMain.add(panelSkills, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panelMain.add(panelSkills, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(300, -1), null, 1, false));
         final JScrollPane scrollPane1 = new JScrollPane();
         panelSkills.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         treeSkills = new JTree();
+        treeSkills.putClientProperty("JTree.lineStyle", "");
+        treeSkills.putClientProperty("html.disable", Boolean.FALSE);
         scrollPane1.setViewportView(treeSkills);
         final JButton button1 = new JButton();
         button1.setText("Create Custom Skill");
         panelSkills.add(button1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panelInformation = new JPanel();
-        panelInformation.setLayout(new GridLayoutManager(6, 5, new Insets(0, 0, 0, 0), -1, -1));
+        panelInformation.setLayout(new GridLayoutManager(6, 5, new Insets(5, 5, 5, 5), -1, -1));
         panelMain.add(panelInformation, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         sliderPoints = new JSlider();
         sliderPoints.setMajorTickSpacing(1);
@@ -333,10 +319,6 @@ public class SelectSkillPopup {
         comboBoxSpecialization = new JComboBox();
         comboBoxSpecialization.setEditable(true);
         panelInformation.add(comboBoxSpecialization, new GridConstraints(2, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        textDescription = new JTextArea();
-        textDescription.setLineWrap(true);
-        textDescription.setWrapStyleWord(true);
-        panelInformation.add(textDescription, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
         submitButton = new JButton();
         submitButton.setText("Submit");
         panelInformation.add(submitButton, new GridConstraints(5, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -352,6 +334,10 @@ public class SelectSkillPopup {
         cancelButton = new JButton();
         cancelButton.setText("Cancel");
         panelInformation.add(cancelButton, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        textDescription = new JTextArea();
+        textDescription.setLineWrap(true);
+        textDescription.setWrapStyleWord(true);
+        panelInformation.add(textDescription, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(100, 50), null, 0, false));
     }
 
     /**
@@ -361,19 +347,4 @@ public class SelectSkillPopup {
         return panelMain;
     }
 
-    private class MyCellRenderer extends JTextArea implements TableCellRenderer {
-        MyCellRenderer() {
-            setLineWrap(true);
-            setWrapStyleWord(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText(value.toString());
-            setSize(table.getColumnModel().getColumn(column).getWidth(), getPreferredSize().height);
-            if (table.getRowHeight(row) != getPreferredSize().height) {
-                table.setRowHeight(row, getPreferredSize().height);
-            }
-            return this;
-        }
-    }
 }

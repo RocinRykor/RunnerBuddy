@@ -15,7 +15,7 @@ public class SkillContainer{
     private String skillName;
     private String baseAttribute;
     private String linkedAttribute;
-    private boolean isBuildRepairAvailible;
+    private boolean isBuildRepairAvailable;
     private String defaults;
     private String description;
     private String source;
@@ -35,7 +35,7 @@ public class SkillContainer{
         baseAttribute = TextUtils.titleCase(JsonUtils.getStringOrDefault(skill, "attribute", AttributeConstants.INTELLIGENCE));
         linkedAttribute = baseAttribute;
 
-        isBuildRepairAvailible = JsonUtils.getBoolOrDefault(skill, "build_repair", false);
+        isBuildRepairAvailable = JsonUtils.getBoolOrDefault(skill, "build_repair", false);
 
         defaults = TextUtils.titleCase(JsonUtils.getStringOrDefault(skill, "defaults", "None"));
         description = skill.getString("description");
@@ -80,12 +80,12 @@ public class SkillContainer{
         this.skillName = skillName;
     }
 
-    public boolean isBuildRepairAvailible() {
-        return isBuildRepairAvailible;
+    public boolean isBuildRepairAvailable() {
+        return isBuildRepairAvailable;
     }
 
-    public void setBuildRepairAvailible(boolean buildRepairAvailible) {
-        isBuildRepairAvailible = buildRepairAvailible;
+    public void setBuildRepairAvailable(boolean buildRepairAvailable) {
+        isBuildRepairAvailable = buildRepairAvailable;
     }
 
     public String getDefaults() {
@@ -176,38 +176,6 @@ public class SkillContainer{
         this.skillType = skillType;
     }
 
-    public DefaultTableModel getTableDescription() {
-        String col[] = {"1", "2"};
-
-        DefaultTableModel tableModel = new MyDefaultTableModel(col, 0);
-
-        //I am adding blank rows because I can't figure out the damn spacing for cells
-
-        tableModel.addRow(addTableRow("Skill Name", skillName));
-        tableModel.addRow(addBlankRow());
-        tableModel.addRow(addTableRow("Category", category));
-        tableModel.addRow(addBlankRow());
-        tableModel.addRow(addTableRow("Linked Attribute", linkedAttribute));
-        tableModel.addRow(addBlankRow());
-        tableModel.addRow(addTableRow("B/R", TextUtils.titleCase(String.valueOf(isBuildRepairAvailible))));
-        tableModel.addRow(addBlankRow());
-        tableModel.addRow(addTableRow("Defaults:", defaults));
-        tableModel.addRow(addBlankRow());
-        tableModel.addRow(addTableRow("Source", source));
-        tableModel.addRow(addBlankRow());
-        tableModel.addRow(addTableRow("Description", description));
-
-        return tableModel;
-    }
-
-    private Object[] addBlankRow() {
-        return new String[]{"", ""};
-    }
-
-    private Object[] addTableRow(Object o1, Object o2) {
-        return new Object[]{o1, o2};
-    }
-
     public void addSpecialization(SpecializationContainer specializationContainer) {
         selectedSpecializations.clear(); //Right now characters are limited to 1 spec, so this forces that
         selectedSpecializations.add(specializationContainer);
@@ -222,20 +190,9 @@ public class SkillContainer{
         return "Skill Name: " + skillName + "\n\n" +
                 "Category: " + category +"\n\n" +
                 "Linked Attribute: " + linkedAttribute +"\n\n" +
-                "B/R: " + TextUtils.titleCase(String.valueOf(isBuildRepairAvailible)) + "\n\n" +
+                "B/R: " + TextUtils.titleCase(String.valueOf(isBuildRepairAvailable)) + "\n\n" +
                 "Defaults: " + defaults +"\n\n" +
                 "Source: " + source + "\n\n" +
                 "Description: " + description;
-    }
-
-    private class MyDefaultTableModel extends DefaultTableModel {
-        public MyDefaultTableModel(String[] col, int i) {
-            super(col, i);
-        }
-
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false;
-        }
     }
 }
