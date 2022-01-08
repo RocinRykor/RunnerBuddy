@@ -20,6 +20,7 @@ public class SkillConstants {
     public static final String SIXTH_WORLD = "Sixth World";
     public static final String INTERESTS = "Interests";
 
+    public static final String[] SKILL_TYPES = {ACTIVE, KNOWLEDGE, LANGUAGE};
     public static final String[] ACTIVE_SUBCATEGORIES = {COMBAT, PHYSICAL, TECHNICAL, SOCIAL, MAGICAL, VEHICLE};
     public static final String[] KNOWLEDGE_SUBCATEGORIES = {STREET, ACADEMIC, SIXTH_WORLD, INTERESTS};
 }

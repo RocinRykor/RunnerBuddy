@@ -43,15 +43,12 @@ public class SkillContainer{
 
         String specializationString = TextUtils.titleCase(JsonUtils.getStringOrDefault(skill, "specialization", ""));
         availableSpecializations = processSpecializationString(specializationString);
-        //System.out.println("Specializtions: " + availableSpecializations);
 
         category = TextUtils.titleCase(skill.getString("category"));
 
         selectedSpecializations = new ArrayList<>();
 
         baseLevel = JsonUtils.getIntOrDefault(skill, "value", 1);
-
-        //System.out.println("Skill Loaded: " + skillName);
     }
 
     private ArrayList<String> processSpecializationString(String string) {

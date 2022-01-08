@@ -1,4 +1,4 @@
-package studio.rrprojects.runnerbuddy.gui.popups;
+package studio.rrprojects.runnerbuddy.gui.popups.skills;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -21,6 +21,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class SelectSkillPopup {
     private JCheckBox checkboxBuildRepair;
     private JLabel labelDisplayString;
     private JButton submitCloseButton;
+    private JButton buttonCustomSkill;
     private LinkedHashMap<String, SkillMap> skillMap;
     private SkillContainer selectedSkill;
     private DefaultTableModel descriptionTableModel;
@@ -97,6 +100,13 @@ public class SelectSkillPopup {
             SubmitEvent();
             frame.dispose();
         });
+        buttonCustomSkill.addActionListener(actionEvent -> {
+            CustomSkillEvent();
+        });
+    }
+
+    private void CustomSkillEvent() {
+        new CustomSkillPopup(this);
     }
 
     private void SubmitEvent() {
@@ -138,6 +148,7 @@ public class SelectSkillPopup {
         }
 
          */
+
         skillsCard.Update();
     }
 
@@ -298,9 +309,9 @@ public class SelectSkillPopup {
         treeSkills.putClientProperty("JTree.lineStyle", "");
         treeSkills.putClientProperty("html.disable", Boolean.FALSE);
         scrollPane1.setViewportView(treeSkills);
-        final JButton button1 = new JButton();
-        button1.setText("Create Custom Skill");
-        panelSkills.add(button1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonCustomSkill = new JButton();
+        buttonCustomSkill.setText("Create Custom Skill");
+        panelSkills.add(buttonCustomSkill, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panelInformation = new JPanel();
         panelInformation.setLayout(new GridLayoutManager(6, 5, new Insets(5, 5, 5, 5), -1, -1));
         panelMain.add(panelInformation, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));

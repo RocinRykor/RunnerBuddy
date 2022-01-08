@@ -6,7 +6,7 @@ import studio.rrprojects.runnerbuddy.constants.SkillConstants;
 import studio.rrprojects.runnerbuddy.containers.skills.SelectedSkillContainer;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.gui.cards.components.SmallProgressBar;
-import studio.rrprojects.runnerbuddy.gui.popups.SelectSkillPopup;
+import studio.rrprojects.runnerbuddy.gui.popups.skills.SelectSkillPopup;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
