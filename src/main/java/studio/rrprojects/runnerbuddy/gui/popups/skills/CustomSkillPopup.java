@@ -3,11 +3,14 @@ package studio.rrprojects.runnerbuddy.gui.popups.skills;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import studio.rrprojects.runnerbuddy.constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.constants.SkillConstants;
 import studio.rrprojects.runnerbuddy.utils.JUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomSkillPopup {
     private final JFrame frame;
@@ -15,7 +18,7 @@ public class CustomSkillPopup {
     private JButton submitButton;
     private JButton cancelButton;
     private JTextField textFieldName;
-    private JComboBox<String> comboBoxType;
+    private JComboBox<SkillPreset> comboBoxType;
     private JCheckBox checkBoxBR;
     private JPanel panelMain;
     private JPanel panelOptions;
@@ -25,6 +28,7 @@ public class CustomSkillPopup {
     private JLabel labelBR;
     private JComboBox<String> comboBoxCategory;
     private JComboBox<String> comboBoxAttribute;
+    private ArrayList<SkillPreset> listPresets;
 
     public CustomSkillPopup(SelectSkillPopup selectSkillPopup) {
         parent = selectSkillPopup;
@@ -41,27 +45,87 @@ public class CustomSkillPopup {
         frame.repaint();
         panelMain.repaint();
 
+        InitSkillPresets();
+
         PopulateTypeBox();
 
-        ValidCheck();
+        UpdateBoxes();
+
+        submitButton.addActionListener(actionEvent -> {
+            ValidCheck();
+        });
+
+        comboBoxType.addActionListener(actionEvent -> {
+            UpdateBoxes();
+        });
+    }
+
+    private void UpdateBoxes() {
+        SkillPreset preset = (SkillPreset) comboBoxType.getSelectedItem();
+
+            comboBoxCategory.removeAllItems();
+        for (String category : preset.skillCategories) {
+            comboBoxCategory.addItem(category);
+        }
+
+        comboBoxAttribute.removeAllItems();
+        ArrayList<String> validAttributes = new ArrayList<>();
+        if (preset.forcedAttribute == null) {
+            validAttributes.addAll(List.of(AttributeConstants.SKILL_ATTRIBUTES));
+        } else {
+            validAttributes.add(preset.forcedAttribute);
+        }
+
+        for (String attribute : validAttributes) {
+            comboBoxAttribute.addItem(attribute);
+        }
+
+        LockBox(comboBoxCategory);
+        LockBox(comboBoxAttribute);
+
+        CheckBoxCheck(preset.buildRepairLocked);
+
+        System.out.println("SELECTED SKILL TYPE: " + preset);
+    }
+
+    private void CheckBoxCheck(boolean buildRepairLocked) {
+        if (buildRepairLocked) {
+            checkBoxBR.setSelected(false);
+            checkBoxBR.setEnabled(false);
+        } else {
+            checkBoxBR.setEnabled(true);
+        }
+    }
+
+    private void LockBox(JComboBox<String> comboBox) {
+        comboBox.setEnabled(comboBox.getItemCount() > 1);
+    }
+
+    private void InitSkillPresets() {
+        listPresets = new ArrayList<>();
+        listPresets.add(new SkillPreset(SkillConstants.ACTIVE, SkillConstants.ACTIVE_SUBCATEGORIES, null, false));
+        listPresets.add(new SkillPreset(SkillConstants.KNOWLEDGE, SkillConstants.KNOWLEDGE_SUBCATEGORIES, AttributeConstants.INTELLIGENCE, true));
+        listPresets.add(new SkillPreset(SkillConstants.LANGUAGE, new String[]{SkillConstants.LANGUAGE}, AttributeConstants.INTELLIGENCE, true));
     }
 
     private void PopulateTypeBox() {
-        for (String skillType : SkillConstants.SKILL_TYPES) {
-            comboBoxType.addItem(skillType);
+        for (SkillPreset preset : listPresets) {
+            comboBoxType.addItem(preset);
         }
 
         comboBoxType.setSelectedIndex(0);
     }
 
     private void ValidCheck() {
-        submitButton.setEnabled(false);
-
         if (textFieldName.getText().isBlank()) {
+            String title = "INVALID SKILL NAME";
+            String errorString = "Please supply the custom skill with a name and try again";
+            JOptionPane.showConfirmDialog(null, errorString, title,
+                    JOptionPane.OK_OPTION);
             return;
         }
 
-        submitButton.setEnabled(true);
+        System.out.println("CREATING CUSTOM SKILL: " + textFieldName.getText());
     }
 
 
@@ -129,4 +193,39 @@ public class CustomSkillPopup {
         return panelMain;
     }
 
+    private class SkillPreset {
+        private final String skillType;
+        private final String[] skillCategories;
+        private final String forcedAttribute;
+        private final boolean buildRepairLocked;
+
+        public SkillPreset(String skillType, String[] skillCategories, String forcedAttribute, boolean buildRepairLocked) {
+
+            this.skillType = skillType;
+            this.skillCategories = skillCategories;
+            this.forcedAttribute = forcedAttribute;
+            this.buildRepairLocked = buildRepairLocked;
+        }
+
+        public String getSkillType() {
+            return skillType;
+        }
+
+        public String[] getSkillCategories() {
+            return skillCategories;
+        }
+
+        public String getForcedAttribute() {
+            return forcedAttribute;
+        }
+
+        public boolean isBuildRepairLocked() {
+            return buildRepairLocked;
+        }
+
+        @Override
+        public String toString() {
+            return skillType;
+        }
+    }
 }
