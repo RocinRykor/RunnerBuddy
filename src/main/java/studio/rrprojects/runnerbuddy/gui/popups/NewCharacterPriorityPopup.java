@@ -135,7 +135,7 @@ public class NewCharacterPriorityPopup extends JFrame {
             String title = "INVALID SELECTION";
             String errorString = "Please ensure all priority levels are selected and try again!";
             JOptionPane.showConfirmDialog(null, errorString, title,
-                    JOptionPane.OK_OPTION);
+                    JOptionPane.DEFAULT_OPTION);
             return;
         }
 

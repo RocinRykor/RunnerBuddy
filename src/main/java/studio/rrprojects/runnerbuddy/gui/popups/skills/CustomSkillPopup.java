@@ -121,7 +121,7 @@ public class CustomSkillPopup {
             String title = "INVALID SKILL NAME";
             String errorString = "Please supply the custom skill with a name and try again";
             JOptionPane.showConfirmDialog(null, errorString, title,
-                    JOptionPane.OK_OPTION);
+                    JOptionPane.DEFAULT_OPTION);
             return;
         }
 
