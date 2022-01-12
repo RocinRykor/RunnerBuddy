@@ -14,15 +14,13 @@ import studio.rrprojects.runnerbuddy.utils.JUtils;
 import studio.rrprojects.runnerbuddy.utils.MiscUtils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -37,7 +35,7 @@ public class SelectSkillPopup {
     private JTree treeSkills;
     private JSlider sliderPoints;
     private JCheckBox checkBoxSpecialization;
-    private JComboBox comboBoxSpecialization;
+    private JComboBox<String> comboBoxSpecialization;
     private JTextArea textDescription;
     private JButton submitButton;
     private JButton cancelButton;
@@ -49,7 +47,6 @@ public class SelectSkillPopup {
     private JButton buttonCustomSkill;
     private LinkedHashMap<String, SkillMap> skillMap;
     private SkillContainer selectedSkill;
-    private DefaultTableModel descriptionTableModel;
     private int baseValue = 1;
 
     public SelectSkillPopup(CharacterContainer characterContainer, SkillsCard skillsCard) {
@@ -77,7 +74,8 @@ public class SelectSkillPopup {
                 int selRow = treeSkills.getRowForLocation(e.getX(), e.getY());
                 TreePath selPath = treeSkills.getPathForLocation(e.getX(), e.getY());
                 if (selRow != -1) {
-                    DoubleClickEvent(selRow, selPath);
+                    assert selPath != null;
+                    DoubleClickEvent(selPath);
                 }
             }
         });
@@ -87,21 +85,21 @@ public class SelectSkillPopup {
             checkSpecialization();
             updateDisplayString();
         });
-        comboBoxSpecialization.addActionListener(actionEvent -> {
-            updateDisplayString();
-        });
-        cancelButton.addActionListener(actionEvent -> {
-            frame.dispose();
-        });
-        submitButton.addActionListener(actionEvent -> {
-            SubmitEvent();
-        });
+        comboBoxSpecialization.addActionListener(actionEvent -> updateDisplayString());
+        cancelButton.addActionListener(actionEvent -> frame.dispose());
+        submitButton.addActionListener(actionEvent -> SubmitEvent());
         submitCloseButton.addActionListener(actionEvent -> {
             SubmitEvent();
             frame.dispose();
         });
-        buttonCustomSkill.addActionListener(actionEvent -> {
-            CustomSkillEvent();
+        buttonCustomSkill.addActionListener(actionEvent -> CustomSkillEvent());
+        panelMain.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+
+                System.out.println("KEY PRESSED: " + e);
+            }
         });
     }
 
@@ -139,16 +137,6 @@ public class SelectSkillPopup {
         SelectedSkillContainer selectedSkillContainer = new SelectedSkillContainer(selectedSkill);
         skillsController.getSelectedSkillList().add(selectedSkillContainer);
 
-        /*
-        if (!skillsController.containsSkill(selectedSkill)) {
-            SelectedSkillContainer selectedSkillContainer = new SelectedSkillContainer(selectedSkill);
-            skillsController.getSelectedSkillList().add(selectedSkillContainer);
-        } else {
-            System.out.println("SelectSkillPopup: Skill already on list!");
-        }
-
-         */
-
         skillsCard.Update();
     }
 
@@ -161,12 +149,12 @@ public class SelectSkillPopup {
         } else {
             checkBoxSpecialization.setSelected(false);
             checkBoxSpecialization.setEnabled(false);
-            checkBoxSpecialization.setToolTipText("You must have at least 2 points alloted to a skill before you can specialize it");
+            checkBoxSpecialization.setToolTipText("You must have at least 2 points allotted to a skill before you can specialize it");
         }
 
     }
 
-    private void DoubleClickEvent(int selRow, TreePath selPath) {
+    private void DoubleClickEvent(TreePath selPath) {
         DefaultMutableTreeNode finalNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
         Object selectedObject = finalNode.getUserObject();
 
@@ -190,7 +178,7 @@ public class SelectSkillPopup {
         ResetSlider();
 
         ArrayList<String> availableSpecializations = selectedSkill.getAvailableSpecializations();
-        DefaultComboBoxModel boxModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel<String> boxModel = new DefaultComboBoxModel<>();
         boxModel.addAll(availableSpecializations);
         comboBoxSpecialization.setModel(boxModel);
         comboBoxSpecialization.setSelectedIndex(0);
@@ -213,8 +201,8 @@ public class SelectSkillPopup {
     private void updateDisplayString() {
         String displayString = "";
 
-        Boolean buildRepair = checkboxBuildRepair.isSelected();
-        Boolean isSpecialized = checkBoxSpecialization.isSelected();
+        boolean buildRepair = checkboxBuildRepair.isSelected();
+        boolean isSpecialized = checkBoxSpecialization.isSelected();
 
         if (buildRepair) {
             selectedSkill.setSkillName("(B/R) " + selectedSkill.getSkillBaseName());
@@ -313,7 +301,7 @@ public class SelectSkillPopup {
         buttonCustomSkill.setText("Create Custom Skill");
         panelSkills.add(buttonCustomSkill, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         panelInformation = new JPanel();
-        panelInformation.setLayout(new GridLayoutManager(6, 5, new Insets(5, 5, 5, 5), -1, -1));
+        panelInformation.setLayout(new GridLayoutManager(7, 5, new Insets(5, 5, 5, 5), -1, -1));
         panelMain.add(panelInformation, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         sliderPoints = new JSlider();
         sliderPoints.setMajorTickSpacing(1);
@@ -323,16 +311,10 @@ public class SelectSkillPopup {
         sliderPoints.setPaintTicks(true);
         sliderPoints.setSnapToTicks(true);
         sliderPoints.setValue(3);
-        panelInformation.add(sliderPoints, new GridConstraints(3, 0, 1, 5, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        checkBoxSpecialization = new JCheckBox();
-        checkBoxSpecialization.setText("Specialization");
-        panelInformation.add(checkBoxSpecialization, new GridConstraints(2, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        comboBoxSpecialization = new JComboBox();
-        comboBoxSpecialization.setEditable(true);
-        panelInformation.add(comboBoxSpecialization, new GridConstraints(2, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelInformation.add(sliderPoints, new GridConstraints(4, 0, 1, 5, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         submitButton = new JButton();
         submitButton.setText("Submit");
-        panelInformation.add(submitButton, new GridConstraints(5, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelInformation.add(submitButton, new GridConstraints(6, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         labelDisplayString = new JLabel();
         labelDisplayString.setText("Choose a Skill");
         panelInformation.add(labelDisplayString, new GridConstraints(1, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -341,14 +323,21 @@ public class SelectSkillPopup {
         panelInformation.add(checkboxBuildRepair, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         submitCloseButton = new JButton();
         submitCloseButton.setText("Submit and Close");
-        panelInformation.add(submitCloseButton, new GridConstraints(5, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelInformation.add(submitCloseButton, new GridConstraints(6, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         cancelButton = new JButton();
         cancelButton.setText("Cancel");
-        panelInformation.add(cancelButton, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelInformation.add(cancelButton, new GridConstraints(6, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textDescription = new JTextArea();
+        textDescription.setEditable(false);
         textDescription.setLineWrap(true);
         textDescription.setWrapStyleWord(true);
-        panelInformation.add(textDescription, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(100, 50), null, 0, false));
+        panelInformation.add(textDescription, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(100, 50), null, 0, false));
+        checkBoxSpecialization = new JCheckBox();
+        checkBoxSpecialization.setText("Specialization");
+        panelInformation.add(checkBoxSpecialization, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        comboBoxSpecialization = new JComboBox();
+        comboBoxSpecialization.setEditable(true);
+        panelInformation.add(comboBoxSpecialization, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

@@ -33,7 +33,7 @@ public class CustomSkillPopup {
     public CustomSkillPopup(SelectSkillPopup selectSkillPopup) {
         parent = selectSkillPopup;
 
-        frame = new JFrame();
+        frame = new JFrame("Custom Skill Creation");
         $$$setupUI$$$();
 
         JUtils.OpenFrameAtMouseLocation(frame);
@@ -51,13 +51,11 @@ public class CustomSkillPopup {
 
         UpdateBoxes();
 
-        submitButton.addActionListener(actionEvent -> {
-            ValidCheck();
-        });
+        submitButton.addActionListener(actionEvent -> ValidCheck());
 
-        comboBoxType.addActionListener(actionEvent -> {
-            UpdateBoxes();
-        });
+        comboBoxType.addActionListener(actionEvent -> UpdateBoxes());
+
+        cancelButton.addActionListener(actionEvent -> frame.dispose());
     }
 
     private void UpdateBoxes() {

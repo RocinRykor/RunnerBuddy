@@ -48,7 +48,7 @@
           </component>
         </children>
       </grid>
-      <grid id="7f804" binding="panelInformation" layout-manager="GridLayoutManager" row-count="6" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="7f804" binding="panelInformation" layout-manager="GridLayoutManager" row-count="7" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="5" left="5" bottom="5" right="5"/>
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -58,7 +58,7 @@
         <children>
           <component id="9f7f2" class="javax.swing.JSlider" binding="sliderPoints">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <majorTickSpacing value="1"/>
@@ -70,25 +70,9 @@
               <value value="3"/>
             </properties>
           </component>
-          <component id="2412e" class="javax.swing.JCheckBox" binding="checkBoxSpecialization">
-            <constraints>
-              <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Specialization"/>
-            </properties>
-          </component>
-          <component id="fff0b" class="javax.swing.JComboBox" binding="comboBoxSpecialization">
-            <constraints>
-              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <editable value="true"/>
-            </properties>
-          </component>
           <component id="3eed6" class="javax.swing.JButton" binding="submitButton" default-binding="true">
             <constraints>
-              <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Submit"/>
@@ -112,7 +96,7 @@
           </component>
           <component id="6a7c2" class="javax.swing.JButton" binding="submitCloseButton">
             <constraints>
-              <grid row="5" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Submit and Close"/>
@@ -120,21 +104,38 @@
           </component>
           <component id="465b8" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
             <constraints>
-              <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Cancel"/>
             </properties>
           </component>
-          <component id="eb3de" class="javax.swing.JTextArea" binding="textDescription">
+          <component id="6ea22" class="javax.swing.JTextArea" binding="textDescription">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="100" height="50"/>
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
               <lineWrap value="true"/>
               <wrapStyleWord value="true"/>
+            </properties>
+          </component>
+          <component id="2412e" class="javax.swing.JCheckBox" binding="checkBoxSpecialization">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Specialization"/>
+            </properties>
+          </component>
+          <component id="fff0b" class="javax.swing.JComboBox" binding="comboBoxSpecialization">
+            <constraints>
+              <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <editable value="true"/>
             </properties>
           </component>
         </children>

@@ -5,8 +5,8 @@ import studio.rrprojects.runnerbuddy.constants.AttributeConstants;
 import studio.rrprojects.runnerbuddy.utils.JsonUtils;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
 
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SkillContainer{
 
@@ -57,10 +57,9 @@ public class SkillContainer{
         String[] splitString = string.split(", ");
 
         if (splitString[0].length() > 0) {
-            for (String s: splitString) {
-                tmp.add(s);
-            }
+            Collections.addAll(tmp, splitString);
         }
+
         tmp.add("-> Custom");
         return tmp;
     }
