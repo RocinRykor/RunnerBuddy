@@ -11,5 +11,5 @@ public class AttributeConstants {
     public static final String MAGIC = "Magic";
     public static final String REACTION = "Reaction";
 
-    public static final String[] SKILL_ATTRIBUTES = {BODY, QUICKNESS, STRENGTH, CHARISMA, INTELLIGENCE, REACTION};
+    public static final String[] SKILL_ATTRIBUTES = {BODY, QUICKNESS, STRENGTH, CHARISMA, INTELLIGENCE, WILLPOWER, REACTION};
 }
