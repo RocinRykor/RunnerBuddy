@@ -124,6 +124,8 @@ public class CustomSkillPopup {
         }
 
         System.out.println("CREATING CUSTOM SKILL: " + textFieldName.getText());
+
+        //TODO - Return the new skill as JSON, add to list  and refresh the list
     }
 
 
