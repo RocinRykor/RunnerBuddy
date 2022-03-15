@@ -1,11 +1,15 @@
 package studio.rrprojects.runnerbuddy.controllers;
 
+import org.json.JSONObject;
+import studio.rrprojects.runnerbuddy.constants.FileConstants;
 import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
 import studio.rrprojects.runnerbuddy.containers.items.GearGroups.GearGroup;
 import studio.rrprojects.runnerbuddy.containers.priority.ResourcePriority;
 import studio.rrprojects.util_library.DebugUtils;
+import studio.rrprojects.util_library.FileUtil;
+import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -26,37 +30,24 @@ public class ResourceController extends ControllerClass {
 
     private void LoadAllGear() {
         //Weapons
-        GearGroup weaponGroup = new GearGroup("Weapons");
-        weaponGroup.addWeapon("Personal Weapons", JsonFileConstants.GEAR_PERSONAL);
-        weaponGroup.addWeapon("Firearms", JsonFileConstants.GEAR_FIREARMS);
-        weaponGroup.addWeapon("Heavy Weapons", JsonFileConstants.GEAR_HEAVY_WEAPONS);
-        //weaponGroup.addWeapon("Grenades and Explosives", JsonFileConstants.GEAR_GRENADES);
-        //weaponGroup.addWeapon("Impact Ranged Weapons", JsonFileConstants.GEAR_IMPACT);
-        //weaponGroup.addWeapon("Rockets and Missiles", JsonFileConstants.GEAR_ROCKETS);
+        ProcessGearFile(JsonFileConstants.GEAR_PERSONAL);
+        ProcessGearFile(JsonFileConstants.GEAR_FIREARMS);
 
-        //Armor
-        //GearGroup armorGroup = new GearGroup("Clothing");
-        //armorGroup.addClothing("Armor and Clothing", JsonFileConstants.GEAR_ARMOR);
+    }
 
-        //Entertainment
-        //GearGroup entertainmentGroup = new GearGroup("Entertainment");
-        //entertainmentGroup.addClothing("Entertainment", JsonFileConstants.GEAR_ENTERTAINMENT);
+    private void ProcessGearFile(String filePath) {
+        //Process JSON
+        JSONObject jsonObj =  FileUtil.getJsonFromResource(FileConstants.RESOURCE_GEAR + filePath);
 
-        //Security
-        //GearGroup securityGroup = new GearGroup("Security");
-        //securityGroup.addClothing("Surveillance and Security", JsonFileConstants.GEAR_SECURITY);
+        //Add to GearGroup
+        JSONObject firstObject = JSONUtil.getFirstIndex(jsonObj);
+        String base = firstObject.getString("base");
 
-        weaponGroup.ProcessSubcategoryMap();
-        //armorGroup.ProcessSubcategoryMap();
-        //entertainmentGroup.ProcessSubcategoryMap();
-        //securityGroup.ProcessSubcategoryMap();
+        if (!masterMap.containsKey(base)) {
+            masterMap.put(base, new GearGroup());
+        }
 
-
-
-        masterMap.put(weaponGroup.getCategory(), weaponGroup);
-        //masterMap.put(armorGroup.getCategory(), armorGroup);
-        //masterMap.put(entertainmentGroup.getCategory(), entertainmentGroup);
-        //masterMap.put(securityGroup.getCategory(), securityGroup);
+        masterMap.get(base).ProcessJSON(jsonObj);
     }
 
     @Override

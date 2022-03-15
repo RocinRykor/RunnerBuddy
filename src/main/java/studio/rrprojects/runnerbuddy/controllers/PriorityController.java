@@ -9,6 +9,7 @@ import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityContainer;
 import studio.rrprojects.runnerbuddy.containers.priority.PriorityLevelGroup;
 import studio.rrprojects.runnerbuddy.utils.JsonUtils;
+import studio.rrprojects.util_library.DebugUtils;
 import studio.rrprojects.util_library.FileUtil;
 
 import java.io.InputStream;
@@ -42,30 +43,15 @@ public class PriorityController extends ControllerClass{
     }
 
     private void LoadPriorityFile() {
-
-        System.out.println("=== COMPARE PATH");
-        String pathOne = FileConstants.RESOURCE_MISC + JsonFileConstants.PRIORITY_TABLE;
-        String pathTwo = "/JSON/Misc/" + JsonFileConstants.PRIORITY_TABLE;
-
-        System.out.println(pathOne);
-        System.out.println(pathTwo);
+        String filePath = FileConstants.RESOURCE_MISC + JsonFileConstants.PRIORITY_TABLE;
 
         try {
-            priorityJson = FileUtil.getJsonFromResource(pathTwo);
-            System.out.println("SUCCESS!");
+            priorityJson = FileUtil.getJsonFromResource(filePath);
+            DebugUtils.ProgressNormalMsg("Loaded Priority Table");
         } catch (NullPointerException e) {
-            System.out.println("FAILURE!");
+            System.out.println("FAILURE! - " + e);
         }
 
-
-        /*
-        InputStream is = getClass().getResourceAsStream("/JSON/Misc/" + JsonFileConstants.PRIORITY_TABLE);
-        
-        assert is != null;
-        JSONTokener token = new JSONTokener(is);
-
-        priorityJson = new JSONObject(token);
-         */
     }
 
 

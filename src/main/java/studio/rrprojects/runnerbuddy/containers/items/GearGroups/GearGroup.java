@@ -1,176 +1,102 @@
 package studio.rrprojects.runnerbuddy.containers.items.GearGroups;
 
 import org.json.JSONObject;
-import studio.rrprojects.runnerbuddy.constants.FileConstants;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
-import studio.rrprojects.runnerbuddy.containers.items.ClothingItem;
-import studio.rrprojects.runnerbuddy.containers.items.WeaponItem;
-import studio.rrprojects.util_library.ConsoleColors;
+import studio.rrprojects.runnerbuddy.containers.items.weapons.BaseWeaponItem;
 import studio.rrprojects.util_library.DebugUtils;
-import studio.rrprojects.util_library.FileUtil;
 import studio.rrprojects.util_library.JSONUtil;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class GearGroup {
-    private String category;
-    private ArrayList<Object> masterList = new ArrayList<>();
-    private LinkedHashMap<String, ArrayList<Buyable>> subcategoryMap = new LinkedHashMap<>();
+    /*
+    Base = Broad Category -> i.e Weapons, Vehicles
+    Category = Subgroup -> i.e. Melee Weapons, Firearms, Cars, Bikes
+    Type = Specific  Sub-Category -> i.e. Edged Weapons, Heavy Pistols, Off-Road Bike, Sports Car
 
-    public GearGroup(String category) {
-        this.category = category;
+    Example - Populated information will lok like
+    Base -> Weapons
+    Category Map  -> <Melee Personal Weapons, [Edged Weapons, Pole-arms, Blunt Weapons]>
+    Arraylists in the Category Map will be a list of individual items,, i.e Edged Weapons ->  [Knife, Sword, Katana]
+     */
+
+    private LinkedHashMap <String, JSONObject> rawMap = new LinkedHashMap<>();
+    private LinkedHashMap<String, Buyable> buyableClassMap = new LinkedHashMap<>();
+
+    private LinkedHashMap<String, ArrayList<String>> categoryMap = new LinkedHashMap<>();
+    private LinkedHashMap<String, ArrayList<Buyable>> typeMap = new LinkedHashMap<>();
+
+    private String base = null;
+
+    public GearGroup() {
+        InitBuyableMap();
     }
 
-    public Map<String, JSONObject> ProcessJSON(String subcategory, String fileName) {
-        DebugUtils.newDebugOut(ConsoleColors.RED, "PROCESSING: " + fileName);
-
-        JSONObject mainJson = null;
-
-        try {
-            DebugUtils.VaraibleMsg("FILE PATH: " + FileConstants.RESOURCE_GEAR + fileName);
-            mainJson = FileUtil.getJsonFromResource(FileConstants.RESOURCE_GEAR + fileName);
-        } catch (NullPointerException ignored) {}
-
-        if (mainJson == null) {
-            DebugUtils.ErrorMsg("ERROR InputStream is NULL");
-            return null;
-        }
-
-        Map<String, JSONObject> mainMap = JSONUtil.JsonToMap(mainJson);
-
-        if (!subcategoryMap.containsKey(subcategory)) {
-            subcategoryMap.put(subcategory, new ArrayList<>());
-        }
-
-        return mainMap;
+    private void InitBuyableMap() {
+        buyableClassMap.put("Weapons", new BaseWeaponItem());
     }
 
-    public void ProcessSubcategoryMap() {
-        for (String key : subcategoryMap.keySet()) {
-            GearGroup gearGroup = new GearGroup(key);
-            ArrayList<Buyable> arrayList = subcategoryMap.get(key);
+    public void ProcessJSON(JSONObject jsonObj) {
+        JSONObject firstObj = JSONUtil.getFirstIndex(jsonObj);
 
-            LinkedHashMap<String, ArrayList<Buyable>> typeMap = new LinkedHashMap<>();
+        base = firstObj.getString("base");
+        String category = firstObj.getString("category");
 
-            for (Buyable buyable: arrayList) {
-                String type = buyable.getType();
+        rawMap.put(category, jsonObj);
+        categoryMap.put(category, new ArrayList<>());
 
-                if (!typeMap.containsKey(type)) {
-                    typeMap.put(type, new ArrayList<>());
-                }
+        ArrayList<String> typeList = categoryMap.get(category);
 
-                typeMap.get(type).add(buyable);
+        Buyable buyable = null;
+        if (buyableClassMap.containsKey(base)) {
+            buyable = buyableClassMap.get(base);
+        } else  {
+            buyable = new Buyable();
+        }
+
+        for (String key : jsonObj.keySet()) {
+            JSONObject tmpObj = jsonObj.getJSONObject(key);
+            DebugUtils.UnknownMsg("PROCESSING: " + key);
+
+            String type = tmpObj.getString("type");
+
+            if (!typeList.contains(type)) {
+                typeList.add(type);
+                typeMap.put(type, new ArrayList<>());
             }
 
-            for (String key2: typeMap.keySet()) {
-                GearGroup typeGroup = new GearGroup(key2);
+            ArrayList<Buyable> buyableList = typeMap.get(type);
 
-                ArrayList<Buyable> buyableList = typeMap.get(key2);
-                typeGroup.ProcessArrayList(buyableList);
-
-                gearGroup.add(typeGroup);
-            }
-
-            masterList.add(gearGroup);
-        }
-    }
-
-    private void add(GearGroup gearGroup) {
-        masterList.add(gearGroup);
-    }
-
-    private void ProcessArrayList(ArrayList<Buyable> arrayList) {
-        masterList.addAll(arrayList);
-    }
-
-    public Map<String, JSONObject> addGeneric(String subcategory, String fileName) {
-        return ProcessJSON(subcategory, fileName);
-    }
-
-    public void addWeapon(String subcategory, String fileName) {
-        Map<String, JSONObject> tmp = addGeneric(subcategory, fileName);
-
-        if (tmp == null) {
-            return;
+            buyableList.add(buyable.createNewFromJson(key, tmpObj));
         }
 
-        ArrayList<Buyable> arrayList = getSubcategoryMap().get(subcategory);
-
-        for (String key: tmp.keySet()) {
-
-            JSONObject jsonObject = tmp.get(key);
-            WeaponItem item = new WeaponItem(key);
-            item.ProcessJson(jsonObject);
-
-            arrayList.add(item);
-        }
-    }
-
-    public void addClothing(String subcategory, String fileName) {
-        Map<String, JSONObject> tmp = addGeneric(subcategory, fileName);
-
-        ArrayList<Buyable> arrayList = getSubcategoryMap().get(subcategory);
-        for (String key: tmp.keySet()) {
-
-            JSONObject jsonObject = tmp.get(key);
-            ClothingItem item = new ClothingItem(key);
-            item.ProcessJson(jsonObject);
-
-            arrayList.add(item);
-        }
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public LinkedHashMap<String, ArrayList<Buyable>> getSubcategoryMap() {
-        return subcategoryMap;
-    }
-
-    @Override
-    public String toString() {
-        String displayString = "";
-        for (String key: getSubcategoryMap().keySet()) {
-            displayString += "=== " + key + " ===\n";
-            ArrayList<Buyable> buyables = getSubcategoryMap().get(key);
-            for (Buyable buyable: buyables) {
-                displayString += buyable + "\n";
-            }
-
-            displayString += "\n";
-        }
-
-        return displayString;
     }
 
     public DefaultMutableTreeNode toNode() {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(category);
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(base);
 
-        for (Object obj : masterList) {
-            if (obj instanceof GearGroup) {
+        for (String category : categoryMap.keySet()) {
+            DefaultMutableTreeNode categoryNode = new DefaultMutableTreeNode(category);
 
-                GearGroup gearGroup = (GearGroup) obj;
+            ArrayList<String> typeList  = categoryMap.get(category);
 
-                node.add(gearGroup.toNode());
-            } else if (obj instanceof Buyable) {
+            for (String type : typeList) {
+                DefaultMutableTreeNode typeNode = new DefaultMutableTreeNode(type);
+                ArrayList<Buyable> buyableList = typeMap.get(type);
 
-                Buyable buyable = (Buyable) obj;
+                for (Buyable buyable : buyableList) {
+                    typeNode.add(buyable.toNode());
+                }
 
-                node.add(buyable.toNode());
-            } else {
-                DebugUtils.newDebugOut(ConsoleColors.RED, "toNode Error: " + obj + " Incorrect class type");
+                categoryNode.add(typeNode);
             }
+
+            node.add(categoryNode);
         }
 
-        DebugUtils.newDebugOut(ConsoleColors.GREEN, "LOADED NODE: " + node.toString());
         return node;
     }
 
-    public ArrayList<Object> getMasterList() {
-        return masterList;
-    }
 }

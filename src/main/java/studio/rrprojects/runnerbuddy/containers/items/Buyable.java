@@ -1,6 +1,5 @@
 package studio.rrprojects.runnerbuddy.containers.items;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.gui.popups.gear.AddBuyablePopup;
 import studio.rrprojects.runnerbuddy.utils.TextUtils;
@@ -41,6 +40,8 @@ public class Buyable {
         name = buyable.getName();
     }
 
+    public Buyable() {}
+
     public String getName() {
         return name;
     }
@@ -57,7 +58,7 @@ public class Buyable {
         this.cost = cost;
     }
 
-    public void ProcessJson(JSONObject object) {
+    public Buyable ProcessJson(JSONObject object) {
         this.jsonObject = object;
         setType(JSONUtil.getString(object, "type", "Misc"));
 
@@ -97,6 +98,7 @@ public class Buyable {
         //Weight
         weight = JSONUtil.getDouble(object, "weight", 0);
 
+        return null;
     }
 
     public String getType() {
@@ -142,4 +144,10 @@ public class Buyable {
         return output;
     }
 
+    public Buyable createNewFromJson(String name, JSONObject jsonObject) {
+        Buyable buyable = new Buyable(name);
+        buyable.ProcessJson(jsonObject);
+
+        return buyable;
+    }
 }

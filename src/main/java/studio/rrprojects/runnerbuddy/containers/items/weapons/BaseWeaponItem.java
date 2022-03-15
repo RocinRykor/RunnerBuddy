@@ -1,11 +1,13 @@
-package studio.rrprojects.runnerbuddy.containers.items;
+package studio.rrprojects.runnerbuddy.containers.items.weapons;
 
 import org.json.JSONObject;
+import studio.rrprojects.runnerbuddy.containers.items.Buyable;
+import studio.rrprojects.util_library.DebugUtils;
 import studio.rrprojects.util_library.JSONUtil;
 
 import java.util.LinkedHashMap;
 
-public class WeaponItem extends Buyable{
+public class BaseWeaponItem extends Buyable {
     int ammoCount;
     String ammoType;
     String firingModes;
@@ -14,14 +16,19 @@ public class WeaponItem extends Buyable{
 
     private LinkedHashMap<String, Object> jsonMap;
 
-    public WeaponItem(String name) {
+    public BaseWeaponItem(String name) {
         super(name);
     }
 
+    public BaseWeaponItem() {
+        super();
+    }
+
     @Override
-    public void ProcessJson(JSONObject object) {
+    public Buyable ProcessJson(JSONObject object) {
         super.ProcessJson(object);
 
+        //TODO - Change to Base Weapon (Just a damage code)
 
         ammoCount = JSONUtil.getInt(object, "ammo",  1);
         ammoType = JSONUtil.getString(object, "ammo_type", "C");
@@ -29,6 +36,7 @@ public class WeaponItem extends Buyable{
         damageCode = JSONUtil.getString(object, "damage", "-1M");
         recoilCompensation = JSONUtil.getString(object, "rc", "N/A");
 
+        return null;
     }
 
     @Override
