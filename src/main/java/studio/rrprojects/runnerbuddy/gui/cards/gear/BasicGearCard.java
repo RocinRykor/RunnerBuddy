@@ -6,6 +6,7 @@ import studio.rrprojects.runnerbuddy.containers.items.Buyable;
 import studio.rrprojects.runnerbuddy.containers.items.GearGroups.GearGroup;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.gui.popups.gear.AddBuyablePopup;
+import studio.rrprojects.util_library.DebugUtils;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -57,6 +58,15 @@ public class BasicGearCard extends Card {
 
         if (selectedObject instanceof Buyable) {
             Buyable buyable = (Buyable) selectedObject;
+
+            //DEBUG
+
+            DebugUtils.ProgressNormalMsg("LOADING BUYABLE: " + buyable);
+            DebugUtils.ProgressNormalMsg("Class Name: " + buyable.getClassName());
+            DebugUtils.ProgressNormalMsg("Description: " + buyable.getDescription());
+
+            //END DEBUG
+
             buyable.PurchaseDialog();
             AddBuyablePopup addBuyablePopup = buyable.getPopup();
             addBuyablePopup.setCharacterContainer(getCharacterContainer());

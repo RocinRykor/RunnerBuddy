@@ -130,7 +130,7 @@ public class Buyable {
         return jsonObject;
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         String output = "";
         output += ("Name: " + name) + "\n";
         output += ("Type: " + type) + "\n";
@@ -149,5 +149,9 @@ public class Buyable {
         buyable.ProcessJson(jsonObject);
 
         return buyable;
+    }
+
+    public String getClassName() {
+        return "Buyable";
     }
 }

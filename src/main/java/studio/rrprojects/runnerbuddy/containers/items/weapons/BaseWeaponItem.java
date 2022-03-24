@@ -2,7 +2,6 @@ package studio.rrprojects.runnerbuddy.containers.items.weapons;
 
 import org.json.JSONObject;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
-import studio.rrprojects.util_library.DebugUtils;
 import studio.rrprojects.util_library.JSONUtil;
 
 import java.util.LinkedHashMap;
@@ -58,5 +57,18 @@ public class BaseWeaponItem extends Buyable {
         output += ("Recoil Compensation: " + recoilCompensation);
 
         return output;
+    }
+
+    @Override
+    public String getClassName() {
+        return "BaseWeaponItem";
+    }
+
+    @Override
+    public Buyable createNewFromJson(String name, JSONObject jsonObject) {
+        BaseWeaponItem baseWeaponItem = new BaseWeaponItem(name);
+        baseWeaponItem.ProcessJson(jsonObject);
+
+        return baseWeaponItem;
     }
 }

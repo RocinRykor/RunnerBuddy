@@ -16,7 +16,7 @@ public class GearGroup {
     Category = Subgroup -> i.e. Melee Weapons, Firearms, Cars, Bikes
     Type = Specific  Sub-Category -> i.e. Edged Weapons, Heavy Pistols, Off-Road Bike, Sports Car
 
-    Example - Populated information will lok like
+    Example - Populated information will look like
     Base -> Weapons
     Category Map  -> <Melee Personal Weapons, [Edged Weapons, Pole-arms, Blunt Weapons]>
     Arraylists in the Category Map will be a list of individual items,, i.e Edged Weapons ->  [Knife, Sword, Katana]
@@ -51,8 +51,10 @@ public class GearGroup {
 
         Buyable buyable = null;
         if (buyableClassMap.containsKey(base)) {
+            System.out.println("buyableClassMap: Success" );
             buyable = buyableClassMap.get(base);
         } else  {
+            System.out.println("buyableClassMap: Failure" );
             buyable = new Buyable();
         }
 
