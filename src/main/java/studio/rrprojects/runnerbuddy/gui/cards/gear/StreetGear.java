@@ -52,7 +52,8 @@ public class StreetGear extends Card {
     }
 
     private String CalculateRemainingNuyen() {
-        int money = getCharacterContainer().getResourceController().getStartingNuyen();
+        int money = getCharacterContainer().getResourceController().getCurrentNuyen();
+
         return TextUtils.IntToCash(money);
     }
 
@@ -83,8 +84,10 @@ public class StreetGear extends Card {
         labelResources = new JLabel();
         labelResources.setText("Label");
         panelInformation.add(labelResources, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        panelInformation.add(scrollPane1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         treeInventory = new JTree();
-        panelInformation.add(treeInventory, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        scrollPane1.setViewportView(treeInventory);
     }
 
     /**

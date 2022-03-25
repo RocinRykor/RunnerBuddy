@@ -53,6 +53,10 @@ public class BasicGearCard extends Card {
     }
 
     private void DoubleClickEvent(TreePath selPath) {
+        if (selPath == null) {
+            return;
+        }
+
         DefaultMutableTreeNode finalNode = (DefaultMutableTreeNode) selPath.getLastPathComponent();
         Object selectedObject = finalNode.getUserObject();
 

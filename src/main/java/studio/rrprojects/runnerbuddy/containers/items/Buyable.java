@@ -31,6 +31,7 @@ public class Buyable {
 
     private AddBuyablePopup popup;
     private JSONObject jsonObject;
+    private int itemRating;
 
     public Buyable(String name) {
         this.name = name;
@@ -58,7 +59,7 @@ public class Buyable {
         this.cost = cost;
     }
 
-    public Buyable ProcessJson(JSONObject object) {
+    public void ProcessJson(JSONObject object) {
         this.jsonObject = object;
         setType(JSONUtil.getString(object, "type", "Misc"));
 
@@ -97,8 +98,6 @@ public class Buyable {
 
         //Weight
         weight = JSONUtil.getDouble(object, "weight", 0);
-
-        return null;
     }
 
     public String getType() {
@@ -131,7 +130,7 @@ public class Buyable {
     }
 
     public String getDescription() {
-        String output = "";
+        String output = "=== BASIC STATS ===\n";
         output += ("Name: " + name) + "\n";
         output += ("Type: " + type) + "\n";
         output += ("Weight: " + weight) + "\n";
@@ -153,5 +152,13 @@ public class Buyable {
 
     public String getClassName() {
         return "Buyable";
+    }
+
+    public Buyable createNewFromJson() {
+        return createNewFromJson(name, jsonObject);
+    }
+
+    public void setRating(int itemRating) {
+        this.itemRating =  itemRating;
     }
 }

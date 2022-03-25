@@ -65,10 +65,14 @@ public class ResourceController extends ControllerClass {
         return masterMap;
     }
 
-    public void addItemToInventory(Buyable buyable) {
-        //Buyable processedBuyable = new Buyable(buyable);
+    public void addItemToInventory(Buyable buyable, int itemRating, int itemQuantity) {
 
-        inventoryList.add(buyable);
+        for (int i = 0; i < itemQuantity; i++) {
+            Buyable processedBuyable = buyable.createNewFromJson();
+            processedBuyable.setRating(itemRating);
+
+            inventoryList.add(processedBuyable);
+        }
 
         //TODO Refresh Gear Cards
     }
@@ -98,5 +102,15 @@ public class ResourceController extends ControllerClass {
         }
 
         return new DefaultTreeModel(masterNode);
+    }
+
+    public int getCurrentNuyen() {
+       int currentNuyen = getStartingNuyen();
+
+        for (Buyable buyable : inventoryList) {
+            currentNuyen -=  buyable.getCost();
+        }
+
+        return currentNuyen;
     }
 }

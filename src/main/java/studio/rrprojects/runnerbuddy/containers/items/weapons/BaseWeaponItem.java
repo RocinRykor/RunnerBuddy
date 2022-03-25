@@ -7,11 +7,7 @@ import studio.rrprojects.util_library.JSONUtil;
 import java.util.LinkedHashMap;
 
 public class BaseWeaponItem extends Buyable {
-    int ammoCount;
-    String ammoType;
-    String firingModes;
     String damageCode;
-    String recoilCompensation;
 
     private LinkedHashMap<String, Object> jsonMap;
 
@@ -24,18 +20,11 @@ public class BaseWeaponItem extends Buyable {
     }
 
     @Override
-    public Buyable ProcessJson(JSONObject object) {
+    public void ProcessJson(JSONObject object) {
         super.ProcessJson(object);
 
         //TODO - Change to Base Weapon (Just a damage code)
-
-        ammoCount = JSONUtil.getInt(object, "ammo",  1);
-        ammoType = JSONUtil.getString(object, "ammo_type", "C");
-        firingModes = JSONUtil.getString(object, "mode", "SS");
         damageCode = JSONUtil.getString(object, "damage", "-1M");
-        recoilCompensation = JSONUtil.getString(object, "rc", "N/A");
-
-        return null;
     }
 
     @Override
@@ -46,15 +35,9 @@ public class BaseWeaponItem extends Buyable {
     }
 
     public String getDescription() {
-        System.out.println("GETTING DESCRIPTION:");
-
-        //System.out.println(description);
-        String output =  super.getDescription() + "\n\n";
-
-        output += ("Ammo: " + ammoCount + "(" + ammoType + ")") + "\n";
-        output += ("Firing Modes: " + firingModes) + "\n";
-        output += ("Damage Code: " + damageCode) + "\n";
-        output += ("Recoil Compensation: " + recoilCompensation);
+        String output =  super.getDescription() + "\n\n" +
+                " === WEAPON STATS ===\n" +
+                "Damage Code: " + damageCode + "\n";
 
         return output;
     }
@@ -66,9 +49,25 @@ public class BaseWeaponItem extends Buyable {
 
     @Override
     public Buyable createNewFromJson(String name, JSONObject jsonObject) {
-        BaseWeaponItem baseWeaponItem = new BaseWeaponItem(name);
-        baseWeaponItem.ProcessJson(jsonObject);
+        LinkedHashMap<String, Buyable> weaponClassMap = new LinkedHashMap<>();
+        weaponClassMap.put("Firearms", new FirearmWeaponItem());
+
+        String category = jsonObject.getString("category");
+
+
+        Buyable baseWeaponItem= null;
+        if(weaponClassMap.containsKey(category)) {
+            baseWeaponItem = weaponClassMap.get(category).createNewFromJson(name, jsonObject);
+        } else {
+            baseWeaponItem = new BaseWeaponItem(name);
+            baseWeaponItem.ProcessJson(jsonObject);
+        }
 
         return baseWeaponItem;
+    }
+
+    @Override
+    public Buyable createNewFromJson() {
+        return createNewFromJson(getName(), getJsonObject());
     }
 }

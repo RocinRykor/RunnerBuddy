@@ -38,20 +38,25 @@ public class AddBuyablePopup {
 
     private void AddThisItem() {
         // TODO: 10/15/21 Add Items to Resource Master List
+        DebugUtils.ProgressNormalMsg("ADDING ITEM TO INVENTORY");
+
         if (characterContainer == null) {
             frame.dispose();
             DebugUtils.ErrorMsg("BUYABLE POPUP ERROR: NO CHARACTER CONTAINER");
             return;
         }
 
-        characterContainer.getResourceController().addItemToInventory(buyable);
+        int itemRating = (int) spinnerRating.getValue();
+        int itemQuantity = (int) spinnerQuantity.getValue();
+
+        characterContainer.getResourceController().addItemToInventory(buyable, itemRating, itemQuantity);
 
         frame.dispose();
     }
 
     private void SetSpinners() {
         spinnerQuantity.setValue(1);
-        spinnerQuantity.setEnabled(false);
+        //spinnerQuantity.setEnabled(false);
         spinnerRating.setValue(1);
         spinnerRating.setEnabled(false);
     }
