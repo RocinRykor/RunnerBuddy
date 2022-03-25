@@ -5,7 +5,7 @@ import studio.rrprojects.runnerbuddy.constants.FileConstants;
 import studio.rrprojects.runnerbuddy.constants.JsonFileConstants;
 import studio.rrprojects.runnerbuddy.containers.character.CharacterContainer;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
-import studio.rrprojects.runnerbuddy.containers.items.GearGroups.GearGroup;
+import studio.rrprojects.runnerbuddy.containers.items.geargroups.GearGroup;
 import studio.rrprojects.runnerbuddy.containers.priority.ResourcePriority;
 import studio.rrprojects.util_library.DebugUtils;
 import studio.rrprojects.util_library.FileUtil;
@@ -32,6 +32,19 @@ public class ResourceController extends ControllerClass {
         //Weapons
         ProcessGearFile(JsonFileConstants.GEAR_PERSONAL);
         ProcessGearFile(JsonFileConstants.GEAR_FIREARMS);
+        ProcessGearFile(JsonFileConstants.GEAR_IMPACT);
+        ProcessGearFile(JsonFileConstants.GEAR_HEAVY_WEAPONS);
+        ProcessGearFile(JsonFileConstants.GEAR_GRENADES);
+
+        //Clothing
+        ProcessGearFile(JsonFileConstants.GEAR_ARMOR);
+
+        //Electronics
+        ProcessGearFile(JsonFileConstants.GEAR_ELECTRONICS);
+        ProcessGearFile(JsonFileConstants.GEAR_ENTERTAINMENT);
+
+        //Equipment
+        ProcessGearFile(JsonFileConstants.GEAR_SECURITY);
 
     }
 

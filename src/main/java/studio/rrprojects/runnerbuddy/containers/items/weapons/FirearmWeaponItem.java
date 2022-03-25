@@ -51,12 +51,11 @@ public class FirearmWeaponItem extends Buyable {
     }
 
     public String getDescription() {
-        String output =  super.getDescription() + "\n\n" +
+
+        return super.getDescription() + "\n\n" +
                 " === WEAPON STATS ===\n" +
                 "Ammo: " +  ammoCount + "(" + ammoType + ")\n" +
                 "Damage Code: " + damageCode + "\n" +
                 "Recoil Compensation: " + recoilCompensation;
-
-        return output;
     }
 }

@@ -119,6 +119,7 @@ public class Buyable {
 
     public void PurchaseDialog() {
         popup = new AddBuyablePopup(this);
+        getPopup().setDescription(getDescription());
     }
 
     public AddBuyablePopup getPopup() {
@@ -160,5 +161,13 @@ public class Buyable {
 
     public void setRating(int itemRating) {
         this.itemRating =  itemRating;
+    }
+
+    public int getRating() {
+        return itemRating;
+    }
+
+    public boolean isVariableRating() {
+        return variableRating;
     }
 }

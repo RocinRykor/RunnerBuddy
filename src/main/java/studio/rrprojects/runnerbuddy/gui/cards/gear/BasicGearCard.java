@@ -3,7 +3,7 @@ package studio.rrprojects.runnerbuddy.gui.cards.gear;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
-import studio.rrprojects.runnerbuddy.containers.items.GearGroups.GearGroup;
+import studio.rrprojects.runnerbuddy.containers.items.geargroups.GearGroup;
 import studio.rrprojects.runnerbuddy.gui.cards.Card;
 import studio.rrprojects.runnerbuddy.gui.popups.gear.AddBuyablePopup;
 import studio.rrprojects.util_library.DebugUtils;

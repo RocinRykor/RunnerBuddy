@@ -5,9 +5,11 @@
      "street_index": 1,
      "weight": 5,
      "type": "Electronics",
+     "category": "Computers",
      "availability_time_frame": "hrs",
      "availability_interval": 1,
-     "availability_rating": 1
+     "availability_rating": 1,
+     "base": "Electronics"
    },
    "Heads-Up Display (200 Mp)": {
      "conceal": 0,
@@ -15,9 +17,11 @@
      "street_index": 3,
      "weight": 0.5,
      "type": "Data Display Systems (Max Memory Capacity)",
+     "category": "Computers",
      "availability_time_frame": "Days",
      "availability_interval": 7,
-     "availability_rating": 6
+     "availability_rating": 6,
+     "base": "Electronics"
    },
    "Table Top Computer": {
      "conceal": 3,
@@ -25,9 +29,11 @@
      "street_index": 0.75,
      "weight": 3,
      "type": "Personal Computers",
+     "category": "Computers",
      "availability_time_frame": "hrs",
      "availability_interval": 1,
-     "availability_rating": 1
+     "availability_rating": 1,
+     "base": "Electronics"
    },
    "Headset (500 Mp)": {
      "conceal": 4,
@@ -35,9 +41,11 @@
      "street_index": 1.5,
      "weight": 0.5,
      "type": "Data Display Systems (Max Memory Capacity)",
+     "category": "Computers",
      "availability_time_frame": "hrs",
      "availability_interval": 1,
-     "availability_rating": 1
+     "availability_rating": 1,
+     "base": "Electronics"
    },
    "Wrist Computer": {
      "conceal": 6,
@@ -45,9 +53,11 @@
      "street_index": 1.5,
      "weight": 0,
      "type": "Personal Computers",
+     "category": "Computers",
      "availability_time_frame": "hrs",
      "availability_interval": 1,
-     "availability_rating": 1
+     "availability_rating": 1,
+     "base": "Electronics"
    },
    "Printer": {
      "conceal": 4,
@@ -55,9 +65,11 @@
      "street_index": 1,
      "weight": 2,
      "type": "Personal Computers",
+     "category": "Computers",
      "availability_time_frame": "hrs",
      "availability_interval": 1,
-     "availability_rating": 1
+     "availability_rating": 1,
+     "base": "Electronics"
    },
    "Data Unit (1,000 Mp)": {
      "conceal": 6,
@@ -65,9 +77,11 @@
      "street_index": 1,
      "weight": 1,
      "type": "Data Display Systems (Max Memory Capacity)",
+     "category": "Computers",
      "availability_time_frame": "hrs",
      "availability_interval": 1,
-     "availability_rating": 1
+     "availability_rating": 1,
+     "base": "Electronics"
    },
    "Pocket Computer": {
      "conceal": 8,
@@ -75,8 +89,10 @@
      "street_index": 1,
      "weight": 1,
      "type": "Personal Computers",
+     "category": "Computers",
      "availability_time_frame": "hrs",
      "availability_interval": 1,
-     "availability_rating": 1
+     "availability_rating": 1,
+     "base": "Electronics"
    }
  }

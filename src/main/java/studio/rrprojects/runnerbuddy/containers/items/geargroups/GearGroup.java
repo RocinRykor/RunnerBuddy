@@ -1,6 +1,7 @@
-package studio.rrprojects.runnerbuddy.containers.items.GearGroups;
+package studio.rrprojects.runnerbuddy.containers.items.geargroups;
 
 import org.json.JSONObject;
+import studio.rrprojects.runnerbuddy.containers.items.BaseArmorItem;
 import studio.rrprojects.runnerbuddy.containers.items.Buyable;
 import studio.rrprojects.runnerbuddy.containers.items.weapons.BaseWeaponItem;
 import studio.rrprojects.util_library.DebugUtils;
@@ -36,6 +37,7 @@ public class GearGroup {
 
     private void InitBuyableMap() {
         buyableClassMap.put("Weapons", new BaseWeaponItem());
+        buyableClassMap.put("Clothing", new BaseArmorItem());
     }
 
     public void ProcessJSON(JSONObject jsonObj) {

@@ -23,12 +23,13 @@ public class JsonFileConstants {
     public static final String GEAR_ROCKETS = "Weapons/SR3E_rockets_and_missiles.json";
 
     //Armor
-    public static final String GEAR_ARMOR = "SR3E_clothing_and_armor.json";
+    public static final String GEAR_ARMOR = "Armor/SR3E_clothing_and_armor.json";
 
     //Entertainment
-    public static final String GEAR_ENTERTAINMENT = "SR3E_entertainment.json";
+    public static final String GEAR_ENTERTAINMENT = "Electronics/SR3E_entertainment.json";
+    public static final String GEAR_ELECTRONICS = "Electronics/SR3E_electronics.json";
 
     //Security
-    public static final String GEAR_SECURITY = "SR3E_surveillance_and_security.json";
+    public static final String GEAR_SECURITY = "Security/SR3E_surveillance_and_security.json";
 
 }

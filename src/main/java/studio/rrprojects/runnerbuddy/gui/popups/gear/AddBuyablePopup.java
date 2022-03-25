@@ -19,7 +19,7 @@ public class AddBuyablePopup {
     private JSpinner spinnerQuantity;
     private JTextArea textAreaDescription;
     private JSpinner spinnerRating;
-    private JButton buttonCanel;
+    private JButton buttonCancel;
     private CharacterContainer characterContainer;
 
     public AddBuyablePopup(Buyable buyable) {
@@ -29,10 +29,10 @@ public class AddBuyablePopup {
         $$$setupUI$$$();
         JUtils.OpenFrameAtMouseLocation(frame);
 
-        setFrameOptions();
-
         SetSpinners();
-        buttonCanel.addActionListener(actionEvent -> frame.dispose());
+
+        setFrameOptions();
+        buttonCancel.addActionListener(actionEvent -> frame.dispose());
         buttonAddItem.addActionListener(actionEvent -> AddThisItem());
     }
 
@@ -55,10 +55,18 @@ public class AddBuyablePopup {
     }
 
     private void SetSpinners() {
-        spinnerQuantity.setValue(1);
-        //spinnerQuantity.setEnabled(false);
-        spinnerRating.setValue(1);
-        spinnerRating.setEnabled(false);
+        SpinnerNumberModel numberModel = new SpinnerNumberModel();
+        numberModel.setValue(1);
+        numberModel.setMinimum(1);
+
+        spinnerQuantity.setModel(numberModel);
+
+        SpinnerNumberModel numberModel2 = new SpinnerNumberModel();
+        numberModel2.setValue(1);
+        numberModel2.setMinimum(1);
+        spinnerRating.setModel(numberModel2);
+
+        spinnerRating.setEnabled(buyable.isVariableRating());
     }
 
     private void setFrameOptions() {
@@ -95,9 +103,9 @@ public class AddBuyablePopup {
         buttonAddItem = new JButton();
         buttonAddItem.setText("Add Item");
         panelMain.add(buttonAddItem, new GridConstraints(2, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        buttonCanel = new JButton();
-        buttonCanel.setText("Cancel");
-        panelMain.add(buttonCanel, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonCancel = new JButton();
+        buttonCancel.setText("Cancel");
+        panelMain.add(buttonCancel, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         spinnerQuantity = new JSpinner();
         panelMain.add(spinnerQuantity, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
